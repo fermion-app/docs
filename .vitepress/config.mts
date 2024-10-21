@@ -66,7 +66,9 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'x', link: 'https://x.com/fermionapp' },
+      { icon: 'instagram', link: 'https://www.instagram.com/fermion.app/' },
+      { icon: 'linkedin', link: 'https://www.linkedin.com/showcase/fermionapp/' }
     ]
   }
 })
