@@ -5,21 +5,18 @@ layout: home
 hero:
   name: "Fermion Docs"
   text: "Documentation on using Fermion platform"
-  tagline: My great project tagline
+  tagline: "build the best interactive learning experiences"
+  image:
+    src: /images/fermion-logo.png
+    alt: Fermion Logo
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Get Started
+      link: /docs/getting-started/what-is-fermion
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Learn about Fermion
+      link: https://fermion.app
 
-features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+
 ---
 
