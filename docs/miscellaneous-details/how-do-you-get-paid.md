@@ -1,4 +1,6 @@
-If we had to summarise payouts in two words, we’d say it’s easy and flexible.
+# How do you get Paid?
+
+If we had to summarize payouts in two words, we’d say it’s easy and flexible.
 
 You get paid, as you want and when you want.
 

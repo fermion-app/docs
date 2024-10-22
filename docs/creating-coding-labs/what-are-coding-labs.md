@@ -1,3 +1,4 @@
+# What are Coding Labs? 
 
 *Another mind-boggling reason why Fermion stands out among other traditional LMS platforms is its ability to integrate interactive coding labs at the click of a button!*
 

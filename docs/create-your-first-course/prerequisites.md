@@ -1,3 +1,5 @@
+# Before you start building your course
+
 Before we get started on creating your first technical course on Fermion, please make sure you have access to a fermion demo account, or you should have the fermion instructor setup mapped to your domain. We can help you setup domain mapping on a subdomain, root domain or a path. If you do not have any account setup, please reach out to us at [support@codedamn.com](mailto:support@codedamn.com) and, we'll help you setup quickly.
 
 

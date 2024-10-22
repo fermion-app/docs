@@ -1,4 +1,3 @@
-
 ## Creating a custom landing page on Fermion
 
 A custom landing page is a great way to drive traffic and attention with a specific campaign for your brand.

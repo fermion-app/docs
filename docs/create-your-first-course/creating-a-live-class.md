@@ -1,4 +1,6 @@
-*It's time to create your first live class! Before we jump in, let's learn a little more about what are live classes on Fermion. *
+# Creating a live class
+
+*It's time to create your first live class! Before we jump in, let's learn a little more about what are live classes on Fermion.*
 
 ## Introduction
 

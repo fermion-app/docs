@@ -1,3 +1,5 @@
+# Email Automation
+
 Fermion provides an end-to-end ecosystem for all of your marketing tools, this includes various email automation flow like: 
 
 1. A payment confirmation email is sent to users immediately after they make the purchase to your course.

@@ -1,3 +1,5 @@
+# Fermion v/s Other Platforms
+
 Fermion has been created with technical instructors in mind. Our top priority is to serve you with a beautiful, seamless experience. A lot of traditional LMS focus on online creators in general, but that’s not who we are. Our focus lies solely on technical creators, and that is why the best use cases on Fermion are designed for technical creators. 
 
 ## Why do a lot of technical creators choose Fermion? 

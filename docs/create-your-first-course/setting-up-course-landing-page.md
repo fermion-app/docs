@@ -1,3 +1,5 @@
+# Setting up course landing page
+
 Now that you've selected a course to get started with, this is how your landing page manager page screen is going to look like. In the below screenshot I'm using an example of a CBC, but depending on what course type you've chosen, you will be greeted with the respective screen.
 
 ![qz_NGx3PejXWDIPmJB_MJ](https://creator-assets.codedamn.com/fermion-instructor/01-08-2024/instructor_66467ae8ada1f52e23942268/qz_NGx3PejXWDIPmJB_MJ)

@@ -1,3 +1,5 @@
+# Change Instructor Details
+
 You can change your account details inside the dashboard, by heading over to the "Account Settings" tab inside the left navigation bar. 
 ![9gYkSNXH9QG1ybHIJ1DJh](https://creator-assets.codedamn.com/fermion-instructor/09-08-2024/instructor_66467ae8ada1f52e23942268/9gYkSNXH9QG1ybHIJ1DJh)
 

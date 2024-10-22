@@ -1,11 +1,10 @@
-## Crash course on setting up interactive labs
+# Crash course on setting up interactive labs
 
 When you're starting off, it is better to learn a lot about coding labs Fermion since it has a slight learning curve. Once you have setup your first few labs and courses, you'll be able to do more in no time.
 
 Here is a 1-hour crash course (broken down by chapter) to get you familiar with the full architecture. The recommended way to watch it is at 1.5x-2x speed, with pausing and going back at parts that seems confusing.
 
-[Watch the 1-hour crash course on setting up interactive labs on Fermion](https://https://youtu.be/FAHI-wOj6lQ)
-
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FAHI-wOj6lQ?si=-idU5MIxulS9pCIn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 ## Getting started

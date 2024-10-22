@@ -1,4 +1,4 @@
-## What is content library?
+# What is content library?
 
 The content library is a repository of reusable educational materials that you can use in your course. It can include quizzes or coding labs (interactive and DSA/IO based, both). The content library also allows you to store and organize your questions efficiently, making it easy to integrate them into multiple courses.
 

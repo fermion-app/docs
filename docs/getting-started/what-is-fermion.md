@@ -1,3 +1,5 @@
+# What is the fermion platform all about? 
+
 Setting up your online courses can be a hefty task, your mind is already running through a truckload of questions.
 
 > “Which platform should I trust?“
@@ -18,7 +20,7 @@ From this documentation, you'll learn about:
 3) How Fermion is different from other platforms out there?
 4) How can you get started with your first course on Fermion?
 
-## What is Fermion? 
+## What is Fermion? (In a nutshell) 
 
 Simply put – Fermion is a high-powered platform that helps technical instructors (like yourself?) in setting up their online academies.
 

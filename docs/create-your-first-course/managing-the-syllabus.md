@@ -1,6 +1,6 @@
-This is the section from where you can build your course curriculum, and prepare course items for your students to study. 
+# Managing the course syllabus 
 
-## Before we get started
+
 
 There are a few things to know before we dig deep: 
 
