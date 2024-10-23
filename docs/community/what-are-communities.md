@@ -1,12 +1,6 @@
-To give a great learning experience to your students, it is important to bring your community under your platform.
+# What are communities on Fermion?
 
-[Fermion](https://fermion.app/) offers you a sweet spot - one where you can host your community in a slack-like interface under your domain.
-
-## What are communities on Fermion?
-
-Real-time communities on Fermion are your own private space where you can interact with your online audience.
-
-The community experience at Fermion is very similar to how Slack works. It comes with tons of features to give your audience a rich experience.
+To give a great learning experience to your students, it is important to bring your community under your platform. [Fermion](https://fermion.app/) offers you a sweet spot - one where you can host your community in a slack-like interface under your domain. Real-time communities on Fermion are your own private space where you can interact with your online audience. The community experience at Fermion is very similar to how Slack works. It comes with tons of features to give your audience a rich experience.
 
 ### What's special?
 
