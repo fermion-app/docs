@@ -15,8 +15,7 @@ Setting up your course metadata is the first thing you've got to do. This includ
 
 ![52zq7tHMNzSQEhcfU-wJj](https://creator-assets.codedamn.com/fermion-instructor/01-08-2024/instructor_66467ae8ada1f52e23942268/52zq7tHMNzSQEhcfU-wJj)
 
-*This brings you one step closer to publishing your course! 
-*
+*This brings you one step closer to publishing your course!*
 
 This is the section from where you can set "goals" for your course. Simply write things that students would accomplish upon completing your course. I've jotted a few things in the above photo for your reference. Click on "Add More" to add another goal, add as many as you like! 
 
