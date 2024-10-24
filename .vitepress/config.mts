@@ -4,6 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "Fermion Docs",
   description: "Documentation on using Fermion platform",
+
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
 
@@ -75,6 +76,33 @@ export default defineConfig({
       { icon: 'x', link: 'https://x.com/fermionapp' },
       { icon: 'instagram', link: 'https://www.instagram.com/fermion.app/' },
       { icon: 'linkedin', link: 'https://www.linkedin.com/showcase/fermionapp/' }
-    ]
-  }
+    ],
+
+    siteTitle: 'Fermion Docs',
+    logo: '/favicons/fermion-logo-500x500.png',
+
+    footer: {
+      copyright: `Copyright © Fermion ${new Date().getFullYear()}. All rights reserved.`
+    },
+
+    search: {
+      provider: 'local'
+    }
+
+
+  },
+
+  markdown: {
+    lineNumbers: true
+  },
+
+  cleanUrls: true,
+
+  lastUpdated: true,
+
+  head: [
+    ['link', { rel: 'shortcut icon', href: '/favicons/favicon.ico' }],
+  ]
+
+
 })
