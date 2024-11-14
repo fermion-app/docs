@@ -6,7 +6,7 @@ Fermion allows you to configure a powerful affiliate marketing system for your o
 
 - Automate everything
 
-- Create custom affiliate links
+- Create custom affiliate links.
 
 - Monitor your affiliates and optimize in real-time
 
