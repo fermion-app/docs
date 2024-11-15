@@ -55,7 +55,8 @@ export default defineConfig({
         items: [
           { text: 'Create a custom landing page', link: '/docs/marketing-tools/create-a-custom-landing-page' },
           { text: 'Using Webhooks', link: '/docs/marketing-tools/using-webhooks' },
-          { text: 'Email Automation', link: '/docs/marketing-tools/email-automation' }
+          { text: 'Email Automation', link: '/docs/marketing-tools/email-automation' },
+          { text: 'Affiliate marketing', link: '/docs/marketing-tools/affiliate' }
 
         ]
       },
