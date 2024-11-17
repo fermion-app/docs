@@ -61,14 +61,14 @@ export default defineConfig({
 						text: 'What are coding labs?',
 						link: '/docs/creating-coding-labs/what-are-coding-labs',
 					},
-					{
-						text: 'Creating a coding lab from scratch',
-						link: '/docs/creating-coding-labs/creating-a-coding-lab-from-scratch',
-					},
 
 					{
 						text: 'React.js',
 						link: '/docs/creating-coding-labs/technologies/react',
+					},
+					{
+						text: 'Python',
+						link: '/docs/creating-coding-labs/technologies/python',
 					},
 
 					{

@@ -4,15 +4,17 @@ Coding labs is a powerful feature of Fermion. Using coding labs in your platform
 
 Let's take a look at how you can setup a React.js interactive coding lab in this guide.
 
+:::tip
+It is highly recommended to watch [this](https://www.youtube.com/watch?v=aBddZmWt0Sc&list=PLYxzS__5yYQnoUg4MCS2sew_tOZsgrUeH&index=4) and [this](https://www.youtube.com/watch?v=SXep-fuTtmk&list=PLYxzS__5yYQnoUg4MCS2sew_tOZsgrUeH&index=5) video first for understanding how coding labs setup work on Fermion.
+:::
+
 ## Step 1 - Creating lab
 
 <!--@include: ../../../_components/lab-metadata.md-->
 
 ## Step 2 - Lab instructions
 
-Once you click on `Edit` button a new page will open. On this page you need to setup instructions for lab. These instructions would be visible to the user when they're attempting the lab. Therefore, include all the helper material, lab setup instructions here.
-
-![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/17-11-2024/00%402x.daeltt.png)
+<!--@include: ../../../_components/lab-instructions.md-->
 
 ## Step 3 - Lab Defaults
 
