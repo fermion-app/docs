@@ -20,7 +20,7 @@ export default defineConfig({
 						link: '/docs/getting-started/what-is-fermion',
 					},
 					{
-						text: 'Fermion v/s Other Platforms',
+						text: 'Fermion v/s other platforms',
 						link: '/docs/getting-started/fermion-vs-other-platforms',
 					},
 					{
@@ -28,30 +28,60 @@ export default defineConfig({
 						link: '/docs/getting-started/what-can-you-do-on-fermion',
 					},
 				],
+	
 			},
 			// /docs/create-your-first-course/
 			{
-				text: 'Creating your first course',
+				text: 'Create your first course',
 				collapsed: false,
 				items: [
 					{
-						text: 'Prerequisites',
+						text: 'Pre-requisites',
 						link: '/docs/create-your-first-course/prerequisites',
 					},
 					{
-						text: 'Setting up course landing page',
-						link: '/docs/create-your-first-course/setting-up-course-landing-page',
+						text: 'Course landing page',
+						link: '/docs/create-your-first-course/course-landing-page',
 					},
 					{
-						text: 'Managing the Syllabus',
-						link: '/docs/create-your-first-course/managing-the-syllabus',
+						text: 'Manage syllabus',
+						link: '/docs/create-your-first-course/manage-syllabus',
 					},
 					{
-						text: 'Creating a live class',
-						link: '/docs/create-your-first-course/creating-a-live-class',
+						text: 'Monitor course analytics',
+						link: '/docs/create-your-first-course/monitor-course-analytics',
+					},
+					{
+						text: 'Common FAQs',
+						link: '/docs/create-your-first-course/common-faqs',
 					},
 				],
 			},
+
+			// /docs/setup-pricing/
+			{
+				text: 'Setup pricing',
+				collapsed: false,
+				items: [
+					{
+						text: 'Fixed pricing plan',
+						link: '/docs/setup-pricing/fixed-pricing-plan',
+					},
+					{
+						text: 'Setup EMIs',
+						link: '/docs/setup-pricing/setup-emi',
+					},
+					{
+						text: 'Add coupon codes',
+						link: '/docs/setup-pricing/add-coupon-codes',
+					},
+					{
+						text: 'Common FAQs',
+						link: '/docs/setup-pricing/common-faqs',
+					},
+				],
+			},
+
 			// /docs/creating-coding-labs/
 			{
 				text: 'Creating coding labs',
@@ -80,17 +110,82 @@ export default defineConfig({
 						text: 'Using the content library',
 						link: '/docs/creating-coding-labs/using-the-content-library',
 					},
+					{
+						text: 'Common FAQs',
+						link: '/docs/creating-coding-labs/common-faqs',
+					},
 				],
 			},
+			// /docs/live-classes/
+			{
+				text: 'Setup live classes',
+				collapsed: false,
+				items: [
+					{
+						text: 'What are live classes?',
+						link: '/docs/live-classes/what-are-live-classes',
+					},
+					{
+						text: 'Setup live class',
+						link: '/docs/live-classes/setup-live-class',
+					},
+					{
+						text: 'Setup OBS',
+						link: '/docs/live-classes/setup-obs',
+					},
+					{
+						text: 'Monitor live analytics',
+						link: '/docs/live-classes/monitor-live-analytics',
+					},
+					{
+						text: 'Common FAQs',
+						link: '/docs/live-classes/common-faqs',
+					},
+				],
+			},
+			
 			// /docs/community/
 			{
 				text: 'Community',
 				collapsed: false,
 				items: [
 					{
-						text: 'What are Communities?',
+						text: 'What are communities?',
 						link: '/docs/community/what-are-communities',
 					},
+					{
+						text: 'Setup community',
+						link: '/docs/community/setup-community',
+					},
+					{
+						text: 'Common FAQs',
+						link: '/docs/community/common-faqs',
+					},
+
+				],
+			},
+			// /docs/digital-products/
+			{
+				text: 'Digital Products',
+				collapsed: false,
+				items: [
+					{
+						text: 'What are digital products?',
+						link: '/docs/digital-products/what-are-digital-products',
+					},
+					{
+						text: 'Course bundles',
+						link: '/docs/digital-products/course-bundles',
+					},
+					{
+						text: 'All platform access',
+						link: '/docs/digital-products/all-platform-access',
+					},
+					{
+						text: 'E-books',
+						link: '/docs/digital-products/ebooks',
+					},
+
 				],
 			},
 			// /docs/marketing-tools/
@@ -99,46 +194,56 @@ export default defineConfig({
 				collapsed: false,
 				items: [
 					{
-						text: 'Create a custom landing page',
-						link: '/docs/marketing-tools/create-a-custom-landing-page',
-					},
-					{
-						text: 'Using Webhooks',
-						link: '/docs/marketing-tools/using-webhooks',
-					},
-					{
-						text: 'Email Automation',
-						link: '/docs/marketing-tools/email-automation',
-					},
-					{
 						text: 'Affiliate marketing',
 						link: '/docs/marketing-tools/affiliate',
 					},
+					{
+						text: 'Custom landing pages',
+						link: '/docs/marketing-tools/custom-landing-pages',
+					},
+					{
+						text: 'Add forms',
+						link: '/docs/marketing-tools/add-forms',
+					},
+					{
+						text: 'Gamification features',
+						link: '/docs/marketing-tools/gamification-features',
+					},
+					{
+						text: 'Setup webhooks',
+						link: '/docs/marketing-tools/setup-webhooks',
+					},
+					{
+						text: 'Email automation',
+						link: '/docs/marketing-tools/email-automation',
+					},
 				],
 			},
-			// /docs/miscellaneous-details/
+			// /docs/manage-settings/
 			{
-				text: 'Miscellaneous Details',
+				text: 'Manage Settings',
 				collapsed: false,
 				items: [
 					{
-						text: 'Change School Settings',
-						link: '/docs/miscellaneous-details/change-school-settings',
+						text: 'Change school settings',
+						link: '/docs/manage-settings/change-school-settings',
 					},
 					{
-						text: 'Change Instructor Details',
-						link: '/docs/miscellaneous-details/change-instructor-details',
+						text: 'Change instructor details',
+						link: '/docs/manage-settings/change-instructor-details',
 					},
 					{
-						text: 'How do you get paid?',
-						link: '/docs/miscellaneous-details/how-do-you-get-paid',
+						text: 'Manage payouts',
+						link: '/docs/manage-settings/manage-payouts',
 					},
 					{
-						text: 'How can you resolve your doubts?',
-						link: '/docs/miscellaneous-details/how-can-you-resolve-your-doubts',
+						text: 'Help',
+						link: '/docs/manage-settings/help',
 					},
 				],
 			},
+		
+
 		] satisfies {
 			text: string
 			collapsed: boolean

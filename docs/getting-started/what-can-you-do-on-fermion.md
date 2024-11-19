@@ -43,7 +43,7 @@ So you essentially want a tool that provides the same, buttery-smooth experience
 
 Fermion simplifies this by offering built-in live class capabilities, eliminating the need for third-party applications like Zoom. This not only provides a seamless experience but also reduces additional costs and setup hassles.
 
-Fermion’s in-house infrastructure ensures a smooth, uninterrupted teaching experience, making it easier for you to focus on delivering their content effectively.
+Fermion’s in-house infrastructure ensures a smooth, uninterrupted teaching experience, making it easier for you to focus on delivering your content effectively.
 
 We'll discuss more about how to get started with Live Classes in detail, as we move deeper into the course.
 
@@ -64,11 +64,11 @@ Not just this, you can go beyond and even add hands-on coding projects as well a
 
 ## Data Transparency and Digital Protection
 
-We get it – there’s nothing more demoralizing than seeing your content be abused. We understand because we’ve been there too.
+There’s nothing more demoralizing than seeing your content be abused. We understand because we’ve been there too.
 
 And this is why, at Fermion, we prioritize data security and transparency by providing you with robust DRM protection to safeguard your content.
 
-Your courses are protected from piracy and unauthorized use, with our in-built DRM protection with Widevine and Fairplay. Moreover, Fermion also offers detailed insights into your audience engagement, course completion, and assessment reports, allowing you to continuously improve your courses.
+Your courses are protected from piracy and unauthorized use, with our in-built DRM protection and with Widevine and Fairplay. Moreover, Fermion also offers detailed insights into your audience engagement, course completion, and assessment reports, allowing you to continuously improve your courses.
 
 You have 100% control and visibility over your content and audience, with a secure and transparent teaching environment.
 
@@ -78,13 +78,13 @@ We help you set up your presence across the globe – quite literally.
 
 Fermion simplifies this process by supporting a variety of international and domestic payment gateways, including Stripe, PayPal, Razorpay, and more. This makes it easy to manage enrollments and receive payments from over 150 countries.
 
+We've also recently rolled out our own in-house UPI payment gateway which reduces your transaction costs, bringing them down to 0.5% from 2%. (2% is what conventional gateways like Razorpay charges).
+
 Our approach is specifically tailored to handle your needs, offering dynamic and geo-pricing options to accommodate a global audience.
 
 ## Multiple Instructors and Co-teaching
 
 Collaboration is the key to creating comprehensive courses, especially in technical content where you want to enrich your content with diverse expertise.
-
-Collaboration is the key to creating comprehensive courses
 
 Fermion fully supports multiple instructors and co-teaching. You can team up with other experts to provide a richer learning experience.
 

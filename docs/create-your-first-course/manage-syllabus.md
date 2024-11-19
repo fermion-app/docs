@@ -1,0 +1,183 @@
+# Managing the course syllabus
+
+There are a few things to know before we dig deep:
+
+1. If you have opted for a "Cohort Based Course", your `Manage syllabus` will look something like below. Here, you can schedule live sessions, add weekly assignments, and track student progress through the course timeline.
+   ![Yhchr7tqw4PIwhUB1HQlU](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/Yhchr7tqw4PIwhUB1HQlU)
+
+2. In case you've chosen a "Recorded Course", your `Manage syllabus` section will look like the below screenshot. This format allows you to create and organize content sections that students can access at their own pace.
+   ![-UTjMT52nzhSqwBdw5TY](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/-_UTjMT52nzhSqwBdw5TY)
+
+3. In the case of a Cohort Based Course, Fermion by-default bifurcates your cohort duration into a weekly division, so that when you prepare your syllabus, it follows a weekly format. This helps in maintaining a structured learning path for your students.
+
+4. In the case of a Recorded Course, Fermion gives you the ability to create "Sections". In every section, you can create multiple course items. When you create a section, one empty article is created by default, as sections cannot be empty. Remember this the next time you create a recorded course to ensure all sections contain valuable content.
+
+## What are course items?
+
+Course items are the components you can add inside your syllabus from the Fermion syllabus manager. These include articles, videos, quizzes, coding labs, coding assessments, and more. We'll discuss more about these in the sections below.
+![0U0oseIG-yeGJSBWSWxJB](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/0U0oseIG-yeGJSBWSWxJB)
+
+## What is an article?
+
+An article is a written piece of content that you can create within the course. It can include text, images, links, and other multimedia elements to explain concepts, provide instructions, or deliver information to students. Articles are ideal for detailed explanations, step-by-step guides, and reference material. The article editor provides you with a proper markdown support so you can make them beautiful!
+
+### How do I create an article?
+
+- Step 1: Click on the `+` button to expand the course items' view.
+  ![ou2MYg6hixAk6KvqwrmrQ](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/ou2MYg6hixAk6KvqwrmrQ)
+
+- Step 2: Click on `Article`. This will add an article inside your section.
+  ![hZdVHAV3X4qaUj1Hkk2tT](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/hZdVHAV3X4qaUj1Hkk2tT)
+
+- Step 3: Click on the three dots of the new article which is added as `Article: Untitled Course Item`. Click on edit.
+  ![rtHhxzjlAQxTyr4nFhsIZ](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/rtHhxzjlAQxTyr4nFhsIZ)
+
+- Step 4: A new editor will now open from where you can change the title of the article and start adding content.
+  ![h8YNmgn_xJzJH3hreTEOA](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/h8YNmgn_xJzJH3hreTEOA)
+
+## What is a quiz?
+
+A quiz is an interactive assessment tool that you can use to test your students' knowledge and understanding of the course material. Quizzes can include multiple-choice questions, true/false questions, short answers, and other formats. They help reinforce learning and provide immediate feedback to students.
+
+### How do I create a quiz?
+
+- Step 1: Click on the `+` button to expand the course items' view.
+  ![ou2MYg6hixAk6KvqwrmrQ](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/ou2MYg6hixAk6KvqwrmrQ)
+
+- Step 2: Click on `Quiz`. This will add a quiz inside your section.
+  ![9TpXsALUf5KyzEil2SWvv](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/9TpXsALUf5KyzEil2SWvv)
+
+- Step 3: Click on the three dots of the new quiz which is added as `Quiz: Untitled quiz`. Click on edit.
+  ![eUyaAcTdiiZgEnMUeI4MM](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/eUyaAcTdiiZgEnMUeI4MM)
+
+- Step 4: A quiz editor will now open in a new tab from where you can start adding the quiz content, on the first screen, you can change the title of the quiz and add any further details you'd like to. Once done make sure to save your changes.
+  ![77Ji6Dwypk58OC-7gqR6H](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/77Ji6Dwypk58OC-7gqR6H)
+
+- Step 5: Now, move to questions tab, where you can start adding new questions. Create your first question by clicking on`Add a new question`.
+  ![iRyqb_HsOqkvMQBRadXnD](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/iRyqb_HsOqkvMQBRadXnD)
+
+- Step 6: Once a new question has been added, select the quiz type, add the question, and start adding multiple options. Make sure to check the correct option(s) once you've added all options.
+  ![E7rqcTfmaQlVAcOntx3Zn](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/E7rqcTfmaQlVAcOntx3Zn)
+
+- Step 7: You can also add a `description` or an `explanation` once you have set your questions and options.
+  ![gLYzQyexiyOcs7sCokg42](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/gLYzQyexiyOcs7sCokg42)
+
+- Step 8: Save your question, and add multiple questions in a single quiz.
+  ![QQA9K-TYEYUVRPtIbzGx2](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/QQA9K-TYEYUVRPtIbzGx2)
+
+## What is a coding lab?
+
+A coding lab is a hands-on programming lab that allows students to apply what they've learned in a practical setting. In a coding lab, students write and run code to solve problems or complete tasks. It provides an interactive environment for learners to practice coding skills and receive real-time feedback.
+
+We'll learn more about coding labs in the upcoming articles and also discuss how you can build one for yourself.
+
+## What is video?
+
+A video is a pre-recorded visual and audio presentation that you can include in your course. Videos can be lectures, tutorials, demonstrations, or any other type of visual content that helps convey information effectively. Videos are engaging and can simplify complex topics through visual representation.
+
+### How do I add videos?
+
+- Step 1: Click on the `+` button to expand the course items' view.
+  ![ou2MYg6hixAk6KvqwrmrQ](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/ou2MYg6hixAk6KvqwrmrQ)
+
+- Step 2: Click on `Video`. This will add a video inside your section.
+  ![U5CJoCJPUbhR70SvX5_dO](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/U5CJoCJPUbhR70SvX5_dO)
+
+- Step 3: Click on`Attach Video` of the new video which is added as `Video: Untitled course item`.
+  ![UEnS7rIrVEAEpquKalIep](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/UEnS7rIrVEAEpquKalIep)
+
+- Step 4: When you click on `Attach video`, it will open a new modal pop-up where you can edit the title, add description and `Add a video`.
+  ![o3vfcMD1WYP47Ga1BiRds](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/o3vfcMD1WYP47Ga1BiRds)
+
+- Step 5: When you click on `Add a video` it will open a new modal for you, showing you all the videos in your video library, if it is empty, it means that there are no videos in your video library. You can add videos in bulk by clicking on the `Upload videos` button.
+  ![wr5keXO1dGDtOvu1R1nIW](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/wr5keXO1dGDtOvu1R1nIW)
+
+- Step 6: Once you add videos, it can take up to a few hours for the videos to get processed. Once your videos are processed you can click on the `Link Video` button to attach it to the current course item.
+
+- Step 7: So on, you can add multiple pre-recorded videos inside your course.
+
+## What is live class?
+
+A live class is a real-time, interactive session where you can teach students directly. During a live class, you can share your screen, present slides, engage in discussions, and answer questions on the spot. Live classes are ideal for fostering interaction and building a community among your students.
+
+We'll learn more on how to setup a live class within your course curriculum, in the next few articles.
+
+## What is coding assessment?
+
+A coding assessment is a structured evaluation designed to test students' programming skills and knowledge.
+
+Unlike coding labs, which are practice-based, coding assessments are used to grade students' performance. They typically involve solving coding problems within a set time frame and are used to measure students' proficiency.
+
+You can also call them "interview kits", as they follow the same pattern of an interview kit, including a mix of quizzes and coding labs.
+
+Here's how a typical assessment look like:
+![cMEy0GJFODortnuZ82FO5](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/cMEy0GJFODortnuZ82FO5)
+
+Coding assessments aren't available to everyone by default, if you wish to convert your course into an interview kit, please reach out to us at [support@codedamn.com](https://).
+
+## What is content library?
+
+The content library is a repository of reusable educational materials that you can use in your course. It can include quizzes or coding labs (interactive and DSA/IO based, both). The content library also allows you to store and organize your questions efficiently, making it easy to integrate them into multiple courses.
+
+### How can I use the content library?
+
+This content library is available to all instructors on a `Pro` plan, and includes over 5000+ questions which you can add with the click of a button.
+
+- Step 1: Click on the `+` button to expand the course items' view.
+  ![ou2MYg6hixAk6KvqwrmrQ](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/ou2MYg6hixAk6KvqwrmrQ)
+
+- Step 2: Click on `Content Library`. This will open up a new modal.
+  ![dhI9BbYmgYCuJWTvq6GF5](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/dhI9BbYmgYCuJWTvq6GF5)
+
+- Step 3: Filter through multiple tags, and find the question you want.
+  ![bqpxldy63d7UBdhf4Vz3U](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/bqpxldy63d7UBdhf4Vz3U)
+
+- Step 4: Select either a quiz, or a coding lab.
+  ![_dhD1EgL2xzmJHoKycRR-](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/_dhD1EgL2xzmJHoKycRR-)
+
+- Step 5: Once you find a problem that you like, click on it, and study it in detail to make sure it is the one you'd like to add in your syllabus.
+
+- Step 6: When you have finalised you can click on `Import Lab` to add it inside your own syllabus.
+  ![PifylUTxZCpQLdrtqDIXQ](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/PifylUTxZCpQLdrtqDIXQ)
+
+## What is modify availability?
+
+`Modify Availability` is a feature to make your course items available on a specific date and a specific time. It's especially used for `Content Dripping`.
+
+Content dropping is a method of releasing course materials to students at scheduled intervals rather than all at once. This approach helps maintain a structured learning path and prevents students from feeling overwhelmed by too much information at once. It also helps keep students engaged and ensures they are progressing through the course at a manageable pace.
+
+If you want to adjust availability of course items:
+
+- Step 1: Click on the three dots infront of the course item you wish to modify.
+  ![guDiXneRt-pYVcd8BBvhX](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/guDiXneRt-pYVcd8BBvhX)
+
+- Step 2: Click on "Modify Availability"
+
+- Step 3: Once you "Enable" the "Content Dripping" mode. You can selecte a date from which your course item will be made available.
+  ![lCuI5qi5JETST3H2zipMz](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/lCuI5qi5JETST3H2zipMz)
+
+- Step 4: Click on `Save` and you're good to go.
+
+###### Please make sure to publish all items to make them available to your students, your course items are in-draft by default and to make them available you will need to publish them.
+
+## Frequently asked questions
+
+### Live classes do not work for my account, what should I do?
+
+Incase live classes do not work for your account, please reach out to us at [support@codedamn.com](https://) and we'll enable them for you.
+
+### How can I add a coding assessment?
+
+Coding assessments aren't available to everyone by default, if you wish to convert your course into an interview kit, please reach out to us at [support@codedamn.com](https://).
+
+### Can I add a project?
+
+Yes, you can also add projects inside your course, however projects aren't currently available. If you'd like to show your interest, please reach out to us at [support@codedamn.com](https://) and let us know more about your use case.
+
+### How can I attach a resource in a course item?
+
+At every course item, there's an option to attach a resource to the particular course item, simply click on the three dots and click on `Attach a resource`. You can attach resources like PDF, code files, or any other asset that could help leaners with your lesson. It will be made available to learners to download on their own computer. Simply upload your file and it'll be added in learner's dashboards.
+
+![-jLImo9mXt8jGNLKK8yS0](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/-jLImo9mXt8jGNLKK8yS0)
+
+![k8wrjZKjIC6TzfcM3Q7s8](https://creator-assets.codedamn.com/fermion-instructor/02-08-2024/instructor_66467ae8ada1f52e23942268/k8wrjZKjIC6TzfcM3Q7s8)

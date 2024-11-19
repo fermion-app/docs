@@ -1,16 +1,8 @@
 # Creating a live class
 
-_It's time to create your first live class! Before we jump in, let's learn a little more about what are live classes on Fermion._
+As an online creator, teaching live online can be one of the biggest bottlenecks, especially when you need high-quality video and smooth interactions at an affordable price.
 
-## Introduction
-
-As an online creator, teaching live online can be one of the biggest bottlenecks, especially when you need high-quality video and smooth interactions.
-
-If you’re planning to teach online, you probably have realized that the easiest way is by using softwares like Google Meet, Webex, Zoom, etc. But these softwares drill a hole inside your pocket the moment you scale.
-
-So you essentially want a tool that provides the same, buttery-smooth experience without hurting your pocket, which is exactly what Fermions serves you with.
-
-Fermion simplifies this by offering built-in live class capabilities, eliminating the need for third-party applications like Zoom. This not only provides a seamless experience but also reduces additional costs and setup hassles.
+Fermion offers built-in live class capabilities, eliminating the need for third-party applications like Zoom. This not only provides a seamless experience but also reduces additional costs and setup hassles.
 
 Fermion’s in-house infrastructure ensures a smooth, uninterrupted teaching experience, making it easier for you to focus on delivering their content effectively.
 

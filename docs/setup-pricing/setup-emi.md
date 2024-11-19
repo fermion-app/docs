@@ -1,0 +1,136 @@
+# Setup partial payment pricing plan
+
+Fermion lets you add and manage multiple pricing plans for your digital products. You can setup a fixed pricing plan, which requires a one-time payment from the students, or you can setup a partial payment plan for your students which works like a custom-EMI plan.
+
+In this documentation we will learn how you can setup a partial payment pricing plan for your courses or products.
+
+::: warning 📝 You can use the same flow to setup pricing for other products (course bundles, ebooks etc). For simplicity, this documentation covers the setup flow for a course.
+:::
+
+## What is a partial payment pricing plan?
+
+Partial payment pricing plan is a type of pricing plan on Fermion where your students can pay you in installments instead of paying the entire amount in a single go.
+
+After speaking with a lot of educators, we've realised that most of the students may not be able to afford course or product pricing, thus, you can setup a partial payment plan where you encourage your students to pay in installments.
+
+You can also consider this as a custom-EMI plan since your students can pay you in installments. You can configure the EMI collection interval, minimum amount to pay, total cost and EMI options.
+
+## Understanding terminologies
+
+Before we figure out how to setup this pricing plan, there are a few things to understand. Let's go over them one by one:
+
+- <u>**Total cost of product**</u>
+  <br>This is the total price of your product or the final price the user will pay overall. All the EMIs you will be setting up should result as a sum equal to this number.
+
+- <u>**Minimum mandatory amount**</u>
+  <br>This is the mandatory amount that the user must pay upfront. User can pay more than this amount as well. Paying this amount will give user the access to product.
+
+- <u>**EMI collection interval**</u>
+  <br>You can set the interval in days, ie, when want the user to pay the next EMI if available.
+
+## How does a partial payment plan work?
+
+We've developed the core infrastructure to setup a custom-EMI based plan on products, at Fermion.
+
+A partial payment plan or a custom EMI plan encourages students to pay the product fees in intervals.
+
+::: warning 📝 You can configure the entire installment plan as an instructor, including setting up the minimum amount to pay, the collection interval and the total EMIs required.
+:::
+
+Let's understand this with an example. This is how a **4 installment plan** will work:
+
+<u> Assume that the user pays the minimum mandatory amount: $5 on November 19th, 2024. Then, their (4 installment) EMI plan becomes: </u>
+
+- Base payment of $5 done on November 19th, 2024
+- Installment #1 of $1.25 to be paid on or before December 19th, 2024
+- Installment #2 of $1.25 to be paid on or before January 18th, 2025
+- Installment #3 of $1.25 to be paid on or before February 17th, 2025
+- Installment #4 of $1.25 to be paid on or before March 19th, 2025
+
+## How to setup a partial payment pricing plan?
+
+### Step 1: Head to the `courses` tab
+
+From your dashboard, head over to the `courses tab`.
+
+![Step 1](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/22%402x.jkyvqz.png)
+
+::: warning 💡 If you are setting the price for course bundles, ebooks or other digital products, head over to their respective tabs.
+:::
+
+### Step 2: Select the course
+
+From the courses page, select the course for which you are setting the fixed pricing plan.
+
+![Step 2](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/19%402x.mhnqhl.png)
+
+### Step 3: Head over to the `pricing` tab
+
+Select the pricing tab from your landing page manager.
+
+![Step 3](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/35%402x.twioru.png)
+
+### Step 4: Click on `partial payment plan`
+
+Click on the `partial payment plan` option on the screen and it will expand showcasing you multiple options. Make sure that the plan is in `draft` state unless and until you want to publish it.
+
+![Step 4](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/22%402x.fzbynt.png)
+
+- Draft state means that your plan would not be visible to users. You can use this state to edit and setup your plan.
+
+- Unlisted state means that the plan would be functional but not visible on landing pages. You can use it to open checkout through API endpoint.
+
+- Published state means the plan would be functional and visible to users. Users will be able to purchase access to your product with this plan.
+
+### Step 5: Configure the pricing plan
+
+- Setup the total cost of the product
+- The minimum mandatory amount (users can pay more than this amount as well, think of it as the amount to book their seat for your product)
+- And the EMI collection interval (in days). This is the interval time when the user will pay their next EMI.
+
+![Step 5](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/58%402x.kluoac.png)
+
+These are the EMI options available by default. After you setup the above details, your installment plan will automatically be made depending on which plan the user opts for.
+
+![Step 6](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/08%E2%80%AFPM.bcvski.png)
+
+**For example:**
+
+If a user opts for a 2 installment plan, here's what it will look like based on the numbers we have configured above.
+
+Assume that the user pays the minimum mandatory amount: $5 on November 19th, 2024. Then, their EMI plan becomes:
+
+- Base payment of $5 done on November 19th, 2024
+- Installment #1 of $2.50 to be paid on or before December 19th, 2024
+- Installment #2 of $2.50 to be paid on or before January 18th, 2025
+
+If you'd like to setup a custom installment plan, you can also do that. Click on `Add another installment plan`
+
+![Step 7](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/41%402x.zjqeyy.png)
+
+Now, enter the installment count
+
+![Step 8](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/15%402x.fbhnew.png)
+
+Your new installment plan will be added here. Make sure to click on `save changes` to save the changes.
+
+![Step 9](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/36%402x.mxfgin.png)
+
+### Step 6: Support multiple currencies
+
+To support your pricing plan in multiple currencies, simply click on `Add a new currency` button like shown below.
+
+![Step10](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/37%402x.jsyyob.png)
+
+Select your currency and add a price amount in the next input field.
+
+![Step11](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/23%402x.ddbyuc.png)
+
+Once you add the currency and price, click on `Add currency` and your pricing plan will be updated with a new currency. This is how it will look like:
+
+![Step12](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/48%402x.ctrhcx.png)
+
+<br>
+
+::: warning 📝 All the available installment plans are shown to your students and they can select one which fits best for them.
+:::
