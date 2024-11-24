@@ -8,7 +8,7 @@ You can support your course in 180+ countries with 100+ currencies available for
 
 ### Do I need to integrate my own payment gateway on the platform?
 
-No, you do not need to integrate your own payment gateway on the platform. Fermion handles and manages all payments and payouts for you, so you don't need to take any headache. If you need more support for payment gateways, [reach out to us at](vishnupriya@fermion.app).
+No, you do not need to integrate your own payment gateway on the platform. Fermion handles and manages all payments and payouts for you, so you don't need to take any headache. If you need more support for payment gateways, [reach out to us at](mailto:vishnupriya@fermion.app).
 
 ### What payment gateways will be made available for my course?
 
