@@ -88,3 +88,13 @@ You will now see a screen like this:
 6. Click on `Create Coupon` to create the coupon.
 
 ## How to share coupon codes with your students?
+
+Once you have created the coupon code, you will find it in the coupon list, something like this:
+
+![jkbkjbk](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/20-11-2024/54%402x.tlcjly.png)
+
+You can now copy the coupon code link, you can also edit the coupon and you can update the coupon.
+
+![jkddbkjbk](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/20-11-2024/16%402x.fntccg.png)
+
+Simply click on the copy button to copy the coupon link and share it with your students.

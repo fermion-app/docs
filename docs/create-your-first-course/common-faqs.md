@@ -1,6 +1,6 @@
-# Common FAQs
+# Frequently asked questions
 
-This document lists down some of the commonly asked FAQs related to course toolings on Fermion.
+This document lists down some of the FAQs related to course toolings on Fermion.
 
 ### What type of courses can I create on Fermion?
 
