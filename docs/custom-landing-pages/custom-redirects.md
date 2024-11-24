@@ -1,0 +1,64 @@
+# Custom redirects
+
+Custom redirects are a powerful URL management system that gives you complete control over how URLs are redirected within your platform. They enable you to establish rules for automatically directing users from one URL to another, ensuring a seamless browsing experience while maintaining the integrity of your website's navigation structure.
+
+Custom redirects give you complete control over URL redirections within your platform so you can easily maintain and manage URL structures.
+
+They are particularly useful for updating URLs while maintaining existing links, creating shorter paths to specific pages, and managing seasonal or temporary redirects, all while ensuring seamless navigation after content restructuring.
+
+## Why use custom redirects?
+
+Website structures rarely remain static. As your site grows and evolves, you'll likely need to reorganize content, update URL structures, or create more intuitive paths to important pages. Custom redirects are essential during these transitions, preventing broken links and maintaining your site's SEO value. They're particularly valuable when you're rebranding, restructuring your content hierarchy, or running temporary promotional campaigns that require special URL handling.
+
+## When to use custom redirects?
+
+You can use custom redirects in the following scenarios:
+
+-   Content Restructuring:
+    When you're reorganizing your website's content hierarchy, custom redirects ensure that users following old bookmarks or links still reach their intended destination. This is crucial for maintaining user experience and preventing frustration from encountering 404 errors.
+
+-   SEO Preservation:
+    If you've built up SEO value on existing URLs, redirects help transfer that authority to new pages, preventing loss of search engine ranking when you need to change URL structures.
+
+-   Marketing Campaigns:
+    During seasonal promotions or temporary campaigns, you might want to create simple, memorable URLs that redirect to specific landing pages. Custom redirects make this possible without permanently altering your site's structure.
+
+-   Brand Consolidation:
+    When merging multiple websites or consolidating content from different domains, custom redirects help create a unified navigation structure while ensuring old links continue to work.
+
+## How to use custom redirects on Fermion?
+
+With custom redirects on Fermion you can:
+
+-   Create exact path matches for precise URL control or create wildcard matches.
+-   Set up static pathname or URL redirects
+-   Manage multiple redirects from a central dashboard
+-   Instant publishing and unpublishing capabilities
+
+### Step 1:
+
+Navigate to the `custom redirects` tab from your Fermion dashboard.
+
+![djfbkjdbnfkjd](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/24-11-2024/50%402x.xueuds.png)
+
+### Step 2:
+
+Click on "Create" to create a new custom redirect.
+
+![dfdfd](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/24-11-2024/57%402x.yxaxxj.png)
+
+### Step 3:
+
+Setup your custom redirect.
+
+![dfddddfd](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/24-11-2024/44%402x.ikixyz.png)
+
+-   When setting up custom redirects, prioritize exact path matches for precise control over specific URLs.
+-   Use wildcard matches judiciously for handling groups of similar URLs that should all follow the same redirection pattern.
+-   Always test your redirects thoroughly before publishing, and monitor their performance to ensure they're serving their intended purpose.
+
+### Step 4:
+
+Publish your custom redirect.
+
+![dfddddfd](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/24-11-2024/55%402x.mxqzni.png)

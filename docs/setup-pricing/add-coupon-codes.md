@@ -1,0 +1,100 @@
+# Coupon codes
+
+Coupon codes are a great way to promote your courses at a discounted price and get more students to enroll in your course. Fermion lets you create and manage coupon codes within your course flow, which you can easily share with your students.
+
+You can either create a fixed amount coupon (for eg: ₹500 off) or you can create a discount percentage. In this documentation we'll talk about both the ways of creating a coupon code.
+
+## How to add coupon code for your course?
+
+### Step 1: From your dashboard, head over to the `courses tab`.
+
+![Step 1](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/22%402x.jkyvqz.png)
+
+::: warning 💡 If you are setting the coupon codes for course bundles, ebooks or other digital products, head over to their respective tabs.
+:::
+
+### Step 2: Select the course
+
+From the courses page, select the course for which you are creating the coupon codes.
+
+![Step 2](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/19%402x.mhnqhl.png)
+
+### Step 3: Head over to the `coupon codes` tab
+
+Select the `coupon codes` tab from your landing page manager.
+
+![Step 3](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/02%402x.ijotvc.png)
+
+### Step 4: Create a new coupon
+
+Click on `create new coupon` to create a new coupon code.
+
+![Step 4](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/57%402x.mxuauc.png)
+
+### Step 4: Select a coupon type
+
+Once you create a new coupon, you will see such a screen:
+
+![erbghjkrb](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/32%E2%80%AFAM.aiujah.png)
+
+You can choose to either select a "Fixed Amount Discount" or a "Percentage Discount"
+
+- Fixed amount discount is where you are giving a flat discount with your coupon code. For eg: on a course of ₹5000, you can add a fixed amount discount of ₹500, which makes the overall payable amount for user to be ₹4500 (excl taxes). It is best to use to retain magic numbers on your pricing, and making the overall calculations easier for both the parties.
+
+- Percentage discount is where you can create a coupon code discounting a percentage number. For eg: you can create a 10% OFF coupon on your course priced at ₹100 which makes the overall payable amount for the user to be ₹90 (excl taxes).
+
+**Let's create a fixed amount coupon first**
+
+Once you click on `Create a new coupon`, click on `fixed amount discount` as shown below.
+
+![erbghsdfjkrb](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/57%402x.satsny.png)
+
+You will now see a screen like this:
+
+![dfjkd](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/59%402x.iwshbf.png)
+
+1. Select a currency from the drop down list and enter the discount amount. This is the amount that will be discounted from the final course price.
+
+2. Next up, add the coupon name. Use underscores for spacing.
+
+3. You can also write a one-line message. This message will appear as soon as the discount code is applied.
+
+4. Set an expiry date for the coupon. The coupon will automatically stop working post this date. In case you do not want the coupon to expire, simply click on `Infinite expiry?` button.
+
+5. Set the coupon redeemable count. This determines how many times the coupon should be availed by all users. For eg, if you set the count to be 10, then this coupon can be used 10 times and then it will automatically stop working. If you do not want any redeemable count, you can select the `Infinite Redeemable?` option and this coupon will then have an infinite redeemable count.
+
+6. Click on `Create Coupon` to create the coupon.
+
+**Let's create a percentage discount coupon**
+
+Once you click on `Create a new coupon`, click on `percentage discount` as shown below.
+
+![sfdfsf](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/59%402x.shahke.png)
+
+You will now see a screen like this:
+
+![fddfdgf](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/55%402x.fwiwjj.png)
+
+1. First of all, add the coupon name. Use underscores for spacing.
+
+2. Write a one-line message. This message will appear as soon as the discount code is applied.
+
+3. Enter the "Discount percentage off". This field determins how much discount in percentage is offered to the students.
+
+4. Set an expiry date for the coupon. The coupon will automatically stop working post this date. In case you do not want the coupon to expire, simply click on `Infinite expiry?` button.
+
+5. Set the coupon redeemable count. This determines how many times the coupon should be availed by all users. For eg, if you set the count to be 10, then this coupon can be used 10 times and then it will automatically stop working. If you do not want any redeemable count, you can select the `Infinite Redeemable?` option and this coupon will then have an infinite redeemable count.
+
+6. Click on `Create Coupon` to create the coupon.
+
+## How to share coupon codes with your students?
+
+Once you have created the coupon code, you will find it in the coupon list, something like this:
+
+![jkbkjbk](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/20-11-2024/54%402x.tlcjly.png)
+
+You can now copy the coupon code link, you can also edit the coupon and you can update the coupon.
+
+![jkddbkjbk](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/20-11-2024/16%402x.fntccg.png)
+
+Simply click on the copy button to copy the coupon link and share it with your students.

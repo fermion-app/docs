@@ -1,0 +1,55 @@
+# Frequently asked questions
+
+This document lists down some of the FAQs related to course toolings on Fermion.
+
+### What type of courses can I create on Fermion?
+
+You can create a recorded course or a cohort-based course (bootcamp style). A recorded course does not have the functionality for live classes and has no fixed start date or end date due to the nature of the course whereas a cohort-based course has a fixed start date, end date, and live classes inside the course.
+
+[Read more about courses.](https://docs.fermion.app/docs/create-your-first-course/prerequisites#what-is-a-cohort-based-course)
+
+### Can I bundle multiple courses together?
+
+Yes, you can create and sell multiple courses together on Fermion. Multiple courses together create a course bundle which you can sell at single price.
+
+[Read more about course bundles here.](https://docs.fermion.app/docs/digital-products/course-bundles)
+
+### Can I sell access to my entire platform?
+
+Yes, you can sell "all platform access" to your students. It's similar to how a udemy subscription works, where a student is able to get access to multiple courses under the same platform in a single payment.
+
+[Read more about all platform access here.](https://docs.fermion.app/docs/digital-products/all-platform-access)
+
+### What other products can I create on Fermion?
+
+You can create and sell an ebook, course bundles, platform access and more, all part of "digital products" at Fermion.
+
+[Read more about digital products here.](https://docs.fermion.app/docs/digital-products/what-are-digital-products)
+
+### Can I customise how my course landing page looks like?
+
+Yes, you can customise how your landing page looks like.
+
+[Read more about how customisation work here.](https://docs.fermion.app/docs/marketing-tools/custom-landing-pages)
+
+### Does Fermion provide a landing page template or do I have to custom-code it?
+
+Fermion by-default provides a template for your course landing pages and all the other product landing pages. However, you do have the option to customise them if you wish to.
+
+If you would like to build custom webpages (including landing pages) on Fermion, [you can read more here](https://docs.fermion.app/docs/marketing-tools/custom-landing-pages)
+
+### Can I enable direct checkout links for my courses?
+
+Yes, you can enable direct checkout links for your course
+
+### Do I need to integrate any external tool to check course analytics?
+
+No, you do not need to integrate any external tool to check course analytics. Fermion shares all student data with you in a single place.
+
+[Read more about course anaytics here](/docs/create-your-first-course/monitor-course-analytics)
+
+### Do I need to add custom parameters to track student performance?
+
+No, you do not need to add any custom parameters to track student performance. You can see every single student's performance under the `students` tab inside your course.
+
+[Or checkout this documentation to learn more.](/docs/create-your-first-course/monitor-course-analytics)
