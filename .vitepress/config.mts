@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import type { ValidRoutePathname } from '../valid-routes'
+import { type Plugin } from 'vite'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -31,28 +32,32 @@ export default defineConfig({
 				],
 			},
 			{
-				text: 'Create your first course',
+				text: 'Setting up a course',
 				collapsed: false,
 				items: [
 					{
 						text: 'Pre-requisites',
-						link: '/docs/create-your-first-course/prerequisites',
+						link: '/docs/setting-up-course/prerequisites',
 					},
 					{
-						text: 'Course landing page',
-						link: '/docs/create-your-first-course/course-landing-page',
+						text: 'Landing page',
+						link: '/docs/setting-up-course/landing-page',
 					},
 					{
-						text: 'Manage syllabus',
-						link: '/docs/create-your-first-course/manage-syllabus',
+						text: 'Syllabus',
+						link: '/docs/setting-up-course/syllabus',
 					},
 					{
-						text: 'Monitor course analytics',
-						link: '/docs/create-your-first-course/monitor-course-analytics',
+						text: 'Attachments',
+						link: '/docs/setting-up-course/attachments',
+					},
+					{
+						text: 'Analytics',
+						link: '/docs/setting-up-course/course-analytics',
 					},
 					{
 						text: 'Common FAQs',
-						link: '/docs/create-your-first-course/common-faqs',
+						link: '/docs/setting-up-course/common-faqs',
 					},
 				],
 			},

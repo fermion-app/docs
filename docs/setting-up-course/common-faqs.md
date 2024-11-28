@@ -46,10 +46,10 @@ Yes, you can enable direct checkout links for your course
 
 No, you do not need to integrate any external tool to check course analytics. Fermion shares all student data with you in a single place.
 
-[Read more about course anaytics here](/docs/create-your-first-course/monitor-course-analytics)
+[Read more about course anaytics here](/docs/setting-up-course/course-analytics)
 
 ### Do I need to add custom parameters to track student performance?
 
 No, you do not need to add any custom parameters to track student performance. You can see every single student's performance under the `students` tab inside your course.
 
-[Or checkout this documentation to learn more.](/docs/create-your-first-course/monitor-course-analytics)
+[Or checkout this documentation to learn more.](/docs/setting-up-course/course-analytics)
