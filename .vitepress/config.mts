@@ -1,6 +1,5 @@
 import { defineConfig } from 'vitepress'
 import type { ValidRoutePathname } from '../valid-routes'
-import { type Plugin } from 'vite'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
