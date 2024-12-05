@@ -91,6 +91,10 @@ export default defineConfig({
 						link: '/docs/creating-coding-labs/what-are-coding-labs',
 					},
 					{
+						text: 'Rust',
+						link: '/docs/creating-coding-labs/technologies/rust',
+					},
+					{
 						text: 'React.js',
 						link: '/docs/creating-coding-labs/technologies/react',
 					},
