@@ -1,12 +1,10 @@
-# How to Create an Interactive Rust Lab with Cargo and Unit Tests?
+# How to Create an Interactive Rust Lab?
 
 **Coding labs** are a powerful feature of Fermion. By integrating coding labs into your platform, you can enhance user retention, provide hands-on experience, and encourage a learn-by-doing approach.
 
 This guide walks you through setting up a Rust interactive coding lab.
 
-:::tip
-Before proceeding, it's highly recommended to watch [this video](https://www.youtube.com/watch?v=aBddZmWt0Sc&list=PLYxzS__5yYQnoUg4MCS2sew_tOZsgrUeH&index=4) and [this video](https://www.youtube.com/watch?v=SXep-fuTtmk&list=PLYxzS__5yYQnoUg4MCS2sew_tOZsgrUeH&index=5) to understand how Fermion coding labs are structured.
-:::
+<div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/e74cdf785b2141c8bdd01ba6cd67882f?sid=aae849eb-5285-44c2-ac4c-93f49eb50d80" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
 ## Step 1 - Creating the Lab
 
@@ -50,13 +48,7 @@ cd /home/damner/code/.labtests;
 rustc test.rs && ./test
 ```
 
-### Explanation
-
--   **Set up environment:** The script sets the Rust version to stable and ensures the `cargo` toolchain is properly configured.
--   **Sequential Execution:** Using `--test-threads=1`, we ensure tests are run sequentially.
--   **Test file setup:** Moves the test file to a hidden `.labtests` folder and updates `Cargo.toml` to include it as a library test module.
--   **Run tests:** Executes `cargo test` with JSON output.
--   **Process results:** Processes the JSON output into a boolean array (`[true, false, true]`), representing the pass/fail state for each challenge.
+-   We simply download the test file (we create in next step), and run it with `rustc`
 
 ## Step 5 - Test File
 
