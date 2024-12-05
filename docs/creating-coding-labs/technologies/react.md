@@ -4,10 +4,6 @@ Coding labs is a powerful feature of Fermion. Using coding labs in your platform
 
 Let's take a look at how you can setup a React.js interactive coding lab in this guide.
 
-:::tip
-It is highly recommended to watch [this](https://www.youtube.com/watch?v=aBddZmWt0Sc&list=PLYxzS__5yYQnoUg4MCS2sew_tOZsgrUeH&index=4) and [this](https://www.youtube.com/watch?v=SXep-fuTtmk&list=PLYxzS__5yYQnoUg4MCS2sew_tOZsgrUeH&index=5) video first for understanding how coding labs setup work on Fermion.
-:::
-
 ## Step 1 - Creating lab
 
 <!--@include: ../../../_components/lab-metadata.md-->
@@ -123,21 +119,6 @@ You might need to have a little understanding of bash scripting. Let us understa
 -   Finally we run the `process.js` file that writes the correct JSON boolean array on `$UNIT_TEST_OUTPUT_FILE` which is then read by the playground UI and marks the lab challenges as pass or fail.
 
 **Note:** You can setup a full testing environment in this block of evaluation script (installing more packages, etc. if you want). However, your bash script test file will be timed out **after 30 seconds**. Therefore, make sure, all of your testing can happen within 30 seconds.
-
-:::tip
-It is highly recommended for you to watch the video below to understand the architecture. The video below might have different UI but the concept remains same.
-:::
-
-<div style="position: relative; width: 100%; height: 0; padding-top: 56.25%;">
-<iframe
-	src="https://www.youtube.com/embed/SXep-fuTtmk?list=PLYxzS__5yYQnoUg4MCS2sew_tOZsgrUeH"
-	title="YouTube video player"
-	frameborder="0"
-	style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-	allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-	allowfullscreen
-></iframe>
-</div>
 
 Next step is to setup test file for this lab.
 

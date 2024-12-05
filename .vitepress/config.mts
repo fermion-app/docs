@@ -91,20 +91,24 @@ export default defineConfig({
 						link: '/docs/creating-coding-labs/what-are-coding-labs',
 					},
 					{
-						text: 'Rust',
-						link: '/docs/creating-coding-labs/technologies/rust',
+						text: 'Using .cdmrc file',
+						link: '/docs/creating-coding-labs/cdmrc-file',
+					},
+					{
+						text: 'HTML/CSS/JS',
+						link: '/docs/creating-coding-labs/technologies/html-css',
 					},
 					{
 						text: 'React.js',
 						link: '/docs/creating-coding-labs/technologies/react',
 					},
 					{
-						text: 'Python',
-						link: '/docs/creating-coding-labs/technologies/python',
+						text: 'Rust',
+						link: '/docs/creating-coding-labs/technologies/rust',
 					},
 					{
-						text: 'Using .cdmrc file',
-						link: '/docs/creating-coding-labs/cdmrc-file',
+						text: 'Python',
+						link: '/docs/creating-coding-labs/technologies/python',
 					},
 					{
 						text: 'Using the content library',
