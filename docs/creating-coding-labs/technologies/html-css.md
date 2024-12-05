@@ -1,18 +1,10 @@
 # How to create interactive HTML/CSS labs?
 
-<!--@include: ./../_components/TechnologyIntro.md-->
+Coding labs is a powerful feature of Fermion. Using coding labs in your platform, you can increase user retention, provide hands-on experience to them, and make them learn-by-doing.
 
-We'll divide this part into 5 sections:
+Let's take a look at how you can setup a HTML/CSS/JS interactive coding lab in this guide.
 
-1. Creating lab metadata
-2. Setting up lab defaults
-3. Setting up lab challenges
-4. Setting up evaluation script
-5. Setting up test file
-
-## Introduction
-
-This guide would assume that you already have created an interactive course from your instructor panel. If not, [go here and set it up first](https://codedamn.com/instructor/interactive-courses)
+<div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/a297c835f2d94be0953a01158ac2a007?sid=86b9a603-7c9c-434a-b3fa-ba5ac3a87c32" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
 ## Step 1 - Creating the Lab
 
