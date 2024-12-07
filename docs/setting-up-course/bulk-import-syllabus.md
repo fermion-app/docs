@@ -75,6 +75,64 @@ Here's an example of valid JSON that conforms to the schema above:
 		"sectionName": "Welcome to my course!",
 		"title": "Hello to HTML",
 		"descriptionInMarkdown": "Create an h1 tag in this lab and write your name."
+	},
+	{
+		"type": "Coding Lab",
+		"sectionName": "Welcome to my course!",
+		"title": "Building a Simple React Component",
+		"descriptionInMarkdown": "Hands-on practice creating your first React component from scratch."
+	},
+	{
+		"type": "Quiz",
+		"sectionName": "Welcome to my course!",
+		"title": "JavaScript Fundamentals Quiz",
+		"descriptionInMarkdown": "Test your knowledge of core JavaScript concepts",
+		"questions": [
+			{
+				"question": "What is the difference between let and var in JavaScript?",
+				"answerExplanation": "Let is block-scoped, while var is function-scoped.",
+				"options": [
+					{
+						"option": "Let is block-scoped, var is function-scoped",
+						"isCorrect": true
+					},
+					{
+						"option": "They are exactly the same",
+						"isCorrect": false
+					},
+					{
+						"option": "Let is function-scoped, var is block-scoped",
+						"isCorrect": false
+					},
+					{
+						"option": "Neither has any meaningful difference",
+						"isCorrect": false
+					}
+				]
+			},
+			{
+				"question": "What does the spread operator do in JavaScript?",
+				"answerExplanation": "The spread operator allows an iterable to expand in places where 0+ arguments are expected.",
+				"options": [
+					{
+						"option": "Combines two arrays",
+						"isCorrect": false
+					},
+					{
+						"option": "Spreads elements of an array or object",
+						"isCorrect": true
+					},
+					{
+						"option": "Creates a deep copy of an object",
+						"isCorrect": false
+					},
+					{
+						"option": "Merges object properties",
+						"isCorrect": false
+					}
+				]
+			}
+		]
 	}
 ]
 ```
@@ -98,18 +156,21 @@ type CohortBasedCourseItem =
 	| {
 			type: 'Article'
 			title: string
+			itemScheduledDate?: string
 			descriptionInMarkdown?: string
 			contentMarkdown: string
 	  }
 	| {
 			type: 'Coding Lab'
 			title: string
+			itemScheduledDate?: string
 			descriptionInMarkdown?: string
 	  }
 	| {
 			type: 'Quiz'
 			title: string
 			descriptionInMarkdown?: string
+			itemScheduledDate?: string
 			questions: {
 				question: string
 				answerExplanation?: string
@@ -135,6 +196,7 @@ Here's an example of valid JSON that conforms to the schema above:
 	{
 		"type": "Article",
 		"title": "Understanding JavaScript Closures",
+		"itemScheduledDate": "2024-07-16T00:00:00Z",
 		"descriptionInMarkdown": "A deep dive into one of JavaScript's most powerful features.",
 		"contentMarkdown": "# JavaScript Closures\n\nClosures are a fundamental concept in JavaScript that allows functions to access variables from their outer (enclosing) scope even after the outer function has returned."
 	},
