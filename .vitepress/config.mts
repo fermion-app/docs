@@ -47,6 +47,10 @@ export default defineConfig({
 						link: '/docs/setting-up-course/syllabus',
 					},
 					{
+						text: 'Bulk import syllabus',
+						link: '/docs/setting-up-course/bulk-import-syllabus',
+					},
+					{
 						text: 'Attachments',
 						link: '/docs/setting-up-course/attachments',
 					},
