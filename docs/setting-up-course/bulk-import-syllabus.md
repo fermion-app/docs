@@ -156,21 +156,21 @@ type CohortBasedCourseItem =
 	| {
 			type: 'Article'
 			title: string
-			itemScheduledDate?: string
+			itemScheduledDate: string
 			descriptionInMarkdown?: string
 			contentMarkdown: string
 	  }
 	| {
 			type: 'Coding Lab'
 			title: string
-			itemScheduledDate?: string
+			itemScheduledDate: string
 			descriptionInMarkdown?: string
 	  }
 	| {
 			type: 'Quiz'
 			title: string
 			descriptionInMarkdown?: string
-			itemScheduledDate?: string
+			itemScheduledDate: string
 			questions: {
 				question: string
 				answerExplanation?: string
