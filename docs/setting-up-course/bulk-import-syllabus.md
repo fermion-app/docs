@@ -203,11 +203,13 @@ Here's an example of valid JSON that conforms to the schema above:
 	{
 		"type": "Coding Lab",
 		"title": "Building a Simple React Component",
+		"itemScheduledDate": "2024-07-16T00:00:00Z",
 		"descriptionInMarkdown": "Hands-on practice creating your first React component from scratch."
 	},
 	{
 		"type": "Quiz",
 		"title": "JavaScript Fundamentals Quiz",
+		"itemScheduledDate": "2024-07-16T00:00:00Z",
 		"descriptionInMarkdown": "Test your knowledge of core JavaScript concepts",
 		"questions": [
 			{
