@@ -111,6 +111,10 @@ export default defineConfig({
 						link: '/docs/creating-coding-labs/technologies/rust',
 					},
 					{
+						text: 'Java',
+						link: '/docs/creating-coding-labs/technologies/java',
+					},
+					{
 						text: 'Python',
 						link: '/docs/creating-coding-labs/technologies/python',
 					},

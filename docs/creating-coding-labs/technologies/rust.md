@@ -1,4 +1,4 @@
-# How to Create an Interactive Rust Lab?
+# How to create a Rust Lab?
 
 **Coding labs** are a powerful feature of Fermion. By integrating coding labs into your platform, you can enhance user retention, provide hands-on experience, and encourage a learn-by-doing approach.
 
