@@ -140,10 +140,9 @@ export default defineConfig({
 						text: 'Setup live class',
 						link: '/docs/live-classes/setup-live-class',
 					},
-					{ text: 'Setup OBS', link: '/docs/live-classes/setup-obs' },
 					{
-						text: 'Monitor live analytics',
-						link: '/docs/live-classes/monitor-live-analytics',
+						text: 'Embed live session',
+						link: '/docs/live-classes/embed-live-session',
 					},
 					{
 						text: 'Common FAQs',
