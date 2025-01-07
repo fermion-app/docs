@@ -64,7 +64,7 @@ Add this iframe to your website where you want to embed the live session:
 	src="https://acme.fermion.app/embed/live-session?token=your_token_here"
 	title="Live event session"
 	frameborder="0"
-	allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+	allow="allow-same-origin; camera *;microphone *;display-capture *;"
 	referrerpolicy="strict-origin-when-cross-origin"
 	allowfullscreen
 >
@@ -82,7 +82,7 @@ To embed the live session chat, use this iframe:
 	src="https://acme.fermion.app/embed/live-session-chat?token=your_token_here"
 	title="Live event session"
 	frameborder="0"
-	allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+	allow="allow-same-origin; camera *;microphone *;display-capture *;"
 	referrerpolicy="strict-origin-when-cross-origin"
 	allowfullscreen
 >
