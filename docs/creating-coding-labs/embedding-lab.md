@@ -1,0 +1,223 @@
+# How to embed a coding lab?
+
+This article discusses integrating an IDE and including evaluative coding labs under your organization. Here are some key points before we jump in:
+
+## What is a coding lab?
+
+A coding lab is an immersive experience where users learn by doing. We support every popular technology. Here’s a non-exhaustive (but popular) list:
+
+-   Node.js
+-   Bun
+-   Python
+-   Rust
+-   C/C++
+-   Java
+-   C#
+-   Solidity
+-   Golang
+-   PHP
+-   Swift
+-   SQLite
+-   Every frontend framework
+
+Note that once a compiler/programming language is supported, every associated framework with it is supported automatically.
+
+For example, with Java, we automatically support Springboot. With Python, we automatically support Django, flask, etc. With Node.js, we automatically support Express, etc., and so on.
+
+On top of this, you can add evaluation inside every lab. This means that you can **check and grade** the work done by user automatically, just like how you would do when working with them 1:1.
+
+Here’s how a coding lab environment looks like:
+
+![](https://codedamn-blog.s3.amazonaws.com/wp-content/uploads/2024/07/20114507/Screenshot-2024-08-20-at-11%E2%80%AF.44.57%402x-1024x580.png)
+
+## How do you create a coding lab?
+
+Complete documentation has been laid out at [docs.fermion.app](http://docs.fermion.app/), where you can follow the instructions according to the technology you want to use, and create coding labs.
+
+## How to embed a coding lab from Fermion?
+
+Before starting the embed process, you need two things:
+
+1. A school on Fermion
+2. Fermion API key
+
+[Contact support](https://codedamn.com/contact) to get both of these things set up for you.
+
+After creating a lab from your Fermion Dashboard, you will get a unique identifier of the lab called `labId`. Here’s what it would look like:
+
+![](https://codedamn-blog.s3.amazonaws.com/wp-content/uploads/2024/07/20114958/Screenshot-2024-08-20-at-11%E2%80%AF.49.49.png)
+
+Clicking the `Embed coding lab` button would give you access to the `labId` and other important parameters.
+
+On any page in which you wish to let the user attempt the lab, you need to embed an iframe as follows:
+
+```xml
+<iframe
+	width="1280"
+	height="720"
+	src="https://acme2.fermion.app/embed/lab?token=EMBED_TOKEN_HERE"
+	title="Coding Lab"
+	frameborder="0"
+	allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;
+	picture-in-picture; web-share"
+	referrerpolicy="strict-origin-when-cross-origin"
+	allowfullscreen>
+</iframe>
+```
+
+Here, the `EMBED_URL` needs to be securely generated on your backend as follows:
+
+1. The embed URL will always contain the following part: [`https://example.fermion.app/embed/lab?token=`.](https://example.fermion.app/embed/lab?token=.)
+2. After this, you need to generate a JWT (JSON Web Token) containing the following claims:The JWT token must be signed with your Fermion API Key. Example JWT: [here](https://jwt.io/#debugger-io?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYWJJZCI6ImFiY2QiLCJ1c2VySWQiOiJ4eXoiLCJpYXQiOjE1MTYyMzkwMjJ9.9SKcAU52Qad6MERnzy1kF4Y0A3SoAWuGfpmE97JDYOo)
+    1. `labId` (String) – This is the unique identifier of the lab as mentioned above.
+    2. `userId` (String) – This is a string that you have stored in your database that can uniquely identify a given user. You have to ensure that you store this identifier properly in your database and reuse it every time a user tries to access any lab.
+3. Append this generated JWT token to the end to get the final embed URL.
+
+Example JavaScript code to generate `EMBED_URL` securely on your backend server:
+
+This example uses the [jsonwebtoken package](https://www.npmjs.com/package/jsonwebtoken) to generate a JWT Token.
+
+```js
+import jwt from 'jsonwebtoken'
+
+const jwtToken = jwt.sign(
+	{
+		labId: '66a9202ab1458d00083ff520',
+		userId: '<enter a user ID here unique to every user>',
+
+		// optionally specify more properties
+		playgroundOptions: {
+			// change this to false to disallow copy-paste
+			isCodeCopyPasteAllowed: true,
+
+			// change this to true to hide logo
+			shouldHideLogo: true,
+
+			// change this to true and supply a lab ID to boot the new lab filesystem from the older lab (documented below)
+			overrideDefaultFilesystemForLab: {
+				isEnabled: false,
+			},
+		},
+	},
+	'FERMION_API_KEY',
+	{ expiresIn: '1h' }
+)
+
+const EMBED_URL =
+	'https://example.fermion.app/embed/lab?token=' +
+	encodeURIComponent(jwtToken)
+```
+
+## Playground options
+
+In the JWT creation above, you can see there are many options you can use to customize the behaviour. Let's break down what each option does here.
+
+### isCodeCopyPasteAllowed
+
+Enabling this will restrict people to paste directly in the editor. Use this if you do not want people to be able to paste code inside editor using mouse or keyboard shortcuts
+
+### shouldHideLogo
+
+By default, when you embed the lab, your school logo will be visible on top left of the IDE interface. If you enable this the logo will be hidden.
+
+### overrideDefaultFilesystemForLab
+
+`overrideDefaultFilesystemForLab` option can be used to configure how the coding lab filesystem will start. The accepted schema for this, if not null, is the following:
+
+```ts
+type Schema =
+	| {
+			isEnabled: false
+	  }
+	| {
+			labId: string
+			isEnabled: true
+			type: 'other-lab-id'
+	  }
+```
+
+#### Case 1: isEnabled = false
+
+If you do not pass this option, or pass it as `isEnabled` = `false` then the default behavior is as follows:
+
+-   On the very first time the user starts the lab, since there is no previous work for the lab, it will start the filesystem with the GitHub repository (and branch) you gave while setting up the lab initially.
+-   When the user comes back to the lab in future, the filesystem is restored from a snapshot of their past work, and not GitHub repository you supplied initially.
+
+#### Case 1: isEnabled = true
+
+If you enable this option, you must specify a `type`. The only possible option today is `other-lab-id`. Pass the `labId` in the same object to be the `labId` which you would like to make the starting point for user for this lab.
+
+Let's say the lab you're creating this JWT token for has an ID of `X` and the `labId` you passed in `overrideDefaultFilesystemForLab` has ID `Y`.
+
+-   Whenever user starts lab `X` with your token supplied, system will check if there is a past work snapshot for the given user that exists for the lab `X`.
+-   In case it does not (i.e. when the user starts the lab for the first time), system will check if there is a past work snapshot for the given user that exists for the lab `Y`.
+-   If work exists for `Y`, system will copy the filesystem to lab `X` and user will start the lab `X` with the filesystem of lab `Y`.
+-   If work does not exist for `Y`, system will boot the filesystem from the GitHub repository (and branch) you gave while setting up lab `X`.
+
+## How can I access lab results?
+
+### Public API
+
+We have an OpenAPI-spec compliant public API you can use, once you have access to FERMION_API_KEY. You can use this API to query multiple data points for your organization.
+
+Please check the [API documentation here](https://api.fermion.app).
+
+### window.postMessage results
+
+Alongside this, when you embed the lab on your domain, we will also emit events in real time through `window.postMessage` API. You can read more about [`window.postMessage` API here](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage).
+
+Note that you must not fully rely on events emitted by `window.postMessage` you because of security reasons. Please do a server-side validation with our real API endpoint to be sure of the final result. You can use messages from `window.postMessage` to optimistically display results, however, since it is a client-side API, it is possible to hijack the event data by the untrusted user.
+
+You can listen to every postMessage like this:
+
+```js
+window.addEventListener('message', (event) => {
+	const payload = event.data
+
+	if (
+		payload == null ||
+		typeof payload !== 'object' ||
+		!('eventType' in payload)
+	) {
+		// not from fermion
+		return
+	}
+
+	if (payload.eventType === 'fermion-lab-run-finished') {
+		// do further processing
+	}
+})
+```
+
+We also recommend processing `event.data` with zod if you can. Our schemas are strictly typed and are zod-parseable.
+
+Here are the events we emit through `window.postMessage` API:
+
+#### fermion-lab-run-finished
+
+We emit the following object on every lab run finished. Here’s a TypeScript type for this event:
+
+```js
+type Event = {
+	eventType: 'fermion-lab-run-finished',
+	data:
+		| {
+				status: 'ok',
+				totalChallengesCount: number,
+				passedChallengesCount: number,
+				failedChallengesCount: number,
+		  }
+		| {
+				status: 'error',
+				errorMessage: string,
+		  },
+}
+```
+
+To check if a user’s lab run was successful, you can check if `totalChallengesCount` is equal to `passedChallengesCount` and take any action in your LMS frontend code accordingly.
+
+You can query for this data through our public API as well for better guarantees of security.
+
+## Have a doubt?
+
+In case something doesn’t work right, or you have any doubt, please feel free to reach out to us at [support@codedamn.com](mailto:support@codedamn.com) with your query, we’d be happy to resolve it at the earliest.

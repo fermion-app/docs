@@ -99,6 +99,10 @@ export default defineConfig({
 						link: '/docs/creating-coding-labs/cdmrc-file',
 					},
 					{
+						text: 'Embed coding lab',
+						link: '/docs/creating-coding-labs/embedding-lab',
+					},
+					{
 						text: 'HTML/CSS/JS',
 						link: '/docs/creating-coding-labs/technologies/html-css',
 					},
