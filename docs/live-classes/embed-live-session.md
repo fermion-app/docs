@@ -89,6 +89,14 @@ To embed the live session chat, use this iframe:
 </iframe>
 ```
 
+## Lifecycle
+
+You must also begin and end the streaming session via API calls. Inactive sessions with no instructor participants going on for more than 2 hours will be automatically terminated.
+
+Please refer to fermion API here to learn more about these endpoints: https://api.fermion.app
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/07-01-2025/screenshot-000686%402x.dvsmpq.png)
+
 ## Important Notes
 
 1. **Viewing Modes:**
