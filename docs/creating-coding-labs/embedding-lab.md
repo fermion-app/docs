@@ -143,7 +143,7 @@ If you do not pass this option, or pass it as `isEnabled` = `false` then the def
 -   On the very first time the user starts the lab, since there is no previous work for the lab, it will start the filesystem with the GitHub repository (and branch) you gave while setting up the lab initially.
 -   When the user comes back to the lab in future, the filesystem is restored from a snapshot of their past work, and not GitHub repository you supplied initially.
 
-#### Case 1: isEnabled = true
+#### Case 2: isEnabled = true
 
 If you enable this option, you must specify a `type`. The only possible option today is `other-lab-id`. Pass the `labId` in the same object to be the `labId` which you would like to make the starting point for user for this lab.
 
