@@ -37,19 +37,52 @@ You'll need to generate a JWT (JSON Web Token) to authenticate the embed. Here's
 ```javascript
 import jwt from 'jsonwebtoken'
 
-const jwtToken = jwt.sign(
-	{
-		liveEventSessionId: '6779080e80ec97e953a17971',
-		userId: '<enter a user ID here unique to every user>',
-	},
-	'FERMION_API_KEY',
-	{
-		expiresIn: '1h',
-	}
-)
+const payloadObject = {
+	/* ... see the valid schema of the object below ... */
+}
+
+const jwtToken = jwt.sign(payloadObject, 'FERMION_API_KEY', {
+	expiresIn: '1h',
+})
 ```
 
-**Note:** Replace `FERMION_API_KEY` with your actual API key and provide a unique user ID for each viewer.
+The `payloadObject` must conform to the following zod schema:
+
+```js
+z.object({
+	liveEventSessionId: z.string(),
+	userId: z.string(),
+
+	playbackOptions: z
+		.object({
+			// If you pass this as true, system would enforce only 1080p and 720p modes of playback. Note: Passing this as true might result in buffering on user side if their internet is not fast (as this disables low quality playback versions)
+			shouldPreferOnlyHighDefinitionPlayback: z.boolean(),
+
+			// If you pass this as true, it will hide the seek controls (seekbar and jump forward/backward buttons) from the UI
+			shouldHideSeekControls: z.boolean(),
+
+			// If you pass this as true, once the livestream ends, the same JWT that is used to embed the stream would not be able to playback the recorded version of the video
+			shouldDisallowRecordedPlaybackIfNotLive: z.boolean(),
+		})
+		.default({
+			shouldDisallowRecordedPlaybackIfNotLive: false,
+			shouldPreferOnlyHighDefinitionPlayback: false,
+			shouldHideSeekControls: false,
+		}),
+})
+```
+
+Important notes:
+
+-   Replace `FERMION_API_KEY` with your actual API key and provide a unique user ID for each viewer.
+-   `shouldPreferOnlyHighDefinitionPlayback` if `true`, will disable low quality playbacks (any playback other than 1080p/720p)
+-   `shouldHideSeekControls` if `true`, will disable the ability to seek back and forward. The user will not be able to go back in livestream
+-   `shouldDisallowRecordedPlaybackIfNotLive` if `true`, will not allow user to watch recording again when the livestream ends with the same JWT. You must create a new JWT with `shouldDisallowRecordedPlaybackIfNotLive` set as `false` if you want user to be able to play video recording.
+-   `playbackOptions` is optional. If you do not pass this object we will use the defaults as mentioned above.
+
+:::info
+Fermion uses the same zod schema as above internally to validate your JWT payload.
+:::
 
 ## Step 3: Embed the Live Session
 
