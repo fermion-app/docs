@@ -56,13 +56,13 @@ z.object({
 	playbackOptions: z
 		.object({
 			// If you pass this as true, system would enforce only 1080p and 720p modes of playback. Note: Passing this as true might result in buffering on user side if their internet is not fast (as this disables low quality playback versions)
-			shouldPreferOnlyHighDefinitionPlayback: z.boolean(),
+			shouldPreferOnlyHighDefinitionPlayback: z.boolean().default(false),
 
 			// If you pass this as true, it will hide the seek controls (seekbar and jump forward/backward buttons) from the UI
-			shouldHideSeekControls: z.boolean(),
+			shouldHideSeekControls: z.boolean().default(false),
 
 			// If you pass this as true, once the livestream ends, the same JWT that is used to embed the stream would not be able to playback the recorded version of the video
-			shouldDisallowRecordedPlaybackIfNotLive: z.boolean(),
+			shouldDisallowRecordedPlaybackIfNotLive: z.boolean().default(false),
 		})
 		.default({
 			shouldDisallowRecordedPlaybackIfNotLive: false,
