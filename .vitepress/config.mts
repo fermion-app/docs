@@ -133,7 +133,7 @@ export default defineConfig({
 				],
 			},
 			{
-				text: 'Setup live classes',
+				text: 'Live classes',
 				collapsed: false,
 				items: [
 					{
@@ -151,6 +151,20 @@ export default defineConfig({
 					{
 						text: 'Common FAQs',
 						link: '/docs/live-classes/common-faqs',
+					},
+				],
+			},
+			{
+				text: 'Recorded videos',
+				collapsed: false,
+				items: [
+					{
+						text: 'Introduction',
+						link: '/docs/recorded-videos/introduction',
+					},
+					{
+						text: 'Embed video externally',
+						link: '/docs/recorded-videos/embed-video',
 					},
 				],
 			},
