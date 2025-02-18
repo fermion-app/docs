@@ -133,6 +133,20 @@ export default defineConfig({
 				],
 			},
 			{
+				text: 'Creating IO coding labs',
+				collapsed: false,
+				items: [
+					{
+						text: 'Introduction',
+						link: '/docs/creating-io-coding-labs/introduction',
+					},
+					{
+						text: 'Embed lab',
+						link: '/docs/creating-io-coding-labs/embed-lab',
+					},
+				],
+			},
+			{
 				text: 'Live classes',
 				collapsed: false,
 				items: [
