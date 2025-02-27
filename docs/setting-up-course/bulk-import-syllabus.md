@@ -33,6 +33,12 @@ type RecordedCourseItems = RecordedCourseItem[]
 
 type RecordedCourseItem =
 	| {
+			type: 'Video'
+			title: string
+			sectionName: string
+			descriptionInMarkdown: string
+	  }
+	| {
 			type: 'Article'
 			title: string
 			sectionName: string
@@ -146,6 +152,12 @@ type CohortBasedCourseItems = CohortBasedCourseItem[]
 // ^ this is the type your final JSON should conform to
 
 type CohortBasedCourseItem =
+	| {
+			type: 'Video'
+			title: string
+			itemScheduledDate: string
+			descriptionInMarkdown?: string
+	  }
 	| {
 			type: 'Live Class'
 			liveClassStartAt: string
