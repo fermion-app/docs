@@ -183,6 +183,20 @@ export default defineConfig({
 				],
 			},
 			{
+				text: 'Ebooks',
+				collapsed: false,
+				items: [
+					{
+						text: 'Introduction',
+						link: '/docs/ebooks/introduction',
+					},
+					{
+						text: 'Embed ebooks externally',
+						link: '/docs/ebooks/embed-ebook',
+					},
+				],
+			},
+			{
 				text: 'Community',
 				collapsed: false,
 				items: [
@@ -293,7 +307,10 @@ export default defineConfig({
 		}[],
 
 		socialLinks: [
-			{ icon: 'x', link: 'https://x.com/fermionapp' },
+			{
+				icon: 'x',
+				link: 'https://x.com/fermionapp',
+			},
 			{
 				icon: 'instagram',
 				link: 'https://www.instagram.com/fermion.app/',
@@ -321,5 +338,13 @@ export default defineConfig({
 
 	lastUpdated: true,
 
-	head: [['link', { rel: 'shortcut icon', href: '/favicons/favicon.ico' }]],
+	head: [
+		[
+			'link',
+			{
+				rel: 'shortcut icon',
+				href: '/favicons/favicon.ico',
+			},
+		],
+	],
 })

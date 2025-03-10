@@ -16,6 +16,9 @@ hero:
     - theme: alt
       text: Learn about Fermion
       link: https://fermion.app
+    - theme: alt
+      text: Watch platform demo
+      link: https://www.youtube.com/watch?v=WmYKn5FWIGk
 
 
 ---
