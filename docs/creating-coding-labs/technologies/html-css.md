@@ -103,7 +103,7 @@ bunx playwright test || true
 cat > process-results.js << EOF
 import fs from 'fs'
 const payload = JSON.parse(fs.readFileSync('./report.json', 'utf-8'))
-const answers = payload.suites[0].suites[0].specs.map(spec => spec.ok === true)
+const answers = payload.suites[0].suites[0].specs.map(spec => spec.ok === true && spec.tests.every(t => t.status === 'expected'))
 fs.writeFileSync(process.env.UNIT_TEST_OUTPUT_FILE, JSON.stringify(answers))
 EOF
 
