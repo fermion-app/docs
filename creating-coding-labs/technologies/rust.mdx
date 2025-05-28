@@ -1,0 +1,165 @@
+---
+title: 'How to create a Rust Lab?'
+description: 'How to create a Rust Lab?'
+---
+
+**Coding labs** are a powerful feature of Fermion. By integrating coding labs into your platform, you can enhance user retention, provide hands-on experience, and encourage a learn-by-doing approach.
+
+This guide walks you through setting up a Rust interactive coding lab.
+
+<iframe
+	src="https://www.loom.com/embed/e74cdf785b2141c8bdd01ba6cd67882f?sid=aae849eb-5285-44c2-ac4c-93f49eb50d80"
+	frameBorder="0"
+	className="aspect-video w-full"
+/>
+
+## Step 1 - Creating the Lab
+
+-   Add a new item lab in your course curriculum page
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/17-11-2024/55%402x.vscibv.png)
+
+-   A new lab item gets added. Edit the lab using the controls:
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/17-11-2024/07%402x.nnfiay.png)
+
+-   A lab item in a course can be attached to an existing lab you created in the past. If not, you can create a new lab with this Edit interface:
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/17-11-2024/05%402x.pmogtp.png)
+
+-   You should now be able to write a quick lab name and press on "Create Lab" button. Once you do, press on `Attach to course item` button. Once that is done, click the three dots again and click on "Edit" to edit the lab.
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/17-11-2024/31%402x.phplpv.png)
+
+## Step 2 - Lab Instructions
+
+Once you click on `Edit` button a new page will open. On this page you need to setup instructions for lab. These instructions would be visible to the user when they're attempting the lab. Therefore, include all the helper material, lab setup instructions here.
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/17-11-2024/00%402x.daeltt.png)
+
+## Step 3 - Lab Defaults
+
+Lab defaults define the initial environment setup for the lab. It is crucial to configure this correctly to avoid confusing students.
+
+For Rust labs, the playground must initialize a valid Rust project. You can do this by specifying a Git repository and branch with a basic `Cargo` project structure:
+
+:::info
+We recommend forking this repository: [Rust playground starter](https://github.com/codedamn-classrooms/rust-coding-lab-starter).
+:::
+
+This repository contains a minimal Rust project with a `Cargo.toml` file and a `src/main.rs` file. Once forked, update the repository link in your lab settings.
+
+The repository also includes a `.cdmrc` file, a critical configuration file for Fermion labs. Familiarize yourself with the [.cdmrc guide](/docs/creating-coding-labs/cdmrc-file) to understand how it works before proceeding.
+
+## Step 4 - Evaluation Script
+
+The evaluation script is executed when the user clicks the **"Run Tests"** button in the playground. It runs the test cases written for the lab.
+
+Here's a sample bash script for a Rust lab:
+
+```bash
+#!/bin/bash
+set -e 1
+
+# Create a `.labtests` directory to store test files
+mkdir -p /home/damner/code/.labtests
+
+# Move the provided test file into the `.labtests` folder
+mv $TEST_FILE_NAME /home/damner/code/.labtests/test.rs
+
+cd /home/damner/code/.labtests;
+rustc test.rs && ./test
+```
+
+-   We simply download the test file (we create in next step), and run it with `rustc`
+
+## Step 5 - Test File
+
+In the **"Custom Test File"** section of the lab, you can define test cases to validate the user's code.
+
+Here's a sample Rust test file:
+
+```rust
+// Include the user's default `lib.rs` file as usercode module
+#[path = "/home/damner/code/src/lib.rs"]
+mod usercode;
+
+use usercode::*;
+use std::env;
+use std::fs::File;
+use std::io::Write;
+
+fn main() {
+    let mut results = Vec::new();
+
+    // Test 1
+    results.push(run_test(|| {
+        let a = 1;
+        let b = 2;
+        let res = add(a, b);
+        res == 3
+    }));
+
+    // Test 2
+    results.push(run_test(|| {
+        let a = 2;
+        let b = 3;
+        let res = add(a, b);
+        res == 5
+    }));
+
+    // Get output file path from environment variable
+    let output_file = env::var("UNIT_TEST_OUTPUT_FILE")
+        .expect("Environment variable UNIT_TEST_OUTPUT_FILE must be set");
+
+    // Write results to the specified file in JSON format
+    if let Err(e) = write_results_to_file(&results, &output_file) {
+        eprintln!("Failed to write results to {}: {}", output_file, e);
+    }
+}
+
+fn run_test<F>(test_fn: F) -> bool
+where
+    F: FnOnce() -> bool,
+{
+    test_fn()
+}
+
+
+fn write_results_to_file(results: &[bool], file_path: &str) -> std::io::Result<()> {
+    // Manually format the boolean array as a JSON string
+    let json_results = format!(
+        "[{}]",
+        results
+            .iter()
+            .map(|&b| b.to_string()) // Convert bool to "true"/"false"
+            .collect::<Vec<_>>()
+            .join(", ")
+    );
+
+    // Write the JSON string to the file
+    let mut file = File::create(file_path)?;
+    file.write_all(json_results.as_bytes())?;
+    Ok(())
+}
+```
+
+### Key Points
+
+-   The length of boolean array `results` must match the challenges defined in the UI.
+-   Tests must be executed sequentially and in order. This is because the boolean array you write to the output file must match the order in which you add challenges in the UI. This is why we don't use `cargo test` and instead run a rust script manually.
+
+## Step 6 - Add Challenges
+
+In the Fermion UI, define the challenges corresponding to the tests. Ensure the order of challenges matches the order of test cases in your test file.
+
+For example:
+
+-   Challenge 1: Verify the `add` function works correctly with input 1,2.
+-   Challenge 2: Verify the `add` function works correctly with input 2,3.
+
+This mapping ensures that the playground accurately reflects the user's progress.
+
+---
+
+Your interactive Rust lab is now ready! Students will be able to practice and learn Rust through real-world challenges, with tests running in a predictable, sequential order.
