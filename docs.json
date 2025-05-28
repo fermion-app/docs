@@ -8,6 +8,9 @@
 		"dark": "#0284C7"
 	},
 	"favicon": "/favicon.png",
+	"contextual": {
+		"options": ["copy", "view", "chatgpt", "claude"]
+	},
 	"navigation": {
 		"anchors": [
 			{
@@ -118,8 +121,13 @@
 			},
 			{
 				"anchor": "API Reference",
-				"icon": "code",
+				"icon": "terminal",
 				"openapi": "https://backend.codedamn.com/webhook/fermion-backend-openapi.yaml"
+			},
+			{
+				"anchor": "Fermion SDK",
+				"icon": "code",
+				"href": "https://github.com/fermion-app/sdk"
 			}
 		]
 	},
