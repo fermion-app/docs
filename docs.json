@@ -1,0 +1,144 @@
+{
+	"$schema": "https://mintlify.com/docs.json",
+	"theme": "mint",
+	"name": "Fermion Documentation",
+	"colors": {
+		"primary": "#0EA5E9",
+		"light": "#38BDF8",
+		"dark": "#0284C7"
+	},
+	"favicon": "/favicon.png",
+	"navigation": {
+		"anchors": [
+			{
+				"anchor": "Documentation",
+				"icon": "book-open",
+				"groups": [
+					{
+						"group": "Getting Started",
+						"pages": [
+							"getting-started/what-is-fermion",
+							"getting-started/fermion-vs-other-platforms",
+							"getting-started/what-can-you-do-on-fermion"
+						]
+					},
+					{
+						"group": "Setting up a course",
+						"pages": [
+							"setting-up-course/prerequisites",
+							"setting-up-course/landing-page",
+							"setting-up-course/syllabus",
+							"setting-up-course/bulk-import-syllabus",
+							"setting-up-course/attachments",
+							"setting-up-course/course-analytics",
+							"setting-up-course/common-faqs"
+						]
+					},
+					{
+						"group": "Setup pricing",
+						"pages": [
+							"setup-pricing/fixed-pricing-plan",
+							"setup-pricing/setup-emi",
+							"setup-pricing/add-coupon-codes",
+							"setup-pricing/common-faqs"
+						]
+					},
+					{
+						"group": "Creating coding labs",
+						"pages": [
+							"creating-coding-labs/what-are-coding-labs",
+							"creating-coding-labs/cdmrc-file",
+							"creating-coding-labs/embedding-lab",
+							"creating-coding-labs/technologies/html-css",
+							"creating-coding-labs/technologies/react",
+							"creating-coding-labs/technologies/rust",
+							"creating-coding-labs/technologies/java",
+							"creating-coding-labs/technologies/python",
+							"creating-coding-labs/using-the-content-library"
+						]
+					},
+					{
+						"group": "Creating IO coding labs",
+						"pages": [
+							"creating-io-coding-labs/introduction",
+							"creating-io-coding-labs/embed-lab"
+						]
+					},
+					{
+						"group": "Live classes",
+						"pages": [
+							"live-classes/what-are-live-classes",
+							"live-classes/setup-live-class",
+							"live-classes/embed-live-session",
+							"live-classes/common-faqs"
+						]
+					},
+					{
+						"group": "Recorded videos",
+						"pages": [
+							"recorded-videos/introduction",
+							"recorded-videos/embed-video"
+						]
+					},
+					{
+						"group": "Ebooks",
+						"pages": ["ebooks/introduction", "ebooks/embed-ebook"]
+					},
+					{
+						"group": "Community",
+						"pages": ["community/what-are-communities"]
+					},
+					{
+						"group": "Custom pages",
+						"pages": [
+							"custom-landing-pages/introduction",
+							"custom-landing-pages/using-wordpress",
+							"custom-landing-pages/using-source-code",
+							"custom-landing-pages/custom-redirects"
+						]
+					},
+					{
+						"group": "Marketing Tools",
+						"pages": [
+							"marketing-tools/affiliate-marketing",
+							"marketing-tools/setup-webhooks",
+							"marketing-tools/email-automation"
+						]
+					},
+					{
+						"group": "Manage Settings",
+						"pages": [
+							"manage-settings/change-school-settings",
+							"manage-settings/change-instructor-details",
+							"manage-settings/manage-payouts",
+							"manage-settings/help"
+						]
+					}
+				]
+			},
+			{
+				"anchor": "API Reference",
+				"icon": "code",
+				"openapi": "https://backend.codedamn.com/webhook/fermion-backend-openapi.yaml"
+			}
+		]
+	},
+	"logo": {
+		"light": "https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/07-10-2024/fermion-logo-500x500.ezvmtj.png",
+		"dark": "https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/07-10-2024/fermion-logo-500x500.ezvmtj.png"
+	},
+	"navbar": {
+		"primary": {
+			"type": "button",
+			"label": "Get fermion",
+			"href": "https://fermion.app/pricing"
+		}
+	},
+	"footer": {
+		"socials": {
+			"twitter": "https://twitter.com/fermionapp",
+			"github": "https://github.com/fermion-app/docs",
+			"linkedin": "https://www.linkedin.com/company/fermion-app"
+		}
+	}
+}

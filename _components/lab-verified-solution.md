@@ -1,10 +1,10 @@
 Verified solution is highly recommended. To setup a verified solution for your lab, once your lab is ready, all you have to do is click on "Test lab", write code that passes your lab, and run that code once.
 
-<!-- ![](/images/html-css/lab-verified-solutions.png) -->
+{/_ ![](/images/html-css/lab-verified-solutions.png) _/}
 
 Once you do that, your lab would be marked a lab having verified solution. It also helps students as we can show them a Monaco diff editor showing the verified solution from the creator (you).
 
-<!-- ![](/images/html-css/playground-verified-solution.png) -->
+{/_ ![](/images/html-css/playground-verified-solution.png) _/}
 
 At this point, your lab is complete. You can now link this lab in your course, ready to be served to thousands of students :) Watch the video tutorial below to understand:
 

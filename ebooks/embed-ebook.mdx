@@ -1,0 +1,86 @@
+---
+title: 'How to embed an ebook externally'
+description: 'How to embed an Ebook externally'
+---
+
+This guide explains how to embed ebooks into external websites.
+
+## Getting started
+
+-   Ebook digital product ID
+-   Fermion API key
+-   Access to your website's codebase
+
+## Step 1: Obtain the ebook digital product ID
+
+Each ebook on fermion has a unique identifier. For example `6779080e80ec97e953a17971`. First, go to `Manage features` tab on your instructor dashboard and enable `Digital products`
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/10-03-2025/15%20PM.ugncgw.png)
+
+After that, go to `eBooks` inside `Digital products` to create and upload an ebook if you haven't.
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/10-03-2025/43%20PM.sapnvv.png)
+
+You can find the ebook digital product ID in the URL.
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/10-03-2025/23%20PM.wulyuh.png)
+
+## Step 2: Generate an Embed Token
+
+You'll need to generate a JWT (JSON Web Token) to authenticate the embed. Here's how to create one using the `jsonwebtoken` package:
+
+```javascript
+import jwt from 'jsonwebtoken'
+
+const payloadObject = {
+	/* ... see the valid schema of the object below ... */
+}
+
+const jwtToken = jwt.sign(payloadObject, 'FERMION_API_KEY', {
+	expiresIn: '10h',
+})
+```
+
+The `payloadObject` must conform to the following zod schema:
+
+```js
+z.object({
+	ebookDigitalProductId: z.string().min(1),
+	userEmail: z.string().email(),
+	userId: z.string().min(1),
+	userPhoneNumber: z.string().min(1).or(z.null()),
+})
+```
+
+Important notes:
+
+-   Replace `FERMION_API_KEY` with your actual API key and provide a unique user ID for each viewer.
+-   Make sure to set a validity on JWT token (recommended validity is 10h-20h)
+
+:::info
+Fermion uses the same zod schema as above internally to validate your JWT payload.
+:::
+
+## Step 3: Embed the ebook
+
+Add this iframe to your website where you want to embed the ebook:
+
+```html
+<iframe
+	width="1280"
+	height="720"
+	src="https://acme.fermion.app/embed/ebook?token=your_token_here"
+	title="Ebook"
+	frameborder="0"
+	allow="allow-same-origin; camera *;microphone *;display-capture *;encrypted-media;"
+	referrerpolicy="strict-origin-when-cross-origin"
+	allowfullscreen
+>
+</iframe>
+```
+
+:::tip
+Make sure you replace `acme.fermion.app` with your fermion school URL.
+:::
+
+This should embed your ebook and display it on your website.

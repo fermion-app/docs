@@ -1,15 +1,15 @@
 {
 	"scripts": {
-		"docs:dev": "tsx generate-link-types.ts && vitepress dev .",
-		"docs:build": "tsx generate-link-types.ts && vitepress build .",
-		"docs:preview": "vitepress preview ."
+		"docs:dev": "mintlify dev",
+		"docs:build": "mintlify build",
+		"docs:preview": "mintlify preview"
 	},
 	"devDependencies": {
-		"fs-extra": "11.2.0",
+		"fs-extra": "11.3.0",
 		"tsx": "4.19.2",
-		"glob": "11.0.0",
-		"vitepress": "1.4.1",
+		"glob": "11.0.2",
 		"@types/fs-extra": "11.0.4",
-		"@types/node": "22.9.0"
+		"@types/node": "22.9.0",
+		"mintlify": "4.0.555"
 	}
 }

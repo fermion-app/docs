@@ -1,0 +1,153 @@
+---
+title: 'How to create an interactive Python lab with Pytest?'
+description: 'How to create an interactive Python lab with Pytest?'
+---
+
+Coding labs is a powerful feature of Fermion. Using coding labs in your platform, you can increase user retention, provide hands-on experience to them, and make them learn-by-doing.
+
+Let's take a look at how you can setup a Python interactive coding lab in this guide.
+
+## Step 1 - Creating lab
+
+-   Add a new item lab in your course curriculum page
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/17-11-2024/55%402x.vscibv.png)
+
+-   A new lab item gets added. Edit the lab using the controls:
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/17-11-2024/07%402x.nnfiay.png)
+
+-   A lab item in a course can be attached to an existing lab you created in the past. If not, you can create a new lab with this Edit interface:
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/17-11-2024/05%402x.pmogtp.png)
+
+-   You should now be able to write a quick lab name and press on "Create Lab" button. Once you do, press on `Attach to course item` button. Once that is done, click the three dots again and click on "Edit" to edit the lab.
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/17-11-2024/31%402x.phplpv.png)
+
+## Step 2 - Lab instructions
+
+Once you click on `Edit` button a new page will open. On this page you need to setup instructions for lab. These instructions would be visible to the user when they're attempting the lab. Therefore, include all the helper material, lab setup instructions here.
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/17-11-2024/00%402x.daeltt.png)
+
+## Step 3 - Lab Defaults
+
+Lab defaults section include how your lab environment boots. It is one of the most important parts because a wrong default environment might confuse your students. Therefore it is important to set it up properly.
+
+When a playground boots, it can setup a filesystem for user by default. You can specify what the starting files could be, by specifying a git repository and a branch name:
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/17-11-2024/screenshot-2024-11-17-3%E2%80%AF-31-53%402x.kzdbiv.png)
+
+You will find a `.cdmrc` file in the repository given to you above. It is highly recommend, at this point, that you go through the [.cdmrc guide and how to use .cdmrc in playgrounds](/docs/creating-coding-labs/cdmrc-file) to understand what `.cdmrc` file exactly is. Once you understand how to work with `.cdmrc` come back to this area.
+
+## Step 4 - Evaluation script
+
+Evaluation script is actually what runs when the user on the codedamn playground clicks on "Run Tests" button.
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/17-11-2024/lab-run-tests.exllxt.png)
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/17-11-2024/screenshot-000001%402x.ywpfjc.png)
+
+Remember that we're using the Pytest utility in this lab to test.
+
+Therefore, your testing script would look like as follows:
+
+```sh
+#!/bin/bash
+set -e 1
+
+mkdir -p /home/damner/code/.labtests
+
+mv $TEST_FILE_NAME /home/damner/code/.labtests/user-test-code.py
+echo "" > /home/damner/code/.labtests/__init__.py
+
+# Install pytest
+pip3 install pytest pytest-json-report
+
+# run test
+cd /home/damner/code/.labtests
+pytest --json-report user-test-code.py || true
+
+# process results file
+cat > processPythonResults.js << EOF
+const payload = require('./.report.json')
+const answers = payload.tests.map(test => test.outcome === 'passed')
+require('fs').writeFileSync(process.env.UNIT_TEST_OUTPUT_FILE, JSON.stringify(answers))
+EOF
+
+
+
+# Write results to UNIT_TEST_OUTPUT_FILE to communicate to frontend
+node /home/damner/code/.labtests/processPythonResults.js
+```
+
+You might need to have a little understanding of bash scripting. Let us understand how the evaluation bash script is working:
+
+-   With `set -e 1` we effectively say that the script should stop on any errors
+-   You can install additional packages here if you want. They would only be installed the first time user runs the test. On subsequent runs, it can reuse the installed packages (since they are not removed at the end of testing)
+-   Then we create a `.labtests` folder inside of the `/home/damner/code` user code directory. Note that `.labtests` is a special folder that can be used to place your test code. This folder will not be visible in the file explorer user sees, and the files placed in this folder are not "backed up to cloud" for user.
+-   We move the test file you wrote earlier (in last step) to `/home/damner/code/.labtests/pytest.py`.
+-   We then create another setup file `/home/damner/code/.labtests/processPythonResults.js`. This is because we need to parse the results outputted by the Python testing utility to reflect it on the playgrounds. You may as well create this file in python (reading the JSON report and outputting a boolean array in a file stored in env `$UNIT_TEST_OUTPUT_FILE`)
+-   This is important because on the playground page, the way challenges work, is that they get green or red based on a JSON boolean array written inside the file in environment variable: `$UNIT_TEST_OUTPUT_FILE`
+-   For example, once the test run succeeds, and if you write `[true,false,true,true]` inside `$UNIT_TEST_OUTPUT_FILE`, it would reflect as PASS, FAIL, PASS, PASS for 4 challenges available inside playground UI (as shown below)
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/17-11-2024/playground-tests-2.tmstkq.png)
+
+-   Then we run the actual test using `python3 -m pytest` command, specifying the output as JSON (read by `processPythonResults.js`) and in a single thread (as we want ordered results).
+
+-   Finally we run the `processPythonResults.js` file that writes the correct JSON boolean array on `$UNIT_TEST_OUTPUT_FILE` which is then read by the playground UI and marks the lab challenges as pass or fail.
+
+**Note:** You can setup a full testing environment in this block of evaluation script (installing more packages, etc. if you want). However, your bash script test file will be timed out **after 30 seconds**. Therefore, make sure, all of your testing can happen within 30 seconds.
+
+## Step 5 - Test file
+
+In the same `Evaluation` tab, you'll see another section called "Custom test file". You can use this test file to add custom code for testing user work.
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/17-11-2024/screenshot-000002%402x.mhhqir.png)
+
+When you click on it, a new window will open. This is a test file area.
+
+You can write anything here. Whatever script you write here, can be executed from the `Test command to run section` inside the evaluation tab we were in earlier.
+
+The point of having a file like this to provide you with a place where you can write your evaluation script.
+
+**Note: For Python labs, I'm assuming you will be using the pre-installed pytest utility to test the user code. Hence, we use the pytest testing format here:**
+
+```py
+import os
+import sys
+import importlib
+# Make user code files available for dynamic import
+sys.path.append(os.environ.get('USER_CODE_DIR'))
+
+# Docs: https://docs.pytest.org/en/6.2.x/getting-started.html#create-your-first-test
+
+def test_variable1():
+	userscript = importlib.import_module('script')
+	assert userscript.variable1 == 5
+
+def test_variable2():
+	userscript = importlib.import_module('script')
+	assert userscript.variable2 == 300
+
+```
+
+Let us understand what is happening here exactly:
+
+-   We import some required python packages.
+-   Then we add `USER_CODE_DIR` to the `PATH` env. `USER_CODE_DIR` string is effectively `/home/damner/code` which in turn is the directory where your students store their coding files (and is also visible in the playground file explorer by default)
+-   We start writing tests on how Python pytest library recommends. Check out [pytest documentation](https://docs.pytest.org/en/6.2.x/getting-started.html#create-your-first-test) for more information.
+-   We dynamically import the `script.py` using `importlib.import_module('script')`. This is to prevent the test file from crashing other tests in case the script is not there at all.
+-   Then we start asserting based on pytest utilities.
+
+-   The number of `def test_(...)` functions inside your test file suite should match the number of challenges added in the creator area.
+
+-   **Note:** If your number of `test` blocks are less than challenges added back in the UI, the "extra" UI challenges would automatically stay as "false". If you add more challenges in test file, the results would be ignored.
+
+This completes your evaluation script for the lab. Your lab is now almost ready for users.
+
+## Step 6 - Add challenges
+
+Finally, in the UI below, add friendly name of challenges that must be visible to the user. Note that the order of challenges is important here and must match the boolean array you write using the bash script + test file above.
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/17-11-2024/screenshot-000003%402x.bedrfe.png)
