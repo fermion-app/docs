@@ -1,6 +1,6 @@
 ---
 title: 'How to embed a video externally'
-description: 'How to embed a video externally'
+description: 'Learn how to integrate Fermion recorded videos into your website using our SDK, including public and private video embedding options.'
 ---
 
 This guide explains how to embed recorded videos into external websites using the Fermion SDK.
@@ -16,15 +16,17 @@ This guide explains how to embed recorded videos into external websites using th
 -   Fermion API key (only if you disable public embeds)
 -   Access to your website's codebase
 
-## Step 1: Obtain the video ID
+## Step 1: Enable Video Library and Get Video ID
 
-Each video on fermion has a unique identifier. For example `6779080e80ec97e953a17971`. First, go to `Manage features` tab on your instructor dashboard and enable `Video library`
+First, go to `Manage features` tab on your instructor dashboard and enable `Video library`:
 
 ![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/16-02-2025/screenshot-001155.joduvu.png)
 
-After that, go to `Video library` and upload a video if you haven't.
+After that, go to `Video library` and upload a video if you haven't:
 
 ![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/16-02-2025/screenshot-001156.reocnd.png)
+
+Each video on Fermion has a unique identifier (e.g., `6779080e80ec97e953a17971`). You'll need this ID for embedding.
 
 ## Step 2: Install the SDK
 
@@ -36,9 +38,29 @@ yarn add @fermion-app/sdk
 pnpm add @fermion-app/sdk
 ```
 
-## Step 3: Generate an Embed Token (Optional)
+## Step 3: Basic Video Embedding
 
-If your video is not public, you'll need to generate a JWT (JSON Web Token) to authenticate the embed. Here's how to create one using the `jsonwebtoken` package:
+### Public Video Embedding
+
+For public videos, you can use the following code:
+
+```typescript
+import { FermionRecordedVideo } from '@fermion-app/sdk/recorded-video'
+
+// Create a video instance
+const video = new FermionRecordedVideo({
+	videoId: 'your-video-id',
+	websiteHostname: 'your-domain.fermion.app',
+})
+
+// Get the embed code
+const publicEmbed = video.getPubliclyEmbedPlaybackIframeCode()
+console.log(publicEmbed.iframeHtml)
+```
+
+### Private Video Embedding
+
+If your video is not public, you'll need to generate a JWT token for authentication:
 
 ```javascript
 import jwt from 'jsonwebtoken'
@@ -60,31 +82,18 @@ const jwtToken = jwt.sign(payloadObject, 'FERMION_API_KEY', {
 	10h-20h
 </Note>
 
-## Step 4: Embed the Video
+Then use the token to embed the video:
 
 ```typescript
-import { FermionRecordedVideo } from '@fermion-app/sdk/recorded-video'
-
-// Create a video instance
-const video = new FermionRecordedVideo({
-	videoId: 'your-video-id',
-	websiteHostname: 'your-domain.fermion.app',
-})
-
-// For public videos
-const publicEmbed = video.getPubliclyEmbedPlaybackIframeCode()
-console.log(publicEmbed.iframeHtml)
-
-// For private videos (requires JWT token)
 const privateEmbed = video.getPrivateEmbedPlaybackIframeCode({
 	jwtToken: 'your-jwt-token',
 })
 console.log(privateEmbed.iframeHtml)
 ```
 
-## Step 5: Add Event Listeners (Optional)
+## Step 4: Add Event Listeners (Optional)
 
-The SDK provides event listeners to track video playback events through the `setupEventListenersOnVideo` method:
+Track video playback events using the SDK's event system:
 
 ```typescript
 const video = new FermionRecordedVideo({
@@ -112,8 +121,6 @@ events.onVideoEnded(() => {
 events.dispose()
 ```
 
-The event listeners communicate with the video iframe through postMessage, and the SDK handles all the validation and security checks internally.
-
 <Warning>
 	Event listeners only work when using the Fermion video player through
 	`getPubliclyEmbedPlaybackIframeCode` or `getPrivateEmbedPlaybackIframeCode`.
@@ -122,7 +129,7 @@ The event listeners communicate with the video iframe through postMessage, and t
 
 ## Advanced: Custom M3U8 Playback
 
-For advanced use cases, you can get the M3U8 playback URL to use with your own video player. This requires you to handle decryption and signed URLs yourself (Fermion SDK can help with some part here).
+For advanced use cases, you can get the M3U8 playback URL to use with your own video player:
 
 ```typescript
 const video = new FermionRecordedVideo({

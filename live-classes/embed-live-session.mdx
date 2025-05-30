@@ -1,13 +1,16 @@
 ---
 title: 'How to embed a live session externally'
-description: 'How to Embed a Live Session Externally'
+description: 'Learn how to integrate Fermion live sessions into your website using the SDK or manual iframe embedding, with support for both instructor WebRTC mode and student view-only mode.'
 ---
 
-This guide explains how to embed Fermion live sessions into external websites, including both the main session view and chat functionality.
+This guide explains how to embed Fermion live sessions into external websites using the Fermion SDK or manual iframe embedding.
 
-## Getting Started
+<Info>
+	The Fermion SDK is open source and available on GitHub:
+	[github.com/fermion-app/sdk](https://github.com/fermion-app/sdk)
+</Info>
 
-### Prerequisites
+## Prerequisites
 
 -   A Fermion live session ID
 -   Fermion API key
@@ -19,9 +22,10 @@ Each live session has a unique identifier. For example `6779080e80ec97e953a17971
 
 First, create a new live event.
 
-:::tip
-If you cannot see `Live events` tab in your dashboard, go to `Manage features` tab at the top and enable live events.
-:::
+<Tip>
+	If you cannot see `Live events` tab in your dashboard, go to `Manage
+	features` tab at the top and enable live events.
+</Tip>
 
 ![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/04-01-2025/screenshot-000662%402x.bbidar.png)
 
@@ -29,11 +33,19 @@ After that, go to `Manage sessions` to create a new session inside a live event:
 
 ![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/04-01-2025/screenshot-000663%402x.yakscf.png)
 
-:::tip
-A single live event can contain multiple live sessions.
-:::
+<Tip>A single live event can contain multiple live sessions.</Tip>
 
-## Step 2: Generate an Embed Token
+## Step 2: Install the SDK
+
+```bash
+npm install @fermion-app/sdk
+# or
+yarn add @fermion-app/sdk
+# or
+pnpm add @fermion-app/sdk
+```
+
+## Step 3: Generate an Embed Token
 
 You'll need to generate a JWT (JSON Web Token) to authenticate the embed. Here's how to create one using the `jsonwebtoken` package:
 
@@ -41,7 +53,19 @@ You'll need to generate a JWT (JSON Web Token) to authenticate the embed. Here's
 import jwt from 'jsonwebtoken'
 
 const payloadObject = {
-	/* ... see the valid schema of the object below ... */
+	liveEventSessionId: 'your-live-session-id',
+	userId: 'unique-user-id',
+
+	playbackOptions: {
+		// If you pass this as true, system would enforce only 1080p and 720p modes of playback. Note: Passing this as true might result in buffering on user side if their internet is not fast (as this disables low quality playback versions)
+		shouldPreferOnlyHighDefinitionPlayback: false,
+
+		// If you pass this as true, it will hide the seek controls (seekbar and jump forward/backward buttons) from the UI
+		shouldHideSeekControls: false,
+
+		// If you pass this as true, once the livestream ends, the same JWT that is used to embed the stream would not be able to playback the recorded version of the video
+		shouldDisallowRecordedPlaybackIfNotLive: false,
+	},
 }
 
 const jwtToken = jwt.sign(payloadObject, 'FERMION_API_KEY', {
@@ -58,13 +82,8 @@ z.object({
 
 	playbackOptions: z
 		.object({
-			// If you pass this as true, system would enforce only 1080p and 720p modes of playback. Note: Passing this as true might result in buffering on user side if their internet is not fast (as this disables low quality playback versions)
 			shouldPreferOnlyHighDefinitionPlayback: z.boolean().default(false),
-
-			// If you pass this as true, it will hide the seek controls (seekbar and jump forward/backward buttons) from the UI
 			shouldHideSeekControls: z.boolean().default(false),
-
-			// If you pass this as true, once the livestream ends, the same JWT that is used to embed the stream would not be able to playback the recorded version of the video
 			shouldDisallowRecordedPlaybackIfNotLive: z.boolean().default(false),
 		})
 		.default({
@@ -75,30 +94,102 @@ z.object({
 })
 ```
 
-Important notes:
+<Note>
+	Important notes: - Replace `FERMION_API_KEY` with your actual API key -
+	Provide a unique user ID for each viewer - `playbackOptions` is optional. If
+	you do not pass this object we will use the defaults as mentioned above.
+</Note>
 
--   Replace `FERMION_API_KEY` with your actual API key and provide a unique user ID for each viewer.
--   `shouldPreferOnlyHighDefinitionPlayback` if `true`, will disable low quality playbacks (any playback other than 1080p/720p)
--   `shouldHideSeekControls` if `true`, will disable the ability to seek back and forward. The user will not be able to go back in livestream
--   `shouldDisallowRecordedPlaybackIfNotLive` if `true`, will not allow user to watch recording again when the livestream ends with the same JWT. You must create a new JWT with `shouldDisallowRecordedPlaybackIfNotLive` set as `false` if you want user to be able to play video recording.
--   `playbackOptions` is optional. If you do not pass this object we will use the defaults as mentioned above.
+<Info>
+	Fermion uses the same zod schema as above internally to validate your JWT
+	payload.
+</Info>
 
-:::info
-Fermion uses the same zod schema as above internally to validate your JWT payload.
-:::
+## Step 4: Embed the Live Session
 
-## Step 3: Embed the Live Session
+### For Instructors (WebRTC Meeting Mode)
 
-### Main Session View
+<Warning>
+	If you are an instructor who needs to use WebRTC (meeting mode), you
+	**must** use the iframe embedding method. The M3U8 playback option is only
+	available for student viewers and does not support WebRTC functionality.
+</Warning>
 
-Add this iframe to your website where you want to embed the live session:
+```typescript
+import { FermionLivestreamVideo } from '@fermion-app/sdk/livestream-video'
+
+// Create a livestream instance
+const livestream = new FermionLivestreamVideo({
+	liveEventSessionId: 'your-live-session-id',
+	websiteHostname: 'your-domain.fermion.app',
+})
+
+// Embed the live session (requires JWT token)
+const embed = livestream.getPrivateEmbedPlaybackIframeCode({
+	jwtToken: 'your-jwt-token',
+})
+
+console.log(embed.iframeHtml)
+```
+
+### For Students (View-Only Mode)
+
+Students can use either the iframe embedding method or the custom M3U8 playback option:
+
+```typescript
+import { FermionLivestreamVideo } from '@fermion-app/sdk/livestream-video'
+
+// Create a livestream instance
+const livestream = new FermionLivestreamVideo({
+	liveEventSessionId: 'your-live-session-id',
+	websiteHostname: 'your-domain.fermion.app',
+})
+
+// Option 1: Iframe embedding (recommended for most cases)
+const embed = livestream.getPrivateEmbedPlaybackIframeCode({
+	jwtToken: 'your-jwt-token',
+})
+console.log(embed.iframeHtml)
+
+// Option 2: Custom M3U8 playback (advanced use case)
+const hlsConfig = livestream.getHlsPlaybackConfig({
+	origin: 'https://cdn-storage.fermion.app',
+	masterM3u8Pathname: '/path/to/your/playlist.m3u8',
+	clearkeyDecryptionKeyInHex: '6815d8748df5297181862d32',
+	urlSearchParamString: '?verify=signature_here',
+})
+
+// Use this configuration with your custom HLS player (e.g., hls.js)
+import Hls from 'hls.js'
+
+if (Hls.isSupported()) {
+	const hls = new Hls({
+		pLoader: hlsConfig.PlaylistLoader,
+	})
+	hls.loadSource(hlsConfig.sourceUrl)
+	hls.attachMedia(videoElement)
+}
+```
+
+<Note>
+	To get the playback options (origin, masterM3u8Pathname,
+	clearkeyDecryptionKeyInHex, urlSearchParamString), you need to call the
+	`get-signed-url-data-for-live-event-session` API endpoint from your backend
+	server with your Fermion API key. [Refer to the API
+	documentation](/api-reference/video/get-signed-url-data-for-live-event-session)
+	for more information.
+</Note>
+
+### Chat Integration
+
+To embed the live session chat, use this iframe manually (SDK support for chat coming soon):
 
 ```html
 <iframe
 	width="1280"
 	height="720"
-	src="https://acme.fermion.app/embed/live-session?token=your_token_here"
-	title="Live event session"
+	src="https://acme.fermion.app/embed/live-session-chat?token=your_token_here"
+	title="Live event session chat"
 	frameborder="0"
 	allow="allow-same-origin; camera *;microphone *;display-capture *;encrypted-media;"
 	referrerpolicy="strict-origin-when-cross-origin"
@@ -107,15 +198,39 @@ Add this iframe to your website where you want to embed the live session:
 </iframe>
 ```
 
-### Chat Integration
+## Iframe Embed vs M3U8 Embed
 
-To embed the live session chat, use this iframe:
+Understanding the differences between iframe embedding and custom M3U8 playback can help you choose the right approach for your use case:
+
+| Feature               | Iframe Embed (Recommended)                                              | Custom M3U8 Playback (Advanced)                                   |
+| --------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| **DRM Protection**    | ✅ Full DRM support                                                     | ❌ No DRM support                                                 |
+| **Player Experience** | ✅ Fully-built player with buffering, quality switching, error handling | ⚠️ Requires custom implementation                                 |
+| **Setup Complexity**  | ✅ Zero configuration, works out of the box                             | ⚠️ Additional complexity and dependencies                         |
+| **UI/UX Consistency** | ✅ Consistent, tested experience                                        | ⚠️ Custom UI development required                                 |
+| **Maintenance**       | ✅ Automatic updates and improvements                                   | ⚠️ Manual maintenance and bug fixes                               |
+| **Customization**     | ⚠️ Limited to Fermion player interface                                  | ✅ Full control over player and behavior                          |
+| **WebRTC Support**    | ✅ Full WebRTC support for instructors                                  | ❌ No WebRTC support (viewers only)                               |
+| **Best For**          | Most production use cases, content protection, instructors              | Advanced customization, existing player integration, viewers only |
+
+<Tip>
+	We recommend using the iframe embed approach for most use cases as it
+	provides the best balance of security, functionality, and ease of
+	implementation. For instructors who need WebRTC functionality, iframe
+	embedding is the only option.
+</Tip>
+
+## Manual Iframe Embedding (Alternative)
+
+If you prefer not to use the SDK, you can embed live sessions manually using iframes:
+
+### Main Session View
 
 ```html
 <iframe
 	width="1280"
 	height="720"
-	src="https://acme.fermion.app/embed/live-session-chat?token=your_token_here"
+	src="https://acme.fermion.app/embed/live-session?token=your_token_here"
 	title="Live event session"
 	frameborder="0"
 	allow="allow-same-origin; camera *;microphone *;display-capture *;encrypted-media;"
