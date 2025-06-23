@@ -10,6 +10,6 @@
 		"glob": "11.0.2",
 		"@types/fs-extra": "11.0.4",
 		"@types/node": "22.9.0",
-		"mintlify": "4.0.555"
+		"mintlify": "4.0.592"
 	}
 }

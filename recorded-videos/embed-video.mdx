@@ -91,7 +91,44 @@ const privateEmbed = video.getPrivateEmbedPlaybackIframeCode({
 console.log(privateEmbed.iframeHtml)
 ```
 
-## Step 4: Add Event Listeners (Optional)
+## Step 4: Controlling Video Playback
+
+Once the video is embedded, you can control its playback programmatically using the `play()` and `pause()` methods.
+
+```typescript
+import { FermionRecordedVideo } from '@fermion-app/sdk/recorded-video'
+
+const video = new FermionRecordedVideo({
+	videoId: 'your-video-id',
+	websiteHostname: 'your-domain.fermion.app',
+})
+
+// Assuming you have added the iframe to your DOM
+// For example:
+// const embed = video.getPubliclyEmbedPlaybackIframeCode();
+// document.getElementById('video-container').innerHTML = embed.iframeHtml;
+
+// You can now control the video
+video.play() // to play the video
+video.pause() // to pause the video
+```
+
+<Info>
+	The SDK automatically assigns a unique ID to the iframe when you use
+	`getPubliclyEmbedPlaybackIframeCode` or `getPrivateEmbedPlaybackIframeCode`.
+	This allows `play()` and `pause()` to find the iframe automatically without
+	you passing the iframe element.
+</Info>
+
+If you have multiple videos or a custom iframe setup, you can pass the iframe element directly to the methods:
+
+```typescript
+const iframeElement = document.querySelector('#my-custom-iframe-id')
+video.play(iframeElement)
+video.pause(iframeElement)
+```
+
+## Step 5: Add Event Listeners (Optional)
 
 Track video playback events using the SDK's event system:
 
@@ -113,6 +150,10 @@ events.onVideoPaused((data) => {
 	console.log('Video paused at', data.durationAtInSeconds, 'seconds')
 })
 
+events.onTimeUpdated((data) => {
+	console.log('Current playback time:', data.currentTimeInSeconds, 'seconds')
+})
+
 events.onVideoEnded(() => {
 	console.log('Video playback ended')
 })
@@ -129,7 +170,14 @@ events.dispose()
 
 ## Advanced: Custom M3U8 Playback
 
-For advanced use cases, you can get the M3U8 playback URL to use with your own video player:
+For security, all Fermion videos are encrypted using AES-128 (clearkey) encryption. The Fermion video player, embedded via the iframe methods, handles the decryption process seamlessly. We highly recommend using the default Fermion player as it is robust, production-ready, and provides a user-friendly experience out of the box.
+
+However, for advanced use cases where you need to integrate the video into your own custom video player (like HLS.js, Video.js, etc.), you can get the M3U8 playback URL. The `getM3U8PlaybackUrl` method fetches the M3U8 manifest, patches it with the necessary decryption key, and returns a blob URL that your player can use.
+
+<Warning>
+	DRM-protected videos can only be played using the Fermion iframe embed. The
+	custom M3U8 playback method does not support DRM at this time.
+</Warning>
 
 ```typescript
 const video = new FermionRecordedVideo({
