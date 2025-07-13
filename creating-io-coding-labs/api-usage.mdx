@@ -1,0 +1,188 @@
+---
+title: 'How to use DSA coding lab execution over API?'
+description: 'Learn about using APIs to execute DSA coding labs'
+---
+
+The DSA Coding Lab Execution API allows you to programmatically execute code submissions and retrieve results for Data Structures and Algorithms (DSA) problems. This API supports batch operations for efficiency and handles multiple programming languages.
+
+## Overview
+
+The API provides two main endpoints that work together:
+
+1. **Request DSA code execution [batch]** - Submit multiple code executions
+2. **Get DSA code execution result [batch]** - Retrieve results of submitted executions
+
+## Industry Pricing Comparison
+
+Fermion offers the best infrastructure and extremely competitive prices compared to industry standards. For example, consider Judge0's pricing on RapidAPI vs Fermion's base plan pricing.
+
+| Platform            | Cost per Submission      | Rate limits                |
+| ------------------- | ------------------------ | -------------------------- |
+| **Judge0**          | $1 per 1,000 submissions | Unknown                    |
+| **Fermion DSA API** | $1 per 5,000 submissions | 10,000 requests per second |
+
+<Info>
+	Planning to execute more than 1 million runs per month? Contact our support
+	team for special enterprise pricing and higher rate limits.
+</Info>
+
+**Why Choose Fermion over Judge0?**
+
+-   **Better Performance**: Optimized specifically for DSA problems
+-   **Batch Operations**: Execute multiple problems in a single API call
+-   **Enterprise Support**: Dedicated support for high-volume users
+-   **Competitive Pricing**: Better rates for volume usage
+
+<Check>
+	Fermion's DSA execution API is a production-ready, enterprise-grade
+	replacement for Judge0 with better performance, reliability, and pricing.
+</Check>
+
+## Fermion API Key
+
+You must have a valid Fermion API key to run these coding labs. Create a Fermion account and go to Settings > API access section in your instructor dashboard to get the key.
+
+## Supported languages
+
+The API supports the following programming languages:
+
+-   `C`
+-   `Cpp` (C++)
+-   `Java`
+-   `Python`
+-   `Nodejs` (Node.js)
+-   `Golang_1_19` (Go)
+-   `Rust_1_87` (Rust)
+-   `Dotnet_8` (.NET)
+-   `Sqlite_3_48_0` (SQLite)
+
+<Info>
+	Reach out to Fermion support if you need access to more runtimes than listed
+	here.
+</Info>
+
+## Step 1 - Submit Code for Execution
+
+Use the **Request DSA code execution [batch]** endpoint to submit one or more code executions.
+
+For detailed API specification, request/response schemas, and interactive examples, see the official API documentation: [Request DSA code execution [batch]](https://docs.fermion.app/api-reference/dsa/request-dsa-code-execution-[batch])
+
+#### Special Case: SQLite
+
+For SQLite code execution, you must include a ZIP file containing a `db.sqlite` file:
+
+```json
+{
+	"language": "Sqlite_3_48_0",
+	"sourceCodeAsBase64UrlEncoded": "U0VMRUNUIEhFTExPKCk=",
+	"additionalFilesAsZip": {
+		"type": "base64url-encoding",
+		"base64UrlEncodedZip": "base64-encoded-zip-content"
+	},
+	"runConfig": {
+		// ... other config
+	}
+}
+```
+
+The API returns an array of task IDs in the same order of challenges that you submitted, that you can use to retrieve results later.
+
+## Step 2 - Retrieve Execution Results
+
+Use the **Get DSA code execution result [batch]** endpoint to retrieve results of submitted executions.
+
+For detailed API specification, request/response schemas, and interactive examples, see the official API documentation: [Get DSA code execution result [batch]](https://docs.fermion.app/api-reference/dsa/get-dsa-code-execution-result-[batch])
+
+## Using Webhook URLs for Instant Results (Recommended)
+
+    Instead of polling for results, it's recommended to use the
+    `callbackUrlOnExecutionCompletion` parameter in your `runConfig`. This
+    webhook URL will receive a POST request with the execution results
+    immediately when processing completes, eliminating the need for repeated
+    polling and providing faster response times.
+
+<Tip>
+	When using webhook URLs, include the `callbackUrlOnExecutionCompletion` in
+	your execution request
+</Tip>
+
+```json
+{
+	"language": "Python",
+	"sourceCodeAsBase64UrlEncoded": "cHJpbnQoImhlbGxvIHdvcmxkIik=",
+	"runConfig": {
+		"callbackUrlOnExecutionCompletion": "https://your-domain.com/webhook/execution-complete",
+		"customMatcherToUseForExpectedOutput": "ExactMatch",
+		"expectedOutputAsBase64UrlEncoded": "aGVsbG8gd29ybGQK",
+		"cpuTimeLimitInMilliseconds": 2000,
+		"wallTimeLimitInMilliseconds": 5000,
+		"memoryLimitInKilobyte": 131072
+	}
+}
+```
+
+Your webhook endpoint will receive the complete execution result as a POST request body, containing the same data structure as the batch result API response.
+
+## Task Status Values
+
+-   **`Pending`**: Task is queued for execution
+-   **`Processing`**: Task is currently being executed
+-   **`Finished`**: Task execution completed
+
+## Run Status Values
+
+-   **`successful`**: Code executed successfully
+-   **`compilation-error`**: Code failed to compile
+-   **`time-limit-exceeded`**: Execution exceeded time limit
+-   **`wrong-answer`**: Output doesn't match expected result
+-   **`non-zero-exit-code`**: Program exited with non-zero code
+-   **`died-sigsev`**: Segmentation fault
+-   **`died-sigxfsz`**: File size limit exceeded
+-   **`died-sigfpe`**: Floating point exception
+-   **`died-sigabrt`**: Program aborted
+-   **`internal-isolate-error`**: Internal system error
+-   **`unknown`**: Unknown error occurred
+
+## Base64URL Encoding
+
+Base64URL encoding is **critical** for proper API usage. The DSA execution API requires Base64URL encoding (not standard Base64) for several fields including source code, expected output, stdin input, and file attachments.
+
+### Why Base64URL Encoding?
+
+Base64URL encoding is a URL-safe variant of Base64 that:
+
+-   Replaces `+` with `-` (dash)
+-   Replaces `/` with `_` (underscore)
+-   Removes padding `=` characters
+-   Ensures the encoded string is safe for use in URLs and JSON
+
+<Warning>
+	Using standard Base64 encoding instead of Base64URL will cause API errors or
+	unexpected behavior. Always use Base64URL encoding for the API.
+</Warning>
+
+### Required Fields
+
+The following fields **must** be Base64URL encoded:
+
+-   `sourceCodeAsBase64UrlEncoded` - Your source code
+-   `expectedOutputAsBase64UrlEncoded` - Expected program output
+-   `stdinStringAsBase64UrlEncoded` - Input data for the program
+-   `base64UrlEncodedZip` - ZIP file contents for SQLite
+-   `stdoutBase64UrlEncoded` - Program output (in responses)
+-   `stderrBase64UrlEncoded` - Error output (in responses)
+
+## Error Handling
+
+The API returns structured error responses:
+
+```json
+{
+	"output": {
+		"status": "error",
+		"errorMessage": "Description of the error"
+	}
+}
+```
+
+Always check the `status` field in the response and handle errors appropriately in your application.

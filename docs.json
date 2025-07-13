@@ -64,7 +64,8 @@
 						"group": "Creating IO coding labs",
 						"pages": [
 							"creating-io-coding-labs/introduction",
-							"creating-io-coding-labs/embed-lab"
+							"creating-io-coding-labs/embed-lab",
+							"creating-io-coding-labs/api-usage"
 						]
 					},
 					{
