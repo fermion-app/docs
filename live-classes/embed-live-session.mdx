@@ -198,6 +198,54 @@ To embed the live session chat, use this iframe manually (SDK support for chat c
 </iframe>
 ```
 
+## Step 5: Add Event Listeners (Optional)
+
+Track live session events using the SDK's event system:
+
+```typescript
+const livestream = new FermionLivestreamVideo({
+	liveEventSessionId: 'your-live-session-id',
+	websiteHostname: 'your-domain.fermion.app',
+})
+
+// Setup event listeners
+const events = livestream.setupEventListenersOnVideo()
+
+// Listen for livestream events
+events.onVideoPlay((data) => {
+	console.log(
+		'Livestream started playing at',
+		data.durationAtInSeconds,
+		'seconds'
+	)
+})
+
+events.onVideoPaused((data) => {
+	console.log('Livestream paused at', data.durationAtInSeconds, 'seconds')
+})
+
+events.onTimeUpdated((data) => {
+	console.log('Current playback time:', data.currentTimeInSeconds, 'seconds')
+})
+
+events.onVideoEnded(() => {
+	console.log('Video playback ended')
+})
+
+events.onLivestreamEnded(() => {
+	console.log('Livestream has ended (streaming finished)')
+})
+
+// When done, clean up the listeners
+events.dispose()
+```
+
+<Warning>
+	Event listeners only work when using the Fermion livestream player through
+	`getPrivateEmbedPlaybackIframeCode`. They are not available when using
+	manual M3U8 playback with custom players.
+</Warning>
+
 ## Iframe Embed vs M3U8 Embed
 
 Understanding the differences between iframe embedding and custom M3U8 playback can help you choose the right approach for your use case:
