@@ -1,6 +1,6 @@
 ---
 title: 'How to embed a video externally'
-description: 'Learn how to integrate Fermion recorded videos into your website using our SDK, including public and private video embedding options.'
+description: 'Learn how to integrate Fermion recorded videos into your website using our SDK, including public and private video embedding options with origin whitelisting.'
 ---
 
 This guide explains how to embed recorded videos into external websites using the Fermion SDK.
@@ -15,6 +15,7 @@ This guide explains how to embed recorded videos into external websites using th
 -   Video ID from your Fermion dashboard
 -   Fermion API key (only if you disable public embeds)
 -   Access to your website's codebase
+-   Your website domain (for origin whitelisting - optional but recommended)
 
 ## Step 1: Enable Video Library and Get Video ID
 
@@ -28,7 +29,42 @@ After that, go to `Video library` and upload a video if you haven't:
 
 Each video on Fermion has a unique identifier (e.g., `6779080e80ec97e953a17971`). You'll need this ID for embedding.
 
-## Step 2: Install the SDK
+## Step 2: Configure Origin Whitelisting (Optional)
+
+For enhanced security, you can configure origin whitelisting to control which domains are allowed to embed your videos. This is especially useful for public embeds to prevent unauthorized usage.
+
+### Per-Video Origin Whitelisting
+
+You can set a whitelisted origin for individual videos:
+
+1. Go to your video settings
+2. In the **Video Settings** section, find the **Whitelisted origin (optional)** field
+3. Enter the domain where you want to embed the video (e.g., `https://example.com`)
+4. Make sure **Allow public embeds** is enabled if you want the video to be publicly embeddable
+
+<Note>
+	If you specify a whitelisted origin, only that domain will be allowed to
+	embed your video. Leave empty to allow all origins. Domain restrictions do
+	not apply when using JWT signed tokens - signed embeds will always work
+	regardless of origin whitelisting settings.
+</Note>
+
+### Global Origin Whitelisting
+
+You can also set a default whitelisted domain for all your videos:
+
+1. Click on **Modify global settings for videos**
+2. In the **Global video settings** modal, enter your domain in the **Whitelisted domain for embedding videos externally (optional)** field
+3. Click **Save Changes**
+
+<Info>
+	If specified, this domain will be used as the default whitelisted origin for
+	all videos that don't have a specific whitelisted origin set. Leave empty to
+	allow all origins by default. **Note: JWT signed tokens always bypass domain
+	restrictions.**
+</Info>
+
+## Step 3: Install the SDK
 
 ```bash
 npm install @fermion-app/sdk
@@ -38,7 +74,7 @@ yarn add @fermion-app/sdk
 pnpm add @fermion-app/sdk
 ```
 
-## Step 3: Basic Video Embedding
+## Step 4: Basic Video Embedding
 
 ### Public Video Embedding
 
@@ -57,6 +93,12 @@ const video = new FermionRecordedVideo({
 const publicEmbed = video.getPubliclyEmbedPlaybackIframeCode()
 console.log(publicEmbed.iframeHtml)
 ```
+
+<Info>
+	When using public embeds with origin whitelisting enabled, make sure your
+	website domain matches the whitelisted origin you configured in Step 2. If
+	there's a mismatch, the video embed will not work.
+</Info>
 
 ### Private Video Embedding
 
@@ -91,7 +133,13 @@ const privateEmbed = video.getPrivateEmbedPlaybackIframeCode({
 console.log(privateEmbed.iframeHtml)
 ```
 
-## Step 4: Controlling Video Playback
+<Info>
+	JWT signed embeds work from any domain, regardless of origin whitelisting
+	settings. This makes private embeds more flexible than public embeds when it
+	comes to domain restrictions.
+</Info>
+
+## Step 5: Controlling Video Playback
 
 Once the video is embedded, you can control its playback programmatically using the `play()` and `pause()` methods.
 
@@ -128,7 +176,7 @@ video.play(iframeElement)
 video.pause(iframeElement)
 ```
 
-## Step 5: Add Event Listeners (Optional)
+## Step 6: Add Event Listeners (Optional)
 
 Track video playback events using the SDK's event system:
 
