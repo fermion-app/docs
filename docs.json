@@ -111,8 +111,8 @@
 						]
 					},
 					{
-						"group": "API Usage",
-						"pages": ["api/using-user-endpoints"]
+						"group": "API Guide",
+						"pages": ["api-guide/using-user-endpoints"]
 					},
 					{
 						"group": "Manage Settings",
