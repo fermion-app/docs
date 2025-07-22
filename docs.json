@@ -111,6 +111,10 @@
 						]
 					},
 					{
+						"group": "API Usage",
+						"pages": ["api/using-user-endpoints"]
+					},
+					{
 						"group": "Manage Settings",
 						"pages": [
 							"manage-settings/change-school-settings",

@@ -1,0 +1,27 @@
+---
+title: 'Using User API Endpoints'
+description: 'Guide to Fermion User API endpoints usage and things you should know'
+---
+
+Fermion offers a robust suite of User API endpoints, enabling you to programmatically manage users, their profiles, analytics, and more. This guide provides a detailed overview of when and how to utilize these endpoints, outlines authentication requirements, and shares best practices for seamless integration into your workflow.
+
+## When and Why Use the User API?
+
+The User API is particularly valuable when you need to:
+
+-   Programmatically create users from your own systems
+-   Retrieve or update user profile information
+-   Upload and manage user profile images
+-   Access user analytics for reporting or automation purposes
+
+By leveraging these endpoints, you can automate user management, synchronize data with external systems, and build custom integrations on top of Fermion.
+
+## Identifying Users: User ID vs. Email
+
+When interacting with the User API, you have two primary methods to identify a specific user or group of users:
+
+-   **User ID:** This is a unique identifier from your external database that you can associate with a user in the Fermion system. It does not need to contain any personally identifiable information (PII) and can simply be a unique database ID. If you choose to use a User ID, ensure that it remains unique within the Fermion platform as well.
+
+-   **Email:** Alternatively, you can use the user's email address to identify them within the Fermion system. This approach is useful if you utilize Fermion both as a Learning Management System (LMS) and via APIs. However, keep in mind that if a user updates their email address within Fermion, you must also update your records to maintain synchronization.
+
+You may associate a User ID with a user at any time. Once associated, it is recommended to use the User ID for lookups, as this method is more stable and less prone to change than using email addresses.
