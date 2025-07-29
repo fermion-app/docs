@@ -17,22 +17,59 @@ Before creating a SQL lab, you'll need:
 
 ### 1. Create Your Database File
 
-First, create your SQLite database with the tables and data you want students to work with:
+First, create your SQLite database with the tables and data you want students to work with. You can either:
 
-```sql
--- Example: Creating a simple database for a student management system
-CREATE TABLE students (
-    id INTEGER PRIMARY KEY,
-    name TEXT NOT NULL,
-    email TEXT UNIQUE,
-    department TEXT,
-    enrollment_date DATE
-);
+**Option A: Use an existing SQLite database**
+You can use popular sample databases like:
 
-INSERT INTO students VALUES
-(1, 'Alice Johnson', 'alice@university.edu', 'Computer Science', '2023-09-01'),
-(2, 'Bob Smith', 'bob@university.edu', 'Mathematics', '2023-09-01'),
-(3, 'Carol Davis', 'carol@university.edu', 'Physics', '2023-09-02');
+-   `chinook.db` - Music store database
+-   `northwind.db` - Business database
+-   `sakila.db` - DVD rental database
+
+These are standard SQLite database files with `.db` extension that contain realistic data for learning purposes.
+
+**Option B: Convert a plaintext SQL file to SQLite**
+If you have a `.sql` file with CREATE TABLE and INSERT statements, you can convert it to an SQLite database:
+
+1. **Using command line:**
+
+```bash
+# Create database from SQL file
+sqlite3 mydatabase.db < schema.sql
+
+# Or if you want to create db.sqlite specifically
+sqlite3 db.sqlite < schema.sql
+```
+
+2. **Using SQLite command line:**
+
+```bash
+# Start SQLite
+sqlite3 db.sqlite
+
+# Read and execute SQL file
+.read schema.sql
+
+# Exit SQLite
+.quit
+```
+
+3. **Using Python (if you prefer):**
+
+```python
+import sqlite3
+
+# Create database
+conn = sqlite3.connect('db.sqlite')
+cursor = conn.cursor()
+
+# Read and execute SQL file
+with open('schema.sql', 'r') as file:
+    sql_script = file.read()
+    cursor.executescript(sql_script)
+
+conn.commit()
+conn.close()
 ```
 
 ### 2. Prepare Your Database File
