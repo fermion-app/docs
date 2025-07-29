@@ -3,17 +3,19 @@ title: 'Creating SQL labs on Fermion'
 description: 'Learn how to setup a successful SQL coding lab on Fermion for your students'
 ---
 
-Fermion supports SQLite for creating interactive SQL coding labs. This allows you to create hands-on database exercises where students can practice writing SQL queries against a real database.
+Fermion supports both SQLite and MySQL 8 for creating interactive SQL coding labs. This allows you to create hands-on database exercises where students can practice writing SQL queries against a real database.
 
 ## Prerequisites
 
 Before creating a SQL lab, you'll need:
 
-1. A SQLite database file (`.sqlite` format)
-2. The database file should be named `db.sqlite`
+1. **For SQLite**: A SQLite database file (`.sqlite` format) named `db.sqlite`
+2. **For MySQL 8**: A plaintext SQL file (`.sql` format) named `setup.sql`
 3. The file should be compressed into a ZIP archive
 
-## Setting Up Your SQLite Database
+## How to create SQLite lab?
+
+Follow the steps below for setting up SQLite based lab:
 
 ### 1. Create Your Database File
 
@@ -78,6 +80,40 @@ conn.close()
 2. Create a ZIP archive containing only the `db.sqlite` file
 3. The ZIP file should be named something descriptive like `student_database.zip`
 
+## How to create MySQL 8 lab?
+
+Follow the steps below for setting up MySQL 8 lab:
+
+### 1. Create Your SQL Setup File
+
+For MySQL 8 labs, you need to create a plaintext SQL file that contains all the necessary setup commands:
+
+```sql
+-- Example setup.sql file
+CREATE DATABASE IF NOT EXISTS student_db;
+USE student_db;
+
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO users (name, email) VALUES
+    ('John Doe', 'john@example.com'),
+    ('Jane Smith', 'jane@example.com'),
+    ('Bob Johnson', 'bob@example.com');
+
+-- Add more tables and data as needed
+```
+
+### 2. Prepare Your SQL File
+
+1. Save your SQL setup file as `setup.sql`
+2. Create a ZIP archive containing only the `setup.sql` file
+3. The ZIP file should be named something descriptive like `mysql_student_database.zip`
+
 ## Creating the SQL Lab on Fermion
 
 <Note>
@@ -93,8 +129,10 @@ conn.close()
 ![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/29-07-2025/screenshot-002425.wlqwcm.png)
 
 5. Inside the lab setup interface, scroll down and pick "SQL Lab".
-6. Fermion currently supports SQLite as a backend adapter for running SQL queries.
-7. Expand this and upload the ZIP file you just created some time back `student_database.zip`.
+6. Fermion currently supports SQLite and MySQL 8 as backend adapters for running SQL queries.
+7. Expand this and upload the ZIP file you just created:
+    - **For SQLite**: Upload `student_database.zip` containing `db.sqlite`
+    - **For MySQL 8**: Upload `mysql_student_database.zip` containing `setup.sql`
 
 ![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/29-07-2025/screenshot-002426.kvehag.png)
 
@@ -102,7 +140,11 @@ conn.close()
 
 ## Setting up test cases
 
-For SQL labs, you can define a single test case where you write an expected output the query should produce. SQLite is able to produce output in 14 different formats, however Fermion outputs the SQL query output in `list` mode.
+For SQL labs, you can define a single test case where you write an expected output the query should produce.
+
+### SQLite Test Cases
+
+SQLite is able to produce output in 14 different formats, however Fermion outputs the SQL query output in `list` mode.
 
 This is how list mode output works:
 
@@ -115,11 +157,19 @@ sqlite>
 
 To get the expected output for your own query against your own database, create a file called `script.sql` that has the solution query, and run the following command locally on your system:
 
-```
+```bash
 cat script.sql | sqlite3 db.sqlite
 ```
 
-This will give you output of your command in `list` mode in SQLite which you can copy-paste in the "output" box of test case
+### MySQL 8 Test Cases
+
+For MySQL 8, the output format is similar to the standard MySQL command line output. To get the expected output for your query, you can run it locally against your MySQL database:
+
+```bash
+mysql -u username -p database_name < script.sql
+```
+
+This will give you output of your command which you can copy-paste in the "output" box of test case.
 
 ![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/29-07-2025/screenshot-002427.hykhoa.png)
 
