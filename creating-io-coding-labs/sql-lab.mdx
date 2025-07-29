@@ -1,0 +1,95 @@
+---
+title: 'Creating SQL labs on Fermion'
+description: 'Learn how to setup a successful SQL coding lab on Fermion for your students'
+---
+
+Fermion supports SQLite for creating interactive SQL coding labs. This allows you to create hands-on database exercises where students can practice writing SQL queries against a real database.
+
+## Prerequisites
+
+Before creating a SQL lab, you'll need:
+
+1. A SQLite database file (`.sqlite` format)
+2. The database file should be named `db.sqlite`
+3. The file should be compressed into a ZIP archive
+
+## Setting Up Your SQLite Database
+
+### 1. Create Your Database File
+
+First, create your SQLite database with the tables and data you want students to work with:
+
+```sql
+-- Example: Creating a simple database for a student management system
+CREATE TABLE students (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE,
+    department TEXT,
+    enrollment_date DATE
+);
+
+INSERT INTO students VALUES
+(1, 'Alice Johnson', 'alice@university.edu', 'Computer Science', '2023-09-01'),
+(2, 'Bob Smith', 'bob@university.edu', 'Mathematics', '2023-09-01'),
+(3, 'Carol Davis', 'carol@university.edu', 'Physics', '2023-09-02');
+```
+
+### 2. Prepare Your Database File
+
+1. Save your database as `db.sqlite`
+2. Create a ZIP archive containing only the `db.sqlite` file
+3. The ZIP file should be named something descriptive like `student_database.zip`
+
+## Creating the SQL Lab on Fermion
+
+<Note>
+	If you have not enabled Coding labs, please go to "Manage features" >
+	"Coding Labs" and enable that first from your instructor dashboard
+</Note>
+
+1. Navigate to your instructor dashboard
+2. Go to the "Coding Labs" section
+3. Click on "I/O labs" and create an SQL lab as IO lab
+4. Edit this lab
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/29-07-2025/screenshot-002425.wlqwcm.png)
+
+5. Inside the lab setup interface, scroll down and pick "SQL Lab".
+6. Fermion currently supports SQLite as a backend adapter for running SQL queries.
+7. Expand this and upload the ZIP file you just created some time back `student_database.zip`.
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/29-07-2025/screenshot-002426.kvehag.png)
+
+8. You can also add default starting code for students if required.
+
+## Setting up test cases
+
+For SQL labs, you can define a single test case where you write an expected output the query should produce. SQLite is able to produce output in 14 different formats, however Fermion outputs the SQL query output in `list` mode.
+
+This is how list mode output works:
+
+```bash
+sqlite> select * from tbl1;
+hello!|10
+goodbye|20
+sqlite>
+```
+
+To get the expected output for your own query against your own database, create a file called `script.sql` that has the solution query, and run the following command locally on your system:
+
+```
+cat script.sql | sqlite3 db.sqlite
+```
+
+This will give you output of your command in `list` mode in SQLite which you can copy-paste in the "output" box of test case
+
+![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/29-07-2025/screenshot-002427.hykhoa.png)
+
+Save your lab and try it as a user to see.
+
+<Tip>
+	Fermion runs every query in a completely isolated environment. Therefore,
+	you can setup labs that can have INSERT or DELETE operations as well,
+	alongside SELECT operations
+</Tip>
