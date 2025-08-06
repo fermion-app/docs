@@ -133,7 +133,8 @@
 						"group": "Recorded videos",
 						"pages": [
 							"recorded-videos/introduction",
-							"recorded-videos/embed-video"
+							"recorded-videos/embed-video",
+							"recorded-videos/troubleshooting-playback"
 						]
 					}
 				]
