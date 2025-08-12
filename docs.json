@@ -146,7 +146,8 @@
 						"group": "Using API",
 						"pages": [
 							"api-guide/introduction",
-							"api-guide/using-user-endpoints"
+							"api-guide/using-user-endpoints",
+							"api-guide/affiliate-marketing-over-api"
 						]
 					},
 					{

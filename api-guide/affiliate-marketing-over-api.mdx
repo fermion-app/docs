@@ -1,0 +1,52 @@
+---
+title: 'Affiliate Marketing Over API'
+description: 'Complete guide to implementing affiliate marketing programmatically using Fermion APIs'
+---
+
+Fermion provides a comprehensive API for implementing affiliate marketing programs programmatically. This guide walks you through the complete process of setting up and managing affiliate marketing through our APIs.
+
+## Overview
+
+Affiliate marketing over API allows you to:
+
+-   Create affiliate users programmatically
+-   Generate custom affiliate links automatically
+-   Track affiliate performance and conversions
+-   Manage affiliate commissions and payouts
+-   Integrate affiliate marketing into your existing systems
+
+## Prerequisites
+
+Before implementing affiliate marketing over API, ensure you have valid API key.
+
+## Step 1: Create a New Affiliate User
+
+First, create a new user account for your affiliate using the user creation API. Use this API endpoint: https://docs.fermion.app/api-reference/user/create-new-user
+
+## Step 2: Generate Affiliate Custom Link
+
+Now you can create custom affiliate link: https://docs.fermion.app/api-reference/affiliate-marketing/create-custom-affiliate-link
+
+-   Once the affiliate user is created, generate a custom affiliate link for them.
+-   Affiliate commission can be defined on a link basis.
+
+## Step 3: Construct the Full Affiliate URL
+
+Use the returned `affiliateLinkSlug` to construct the complete affiliate URL:
+
+```
+https://your-lms.com/a/:affiliateLinkSlug
+```
+
+## Real-time Conversion Tracking
+
+You can set up webhooks to receive real-time conversion notifications. Go to Webhooks in your dashboard, and enable "Product purchase" webhook event.
+
+<Info>
+	If you do not see "Webhooks" in your admin dashboard, go to "Manage
+	Features" > "Webhooks" and enable it.
+</Info>
+
+## Track affiliate link data
+
+You can also call `get-affiliate-link-stats` with the `affiliateLinkSlug` you got from step 1 to get stats like sale count, clicks and amount: https://docs.fermion.app/api-reference/affiliate-marketing/get-affiliate-link-stats
