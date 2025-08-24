@@ -1,11 +1,11 @@
 ---
-title: 'How to create interactive HTML/CSS labs?'
-description: 'How to create interactive HTML/CSS labs?'
+title: 'How to create interactive Node.js labs?'
+description: 'Learn how to build interactive coding labs with Node.js'
 ---
 
 Coding labs is a powerful feature of Fermion. Using coding labs in your platform, you can increase user retention, provide hands-on experience to them, and make them learn-by-doing.
 
-Let's take a look at how you can setup a HTML/CSS/JS interactive coding lab in this guide.
+Let's take a look at how you can setup a Node.js interactive coding lab in this guide.
 
 <iframe
 	src="https://www.loom.com/embed/a297c835f2d94be0953a01158ac2a007?sid=86b9a603-7c9c-434a-b3fa-ba5ac3a87c32"
@@ -45,8 +45,8 @@ Once you click on `Edit` button a new page will open. On this page you need to s
 Lab defaults section include how your lab environment boots. It is one of the most important parts because a wrong default environment might confuse your students. Therefore it is important to set it up properly.
 
 <Info>
-	We recommend forking this repository: [HTML playground
-	starter](https://github.com/codedamn-classrooms/html-playground-starter).
+	We recommend forking this repository: [Node.js playground
+	starter](https://github.com/codedamn-classrooms/node-playground-starter).
 </Info>
 
 The repository also includes a `.cdmrc` file, a critical configuration file for Fermion labs. Familiarize yourself with the [.cdmrc guide](/docs/creating-coding-labs/cdmrc-file) to understand how it works before proceeding.
@@ -60,87 +60,67 @@ Evaluation script is actually what runs when the user on the playground clicks o
 ![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/17-11-2024/lab-run-tests.exllxt.png)
 ![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/17-11-2024/screenshot-000001%402x.ywpfjc.png)
 
-Since we have already written a pure evaluation script that runs and finally writes the JSON result to the `UNIT_TEST_OUTPUT_FILE` environment, all we have to do is trigger that script via Node.js.
-
-The full path of the script is made available at run-time with another environment variable called `TEST_FILE_NAME`. Therefore, all we have to do is write the following in the evaluation script area:
+Since we're going to test this lab using Vitest, we'll setup the Vitest testing environment. This is what your evaluation script would look like:
 
 ```sh
 #!/bin/bash
 set -e 1
 
-# create a folder for test
+# Install vitest and testing util
+cd /home/damner/code
+bun add vitest@0.32.2 jsdom@22.1.0 @testing-library/jest-dom@5.16.5 --dev
 mkdir -p /home/damner/code/.labtests
 
-# move to the folder
-cd /home/damner/code/.labtests
+# Move test file
+mv $TEST_FILE_NAME /home/damner/code/.labtests/nodecheck.test.js
 
-# move test file here
-mv $TEST_FILE_NAME nodecheck.spec.js
+# setup file
+cat > /home/damner/code/.labtests/setup.js << EOF
+import '@testing-library/jest-dom'
+EOF
 
-# mark this as module
-cat > package.json << EOF
+# vitest config file
+cat > /home/damner/code/.labtests/config.js << EOF
+import { defineConfig } from 'vite'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+	plugins: [],
+    test: {
+        globals: true,
+		environment: 'jsdom',
+		setupFiles: '/home/damner/code/.labtests/setup.js',
+    }
+})
+EOF
+
+# process.js file
+cat > /home/damner/code/.labtests/process.js << EOF
+import fs from 'node:fs'
+const payload = JSON.parse(fs.readFileSync('./payload.json', 'utf8'))
+const answers = payload.testResults[0].assertionResults.map(test => test.status === 'passed')
+
+fs.writeFileSync(process.env.UNIT_TEST_OUTPUT_FILE, JSON.stringify(answers))
+EOF
+
+# package.json
+cat > /home/damner/code/.labtests/package.json << EOF
 {
     "type": "module"
 }
 EOF
 
-# write playwright config file
-cat > playwright.config.ts << EOF
-import { defineConfig, devices } from '@playwright/test'
-import puppeteer from 'puppeteer'
+# run test
+(bun vitest run --config=/home/damner/code/.labtests/config.js --threads=false --reporter=json --outputFile=/home/damner/code/.labtests/payload.json || true)  | tee /home/damner/code/.labtests/evaluationscript.log
 
-export default defineConfig({
-	timeout: 10_000,
-	maxFailures: 0,
-	testDir: '.',
-	fullyParallel: false,
-	forbidOnly: true,
-	retries: 0,
-	workers: 1,
-
-	// Reporter to use
-	reporter: [['list'], ['json', { outputFile: './report.json' }]],
-
-	use: {
-		baseURL: 'http://localhost:1337/',
-		trace: 'off',
-		launchOptions: {
-			headless: true,
-			executablePath: puppeteer.executablePath(),
-			chromiumSandbox: false
-		}
-	},
-
-	projects: [
-		{
-			name: 'chromium',
-			use: { ...devices['Desktop Chrome'] }
-		}
-	]
-})
-EOF
-
-# `puppeteer` is installed via NPM in playgrounds. Use preinstalled dependency
-npm link puppeteer
-bun install @playwright/test@1.40.1 playwright@1.40.1
-
-bunx playwright test || true
-
-# process results file
-cat > process-results.js << EOF
-import fs from 'fs'
-const payload = JSON.parse(fs.readFileSync('./report.json', 'utf-8'))
-const answers = payload.suites[0].suites[0].specs.map(spec => spec.ok === true && spec.tests.every(t => t.status === 'expected'))
-fs.writeFileSync(process.env.UNIT_TEST_OUTPUT_FILE, JSON.stringify(answers))
-EOF
-
-node process-results.js
-
+# Write results to UNIT_TEST_OUTPUT_FILE to communicate to frontend
+cd /home/damner/code/.labtests
+node process.js
 ```
 
 This will make sure we run the full Node.js script and write the results properly for the playground IDE to read. It would look like the following:
 
-{/* ![](/images/html-css/lab-test-command.png) */}
+{/* ![](/images/node/lab-test-command.png) */}
 
 **Note:** You can setup a full testing environment in this block of evaluation script (installing more packages, etc. if you want). However, your test file will be timed out **after 60 seconds**. Therefore, make sure, all of your testing can happen within 60 seconds.
 
@@ -156,21 +136,23 @@ You can write anything here. Whatever script you write here, can be executed fro
 
 The point of having a file like this to provide you with a place where you can write your evaluation script.
 
-**For HTML/CSS labs, you can use the default test file for playwright:**
+**For Node.js labs tested with Vitest, you can use the default test file:**
 
 ```js
-import { expect, test } from '@playwright/test'
+describe('Test runner suite', () => {
+	test('Variable should be exported', async () => {
+		const userVariable = await import('/home/damner/code/index.js').then(
+			(t) => t.default
+		)
 
-test.describe.serial('Test', () => {
-	test.beforeEach(async ({ page }, testInfo) => {
-		console.log(`Running ${testInfo.title}`)
-		await page.goto('/')
+		expect(typeof userVariable === 'undefined').to.be.false
 	})
 
-	test('Stylesheet is linked', async ({ page }) => {
-		const linkElement = page.locator('link[rel="stylesheet"]')
-		expect(linkElement).toBeDefined()
-		expect(await linkElement.getAttribute('href')).toEqual('style.css')
+	test('Variable should have correct value', async () => {
+		const userVariable = await import('/home/damner/code/index.js').then(
+			(t) => t.default
+		)
+		expect(userVariable === 'Hello World').to.be.true
 	})
 })
 ```

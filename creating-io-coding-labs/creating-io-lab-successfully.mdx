@@ -1,0 +1,37 @@
+---
+title: 'Creating an IO lab successfully on Fermion'
+description: 'Learn about best practices for creating a functional IO lab on Fermion'
+---
+
+Creating an I/O lab on Fermion requires you to follow several best practices to ensure your lab functions correctly and provides a good learning experience.
+
+## Understanding I/O Lab Philosophy
+
+Fermion labs are built on the philosophy of having an input and an expected output. In many cases, the expected output can have multiple spaces, line breaks, and other formatting elements. Therefore, it is crucial that you select the right matcher for your specific use case.
+
+## Available Matchers
+
+There are multiple matchers available in Fermion I/O lab setup that allow you to configure how the expected output of the program is matched with the real output that the user generates:
+
+-   **Exact Match**: Use this when you need the output to match exactly, including all spaces, tabs, and line breaks
+-   **Other matchers**: Available for different matching requirements
+
+For example, if you want an exact match, you must use the exact output matcher.
+
+## Test Case Configuration
+
+When creating an I/O lab, you can specify some test cases as **sample test cases**. If you mark a test case as a sample test case, it becomes visible to the end user, allowing them to understand the expected input-output format before attempting the lab.
+
+## Troubleshooting: Code Output vs Test Case Failure
+
+### Common Issue: Right Output, Failing Test Case
+
+If your code produces the correct output but your test case is still failing, please double-check the following:
+
+1. **Spacing Issues**: Ensure there are no extra or missing spaces in your expected output
+2. **New Line Issues**: Verify that line breaks match exactly between expected and actual output
+3. **Character Issues**: Check for any hidden characters, tabs, or different character encodings
+
+### Matcher Type Considerations
+
+If you're using an **exact match** matcher, your lab will fail even if there's a single new line, tab, or different character difference. Make sure your expected output matches the actual output character-for-character.

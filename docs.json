@@ -95,6 +95,7 @@
 							"creating-coding-labs/cdmrc-file",
 							"creating-coding-labs/embedding-lab",
 							"creating-coding-labs/technologies/html-css",
+							"creating-coding-labs/technologies/node",
 							"creating-coding-labs/technologies/react",
 							"creating-coding-labs/technologies/rust",
 							"creating-coding-labs/technologies/java",
@@ -106,6 +107,7 @@
 						"group": "IO coding labs",
 						"pages": [
 							"creating-io-coding-labs/introduction",
+							"creating-io-coding-labs/creating-io-lab-successfully",
 							"creating-io-coding-labs/sql-lab",
 							"creating-io-coding-labs/embed-lab",
 							"creating-io-coding-labs/api-usage"
