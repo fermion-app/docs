@@ -9,7 +9,12 @@
 	},
 	"favicon": "/favicon.png",
 	"contextual": {
-		"options": ["copy", "view", "chatgpt", "claude"]
+		"options": [
+			"copy",
+			"view",
+			"chatgpt",
+			"claude"
+		]
 	},
 	"navigation": {
 		"tabs": [
@@ -45,14 +50,18 @@
 							"setup-pricing/common-faqs"
 						]
 					},
-
 					{
 						"group": "Ebooks",
-						"pages": ["ebooks/introduction", "ebooks/embed-ebook"]
+						"pages": [
+							"ebooks/introduction",
+							"ebooks/embed-ebook"
+						]
 					},
 					{
 						"group": "Community",
-						"pages": ["community/what-are-communities"]
+						"pages": [
+							"community/what-are-communities"
+						]
 					},
 					{
 						"group": "Custom pages",
@@ -72,7 +81,6 @@
 							"marketing-tools/email-automation"
 						]
 					},
-
 					{
 						"group": "Manage Settings",
 						"pages": [
@@ -165,6 +173,17 @@
 				"tab": "Fermion SDK",
 				"icon": "code",
 				"href": "https://github.com/fermion-app/sdk"
+			},
+			{
+				"tab": "Changelog",
+				"groups": [
+					{
+						"group": "Changelog",
+						"pages": [
+							"changelog"
+						]
+					}
+				]
 			}
 		]
 	},
