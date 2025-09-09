@@ -4,81 +4,245 @@ description: "New updates and improvements"
 ---
 
 <Update label="September 2025" description="Highlights">
-  - Added video watermarking setup instructions
-  - Added docs for SCORM packages
+  ## Email & Analytics
+  - Added email tracking dashboard UI
+
+  ## Livestreaming
+  - New configuration to hide the seekbar in livestreams
+  - Stability fixes for the seek control
+
+  ## Checkout & Payments
+  - Checkout page now uses SSG and preserves email/name/password when coupons change
+
+  ## Video watermarking
+  - Added customization options for watermarking
+
+  ## Courses & Syllabus
+  - Bulk import syllabus CSV improvements and ability to import from CSV
+  - Removed deprecated resolvers
+  - Fixed permissions for all course access actions, including deletion
+
+  ## User management
+  - Added support for all digital products in platform summary
+  - Enroll/Unenroll products directly from the user activity page
 </Update>
 
 <Update label="August 2025" description="Improvements">
-  - Added Node.js usage docs
-  - Added custom CSS styling guide
-  - Added coupon codes setup docs
-  - Added affiliate marketing API docs
-  - Updated course landing page docs
-  - Added troubleshooting guide for video playback
+  ## AI & Insights
+  - Livestream stats are now AI-powered and system prompts updated
+  - Post‑livestream feedback flow added
+
+  ## Platform UI/UX
+  - Revamped instructor dashboard and reworked All Users page
+  - Multiple UI improvements across platform and course landing pages
+  - Better pricing display, custom CSS selectors support
+  - Video player control updates and HLS buffer sizing fixes
+  - Iframe embed UI improvements and general platform UI refresh
+
+  ## Livestreaming
+  - Hosts can view private chats
+  - Permission model fixes and landing page updates
+
+  ## Content & Blogging
+  - Public tags support, optional quiz import fields
+  - Allow '/' in blog slugs, whitelist overrides for blog
+
+  ## Infra & Embeds
+  - Whitelisted /api routes on password‑protected sites
+
+  ## Misc
+  - Ability to redirect course pages.
 </Update>
 
 <Update label="July 2025" description="Platform updates">
-  - Updated IO labs language support
-  - Added MySQL 8 notes
-  - Layout and docs refinements
-  - Switched paths to `api-guide/*`
-  - Updated user API usage docs
-  - Video embedding: added origin whitelisting information
-  - Livestreaming embed: documented event support
-  - Added API usage for DSA coding labs
-  - Added docs for buy-digital-product endpoint
+  ## Features
+  - MySQL 8 support for IO labs, ability to clone live events across courses
+  - Course announcements, UTM marketing reporting page
+  - Regenerate certificates, improved quiz builder and reworked quiz UI
+  - Admin controls for ebooks, item bundles, support subsections in course syllabus
+  - Video proctoring, tags on coding labs, async contest attempt reports
+
+  ## Livestreaming
+  - Reworked livestream analytics and added livestream ended events (WebRTC & SDK)
+  - Live Streams now support upto 50 people on stage
+
+  - Origin whitelisting for public videos, multiple AV stability and UI fixes
+
+  ## Analytics & Billing
+  - New analytics for courses and overall support tab in analytics
+  - Revamped AI usage tracking, post‑live user feedback
+
+  ## Admin & UX
+  - Import users with passwords, added better UI for importing users
+  - Reorder instructors, improved tabbed product modal
+  - Ability to edit other user profiles
+  - Search students on manage students
 </Update>
 
-<Update label="June 2025" description="Docs">
-  - Updated embed-video page
+<Update label="June 2025" description="Enhancements">
+  ## Video & Live
+  - Updated to latest video SDK and improved AV stability
+  - Manifestless livestreaming fixes and configurable live sync duration
+  - Added a Download button on video embed page, object storage UI improvements
+
+  ## AI & Email
+  - Better AI builder UI inside DSA labs, stored detailed AI usage
+  - Email campaign builder and editor performance fixes
+
+  ## Permissions & UX
+  - Added New permission presets
+  - Checkbox and constraint UX improvements on videos
+  - Billing page UI updates and small UI refinements across the app
 </Update>
 
-<Update label="May 2025" description="Mintlify & embeds">
-  - Integrated Mintlify for docs
-  - Updated video embedding documentation
-  - Clarified manual video embedding flow
-  - General documentation fixes
+<Update label="May 2025" description="Platform improvements">
+  ## Object storage
+  - Upload any file to Fermion Object Store
+  - Bugfixes for object storage uploads and health‑check cron
+
+  ## Payments & policies
+  - Registration with phone number
+  - Custom Razorpay support and key exposure from backend
+  - Terms of Service and Privacy Policy support
+  - Ability to archive products
+
+  ## IAM & security
+  - IAM UI updates and policy editor improvements
+  - Bugfixes to IAM policy structure
+
+  ## Courses & assignments
+  - Submit assignment flow, including Python indentation support
+  - Toggle discussions per course item, toggle items in recorded courses
+
+  ## Video & DRM
+  - Enable DRM controls on embed page
+  - Playback without user token for DRM
+  - Support events on HLS playback, mic indicator fixes, routing and UI fixes
+
+  ## Live & support
+  - You can now invite external hosts to live events
+
+  ## Marketing & misc
+  - Pricing page updates and SMS pricing
 </Update>
 
-<Update label="March 2025" description="Ebooks">
-  - Added docs to embed ebooks
+<Update label="April 2025" description="Major updates">
+  ## Course content & QnA
+  - QnA for video and article items, ability to download pre‑recorded videos
+  - Multipart uploads enabled
+
+  ## Live & streaming
+  - DRM live support via API, attendance for non‑Fermion live sessions
+  - Multiple livestreaming fixes and faster fallbacks
+
+  ## Reports & certificates
+  - Company‑wide reports
+  - Custom HTML certificates and CBC support, certificate upload fixes
+
+  ## AI & infra
+  - AI builder on coding lab page
+
+  ## Pricing & billing
+  - Pricing updates and refunds panel UI changes
+
+  ## SCORM
+  - SCORM support added
+
+  ## Misc
+  - Go Live button inside courses, matcher config for IO labs
+</Update>
+
+<Update label="March 2025" description="Features & fixes">
+  ## Billing & refunds
+  - Refunds UI added
+
+  ## Reviews & instructor tools
+  - Show course reviews to instructors
+  - Added instructor billing pages
+  - Lock bundles based on course order
+
+  ## Live & analytics
+  - Moved live viewer analytics to separate tables, improved live stats with HLS participants
+  - Private live chat & better contest reports
+
+  ## Courses & content
+  - In‑video quiz, product ratings, free previews for coding labs and videos
+  - Contest students page and exports, navigation updates, dashboard contests
+
+  ## Community & UI
+  - Numerous UI/UX fixes and preset buttons
+
+  ## Emails & marketing
+  - Clone and test email marketing campaigns
+
+  ## Embeds
+  - Support embedding ebooks
 </Update>
 
 <Update label="February 2025" description="Media & labs">
-  - Added support docs for bulk importing videos
-  - Added docs for embedding IO labs
-  - Added docs for embedding external videos
+  - Added support for bulk importing videos
+  - Added support for embedding IO labs and external videos
 </Update>
 
-<Update label="January 2025" description="Livestreaming">
-  - Added default options for live embed
-  - Added more parameters for live embed
-  - Added docs for embedding coding labs
-  - Updated livestreaming API docs and Live v2
-  - Typo and minor fixes
+<Update label="January 2025" description="Livestreaming & certificates">
+  ## Live v2 & DRM
+  - All Live sessions now run on Live v2
+  - You can now enable DRM on live sessions & download live sessions
+  - Better stability: reconnect, disable low resolutions, encoding tweaks, bitrate controls
+  - Public APIs to start/end streams, faster recorded‑video playback
+
+  ## Certificates
+  - Certificate generator fixes and support for certificates across platform
+
+  ## Analytics & API
+  - IO analytics, analytics dashboards and invoice exposure
+
+  ## Contests & community
+  - Live event invites, contest reporting and attempts, public channels view
 </Update>
 
-<Update label="December 2024" description="New labs & imports">
-  - Added basic Java lab docs
-  - Added `itemScheduledDate` support to bulk import
-  - Added docs for bulk importing syllabus
-  - Added video tutorial for HTML/CSS
-  - Added docs for HTML/CSS
-  - Added Rust lab docs and Rust support
-</Update>
+<Update label="November 2024" description="Product updates">
+  ## Streamline your URL management with custom redirects
 
-<Update label="November 2024" description="Foundational updates">
-  - Added course item attachment docs
-  - Updated affiliate documentation and custom landing pages
-  - Added support for Python and React.js labs
-  - Initial affiliate documentation and general updates
-  - Maintenance fixes and rebuilds
-</Update>
+  `Custom redirects` give you complete control over URL redirections within your platform so you can easily maintain and manage URL structures.
 
-<Update label="October 2024" description="Initial migration">
-  - Migrated existing course docs
-  - Added clean URLs and search support
-  - Fixed page headings and highlight/next-page issues
-  - Updated social links and lockfile
-  - Initial project setup
+  You can:
+
+  - Create exact path matches for precise URL control or create wildcard matches.
+  - Set up static pathname or URL redirects
+  - Manage multiple redirects from a central dashboard
+  - Instant publishing and unpublishing capabilities
+
+  Custom redirects are particularly useful for updating URLs while maintaining existing links, creating shorter paths to specific pages, and managing seasonal or temporary redirects, all while ensuring seamless navigation after content restructuring.
+
+  You can read more about setting up custom redirects in our documentation: [Custom redirects](/custom-landing-pages/custom-redirects).
+
+  ---
+
+  ## Add free previews to your course
+
+  Your online courses can now support free previews on specific course items for your students. `Free preview` means that users will be able to access the item without purchasing or logging into the platform.
+
+  You can enable or disable free previews for `articles` inside your course items. Learn more about enabling free previews in the documentation.
+
+  ---
+
+  ## Gamify the learning experience for your students
+
+  You can now manage and customize how gamification should work on your platform. Head over to `Gamification` tab from your Fermion dashboard, where you can control various toolings including:
+
+  - Enabling custom XP rewards on various actions (completing a coding lab, watching a video, finishing a quiz, etc).
+  - Adding negative XP to discourage users from performing certain actions, for example: downloading solutions inside a coding lab.
+  - Enabling custom XP rewards for students, as a part of “daily attendance” on the platform as well as live classes.
+  - Configuring XP rewards for `platform streaks`.
+
+  To set up gamification controls for your school, read [our documentation].
+
+  ---
+
+  ## Introducing affiliate marketing tooling for your online school
+
+  Fermion allows you to configure a powerful affiliate marketing system for your online academy, with its built-in affiliate marketing tooling. You can enable affiliate program for your students, create custom affiliate links, monitor your affiliates, and optimize in real-time.
+
+  All affiliate payouts are handled by Fermion making it easier for you to focus and scale your teaching business. These features are available to instructors on all plans. Check out [our documentation](http://docs.fermion.app/docs/marketing-tools/affiliate) to learn more.
 </Update>
