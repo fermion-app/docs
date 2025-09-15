@@ -31,6 +31,21 @@ This example changes the background color of the completed lessons' checkbox to 
 
 Below, we present a list of available values for the `data-custom-css-class` attribute that target specific locations on the Fermion platform.
 
+### Course Item Views
+
+-   `[data-custom-css-class="course-item-video"]` - Targets video lessons
+-   `[data-custom-css-class="course-item-quiz"]` - Targets quiz items
+-   `[data-custom-css-class="course-item-article"]` - Targets article/read-only items
+-   `[data-custom-css-class="course-item-ebook"]` - Targets embedded eBooks
+-   `[data-custom-css-class="course-item-contest"]` - Targets contest/problem items
+-   `[data-custom-css-class="course-item-scorm"]` - Targets SCORM packages
+-   `[data-custom-css-class="course-item-assignment"]` - Targets assignment/homework items
+-   `[data-custom-css-class="course-item-iframe-embed"]` - Targets generic iframe embeds
+-   `[data-custom-css-class="course-item-coding-lab"]` - Targets coding lab items
+-   `[data-custom-css-class="course-item-live-event-fermion"]` - Targets Fermion live events
+-   `[data-custom-css-class="course-item-live-class-fermion"]` - Targets Fermion live classes
+-   `[data-custom-css-class="course-item-live-class-other"]` - Targets non-Fermion live classes
+
 ### Header Logo (Course Landing Page)
 
 -   `[data-custom-css-class="header-logo-course-landing-page-desktop"]`
@@ -45,10 +60,15 @@ Below, we present a list of available values for the `data-custom-css-class` att
 
 ![](https://codedamn-blog.s3.amazonaws.com/wp-content/uploads/2024/08/06133120/header-1024x678.png)
 
+### Header Logo (Product Landing Page)
+
+-   `[data-custom-css-class="header-logo-product-landing-page-desktop"]`
+-   `[data-custom-css-class="header-logo-product-landing-page-mobile"]`
+
 ### Learning Page
 
--   `[data-custom-css-class="course-item-mark-as-not-done-checkbox"]` - refers to completed checkbox
--   `[data-custom-css-class="course-item-mark-as-done-checkbox"]` - refers to incomplete checkbox
+-   `[data-custom-css-class="course-item-mark-as-done-checkbox"]` - Targets the control to mark an item as complete
+-   `[data-custom-css-class="course-item-mark-as-not-done-checkbox"]` - Targets the control to mark an item as incomplete
 
 ![](https://codedamn-blog.s3.amazonaws.com/wp-content/uploads/2024/08/06134213/Screenshot-2024-08-06-at-1.40.21%E2%80%AFPM-1024x792.png)
 
@@ -63,11 +83,45 @@ Below, we present a list of available values for the `data-custom-css-class` att
 
 -   `[data-custom-css-class="course-item-main-area"]` - This selector is the topmost parent class of the area where the user sees course item content.
 
+### Course Item Layout/Wrappers
+
+-   `[data-custom-css-class="course-item-main-area"]` - Outer wrapper for the current course item content
+
+### Course Landing Page Sections
+
+-   `[data-custom-css-class="instructor-section-top"]` - Top instructor information block
+-   `[data-custom-css-class="instructor-section-bottom"]` - Bottom instructor information block
+-   `[data-custom-css-class="course-hero-section"]` - Hero/header section of the course page
+-   `[data-custom-css-class="course-content-sections"]` - Main content/what-you'll-learn sections
+-   `[data-custom-css-class="course-reviews-grid"]` - Reviews/testimonials grid container
+-   `[data-custom-css-class="course-faqs-container"]` - FAQs accordion/container
+
+### Dynamic State and Type Marker
+
+Pattern: `course-item--state-${complete|incomplete}--type-${lowercase(item.type)}-v2`
+
+-   Use exact values to target specific combinations, for example:
+
+```css
+[data-custom-css-class='course-item--state-complete--type-video-v2'] {
+	/* Your custom CSS for completed video items */
+}
+
+[data-custom-css-class='course-item--state-incomplete--type-quiz-v2'] {
+	/* Your custom CSS for incomplete quiz items */
+}
+```
+
 ### Authentication Pages
 
 -   `[data-custom-css-class="login-page"]` - Targets the login page at `/login`. Use this to customize background, fonts, and overall styling of the login page.
+-   `[data-custom-css-class="logout-page"]` - Targets the logout page at `/logout`. Use this to customize page-level visuals while logging out.
 -   `[data-custom-css-class="register-page"]` - Targets the registration page at `/register`. Use this to customize background, fonts, and overall styling of the registration page.
 -   `[data-custom-css-class="password-reset-page"]` - Targets the password reset page at `/password-reset`. Use this to customize background, fonts, and overall styling of the password reset page.
+
+### Forms
+
+-   `[data-custom-css-class="fermion-form"]` - Targets generic Fermion forms wrapper
 
 ### Complete Example Configuration
 
