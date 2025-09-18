@@ -3,7 +3,57 @@ title: "Product Updates"
 description: "New updates and improvements"
 ---
 
-<Update label="September 2025" description="Highlights">
+<Update label="September 2025">
+## Public API — 18 September 2025
+  - Creates a login link for a user to log in directly to your Fermion‑managed LMS. Useful when you have your own system and want seamless SSO‑like access.
+
+  ### Endpoint
+  - Method: POST
+  - URL: https://backend.codedamn.com/api/public/get-login-link-for-user
+  - Authentication: `FERMION-API-KEY` header is required
+  - Rate limit: Maximum 60 requests in a 1m window
+
+  ### Why this is useful
+  - Seamless hand‑off from your existing app/portal: generate a link server‑side and redirect users into the LMS without an extra login step.
+  - Passwordless onboarding: include the link in welcome emails/SMS to let invited users jump straight into their course.
+  - Post‑purchase experience: after checkout on your site, deep‑link users directly into the relevant product area in the LMS.
+  - Legacy migrations: move users from another system and let them access content before setting/resetting a Fermion password.
+  - Mobile apps: open the link from your mobile client to bootstrap a signed‑in web session.
+
+  ### Response
+  ```json
+  [
+    {
+      "output": {
+        "status": "ok",
+        "data": {
+          "loginUrl": "<string>"
+        }
+      }
+    }
+  ]
+  ```
+
+  ### cURL example
+  ```bash
+  curl --request POST \
+    --url https://backend.codedamn.com/api/public/get-login-link-for-user \
+    --header 'Content-Type: application/json' \
+    --header 'FERMION-API-KEY: <api-key>' \
+    --data '{
+    "data": [
+      {
+        "data": {
+          "userIdentifier": {
+            "type": "email",
+            "email": "jsmith@example.com"
+          },
+          "sessionValidity": "90d"
+        }
+      }
+    ]
+  }'
+  ```
   ## Email & Analytics
   - Added an email logs dashboard so instructors can access all emails sent out from their school
 
