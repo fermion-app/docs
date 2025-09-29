@@ -51,6 +51,12 @@
 						]
 					},
 					{
+						"group": "Forms",
+						"pages": [
+							"forms/introduction"
+						]
+					},
+					{
 						"group": "Ebooks",
 						"pages": [
 							"ebooks/introduction",
