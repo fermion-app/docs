@@ -7,7 +7,7 @@
 		"light": "#38BDF8",
 		"dark": "#0284C7"
 	},
-	"favicon": "/favicon.png",
+	"favicon": "/favicon.webp",
 	"contextual": {
 		"options": [
 			"copy",
