@@ -137,7 +137,11 @@
 						"group": "Live classes",
 						"pages": [
 							"live-classes/what-are-live-classes",
+							"live-classes/recording-and-captions",
 							"live-classes/setup-live-class",
+							"live-classes/invite-to-stage",
+							"live-classes/pin-a-tile",
+							"live-classes/live-chat",
 							"live-classes/embed-live-session",
 							"live-classes/common-faqs"
 						]
@@ -151,6 +155,7 @@
 						"group": "Recorded videos",
 						"pages": [
 							"recorded-videos/introduction",
+							"recorded-videos/captions",
 							"recorded-videos/embed-video",
 							"recorded-videos/troubleshooting-playback"
 						]
