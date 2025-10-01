@@ -29,90 +29,95 @@ Use the following HTML template as a starting point. The system will replace var
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Certificate of Completion</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #f2f2f2;
-        }
-
-        .certificate-container {
-            width: 800px;
-            height: 600px;
-            padding: 40px;
-            border: 10px solid #796aee;
-            background-color: #ffffff;
-            margin: 50px auto;
-            text-align: center;
-            position: relative;
-        }
-
-        .certificate-title {
-            font-size: 48px;
-            font-weight: bold;
-            color: #333333;
-            margin-bottom: 0;
-        }
-
-        .certificate-subtitle {
-            font-size: 20px;
-            color: #555555;
-            margin-top: 10px;
-        }
-
-        .certificate-recipient {
-            font-size: 32px;
-            font-weight: bold;
-            color: #000000;
-            margin: 30px 0;
-        }
-
-        .certificate-course {
-            font-size: 22px;
-            color: #333333;
-            margin: 20px 0;
-        }
-
-        .certificate-date {
-            font-size: 18px;
-            color: #555555;
-            margin-top: 30px;
-        }
-
-        .signature {
-            width: 200px;
-            border-top: 2px solid #333333;
-            margin: 50px auto 0;
-        }
-
-        .signature-text {
-            font-size: 16px;
-            color: #333333;
-            margin-top: 5px;
-        }
-
-        .certificate-footer {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            font-size: 14px;
-            color: #555555;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certificate of Completion</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f7f7f7;
+      font-family: 'Arial', sans-serif;
+    }
+    .certificate-container {
+      width: 800px;
+      margin: 50px auto;
+      padding: 40px;
+      background: #fff;
+      border: 8px solid #e0e0e0;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .header {
+      margin-bottom: 30px;
+    }
+    .title {
+      font-size: 2.8em;
+      color: #333;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .icon {
+      font-size: 2.5em;
+      margin: 0 15px;
+      vertical-align: middle;
+    }
+    .subtitle {
+      font-size: 1.1em;
+      color: #666;
+      margin-top: 20px;
+    }
+    .username {
+      font-size: 2em;
+      color: #222;
+      margin: 10px 0;
+    }
+    .text {
+      font-size: 1.1em;
+      color: #555;
+      margin: 20px 0;
+    }
+    .coursename {
+      font-size: 1.8em;
+      color: #333;
+      margin: 10px 0 30px 0;
+    }
+    .date {
+      font-size: 0.9em;
+      color: #777;
+      margin-bottom: 40px;
+    }
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9em;
+      color: #555;
+    }
+    .success {
+      font-size: 1em;
+      color: #2a7f62;
+    }
+    .success .icon {
+      font-size: 1.2em;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+  </style>
 </head>
 <body>
-    <div class="certificate-container">
-        <h1 class="certificate-title">Certificate of Completion</h1>
-        <p class="certificate-subtitle">This is to certify that</p>
-        <p class="certificate-recipient">{{userFullName}}</p>
-        <p class="certificate-subtitle">has successfully completed</p>
-        <p class="certificate-course">{{forCompletingWhatEntityName}}</p>
-        <p class="certificate-date">Awarded on {{issuedAtFormattedDate}}</p>
-        <p class="certificate-footer">Certificate ID: {{certificateId}}</p>
+  <div class="certificate-container">
+    <div class="header">
+      <span class="icon">🎖️</span>
+      <span class="title">Certificate of Completion</span>
+      <span class="icon">🎖️</span>
     </div>
+    <p class="subtitle">This is to certify that</p>
+    <h1 class="username">{{userFullName}}</h1>
+    <p class="text">has successfully completed</p>
+    <h2 class="coursename">{{forCompletingWhatEntityName}}</h2>
+    <p class="date">Issued on {{issuedAtFormattedDate}}</p>
+  </div>
 </body>
 </html>
 ```
@@ -126,6 +131,6 @@ Use the following HTML template as a starting point. The system will replace var
 
 <Warning>
 
-    ⚠️ Keep your template mobile-friendly. Use web-safe fonts and avoid remote CSS for reliable rendering.
+     Keep your template mobile-friendly. Use web-safe fonts and avoid remote CSS for reliable rendering.
 
 </Warning>
