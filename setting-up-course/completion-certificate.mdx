@@ -1,0 +1,72 @@
+---
+title: "Completion certificates"
+description: "Enable and customize course completion certificates"
+---
+
+Completion certificates provide a professional way to acknowledge and celebrate learner achievements in your courses. These digital certificates serve as formal recognition of course completion and can significantly boost learner motivation and engagement.
+
+When learners complete your courses, they receive a personalized certificate that includes their name, course title, completion date, and a unique certificate ID for verification purposes. These certificates can be downloaded as PDF files, shared on social media platforms like LinkedIn, or printed for physical display.
+
+You can enable certificates for:
+
+- Recorded courses: issue when a student reaches a completion threshold (for example 100% or 80%).
+- Cohort-based courses: issue after a specific date/time (for example cohort end date) regardless of per‑item completion tracking.
+- Live sessions: issue after the live session ends.
+
+## Enable certificates
+
+1. Open any course and go to Settings > Completion certificate.
+2. Toggle Enable certificate for this course.
+3. You can upload a custom HTML template or generate one using AI.
+4. Save changes.
+![enable certificates](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/01-10-2025/Arc_JOjEA9jkN0.citzyh.png)
+
+## Certificate template (HTML)
+
+Use the following HTML template as a starting point. The system will replace variables in double curly braces at issuance time.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Certificate of Completion</title>
+    <style>
+        body { margin: 0; padding: 0; font-family: 'Arial', sans-serif; background-color: #f2f2f2; }
+        .certificate-container { width: 800px; height: 600px; padding: 40px; border: 10px solid #796aee; background-color: #ffffff; margin: 50px auto; text-align: center; position: relative; }
+        .certificate-title { font-size: 48px; font-weight: bold; color: #333333; margin-bottom: 0; }
+        .certificate-subtitle { font-size: 20px; color: #555555; margin-top: 10px; }
+        .certificate-recipient { font-size: 32px; font-weight: bold; color: #000000; margin: 30px 0; }
+        .certificate-course { font-size: 22px; color: #333333; margin: 20px 0; }
+        .certificate-date { font-size: 18px; color: #555555; margin-top: 30px; }
+        .signature { width: 200px; border-top: 2px solid #333333; margin: 50px auto 0; }
+        .signature-text { font-size: 16px; color: #333333; margin-top: 5px; }
+        .certificate-footer { position: absolute; bottom: 20px; width: 100%; font-size: 14px; color: #555555; }
+    </style>
+</head>
+<body>
+    <div class="certificate-container">
+        <h1 class="certificate-title">Certificate of Completion</h1>
+        <p class="certificate-subtitle">This is to certify that</p>
+        <p class="certificate-recipient">{{userFullName}}</p>
+        <p class="certificate-subtitle">has successfully completed</p>
+        <p class="certificate-course">{{forCompletingWhatEntityName}}</p>
+        <p class="certificate-date">Awarded on {{issuedAtFormattedDate}}</p>
+        <p class="certificate-footer">Certificate ID: {{certificateId}}</p>
+    </div>
+</body>
+</html>
+```
+
+### Supported variables
+
+- `{{forCompletingWhatEntityName}}` – course or product title
+- `{{userFullName}}` – certificate recipient name
+- `{{issuedAtFormattedDate}}` – issuance date (formatted)
+- `{{certificateId}}` – unique certificate ID (hash)
+
+<Warning>
+
+    ⚠️ Keep your template mobile-friendly. Use web-safe fonts and avoid remote CSS for reliable rendering.
+
+</Warning>
