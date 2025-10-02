@@ -97,7 +97,6 @@
 							"manage-settings/custom-css-styling",
 							"manage-settings/custom-links",
 							"manage-settings/help"
-							
 						]
 					},
 					{
@@ -149,6 +148,7 @@
 						"pages": [
 							"live-classes/what-are-live-classes",
 							"live-classes/recording-and-captions",
+							"live-classes/drm-and-watermarking",
 							"live-classes/setup-live-class",
 							"live-classes/invite-to-stage",
 							"live-classes/pin-a-tile",
