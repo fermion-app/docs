@@ -1,0 +1,38 @@
+---
+title: Anatomy of a Webhook Event
+description: Understand the structure of webhook events sent by Fermion.
+---
+
+Every webhook request sent by Fermion follows a **standard structure** to ensure consistency across all event types.  
+This standardized format makes it easier for your server to reliably parse incoming events and handle them in a predictable manner.
+
+By understanding the anatomy of a webhook event, you can:  
+- Log events for auditing purposes  
+- Avoid processing duplicates  
+- Correctly interpret the data for your workflows  
+
+Each webhook request contains the following core fields:
+
+1. **`eventUniqueId`**  
+   A globally unique identifier for the webhook event.  
+   This ID helps you **track and log events reliably** and ensures that you do not process the same event multiple times, even if it is retried.
+
+2. **`timestampIsoString`**  
+   The timestamp when the event occurred, formatted in **ISO 8601**.  
+   You can use this to **sort events chronologically**, monitor delays between occurrence and delivery, or detect potential latency issues in your processing system.
+
+3. **`isTestEvent`**  
+   A boolean value indicating whether the event is a **test event** triggered manually from the Fermion dashboard.  
+   Test events are useful for **verifying your webhook endpoint** and making sure your server correctly handles the event payload before going live.
+
+4. **`payload`**  
+   Contains the actual event-specific data. The structure of this payload depends on the type of event you subscribed to.  
+   Each event has its own fields, such as user information, course details, lab results, or video URLs. By processing the payload correctly, you can automate workflows and integrate with other systems seamlessly.
+   
+   
+More information on payload for each event is provided in the next sections.
+
+<Tip>
+Understanding this standard structure is the first step to building reliable integrations.  
+Always validate the webhook secret and log the `eventUniqueId` to avoid duplicates.
+</Tip>

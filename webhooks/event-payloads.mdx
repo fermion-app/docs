@@ -1,0 +1,286 @@
+---
+title: Supported Webhook Event Payloads
+description: Detailed breakdown of all webhook event payloads supported by Fermion.
+---
+
+
+Fermion webhook events include structured payloads to provide all necessary data for your integrations.  
+Each payload is tailored to the specific event type, making it easy to automate workflows and handle events reliably.
+
+Below is a detailed breakdown of each supported webhook event, including its trigger, TypeScript type, and description of the payload fields. 
+
+<Info>
+The Typscript type of a particular event can also be accessed when subscribing to the events
+</Info>
+
+---
+## 1. Lab Run Tests
+  
+**Event Trigger:** When a user clicks the "Run Tests" button in a lab.
+
+
+Use this webhook for automated grading, analytics, or tracking lab completion and success rates.
+
+
+<Accordion title="Payload Description">
+
+```tsx
+type FermionWebhookEventLabRunTestsType = {
+  eventUniqueId: string;
+  timestampIsoString: string;
+  isTestEvent: boolean;
+  payload: {
+    eventType: "lab-run-tests";
+  } & {
+    internalUserId: string;
+    apiUserId: string | null;
+    labId: string;
+    challengeResult: {
+      isLabAttempted: true;
+      result: {
+        challengeId: string;
+        isChallengePassed: boolean;
+        challengeLabel: string;
+      }[];
+    } | {
+      isLabAttempted: false;
+    };
+  };
+}
+```
+
+
+### Payload Data:
+
+- `internalUserId` – Fermion’s internal user ID.
+- `apiUserId` – Your API-facing user ID (if available).
+- `labId` – Unique identifier for the lab run.
+- `challengeResult` – Contains lab results:
+- If `isLabAttempted`: ```true```, result is an array of challenges with their IDs, pass status, and labels.
+- If `isLabAttempted`: ```false```, no challenges were attempted.
+
+</Accordion>
+
+---
+
+## 2. Live Event Session Caption Ready
+
+**Event Trigger:** When captions for a live event session are ready.
+
+
+Useful for automated workflows like sending captions to students, embedding or processing with third-party translation tools.
+
+<Accordion title="Payload Description">
+
+```tsx
+type FermionWebhookEventLiveEventSessionCaptionReadyType = {
+    eventUniqueId: string;
+    timestampIsoString: string;
+    isTestEvent: boolean;
+    payload: {
+        eventType: "live-event-session-caption-ready";
+    } & {
+        liveEventId: string;
+        liveEventSessionId: string;
+        captionEnglishDownloadUrl: string;
+    };
+}
+```
+
+**Payload Data:**
+
+- `liveEventId` – Unique ID of the live event.
+- `liveEventSessionId` – ID of the specific session.
+- `captionEnglishDownloadUrl` – URL to download the English captions.
+
+</Accordion>
+
+---
+
+## 3. Live Event Session Processed MP4 Ready
+
+**Event Trigger:** When a live event’s processed MP4 video is ready.
+
+
+This webhook is ideal for workflows that involve video publishing, post-production, or content delivery.
+
+<Accordion title="Payload Description">
+
+```tsx
+type FermionWebhookEventLiveEventSessionProcessedMp4ReadyType = {
+    eventUniqueId: string;
+    timestampIsoString: string;
+    isTestEvent: boolean;
+    payload: {
+        eventType: "live-event-session-processed-mp4-ready";
+    } & {
+        liveEventId: string;
+        liveEventSessionId: string;
+        downloadUrl1080p: string;
+    };
+}
+```
+
+**Payload Data:**
+
+- `liveEventId` – Unique ID of the live event.
+- `liveEventSessionId` – ID of the session.
+- `downloadUrl1080p` – URL to download the processed video in 1080p resolution.
+
+</Accordion >
+---
+## 4. Paid Digital Product Sale
+
+**Event Trigger:** When a user purchases a paid product.
+
+Use this event to sync sales data, trigger email confirmations, or update your accounting software.
+
+<Accordion title="Payload Description">
+
+```tsx
+type FermionWebhookEventPaidDigitalProductSaleType = {
+    eventUniqueId: string;
+    timestampIsoString: string;
+    isTestEvent: boolean;
+    payload: {
+        eventType: "paid-digital-product-sale";
+    } & {
+        userId: string;
+        userFullname: string;
+        userEmail: string | null;
+        userPhoneNumber: string | null;
+        paymentGateway: "Paypal" | "PhonePe" | "Razorpay" | "SelfRazorpay" | "Stripe" | "FermionUpi";
+        chargedAmountInrPaise: number;
+        productSlug: string;
+        productName: string;
+    };
+}
+```
+
+**Payload Data:**
+
+- `userId`, `userFullname`, `userEmail`, `userPhoneNumber` – User details.
+- `paymentGateway` – Gateway used (e.g. FermionUpi, Paypal, Stripe, Razorpay).
+- `chargedAmountInrPaise` – Amount charged in paise (1 INR = 100 paise).
+- `productSlug`, `productName` – Identifiers for the purchased product.
+
+</Accordion >
+
+
+
+---
+
+## 5. Payment Failed
+
+**Event Trigger:** When a payment attempt fails.
+
+
+This webhook helps automate failure handling, retry logic, and notifications to users.
+
+<Accordion title="Payload Description">
+
+```tsx
+type FermionWebhookEventPaymentFailedType = {
+    eventUniqueId: string;
+    timestampIsoString: string;
+    isTestEvent: boolean;
+    payload: {
+        eventType: "payment-failed";
+    } & {
+        userId: string | null;
+        userFullname: string;
+        userEmail: string;
+        userPhoneNumber: string | null;
+        paymentGateway: "Paypal" | "PhonePe" | "Razorpay" | "Stripe" | "FermionUpi" | "SelfRazorpay";
+        attempedChargeAmountInrPaise: number;
+        courseSlug: string;
+        courseName: string;
+    };
+}
+```
+
+**Payload Data:**
+
+- `userId`, `userFullname`, `userEmail`, `userPhoneNumber` – User details.
+- `paymentGateway` – Gateway used for the attempt.
+- `attempedChargeAmountInrPaise` – Amount attempted.
+- `courseSlug`, `courseName` – Course for which the payment failed.
+
+</Accordion >
+
+
+
+---
+
+## 6. Payment Initiated But Never Completed
+
+**Event Trigger:** When a payment is started but not completed within 60 minutes.
+
+
+This event is useful for abandoned cart notifications or automated reminders.
+
+<Accordion title="Payload Description">
+
+```tsx
+type FermionWebhookEventPaymentInitiatedButNeverCompletedType = {
+    eventUniqueId: string;
+    timestampIsoString: string;
+    isTestEvent: boolean;
+    payload: {
+        eventType: "payment-initiated-but-never-completed";
+    } & {
+        userId: string | null;
+        userFullname: string;
+        userEmail: string;
+        userPhoneNumber: string | null;
+        paymentGateway: ("Paypal" | "PhonePe" | "Razorpay" | "Stripe" | "FermionUpi") | null;
+        attempedChargeAmountInrPaise: number | null;
+        courseSlug: string;
+        courseName: string;
+    };
+}
+```
+
+**Payload Description:**
+
+- `userId`, `userFullname`, `userEmail`, `userPhoneNumber` – User details.
+- `paymentGateway` – Gateway used (nullable if unknown).
+- `attempedChargeAmountInrPaise` – Amount attempted (nullable if unknown).
+- `courseSlug`, `courseName` – Course attempted.
+
+</Accordion >
+
+
+
+---
+
+## 7. Recorded Video Ready for Playback
+
+**Event Trigger:** When a video uploaded to Fermion is ready for playback.
+
+
+This webhook allows automated publishing or notifications to students when video content is ready.
+
+<Accordion title="Payload Description">
+
+```tsx
+type FermionWebhookEventRecodedVideoReadyForPlaybackType = {
+    eventUniqueId: string;
+    timestampIsoString: string;
+    isTestEvent: boolean;
+    payload: {
+        eventType: "recoded-video-ready-for-playback";
+    } & {
+        videoId: string;
+    };
+}
+```
+
+**Payload Description:**
+
+- `videoId` – Unique ID of the video.
+
+</Accordion >
+
+
+

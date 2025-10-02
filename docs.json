@@ -81,6 +81,18 @@
 						]
 					},
 					{
+						"group": "Webhooks",
+						"pages": [
+							"webhooks/what-is-webhook",
+							"webhooks/getting-started",
+							"webhooks/supported-events",
+							"webhooks/anatomy",
+							"webhooks/event-payloads",
+							"webhooks/using-data"
+							
+						]
+					},
+					{
 						"group": "Marketing Tools",
 						"pages": [
 							"marketing-tools/affiliate-marketing",

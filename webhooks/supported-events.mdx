@@ -1,0 +1,26 @@
+---
+title: Supported Webhook Events
+description: Overview of all webhook events currently supported in Fermion.
+---
+
+Fermion currently supports a variety of webhook events that allow your external systems to stay in sync with activities on the platform.  
+Each event represents a specific action or change in your courses, labs, live events, or digital products, and is delivered in real-time to your configured webhook endpoint.
+
+By subscribing to the appropriate events, you can automate workflows, trigger notifications, and integrate seamlessly with third-party systems. For example, you could automatically update your CRM when a user enrolls, or trigger post-processing scripts when a live event video is ready.  
+
+| Event | Description |
+| --- | --- |
+| **Lab Run Tests** | Triggered when a user presses the "Run Tests" button inside a lab. |
+| **Live Event Session Caption Ready** | Triggered when captions are ready for a live event session. |
+| **Live Event Session Processed MP4 Ready** | Triggered when a processed MP4 is ready for a live event session. |
+| **Paid Product Sale** | Triggered when a user purchases a paid product. |
+| **Payment Failed** | Triggered when a user's payment fails for any reason. |
+| **Payment Initiated But Never Completed** | Triggered when a user initiates a purchase but does not complete it within 60 minutes. |
+| **Recorded Video Ready for Playback** | Triggered when a video uploaded to Fermion is ready for playback. |
+
+<Info>
+The details on how to subscribe to each event and use their payloads are explained in the following sections.    
+
+
+It’s recommended to start with only the events you need, then expand as your integrations grow.
+</Info>
