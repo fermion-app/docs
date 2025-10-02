@@ -22,11 +22,23 @@
 				"tab": "General documentation",
 				"groups": [
 					{
-						"group": "Getting Started",
+						"group": "Quick Overview",
 						"pages": [
 							"getting-started/what-is-fermion",
 							"getting-started/fermion-vs-other-platforms",
 							"getting-started/what-can-you-do-on-fermion"
+							
+						]
+					},
+					{
+						"group": "Getting Started",
+						"pages": [
+							"onboarding/account-setup",
+							"onboarding/platform-resources",
+							"onboarding/support-strategy",
+							"onboarding/turnaround-time",
+							"onboarding/troubleshooting",
+							"onboarding/common-faqs"
 						]
 					},
 					{
@@ -109,17 +121,8 @@
 							"manage-settings/custom-css-styling",
 							"manage-settings/custom-links"
 						]
-					},
-					{
-						"group": "Onboarding and Support",
-						"pages": [
-							"onboarding/platform-resources",
-							"onboarding/support-strategy",
-							"onboarding/account-setup",
-							"onboarding/turnaround-time",
-							"onboarding/troubleshooting"
-						]
 					}
+					
 				]
 			},
 			{

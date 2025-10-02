@@ -18,9 +18,14 @@ The Typscript type of a particular event can also be accessed when subscribing t
   
 **Event Trigger:** When a user clicks the "Run Tests" button in a lab.
 
+Fermion’s interactive coding labs are full-fledged environments that boot up quick and give learners 
+a near VSCode-like developer experience directly in the browser. These labs include an editor, terminal, preview window, 
+and dedicated challenge sections so students can learn by doing, not just by watching.
 
-Use this webhook for automated grading, analytics, or tracking lab completion and success rates.
+To gather more information about Coding Labs, you can navigate to [What are Coding Labs](/creating-coding-labs/what-are-coding-labs)
 
+By integrating the Lab Run Tests webhook, you can capture when learners attempt or complete challenges, 
+track their progress, and feed the results into grading systems, analytics dashboards, or custom reporting tools. 
 
 <Accordion title="Payload Description">
 
@@ -67,8 +72,14 @@ type FermionWebhookEventLabRunTestsType = {
 
 **Event Trigger:** When captions for a live event session are ready.
 
+Fermion automatically generates AI-powered captions for live sessions, synced with the video timeline to improve accessibility and inclusivity.
+With this webhook, you can programmatically access the generated captions and integrate them into your workflows.
 
-Useful for automated workflows like sending captions to students, embedding or processing with third-party translation tools.
+You can find more about captions for live events here: [Auto-recording & Captions for Live Sessions](/live-classes/recording-and-captions)
+
+
+This webhook is useful for automated workflows like sending captions to students, embedding or processing with third-party translation tools.
+
 
 <Accordion title="Payload Description">
 
@@ -101,8 +112,19 @@ type FermionWebhookEventLiveEventSessionCaptionReadyType = {
 
 **Event Trigger:** When a live event’s processed MP4 video is ready.
 
+After a live session concludes, Fermion automatically generates a processed MP4 recording that can be accessed by students. 
+This ensures that learners who couldn’t attend live can still benefit from the session. 
 
-This webhook is ideal for workflows that involve video publishing, post-production, or content delivery.
+The recording typically takes a very short time to 
+process, depending on factors such as the duration of the session and the number of participants. As soon as the recording is processed, 
+this webhook event is triggered.
+
+<Info>
+If you want students to be able to download the recordings of your lifestreams, you have to enable that feature in instructor dashboard. 
+You can find out how to do that here: [Auto Recording](/live-classes/recording-and-captions)
+</Info>
+
+This webhook is useful for automating tasks like publishing recordings, delivering content to external systems, or archiving sessions for future use.
 
 <Accordion title="Payload Description">
 
@@ -133,7 +155,10 @@ type FermionWebhookEventLiveEventSessionProcessedMp4ReadyType = {
 
 **Event Trigger:** When a user purchases a paid product.
 
-Use this event to sync sales data, trigger email confirmations, or update your accounting software.
+Fermion allows schools to sell a variety of digital products such as [E-books](/ebooks/introduction), downloadable files, premium resources, or add-on learning materials. 
+This webhook is fired whenever a student completes a purchase of a paid digital product.
+
+you can use this event to sync sales data, trigger email confirmations, or update your accounting software.
 
 <Accordion title="Payload Description">
 
@@ -175,7 +200,9 @@ type FermionWebhookEventPaidDigitalProductSaleType = {
 **Event Trigger:** When a payment attempt fails.
 
 
-This webhook helps automate failure handling, retry logic, and notifications to users.
+This event is triggered anytime a student tries to pay for a course but the transaction fails due to various reasons. 
+You can gather information like **User Details**,  **Payment Gateway** information, **amount** in INR paise for the attempted transaction 
+and **Course details** for which the payment was being made.
 
 <Accordion title="Payload Description">
 
@@ -216,8 +243,11 @@ type FermionWebhookEventPaymentFailedType = {
 
 **Event Trigger:** When a payment is started but not completed within 60 minutes.
 
+This event captures situations where a student begins the checkout process but abandons it before finishing it in under 60 minutes - commonly known as an “_abandoned cart_” 
 
-This event is useful for abandoned cart notifications or automated reminders.
+
+This could happen if the user gets distracted, changes their mind, or encounters a technical/payment issue.
+This event webhook can be utilized for abandoned cart notifications or automated reminders.
 
 <Accordion title="Payload Description">
 
@@ -258,8 +288,10 @@ type FermionWebhookEventPaymentInitiatedButNeverCompletedType = {
 
 **Event Trigger:** When a video uploaded to Fermion is ready for playback.
 
+Fermion automatically transcodes and optimizes every uploaded video to ensure smooth delivery across devices and bandwidths. 
+Once the processing is complete, this webhook is fired so you can trigger automated actions such as notifying students.
 
-This webhook allows automated publishing or notifications to students when video content is ready.
+Learn more about Recorded Videos here: [Recorded Videos](/recorded-videos/introduction)
 
 <Accordion title="Payload Description">
 
