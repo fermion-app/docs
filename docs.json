@@ -95,7 +95,19 @@
 							"manage-settings/change-instructor-details",
 							"manage-settings/manage-payouts",
 							"manage-settings/custom-css-styling",
+							"manage-settings/custom-links",
 							"manage-settings/help"
+							
+						]
+					},
+					{
+						"group": "Onboarding and Support",
+						"pages": [
+							"onboarding/introduction",
+							"onboarding/support-strategy",
+							"onboarding/account-setup",
+							"onboarding/turnaround-time",
+							"onboarding/troubleshooting"
 						]
 					}
 				]
@@ -114,8 +126,7 @@
 							"creating-coding-labs/technologies/react",
 							"creating-coding-labs/technologies/rust",
 							"creating-coding-labs/technologies/java",
-							"creating-coding-labs/technologies/python",
-							"creating-coding-labs/using-the-content-library"
+							"creating-coding-labs/technologies/python"
 						]
 					},
 					{
