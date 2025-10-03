@@ -163,6 +163,9 @@ you can use this event to sync sales data, trigger email confirmations, or updat
 <Accordion title="Payload Description">
 
 ```tsx
+
+
+
 type FermionWebhookEventPaidDigitalProductSaleType = {
     eventUniqueId: string;
     timestampIsoString: string;
@@ -178,16 +181,31 @@ type FermionWebhookEventPaidDigitalProductSaleType = {
         chargedAmountInrPaise: number;
         productSlug: string;
         productName: string;
+        additionalDataToCollectOnCheckoutResponses?: ({
+            [x: string]: unknown;
+        } | null) | undefined;
     };
 }
+
 ```
 
 **Payload Data:**
 
 - `userId`, `userFullname`, `userEmail`, `userPhoneNumber` – User details.
-- `paymentGateway` – Gateway used (e.g. FermionUpi, Paypal, Stripe, Razorpay).
+- `paymentGateway` – Gateway used (e.g., FermionUpi, Paypal, Stripe, Razorpay).
 - `chargedAmountInrPaise` – Amount charged in paise (1 INR = 100 paise).
 - `productSlug`, `productName` – Identifiers for the purchased product.
+- `additionalDataToCollectOnCheckoutResponses` – This field contains any **custom data** you’ve chosen to collect from the user during checkout.  
+  For example, if your checkout form asks for extra information like “Field of Study,” “Counsellor ID,” or other custom fields, the responses will appear here as key-value pairs.  
+
+  Example:
+
+  ```json
+  
+    "additionalDataToCollectOnCheckoutResponses": {
+      "Field of Study": "Information Technology",
+      "Counsellor ID": "2010MP4"
+    }
 
 </Accordion >
 
