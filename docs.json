@@ -161,12 +161,12 @@
 						"group": "Live classes",
 						"pages": [
 							"live-classes/what-are-live-classes",
-							"live-classes/recording-and-captions",
-							"live-classes/drm-and-watermarking",
 							"live-classes/setup-live-class",
 							"live-classes/invite-to-stage",
 							"live-classes/pin-a-tile",
 							"live-classes/live-chat",
+							"live-classes/recording-and-captions",
+							"live-classes/drm-and-watermarking",
 							"live-classes/embed-live-session",
 							"live-classes/common-faqs"
 						]
