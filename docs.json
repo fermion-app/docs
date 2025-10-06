@@ -59,7 +59,9 @@
 							"setup-pricing/fixed-pricing-plan",
 							"setup-pricing/setup-emi",
 							"setup-pricing/add-coupon-codes",
+							"setup-pricing/checkout-fields",
 							"setup-pricing/common-faqs"
+							
 						]
 					},
 					{
