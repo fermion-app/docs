@@ -21,106 +21,20 @@ You can enable certificates for:
 4. Save changes.
 ![enable certificates](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/01-10-2025/Arc_JOjEA9jkN0.citzyh.png)
 
-## Certificate template (HTML)
+## Certificate template (AI builder)
 
-Use the following HTML template as a starting point. The system will replace variables in double curly braces at issuance time.
+You can use the AI-powered template builder to quickly generate a professional certificate design without writing any HTML. Simply click **Generate with AI** in the certificate settings, describe your preferred style or layout, and the system will create a customized template for you. You can further edit the generated template or regenerate until you are satisfied.
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Certificate of Completion</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #f7f7f7;
-      font-family: 'Arial', sans-serif;
-    }
-    .certificate-container {
-      width: 800px;
-      margin: 50px auto;
-      padding: 40px;
-      background: #fff;
-      border: 8px solid #e0e0e0;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    .header {
-      margin-bottom: 30px;
-    }
-    .title {
-      font-size: 2.8em;
-      color: #333;
-      display: inline-block;
-      vertical-align: middle;
-    }
-    .icon {
-      font-size: 2.5em;
-      margin: 0 15px;
-      vertical-align: middle;
-    }
-    .subtitle {
-      font-size: 1.1em;
-      color: #666;
-      margin-top: 20px;
-    }
-    .username {
-      font-size: 2em;
-      color: #222;
-      margin: 10px 0;
-    }
-    .text {
-      font-size: 1.1em;
-      color: #555;
-      margin: 20px 0;
-    }
-    .coursename {
-      font-size: 1.8em;
-      color: #333;
-      margin: 10px 0 30px 0;
-    }
-    .date {
-      font-size: 0.9em;
-      color: #777;
-      margin-bottom: 40px;
-    }
-    .footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.9em;
-      color: #555;
-    }
-    .success {
-      font-size: 1em;
-      color: #2a7f62;
-    }
-    .success .icon {
-      font-size: 1.2em;
-      vertical-align: middle;
-      margin-right: 5px;
-    }
-  </style>
-</head>
-<body>
-  <div class="certificate-container">
-    <div class="header">
-      <span class="icon">🎖️</span>
-      <span class="title">Certificate of Completion</span>
-      <span class="icon">🎖️</span>
-    </div>
-    <p class="subtitle">This is to certify that</p>
-    <h1 class="username">{{userFullName}}</h1>
-    <p class="text">has successfully completed</p>
-    <h2 class="coursename">{{forCompletingWhatEntityName}}</h2>
-    <p class="date">Issued on {{issuedAtFormattedDate}}</p>
-  </div>
-</body>
-</html>
-```
+The builder automatically supports variables like recipient name, course title, issue date, and certificate ID, so your certificates are always personalized and ready for sharing or download.
+
+1. Open any course and go to Settings > Completion certificate.
+2. Toggle Enable certificate for this course.
+3. Use the AI chat to generate templates.
+![AI template](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/06-10-2025/Arc_nWupgrg20y.idhiye.png)
+4. Edit the source code to make any additional changes
+![edit source code](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/06-10-2025/Arc_mOGA0DYohl.isxidk.png)
+5. Click on `Apply certificate to this product`
+![appyl cert](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/06-10-2025/Arc_tGcZrboeDe.dmxnui.png)
 
 ### Supported variables
 
@@ -128,9 +42,3 @@ Use the following HTML template as a starting point. The system will replace var
 - `{{userFullName}}` – certificate recipient name
 - `{{issuedAtFormattedDate}}` – issuance date (formatted)
 - `{{certificateId}}` – unique certificate ID (hash)
-
-<Warning>
-
-     Keep your template mobile-friendly. Use web-safe fonts and avoid remote CSS for reliable rendering.
-
-</Warning>

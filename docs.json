@@ -27,7 +27,6 @@
 							"getting-started/what-is-fermion",
 							"getting-started/fermion-vs-other-platforms",
 							"getting-started/what-can-you-do-on-fermion"
-
 						]
 					},
 					{
@@ -101,7 +100,6 @@
 							"webhooks/anatomy",
 							"webhooks/event-payloads",
 							"webhooks/using-data"
-
 						]
 					},
 					{
@@ -118,10 +116,10 @@
 							"manage-settings/change-instructor-details",
 							"manage-settings/manage-payouts",
 							"manage-settings/custom-css-styling",
-							"manage-settings/custom-links"
+							"manage-settings/custom-links",
+							"manage-settings/email-log"
 						]
 					}
-
 				]
 			},
 			{
