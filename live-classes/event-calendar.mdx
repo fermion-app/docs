@@ -1,0 +1,69 @@
+---
+title: "Event Calendar"
+description: "Learn how to use Fermion's Event Calendar to plan, schedule, and manage live events and classes effortlessly, either individually or in bulk using CSV uploads."
+---
+
+## Introduction
+
+The **Event Calendar** in Fermion brings all your live sessions and events together in one simple, easy-to-manage view. Instead of jumping between different tools or tracking schedules manually, you can plan, edit, and manage all your sessions directly from one place.
+
+![Calendar introduction](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/06-10-2025/Calendarintro.isusio.png)
+
+It’s especially useful when managing multiple cohorts or working with different instructors, event calendar enables you to view all upcoming sessions, check for overlaps, and make quick adjustments when needed. This helps ensure a smoother experience for everyone involved, from planning to teaching to attending. With the Event Calendar, managing your live learning schedule becomes much more straightforward and reliable.
+
+## How to access the Event Calendar
+
+Accessing the **Event Calendar** in Fermion takes just a few simple steps.  
+
+1. In the instructor dashboard sidebar, navigate to the **Live** section - this is where all livestream tools are located.  
+2. From the dropdown options, select **Event Calendar**.  
+
+![How to access event calendar](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/06-10-2025/chrome_v6CwiECIuO.pwztmp.png)
+
+You’ll now see a full calendar view displaying all scheduled sessions.
+
+
+## How to Schedule a Live Session Directly in Event Calendar
+
+
+Scheduling a live session directly from the **Event Calendar** is simple and helps you plan individual classes, workshops, or office hours without any extra setup. The process is easy to follow - you can open the calendar, pick a date, and fill in the details right away. This makes it ideal for one-off sessions or smaller events that don’t require bulk scheduling.
+
+1. Open your **Fermion Dashboard** and navigate to the **Event Calendar** from the sidebar.  
+2. On the calendar view, click on the **date** where you want to schedule your session. A **Create a new session** form will appear.  
+3. Select the **course** the session belongs to.  
+
+![Session creation](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/06-10-2025/Schedule%20an%20event.wdanqo.png)
+
+4. Enter a clear **Title** for the session.  
+5. Set the **Start Time** and **Duration** in minutes, and add the **email addresses** of any co-hosts or instructors.
+<Tip> Admins can always start sessions, but you can also add additional hosts and instructors by adding their email addresses in the same form! </Tip>
+
+6. Review your details and click **Create Session** to confirm. 
+
+## How to Bulk Schedule live classes via CSV
+
+When you’re planning multiple live sessions at once: like an entire term’s timetable or a series of workshops - the **Bulk schedule via CSV** feature can save a lot of time. Instead of creating each session manually, you can prepare all the details in a single CSV file and upload them together.
+
+1. Open the **Event Calendar** from your Fermion Dashboard.  
+2. Click the **Bulk schedule via CSV** button at the top of the page. 
+   ![Bulk schedule steps](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/06-10-2025/bulsteps.uxikka.png) 
+
+3. Select your prepared CSV file from your device and upload it. CSV format details are mentioned in the [CSV format details](/live-classes/event-calendar#csv-format-details) section 
+    ![Bulk schedule form](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/06-10-2025/Bulk%20Schedule.cmcilj.png)
+4. Click to **Schedule Event** button to schedule multiple live events at once 
+
+### CSV Format Details
+
+Each row in your CSV file represents one session to be scheduled. Make sure to include all the following columns in your CSV file:
+
+- `productSlug` (required): Slug to identify the cohort-based course.  
+- `itemTitle` (required): Title of the session.  
+- `sectionName` (required): Name of the section or module where the session belongs.  
+- `liveSessionStartAt` (optional): Date and time of the session (e.g. *January 31 2025 02:15:00 PM*).  
+- `liveSessionHostsEmails` (optional): Comma-separated list of host email addresses.  
+- `durationInSeconds` (optional): Duration of the session in seconds (e.g. *3600* for 1 hour or *1800* for 30 minutes).  
+
+<Note>  
+You can also download a **sample CSV** directly from the **Bulk Schedule** interface to check the correct format before uploading your own file.  
+</Note>
+
