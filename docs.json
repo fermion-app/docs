@@ -71,9 +71,12 @@
 						]
 					},
 					{
-						"group": "Ebooks",
+						"group": "eBooks",
 						"pages": [
 							"ebooks/introduction",
+							"ebooks/landing-page",
+							"ebooks/enroll-students",
+							"ebooks/ebook-course",
 							"ebooks/embed-ebook"
 						]
 					},
