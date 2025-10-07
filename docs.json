@@ -131,7 +131,7 @@
 				"tab": "Coding Labs",
 				"groups": [
 					{
-						"group": "Interactive coding labs",
+						"group": "Interactive Coding Labs",
 						"pages": [
 							"creating-coding-labs/what-are-coding-labs",
 							"creating-coding-labs/cdmrc-file",
@@ -145,7 +145,7 @@
 						]
 					},
 					{
-						"group": "IO coding labs",
+						"group": "IO Coding Labs",
 						"pages": [
 							"creating-io-coding-labs/introduction",
 							"creating-io-coding-labs/creating-io-lab-successfully",

@@ -1,18 +1,33 @@
 ---
 title: 'Embed an eBook'
-description: 'How to embed an eBook externally'
+description: 'Learn how to embed an eBook externally'
 ---
 
-Embedding an eBook externally allows you to share your digital content on your own website or any other web platform while keeping it secure and protected. With Fermion, you can generate a secure embed token and integrate your eBook seamlessly using an iframe. This guide walks you step by step through obtaining your eBook ID, generating an authentication token, and embedding the eBook on your site so your audience can access it without leaving your platform.
+Embedding an [eBook](/ebooks/introduction) externally allows you to share your digital content on your own website or any other web platform while keeping it secure and protected. With Fermion, you can generate a secure embed token and integrate your eBook easily using an iframe. This guide walks you step by step through obtaining your eBook digital product ID, generating an authentication token, and embedding the eBook on your site so your audience can access it without leaving your platform.
 
 
-## Getting started
+Before you begin embedding your eBook externally, make sure you have the following ready:
 
--   Ebook digital product ID
--   Fermion API key
--   Access to your website's codebase
+<Columns cols={3}>
+  <Card title="eBook Digital Product ID" icon="book">
+    This unique identifier lets Fermion know which eBook you want to embed. You can find this ID with the help of <strong>Step 1</strong> below.
+  </Card>
 
-## Step 1: Obtain the ebook digital product ID
+  <Card title="Fermion API Key" icon="key">
+    Used to authenticate your requests securely when generating the embed token. You can create or view your API key from the <strong>API Access</strong> section in your instructor dashboard sidebar.
+  </Card>
+
+  <Card title="Access to Your Website’s Codebase" icon="code">
+    You’ll need to add a small code snippet (iframe) to your website, so make sure you have editing access or a developer who can implement it.
+  </Card>
+</Columns>
+
+Once you have these three essentials, you can proceed to generate your secure embed token and integrate your eBook directly on your website with the help of steps below:
+
+
+<Steps>
+
+<Step title="Obtain the ebook digital product ID">
 
 Each ebook on fermion has a unique identifier. For example `6779080e80ec97e953a17971`. First, go to `Manage features` tab on your instructor dashboard and enable `Digital products`
 
@@ -26,7 +41,10 @@ You can find the ebook digital product ID in the URL.
 
 ![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/10-03-2025/23%20PM.wulyuh.png)
 
-## Step 2: Generate an Embed Token
+</Step>
+
+
+<Step title="Generate an Embed Token">
 
 You'll need to generate a JWT (JSON Web Token) to authenticate the embed. Here's how to create one using the `jsonwebtoken` package:
 
@@ -63,7 +81,9 @@ Important notes:
 	payload.
 </Info>
 
-## Step 3: Embed the ebook
+</Step>
+
+<Step title="Embed the ebook">
 
 Add this iframe to your website where you want to embed the ebook:
 
@@ -81,8 +101,10 @@ Add this iframe to your website where you want to embed the ebook:
 </iframe>
 ```
 
-<Tip>
+<Warning>
 	Make sure you replace `acme.fermion.app` with your fermion school URL.
-</Tip>
+</Warning>
 
 This should embed your ebook and display it on your website.
+</Step>
+</Steps>
