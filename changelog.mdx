@@ -65,202 +65,169 @@ You can now collect additional information from learners during checkout using *
   For more information, please refer to:[API Docs](/api-reference/user/get-login-link-for-user)
 
   ## Email & Analytics
-  - Added an email logs dashboard so instructors can access all emails sent out from their School.
+  Added an email logs dashboard so instructors can access all emails sent out from their School.
 
   You can access this from the Settings → School Settings option in your sidebar: [email log](/manage-settings/email-log)
 
   ## Livestreaming
-  - New configuration to hide the seekbar in livestreams , allowing students to always be watching the stream live in real-time without the ability to seek the video. Instructors can toggle this option from Settings → School Settings.
-  ![stick to edge](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/22-09-2025/seelen-ui_r1WfkbAu6d.iyqrcp.png)
-  - Stability fixes for the seek control.
+  New configuration to hide the seekbar in livestreams , allowing students to always be watching the stream live in real-time without the ability to seek the video. Instructors can toggle this option from **Settings → School Settings**.
 
   ## Video watermarking
-  - Added customization options for watermarking, allowing instructors to manually customize the size , style and data displayed in the watermark. Instructors can customize this from Settings → School Settings.
-  ![video watermark](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/22-09-2025/seelen-ui_T7WebrOn2P.yuuccw.png)
-
-  For more information, please refer to :[Video Watermarking](https://docs.fermion.app/recorded-videos/introduction#video-watermarking)
+  Added customization options for watermarking, allowing instructors to manually customize the size , style and data displayed in the watermark. Instructors can customize this from **Settings → School Settings**.
+  For more information, please refer to :[Video Watermarking](/recorded-videos/introduction#video-watermarking)
 
   ## Courses & syllabus
-  - Bulk import syllabus CSV improvements and ability to import from CSV
-  - Fixed permissions for all course access actions, including deletion
+  Enhanced bulk syllabus import: You can now import entire course syllabi directly from CSV files, making it easier to migrate or update course structures at scale. The import process now supports improved error handling, field mapping, and validation for a smoother experience. For step-by-step instructions, see [Bulk import syllabus](/setting-up-course/bulk-import-syllabus).
 
-  ## User management
-  - Added support for all digital products in platform summary
-  - Added ability for instructors to Enroll/Unenroll products directly from the user activity page
+  ## AI Features
+  Livestream statistics are now AI-powered, offering more intelligent insights and analytics for live sessions. Additionally, instructors can now view post-livestream feedback to better understand student engagement and improve future sessions.
 </Update>
 
-<Update label="August 2025" description="Improvements">
-  ## AI & Insights
-  - Livestream stats are now AI-powered and system prompts updated
-  - Post‑livestream feedback flow added
+
+<Update label="August 2025">
 
   ## Platform UI/UX
-  - Revamped instructor dashboard and reworked All Users page
-  - Multiple UI improvements across platform and course landing pages
-  - Better pricing display, custom CSS selectors support
-  - Video player control updates and HLS buffer sizing fixes
-  - Iframe embed UI improvements and general platform UI refresh
+  The instructor dashboard has been completely revamped with a modern interface that improves navigation and usability.
 
-  ## Livestreaming
-  - Hosts can view private chats
-  - Permission model fixes and landing page updates
+  The All Users page has been reworked with better filtering and management capabilities. Course landing pages now have an updated UI that's more engaging for potential students.
+  You can see this revamped all users page from **Dashboard → Users → All users**.
 
-  ## Content & Blogging
-  - Public tags support, optional quiz import fields
-  - Allow '/' in blog slugs, whitelist overrides for blog
+  ## Content Management
+  Public tags are now supported across the platform, enabling instructors and students to categorize and search content more efficiently. Tags can be added to all digital products on Fermion, making it easier to filter and explore relevant materials. This enhancement improves content organization, helps users find topics of interest faster, and supports better content curation for both public and private resources.
 
-  ## Infra & Embeds
-  - Whitelisted /api routes on password‑protected sites
+  The quiz import process has been improved with optional question answer explanation fields. You can check [Quiz](/setting-up-course/syllabus#what-is-a-quiz%3F) for more information.
 
-  ## Misc
-  - Ability to redirect course pages.
 </Update>
 
-<Update label="July 2025" description="Platform updates">
-  ## Features
-  - MySQL 8 support for IO labs, ability to clone live events across courses
-  - Course announcements, UTM marketing reporting page
-  - Regenerate certificates, improved quiz builder and reworked quiz UI
-  - Admin controls for ebooks, item bundles, support subsections in course syllabus
-  - Video proctoring, tags on coding labs, async contest attempt reports
+<Update label="July 2025" description="Major platform enhancements">
+  ## Labs
+  MySQL 8 support has been added for IO labs, providing better performance and compatibility with modern database systems. Please refer to [SQL Labs](/creating-io-coding-labs/sql-lab) for more information.
 
-  ## Livestreaming
-  - Reworked livestream analytics and added livestream ended events (WebRTC & SDK)
-  - Live Streams now support upto 50 people on stage
+  ## Course Management
+  - We've introduced course announcements, allowing instructors to communicate important updates directly within courses. You can send an announcement from **Course builder -> Announcements -> Create a new announcement**.
 
-  - Origin whitelisting for public videos, multiple AV stability and UI fixes
+  - The syllabus manager now supports subsections, allowing instructors to break down modules into multiple levels for improved organization and clarity in complex course structures. This makes it easier to create, edit, and navigate detailed syllabi, especially for courses with nested topics or multi-part lessons or batches.
 
-  ## Analytics & Billing
-  - New analytics for courses and overall support tab in analytics
-  - Revamped AI usage tracking, post‑live user feedback
+  - Admin controls for ebooks have been expanded, enabling more granular management of ebook access, permissions, and distribution. Instructors can now assign ebooks to specific users or groups, set expiration dates, and monitor usage analytics directly from the dashboard. Please refer to [Ebooks](/ebooks/landing-page) for more information.
 
-  ## Admin & UX
-  - Import users with passwords, added better UI for importing users
-  - Reorder instructors, improved tabbed product modal
-  - Ability to edit other user profiles
-  - Search students on manage students
+  - Item bundles are now supported, letting instructors group related course items—such as videos, quizzes, assignments, and ebooks—into cohesive bundles. Bundles can be used to create themed learning paths, offer package deals, or simplify content management for both instructors and students.
+
+  ## Analytics & Reporting
+  Livestream analytics have been completely reworked with more detailed insights and better reporting capabilities. WebRTC and SDK now support livestream ended events for better session tracking. A new UTM marketing reporting page has been added to help track marketing campaign effectiveness.
+
+  ## User Management & Security
+  User import functionality has been significantly improved with password-based import support and better UI for bulk user operations. Instructors can now reorder other instructors and edit user profiles with enhanced admin capabilities. Video proctoring features have been added for better exam security.
+
 </Update>
 
-<Update label="June 2025" description="Enhancements">
-  ## Video & Live
-  - Updated to latest video SDK and improved AV stability
-  - Manifestless livestreaming fixes and configurable live sync duration
-  - Added a Download button on video embed page, object storage UI improvements
+<Update label="June 2025" description="AI improvements and livestreaming enhancements">
+  ## AI & Content Creation
+  A new AI agent has been introduced for building coding labs, significantly streamlining the lab creation process. The AI builder UI inside DSA labs has been improved with better user experience and more intuitive controls.
 
-  ## AI & Email
-  - Better AI builder UI inside DSA labs, stored detailed AI usage
-  - Email campaign builder and editor performance fixes
+  ## Livestreaming & Video
+  Livestreaming capacity has been expanded to support up to 50 people on stage, enabling larger interactive sessions. Manifestless livestreaming has been implemented for better compatibility and performance. The video player now includes a download button on embed pages, and object storage UI has been improved for better file management.
 
-  ## Permissions & UX
-  - Added New permission presets
-  - Checkbox and constraint UX improvements on videos
-  - Billing page UI updates and small UI refinements across the app
+  ## User Experience
+  New permission presets have been added to simplify access control configuration. The user dashboard now displays upcoming live sessions for the day, helping students stay informed about their schedule. Email functionality has been enhanced with the ability to turn off reminder emails for better customization.
+
+  ## Platform Improvements
+  Assignment submissions now include grading capabilities, and a dedicated page has been added to view all assignment submissions. Contest proctoring has been improved for better exam security, and the system now supports discount billing cycles for more flexible pricing options.
 </Update>
 
-<Update label="May 2025" description="Platform improvements">
-  ## Object storage
-  - Upload any file to Fermion Object Store
-  - Bugfixes for object storage uploads and health‑check cron
+<Update label="May 2025" description="Storage, payments, and video enhancements">
+  ## Storage & File Management
+  The Fermion Object Store now supports uploading any file type, providing more flexibility for content creators. Bulk video deletion capabilities have been added, making it easier to manage large video libraries. Object storage UI has been improved for better user experience and file management.
 
-  ## Payments & policies
-  - Registration with phone number
-  - Custom Razorpay support and key exposure from backend
-  - Terms of Service and Privacy Policy support
-  - Ability to archive products
+  ## Payments & Authentication
+  Registration with phone numbers is now supported, expanding authentication options for users. Custom Razorpay integration has been implemented with public key exposure from the backend for enhanced payment processing. Terms of Service and Privacy Policy support has been added for better legal compliance.
 
-  ## IAM & security
-  - IAM UI updates and policy editor improvements
-  - Bugfixes to IAM policy structure
-
-  ## Courses & assignments
-  - Submit assignment flow, including Python indentation support
-  - Toggle discussions per course item, toggle items in recorded courses
+  ## Course Management & Assignments
+  Assignment submission flow has been implemented with support for Python indentation in coding assignments. Course items can now have discussions toggled on or off, and items in recorded courses can be individually toggled for better content control. Course creation dates can now be modified for better course management.
 
   ## Video & DRM
-  - Enable DRM controls on embed page
-  - Playback without user token for DRM
-  - Support events on HLS playback, mic indicator fixes, routing and UI fixes
+  DRM controls are now enabled on video embed pages for better content protection. Video playback no longer requires user authentication tokens for DRM content, improving user experience.
 
-  ## Live & support
-  - You can now invite external hosts to live events
-
-  ## Marketing & misc
-  - Pricing page updates and SMS pricing
+  ## Live Events
+  External hosts can now be invited to live events, expanding collaboration possibilities. You can refer to [Add external hosts](/live-classes/setup-live-class#:~:text=add%20external%20hosts%20via%20email%20address.) for more infrmation.
 </Update>
 
-<Update label="April 2025" description="Major updates">
-  ## Course content & QnA
-  - QnA for video and article items, ability to download pre‑recorded videos
-  - Multipart uploads enabled
+<Update label="April 2025" description="QnA, certificates, and streaming improvements">
+  ## Course Content & QnA
+  QnA functionality has been added for video and article course items, enabling students to ask questions and receive answers directly within the content. Pre-recorded videos can now be downloaded for offline viewing.
 
-  ## Live & streaming
-  - DRM live support via API, attendance for non‑Fermion live sessions
-  - Multiple livestreaming fixes and faster fallbacks
+  ## Live Streaming & Attendance
+  Live sessions now feature robust DRM (Digital Rights Management) support through our API, providing advanced content protection for both scheduled and on-demand streams. This ensures that only authorized users can access live educational content, helping institutions and instructors safeguard their intellectual property. For technical details and integration steps, see [API - Live session DRM](/api-reference/live/create-live-session).
 
-  ## Reports & certificates
-  - Company‑wide reports
-  - Custom HTML certificates and CBC support, certificate upload fixes
+  Attendance tracking capabilities have been expanded to include non-Fermion live sessions, enabling instructors to monitor and record participant engagement in external webinars, workshops, or third-party events. Attendance data can be exported and analyzed alongside internal session metrics for comprehensive reporting.
 
-  ## AI & infra
-  - AI builder on coding lab page
+  ## Certificates & Reports
+  Custom HTML certificate support has been added with CBC (Course-Based Certificate) functionality. Certificate regeneration capabilities have been implemented for better certificate management. Please refer to: [Certificates](setting-up-course\completion-certificate) for more information.
 
-  ## Pricing & billing
-  - Pricing updates and refunds panel UI changes
+  ## AI & Infrastructure
+  AI builder functionality has been enabled on the coding lab page, making it easier to create interactive programming exercises. The syllabus page now features new AI capabilities for content creation and management.
 
-  ## SCORM
-  - SCORM support added
+  ## Platform Features
+  - [SCORM](/setting-up-course/syllabus#what-are-scorm-packages%3F) package support has been introduced, allowing instructors to import and deliver standardized e-learning content directly within courses. This enables seamless integration with external LMS platforms, supports interactive learning modules, and ensures compatibility with a wide range of educational resources.
+  - The "Go Live" button is now available inside courses for easier live session initiation. Please refer to [Set up a live class](https://docs.fermion.app/live-classes/setup-live-class) for more information.
 
-  ## Misc
-  - Go Live button inside courses, matcher config for IO labs
 </Update>
 
-<Update label="March 2025" description="Features & fixes">
-  ## Billing & refunds
-  - Refunds UI added
+<Update label="March 2025" description="Billing, reviews, and content features">
+  ## Billing & Financial Management
+  A comprehensive refunds UI has been added to the platform, making it easier to manage refunds and financial transactions. Instructor billing pages have been implemented, providing better financial oversight.
 
-  ## Reviews & instructor tools
-  - Show course reviews to instructors
-  - Added instructor billing pages
-  - Lock bundles based on course order
+  ## Reviews & Instructor Tools
+  Course reviews are now visible to instructors, providing valuable feedback for course improvement. Product ratings functionality has been added, allowing students to rate courses and content. Bundles can now be locked based on the order of courses, providing better content sequencing control.
 
-  ## Live & analytics
-  - Moved live viewer analytics to separate tables, improved live stats with HLS participants
-  - Private live chat & better contest reports
+  ## Course Content & Contests
+  In-video quiz functionality has been added, allowing quizzes to be embedded directly within video content. Free previews are now supported for both coding labs and videos. Contest management has been enhanced with dedicated student pages, export capabilities, and improved navigation. Contests are now displayed on the user dashboard for better visibility.
 
-  ## Courses & content
-  - In‑video quiz, product ratings, free previews for coding labs and videos
-  - Contest students page and exports, navigation updates, dashboard contests
-
-  ## Community & UI
-  - Numerous UI/UX fixes and preset buttons
-
-  ## Emails & marketing
-  - Clone and test email marketing campaigns
-
-  ## Embeds
-  - Support embedding ebooks
+  ## User Experience & Marketing
+  - Email marketing campaigns can now be cloned, allowing you to quickly duplicate successful campaigns and iterate on messaging. Campaigns can also be tested before sending, making it easier to optimize content and delivery for your audience.
+  - The platform now supports [embedding ebooks](/ebooks/embed-ebook) directly within course content, enabling richer learning experiences and seamless access to supplementary materials. Ebook analytics are available to track engagement and reading progress.
 </Update>
 
-<Update label="February 2025" description="Media & labs">
-  - Added support for bulk importing videos
-  - Added support for embedding IO labs and external videos
+<Update label="February 2025" description="Video management and lab enhancements">
+  ## Video Management & Import
+  Bulk video importing capabilities have been added, allowing instructors to upload multiple videos at once for more efficient content management. Video constraints have been implemented for better content control and security.
+
+  ## Coding Labs & Integration
+  IO labs can now be embedded in external websites, expanding the reach of interactive programming exercises: [Embed coding labs](/creating-coding-labs/embedding-lab)
+
+  ## Course Management
+  Course cloning functionality has been added, making it easier to duplicate successful course structures. Custom section names can now be added in CBC (Course-Based Certificates) for better organization.
+
+  ## Contests & Proctoring
+  Contest functionality has been enhanced with basic proctoring layers for better exam security. Copy-paste constraints have been added to prevent cheating during contests. Contest attempts can now require course resets on failure for better learning outcomes.
+
+  ## Forms & Community
+  Forms now include the .fermion-form class for better styling integration. Blog functionality has been enhanced with category support for better content organization. Public channels can now be viewed anonymously, expanding community access.
+
+  ## User Management & Analytics
+  User import functionality has been improved with better UI and the ability to remove users from products. User deletion capabilities have been added for better account management. Analytics have been enhanced with more data points in user activity tracking.
 </Update>
 
-<Update label="January 2025" description="Livestreaming & certificates">
-  ## Live v2 & DRM
-  - All Live sessions now run on Live v2
-  - You can now enable DRM on live sessions & download live sessions
-  - Better stability: reconnect, disable low resolutions, encoding tweaks, bitrate controls
-  - Public APIs to start/end streams, faster recorded‑video playback
+<Update label="January 2025" description="Live streaming v2 and platform foundations">
+  ## Live Streaming v2
+  All live sessions now run on the new Live v2 infrastructure, providing significantly improved stability and performance. The system includes better reconnection capabilities, encoding optimizations, and bitrate controls for enhanced streaming quality. Public APIs have been added to start and end streams programmatically, and live session recordings can now be downloaded for offline access.
 
-  ## Certificates
-  - Certificate generator fixes and support for certificates across platform
+  ## DRM & Security
+  Live sessions now include advanced DRM features, making it harder to capture or share streams outside the platform. Recorded videos benefit from both DRM and optimized playback speeds, providing a smoother viewing experience while maintaining security. For details on how DRM works for live sessions and how to enable it, see: [DRM for live sessions](/live-classes/drm-and-watermarking)
 
-  ## Analytics & API
-  - IO analytics, analytics dashboards and invoice exposure
+  ## Certificates & Recognition
+  Comprehensive certificate support has been added across the platform with generator fixes and improved functionality. Certificates can now be generated for various completion milestones, providing better student recognition and motivation: [Completion certificates](\setting-up-course\completion-certificate)
 
-  ## Contests & community
-  - Live event invites, contest reporting and attempts, public channels view
+  ## Contests
+  Contest functionality is now available, allowing instructors to create, manage, and monitor contests directly within the platform. Detailed reporting tools provide insights into participant performance, submission analytics, and overall contest outcomes. Attempt tracking enables both students and instructors to review progress, monitor multiple attempts, and identify areas for improvement.
+
+  ## Live events
+  Live event invites can now be sent to participants, streamlining event organization and ensuring attendees receive timely notifications and reminders. This makes it easier to coordinate live sessions, workshops, and webinars.
+
+  All live event sessions are now automatically post-processed after completion. This includes enhancements to recording quality, improved accessibility features such as captions and transcripts, and faster availability of session replays for students who could not attend live.
+  ## Community
+  Public channels are now accessible to all users, including those not logged in, which broadens community engagement and allows prospective students to explore discussions and resources before joining. This feature helps foster a more open and active learning community. Please refer to [Communities](/community/what-are-communities) for more information.
+
+
 </Update>
 
 <Update label="November 2024" description="Product updates">
@@ -306,5 +273,5 @@ You can now collect additional information from learners during checkout using *
 
   Fermion allows you to configure a powerful affiliate marketing system for your online academy, with its built-in affiliate marketing tooling. You can enable affiliate program for your students, create custom affiliate links, monitor your affiliates, and optimize in real-time.
 
-  All affiliate payouts are handled by Fermion making it easier for you to focus and scale your teaching business. These features are available to instructors on all plans. Check out [our documentation](http://docs.fermion.app/docs/marketing-tools/affiliate) to learn more.
+  All affiliate payouts are handled by Fermion making it easier for you to focus and scale your teaching business. These features are available to instructors on all plans. Check out [Affiliate marketing](/marketing-tools/affiliate) to learn more.
 </Update>
