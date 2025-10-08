@@ -87,6 +87,12 @@
 						]
 					},
 					{
+						"group": "Contests",
+						"pages": [
+							"contests/introduction"
+						]
+					},
+					{
 						"group": "Custom pages",
 						"pages": [
 							"custom-landing-pages/introduction",
