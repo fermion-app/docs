@@ -19,7 +19,7 @@
 	"navigation": {
 		"tabs": [
 			{
-				"tab": "General documentation",
+				"tab": "General Documentation",
 				"groups": [
 					{
 						"group": "Quick Overview",
@@ -168,11 +168,12 @@
 				"tab": "Livestreaming",
 				"groups": [
 					{
-						"group": "Live classes",
+						"group": "Live Classes",
 						"pages": [
 							"live-classes/what-are-live-classes",
 							"live-classes/setup-live-class",
 							"live-classes/event-calendar",
+							"live-classes/public-event",
 							"live-classes/standalone-invites",
 							"live-classes/invite-to-stage",
 							"live-classes/pin-a-tile",
@@ -186,10 +187,10 @@
 				]
 			},
 			{
-				"tab": "Video streaming",
+				"tab": "Video Streaming",
 				"groups": [
 					{
-						"group": "Recorded videos",
+						"group": "Recorded Videos",
 						"pages": [
 							"recorded-videos/introduction",
 							"recorded-videos/captions",
