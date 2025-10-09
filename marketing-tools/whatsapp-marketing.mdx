@@ -131,10 +131,14 @@ Once your WhatsApp Business account is connected to Fermion, you can start sendi
     Preview the message on the right side to see how it will look to your students.  
     Make sure your tone is friendly and professional, and all dynamic variables are correctly inserted.
 
+  <Info>
+  Templates are usually reviewed and approved within **a few seconds**, but sometimes the process can take **up to 24 hours** depending on WhatsApp’s moderation queue.
+  </Info>
+
     **Example Template:**
 
     - **Template Name:** `live_session_reminder`  
-    - **Header:** *Live Session Starting Soon*  
+    - **Header (Optional):** *Live Session Starting Soon*  
     - **Body:**  
       ```
       Hi {{participant_name}},
@@ -160,10 +164,16 @@ Below are the variables currently supported in Fermion WhatsApp templates:
 | Variable | Description |
 |-----------|-------------|
 | `{{participant_name}}` | Automatically inserts the participant’s full name. |
+| `{{school_name}}` | Displays the name of your school |
 | `{{session_name}}` | Displays the name of the live session. |
 | `{{session_start_time}}` | Shows the exact start time of the live session. |
 | `{{time_until_start}}` | Displays how much time is left before the session starts (e.g., “in 30 minutes”). |
 
+  <Warning>
+  **Currently, only utility templates are supported.** These are templates for notifications or reminders. 
+  
+  If you try to create a **marketing or promotional** template (e.g., discounts, offers, etc.), **WhatsApp will reject it.** If you need help setting up marketing templates, please contact our team at (support@codedamn.com).
+  </Warning>
 
     Once done, click **Save Template** to store it in your WhatsApp marketing template library. Your template will now be sent to WhatsApp for approval and would take some time to get approved by Meta.
   </Step>
