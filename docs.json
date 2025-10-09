@@ -90,7 +90,8 @@
 						"group": "Contests",
 						"pages": [
 							"contests/introduction",
-							"contests/set-up-contest"
+							"contests/set-up-contest",
+							"contests/contest-questions"
 						]
 					},
 					{
