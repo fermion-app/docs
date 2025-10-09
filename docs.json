@@ -71,13 +71,14 @@
 						]
 					},
 					{
-						"group": "eBooks",
+						"group": "Digital Products",
 						"pages": [
 							"ebooks/introduction",
 							"ebooks/landing-page",
 							"ebooks/enroll-students",
 							"ebooks/ebook-course",
-							"ebooks/embed-ebook"
+							"ebooks/embed-ebook",
+							"ebooks/downloadable-products"
 						]
 					},
 					{
