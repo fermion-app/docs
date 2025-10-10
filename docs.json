@@ -41,7 +41,7 @@
 						]
 					},
 					{
-						"group": "Setting up a course",
+						"group": "Courses on Fermion",
 						"pages": [
 							"setting-up-course/prerequisites",
 							"setting-up-course/landing-page",
@@ -55,7 +55,7 @@
 						]
 					},
 					{
-						"group": "Setup pricing",
+						"group": "Setup Pricing",
 						"pages": [
 							"setup-pricing/fixed-pricing-plan",
 							"setup-pricing/setup-emi",
@@ -96,11 +96,12 @@
 						]
 					},
 					{
-						"group": "Custom pages",
+						"group": "Custom Pages",
 						"pages": [
 							"custom-landing-pages/introduction",
 							"custom-landing-pages/using-wordpress",
 							"custom-landing-pages/using-source-code",
+							"custom-landing-pages/blogs",
 							"custom-landing-pages/checkout-page-direct-links",
 							"custom-landing-pages/custom-redirects"
 						]
