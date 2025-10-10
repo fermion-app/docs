@@ -1,0 +1,93 @@
+---
+title: "Payment Gateways"
+description: "Learn how to set up and manage payment gateways on Fermion. Configure Razorpay or use Fermion's in-house UPI solution"
+---
+
+Fermion offers multiple payment gateway solutions to help you accept payments seamlessly and securely. With our platform, you can choose the gateway that best fits your needs, whether you want direct payments to your account via Razorpay or prefer our in-house UPI solution that automatically collects funds into your Fermion balance. 
+
+Our payment systems are designed to simplify the payment process for both instructors and learners. Students can pay using a variety of popular methods, including UPI apps, credit/debit cards, and netbanking. With low transaction fees, instant verification, and real-time payment updates, you can focus on creating and delivering content while Fermion handles the complexities of payment processing.  
+
+Currently, you can use:
+
+<Columns cols={2}>
+  <Card title="Fermion's UPI solution">
+    Our in-house UPI solution for instant payments in India. No third-party account needed. 
+  </Card>
+  <Card title="Razorpay">
+    Ideal for INR payments in India with secure integration and webhook support. 
+  </Card>
+</Columns>
+
+---
+
+## Accessing payment gateways
+
+To manage your payment gateways:
+
+<Steps>
+  <Step title="Navigate to Payment Gateways">
+    Go to your **Instructor Dashboard → Payment Gateway** section in the sidebar. This is where you can view all available gateways, enable/disable them, and manage credentials.
+  </Step>
+  <Step title="Choose your gateway">
+    Select the Razorpay gateway and click on **Show details** button to configure various settings. If no gateway is selected, the primary gateway would be Fermion's in-house UPI integration.  
+  </Step>
+  </Steps>
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/10-10-2025/chrome_4loMT0fi6M.dbabgd.png)
+
+<Info>
+ If no payment gateway is enabled, Fermion’s in-house UPI gateway will be active, and payments will be added to your Fermion balance for withdrawal via payouts. If Razorpay is enabled, student payments go directly to your Razorpay account.
+</Info>
+
+
+## Fermion's in-house UPI solution
+
+Our in-house UPI solution allows you to accept instant payments from any Indian UPI app. No third-party account setup is required. After clicking **Complete Order**, your students can pay using Google Pay, PayTM, BHIM UPI, or any UPI app. Transactions are instant and secure. 
+
+<Tip>
+By using Fermion’s in-house UPI solution, transaction costs are significantly reduced to just 0.5%, compared to the typical 2% charged by platforms like Razorpay.
+</Tip>
+
+## Razorpay Integration
+
+Razorpay is a widely trusted payment gateway in India, suitable for processing INR payments through UPI, credit/debit cards, and netbanking. It offers secure payment processing, instant notifications, and robust reporting tools for businesses of all sizes.  
+
+If the Razorpay gateway is disabled, Fermion’s default in-house UPI solution will automatically handle payments, ensuring uninterrupted transaction flow.
+
+You can enable Razorpay at Fermion with the help of the following steps:
+
+<Steps>
+  <Step title="Enable Razorpay">
+    Toggle the switch to enable the gateway. Once enabled, it becomes active immediately for new orders.
+    <Warning>
+    Avoid toggling the Razorpay gateway on and off. Disabling it after activation may cause payment failures and split payouts, complicating your finances.
+    </Warning>
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/10-10-2025/chrome_NesyKd3pPg.pslrvi.png)
+  </Step>
+  <Step title="Add Credentials">
+    Enter your **Key ID** and **Key Secret** provided by Razorpay. These credentials ensure that payments are securely linked to your account. [Learn more](https://razorpay.com/docs/payments/dashboard/account-settings/api-keys/) on where to find these credentials. 
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/10-10-2025/Zx2AZASEF5.lsykjg.png)
+  </Step>
+  <Step title="Configure Webhook">
+    Add the following **Webhook URL** provided in your Fermion Dashboard to your Razorpay account. [Learn more](https://razorpay.com/docs/webhooks/) about how to add webhook URLs at Razorpay.  
+    Enable the following webhook event:  
+    - `payment.captured`    
+    
+    Utilize the **Webhook Signing Secret** to verify webhook signatures.  
+    This ensures that Fermion receives real-time updates about payment status and avoids manual reconciliation.
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/10-10-2025/chrome_NesyKd3pPg.yawbso.png)
+  </Step>
+  <Step title='Add Razorpay to Fermion'>
+  Click on the **Update button** to add the Razorpay gateway to Fermion. Now you can receive payments from your learners with the help of Razorpay.
+  </Step>
+</Steps>
+
+
+---
+
+## Receiving payouts
+
+Payouts are the transfers of your earned revenue from Fermion to your bank account. Whenever students purchase your courses or content, the collected payments are accumulated in your Fermion account balance.  
+
+Receiving payouts ensures that you get your earnings securely and on time. It's important to keep your payout details accurate so that funds are transferred without delays or errors. Getting paid with Fermion is simple and hassle-free. Once your bank account is added in Payout Details, you can request a payout directly from your dashboard. 
+
+Check the detailed guide here: [Receiving Payouts](/manage-settings/manage-payouts)

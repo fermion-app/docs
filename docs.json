@@ -61,6 +61,7 @@
 							"setup-pricing/setup-emi",
 							"setup-pricing/add-coupon-codes",
 							"setup-pricing/checkout-fields",
+							"setup-pricing/payment-gateway",
 							"setup-pricing/common-faqs"
 						]
 					},
