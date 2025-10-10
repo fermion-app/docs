@@ -62,6 +62,7 @@
 							"setup-pricing/add-coupon-codes",
 							"setup-pricing/checkout-fields",
 							"setup-pricing/payment-gateway",
+							"setup-pricing/custom-payment-links",
 							"setup-pricing/common-faqs"
 						]
 					},
@@ -137,7 +138,8 @@
 							"manage-settings/email-log",
 							"manage-settings/manage-features",
 							"manage-settings/school-analytics",
-							"manage-settings/manage-instructors"
+							"manage-settings/manage-instructors",
+							"manage-settings/manage-users"
 						]
 					}
 				]
