@@ -101,7 +101,6 @@
 						"group": "Custom Pages",
 						"pages": [
 							"custom-landing-pages/introduction",
-							"custom-landing-pages/using-wordpress",
 							"custom-landing-pages/using-source-code",
 							"custom-landing-pages/blogs",
 							"custom-landing-pages/checkout-page-direct-links",
@@ -177,18 +176,25 @@
 				"tab": "Livestreaming",
 				"groups": [
 					{
-						"group": "Live Classes",
+						"group": "Hosting and Managing Live Classes",
 						"pages": [
 							"live-classes/what-are-live-classes",
 							"live-classes/setup-live-class",
-							"live-classes/event-calendar",
-							"live-classes/public-event",
-							"live-classes/standalone-invites",
 							"live-classes/invite-to-stage",
 							"live-classes/pin-a-tile",
 							"live-classes/live-chat",
 							"live-classes/recording-and-captions",
-							"live-classes/drm-and-watermarking",
+							"live-classes/drm-and-watermarking"
+						]
+					},
+					{
+						"group": "Scheduling and Analytics",
+						"pages": [
+							"live-classes/event-calendar",
+							"live-classes/public-event",
+							"live-classes/standalone-invites",
+							"live-classes/one-one-calls",
+							"live-classes/cloning-class",
 							"live-classes/embed-live-session",
 							"live-classes/livestream-analytics",
 							"live-classes/common-faqs"
@@ -254,7 +260,7 @@
 	"navbar": {
 		"primary": {
 			"type": "button",
-			"label": "Get fermion",
+			"label": "Get Fermion",
 			"href": "https://fermion.app/pricing"
 		}
 	},
