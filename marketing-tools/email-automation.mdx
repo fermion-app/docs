@@ -1,5 +1,5 @@
 ---
-title: 'Email Automation'
+title: 'Email Sender Configuration'
 description: 'Automate your email campaigns to engage learners and keep your students informed.'
 ---
 
@@ -14,12 +14,34 @@ These are just three of the many email flows that are already linked to your acc
 If you have a specific email flow in your mind, useful for your use-case, feel free to share with us by reaching us at [support@codedamn.com](mailto:support@codedamn.com).
 
 ## Setting up a custom email sender
-Fermion provides an option for you to send emails from a dedicated address under your sub-domain.
 
-- Step 1: Go to Settings > Email senders and add a new domain to send emails from.
-![email-sender-step-1](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/11-09-2025/email-sender-step-1.rjbpjm.png)
-- Step 2: Click on the newly created sub-domain to access the DNS records to connect Fermion with your sub-domain
-![email-sender-step-2](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/11-09-2025/comet_j7sDUtxa5w.rzjtgc.png)
-- Step 3: Copy and paste these DNS records in the DNS section of your hosting provider
-![email-sender-step-3](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/11-09-2025/comet_ufp6vyNmxd.dspbag.png)
-- Step 4: Once the records are verified , the state changes to indicate the same and your custom email senders are set up.
+Fermion provides an option to send emails from a dedicated address under your sub-domain.
+
+<Steps>
+  <Step title="Add a new domain">
+    Go to **Settings > Email Senders** and add a new domain to send emails from.  
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/11-09-2025/email-sender-step-1.rjbpjm.png)
+  </Step>
+
+  <Step title="Access DNS records">
+    Click on the newly created sub-domain to access the DNS records required to connect Fermion with your sub-domain.  
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/11-09-2025/comet_j7sDUtxa5w.rzjtgc.png)
+  </Step>
+
+  <Step title="Add DNS records to your host">
+    Copy and paste the provided DNS records into the DNS section of your hosting provider.  
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/11-09-2025/comet_ufp6vyNmxd.dspbag.png)
+  </Step>
+
+  <Step title="Verify records">
+    Once the records are verified, the status will update to indicate verification, and your custom email sender will be ready to use.
+  </Step>
+</Steps>
+
+## Next steps
+
+<Columns cols={1}>
+  <Card title="Email Marketing">
+    To expand your marketing reach, explore **email marketing** at Fermion. Learn how to create campaigns, manage use groups, and send emails by visiting the [email marketing documentation](/marketing-tools/email-marketing).
+  </Card>
+</Columns>
