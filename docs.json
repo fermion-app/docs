@@ -76,12 +76,14 @@
 					{
 						"group": "Digital Products",
 						"pages": [
-							"ebooks/introduction",
-							"ebooks/landing-page",
-							"ebooks/enroll-students",
-							"ebooks/ebook-course",
-							"ebooks/embed-ebook",
-							"ebooks/downloadable-products"
+							"digital-products/introduction",
+							"digital-products/landing-page",
+							"digital-products/enroll-students",
+							"digital-products/ebook-course",
+							"digital-products/embed-ebook",
+							"digital-products/downloadable-products",
+							"digital-products/object-storage"
+
 						]
 					},
 					{
