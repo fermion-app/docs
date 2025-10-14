@@ -72,38 +72,35 @@ But yes, if you're hosting a custom HTML/CSS/JS build without any bundler, you m
 ## How can you upload a custom page?
 
 Follow the steps below to understand how source-code hosting works on Fermion.
+<Steps>
 
-### Step 1
-
+<Step title=" Navigate to Pages & redirects">
 From your dashboard, navigate to `Pages & redirects`.
 
 ![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/24-11-2024/32%402x.zmznlx.png)
+</Step>
 
-### Step 2
-
-Click on `Custom pages` and go to the `Manage Fermion` section
+<Step title="Access Custom Pages">
+Click on `Custom pages` and go to the `Manage Fermion` section.
 
 ![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/24-11-2024/58%402x.pmticb.png)
+</Step>
 
-### Step 3
-
-Choose from available technologies
+<Step title="Choose your technology">
+Choose from available technologies.
 
 ![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/24-11-2024/33%402x.kxgjgj.png)
 
 When building your static website on Fermion, you can choose from several modern web technologies. For simpler projects or custom implementations, you can use plain HTML/CSS/JavaScript.
 
 <Info>
-	All these technologies will be properly hosted on Fermion with full asset
-	support (CSS, JavaScript, images, etc.) through our CDN.
+All these technologies will be properly hosted on Fermion with full asset support (CSS, JavaScript, images, etc.) through our CDN.
 </Info>
 
 For example: I'll be demonstrating the process by uploading a basic HTML website. So I will choose the `custom HTML website` option. Similarly, based on your requirements you can choose from available options of technologies.
 
 <Tip>
-	Please note that this step is merely for demonstration purpose. It is not
-	mandatory to choose the <code>custom HTML website</code> option. Please
-	choose the option which suits the best for your needs.
+Please note that this step is merely for demonstration purpose. It is not mandatory to choose the <code>custom HTML website</code> option. Please choose the option which suits the best for your needs.
 </Tip>
 
 ![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/24-11-2024/08%402x.wvlfvk.png)
@@ -111,31 +108,37 @@ For example: I'll be demonstrating the process by uploading a basic HTML website
 Once you have clicked on the option, you will see further instructions and details for deploying your website project. Note that these instructions are different for every technology.
 
 ![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/24-11-2024/20%E2%80%AFPM.svvcxj.png)
+</Step>
 
-### Step 5
-
+<Step title="Prepare your ZIP file">
 Prepare for the upload. Create a ZIP file containing your website files. All static assets (HTML, CSS, JavaScript, images) should be included in this ZIP file.
+</Step>
 
-### Step 6
-
+<Step title="Upload your website">
 Upload your website by clicking the "Upload website ZIP file" button. The system will process your ZIP file and deploy it to the CDN.
 
 ![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/24-11-2024/58%402x.eiirbe.png)
 
-### Step 7
+<Warning>
+Fermion does **not** store your ZIP files. Once uploaded, your ZIP is **flattened and hosted alongside your school's assets**. This means it is difficult to recover old code after uploading. Make sure you retain a local copy of your files before deployment.
+</Warning>
+</Step>
 
+<Step title=" Configure static assets">
 Configure your static assets to use the CDN prefix URL. There are two ways to do this:
 
--   Update your base href tag in your HTML:
+- Update your base href tag in your HTML:
     `<base href="https://custom-webpage-static-assets-production.fermion.app/66467a43e44cda2c9f7ab7a9-custom-zip-pages/">`
 
--   Or prefix all your static asset URLs with the CDN URL:
+- Or prefix all your static asset URLs with the CDN URL:
+    - Before: ./my-script.js
+    - After: https://custom-webpage-static-assets-production.fermion.app/66467a43e44cda2c9f7ab7a9-custom-zip-pages/my-script.js
+</Step>
 
-    -   Before: ./my-script.js
-    -   After: https://custom-webpage-static-assets-production.fermion.app/66467a43e44cda2c9f7ab7a9-custom-zip-pages/my-script.js
-
-### Step 8
-
+<Step title="Verify publication">
 Once uploaded and configured, your page will be published and accessible. You can verify this by checking the status which should show as "Published" in the pages list.
 
 ![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/24-11-2024/59%402x.pldzlh.png)
+</Step>
+
+</Steps>
