@@ -103,6 +103,13 @@
 						]
 					},
 					{
+						"group": "Gamification",
+						"pages": [
+							"gamification/introduction",
+							"gamification/features"
+						]
+					},
+					{
 						"group": "Custom Pages",
 						"pages": [
 							"custom-landing-pages/introduction",
