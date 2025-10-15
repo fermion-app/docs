@@ -1,0 +1,99 @@
+---
+title: "Compile API"
+description: "Use Fermion’s Compile API to execute code in multiple programming languages securely and retrieve real-time output."
+---
+
+The **Compile API** allows you to execute arbitrary code in a secure, sandboxed environment directly through Fermion’s backend. This is ideal for online coding exercises, testing snippets, or building coding playgrounds on your platform.
+
+You can send a POST request with your source code and configuration details, and the API returns the program’s output, error messages, and execution metadata, right inside your instructor dashboard.
+
+<Check>
+Before you start, make sure **Coding labs** are enabled under **Manage Features** in your instructor dashboard. Learn how to enable features at Fermion [here](/manage-settings/manage-features)
+</Check>
+
+---
+
+## Supported languages
+
+Fermion currently supports the following runtimes for code execution:
+
+- **C**  
+- **C++**  
+- **Java**  
+- **Python**  
+- **Node.js (JavaScript)**  
+- **SQLite (3.48.0)**  
+- **Go (1.19)**  
+- **Rust (1.87)**  
+- **.NET 8**  
+- **MySQL 8**
+
+Each language runs in a secure, isolated container with seperate resources.
+
+---
+## How does compile API work?
+
+You can access compile API directly inside your instructor user dashboard by heading over to **Coding labs** → **Compile API**.
+
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/15-10-2025/chrome_74extBr1hQ.lrrdgl.png)
+
+After accessing this section, you will be presented with the following two panes: 
+
+<Columns cols={2}>
+
+  <Card title="Write and Run Code">
+    On the left side, you can write and edit your source code in the built-in editor using any of the supported languages. 
+    Simply choose the language from the dropdown and click **Run code** to execute it securely in Fermion’s sandboxed environment.
+  </Card>
+
+  <Card title="API Preview">
+    On the right side, you can view the automatically generated **cURL request**: showing exactly how to call the Fermion Compile API programmatically. 
+  </Card>
+
+
+</Columns>
+
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/15-10-2025/chrome_DwdJJL8IeA.kprbaj.png)
+
+After clicking **Run code**, you will see the execution results, including status, timing, memory usage, and program output. Example:
+
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/15-10-2025/chrome_03ChiHatr6.mlgwpt.png)
+
+## Example usage
+
+Here’s a sample `curl` request to execute a C++ code to compute sum of two variables:
+
+```bash
+curl -X POST https://backend.codedamn.com/api/public/request-dsa-code-execution \
+ -H 'content-type: application/json' \
+ -H 'fermion-api-key: YOUR_API_KEY' \
+ -d '{
+ "data": [
+  {
+   "data": {
+    "language": "Cpp",
+    "runConfig": {},
+    "sourceCodeAsBase64UrlEncoded": "I2luY2x1ZGUgPGlvc3RyZWFtPiAKdXNpbmcgbmFtZXNwYWNlIHN0ZDsKCmludCBtYWluKCkgewoJaW50IGEgPTQ7CglpbnQgYj01OwoJY291dDw8YStiOwoJcmV0dXJuIDA7Cn0"
+   }
+  }
+ ]
+}'
+```
+## Next steps
+
+To learn more about Fermion API, head over to the following sections for more in depth instructions on executing code over Fermion API.
+
+<Columns cols={2}>
+
+  <Card title="Executing Labs over API" href="/creating-io-coding-labs/api-usage">
+    Learn how to execute your coding labs programmatically using Fermion’s  API. 
+    Run code securely in a sandboxed environment and get real-time results.
+  </Card>
+
+  <Card title="Fermion API Reference" href="/api-guide/introduction">
+    Access the complete Fermion API documentation. 
+    Understand endpoints, request formats, and examples to integrate Fermion into your applications.
+  </Card>
+
+</Columns>
+
