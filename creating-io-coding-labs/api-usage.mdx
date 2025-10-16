@@ -40,9 +40,30 @@ Fermion offers the best infrastructure and extremely competitive prices compared
 
 ## Fermion API Key
 
-You must have a valid Fermion API key to run these coding labs. Create a Fermion account and go to Settings > API access section in your instructor dashboard to get the key.
+You must have a valid Fermion API key to run these coding labs. Create a Fermion account and go to Settings > API access section in your instructor dashboard to get the key. Learn how to get your [API key here](/api-guide/introduction#how-to-get-your-api-key)
 
-## Step 1 - Submit Code for Execution
+## Base64URL Encoding
+
+Base64URL encoding is **critical** for proper API usage. The DSA execution API requires Base64URL encoding (not standard Base64) for several fields including **source code**, **expected output**, **stdin input**, and **file attachments** for [SQL labs](/creating-io-coding-labs/sql-over-api).
+
+### Why Base64URL Encoding?
+
+Base64URL encoding is a URL-safe variant of Base64 that:
+
+-   Replaces `+` with `-` (dash)
+-   Replaces `/` with `_` (underscore)
+-   Removes padding `=` characters
+-   Ensures the encoded string is safe for use in URLs and JSON
+
+<Warning>
+	Using standard Base64 encoding instead of Base64URL will cause API errors or
+	unexpected behavior. Always use Base64URL encoding for the API. Learn more about [Base64URL encoding](https://b64encode.com/blog/base64url-guide/)
+</Warning>
+
+## How to execute IO/DSA labs over API?
+
+<Steps>
+<Step title='Submit code for execution'>
 
 Use the **Request DSA code execution [batch]** endpoint to submit one or more code executions.
 
@@ -65,21 +86,63 @@ For SQLite code execution, you must include a ZIP file containing a `db.sqlite` 
 	}
 }
 ```
+Learn more about [executing sql queries over API](/creating-io-coding-labs/sql-over-api)
+
 
 The API returns an array of task IDs in the same order of challenges that you submitted, that you can use to retrieve results later.
 
-## Step 2 - Retrieve Execution Results
+```json
+{
+    "output": 
+	{
+      "status": "ok",
+      "data": 
+	  {
+        "taskIds": [ "<string>"]
+      }
+    }
+}
+```
 
-Use the **Get DSA code execution result [batch]** endpoint to retrieve results of submitted executions.
+
+</Step>
+
+<Step title="Retrieve execution results">
+
+Use the **Get DSA code execution result [batch]** endpoint to retrieve results of submitted executions. You will have to pass the Fermion API key so that we can authenticate your request
+
+Here's a sample cURL request to get the execution results of the task IDs returned from the previous endpoint
+
+```bash
+curl --request POST \
+  --url https://backend.codedamn.com/api/public/get-dsa-code-execution-result-batch \
+  --header 'Content-Type: application/json' \
+  --header 'FERMION-API-KEY: <api-key>' \
+  --data '{
+  "data": [
+    {
+      "data": {
+        "taskUniqueIds": [
+          "<string>"
+        ]
+      }
+    }
+  ]
+}
+```
+
 
 For detailed API specification, request/response schemas, and interactive examples, see the official API documentation: [Get DSA code execution result [batch]](https://docs.fermion.app/api-reference/dsa/get-dsa-code-execution-result-[batch])
 
-## Using Webhook URLs for Instant Results (Recommended)
 
-    Instead of polling for results, it's recommended to use the
-    `callbackUrlOnExecutionCompletion` parameter in your `runConfig`. This
-    webhook URL will receive a POST request with the execution results
-    immediately when processing completes, eliminating the need for repeated
+</Step>
+
+</Steps>
+
+## Using webhook URLs for instant results (recommended)
+
+    Instead of polling for results, it's recommended to use the`callbackUrlOnExecutionCompletion` parameter in your `runConfig`. This
+    webhook URL will receive a POST request with the execution results immediately when processing completes, eliminating the need for repeated
     polling and providing faster response times.
 
 <Tip>
@@ -101,16 +164,31 @@ For detailed API specification, request/response schemas, and interactive exampl
 	}
 }
 ```
-
 Your webhook endpoint will receive the complete execution result as a POST request body, containing the same data structure as the batch result API response.
 
+--- 
+
+## Required Fields
+
+The following fields **must** be Base64URL encoded:
+
+-   `sourceCodeAsBase64UrlEncoded` - Your source code
+-   `expectedOutputAsBase64UrlEncoded` - Expected program output
+-   `stdinStringAsBase64UrlEncoded` - Input data for the program
+-   `base64UrlEncodedZip` - ZIP file contents for SQLite
+-   `stdoutBase64UrlEncoded` - Program output (in responses)
+-   `stderrBase64UrlEncoded` - Error output (in responses)
+
 ## Task Status Values
+
+Each submitted coding task in Fermion's DSA execution API has a `codingTaskStatus` that indicates its current stage of processing. The `codingTaskStatus` can have the following values:
 
 -   **`Pending`**: Task is queued for execution
 -   **`Processing`**: Task is currently being executed
 -   **`Finished`**: Task execution completed
 
 ## Run Status Values
+The `runStatus` field inside runResult provides detailed feedback about the outcome of code execution. The `runStatus` field can have the following values: 
 
 -   **`successful`**: Code executed successfully
 -   **`compilation-error`**: Code failed to compile
@@ -124,34 +202,7 @@ Your webhook endpoint will receive the complete execution result as a POST reque
 -   **`internal-isolate-error`**: Internal system error
 -   **`unknown`**: Unknown error occurred
 
-## Base64URL Encoding
 
-Base64URL encoding is **critical** for proper API usage. The DSA execution API requires Base64URL encoding (not standard Base64) for several fields including source code, expected output, stdin input, and file attachments.
-
-### Why Base64URL Encoding?
-
-Base64URL encoding is a URL-safe variant of Base64 that:
-
--   Replaces `+` with `-` (dash)
--   Replaces `/` with `_` (underscore)
--   Removes padding `=` characters
--   Ensures the encoded string is safe for use in URLs and JSON
-
-<Warning>
-	Using standard Base64 encoding instead of Base64URL will cause API errors or
-	unexpected behavior. Always use Base64URL encoding for the API.
-</Warning>
-
-### Required Fields
-
-The following fields **must** be Base64URL encoded:
-
--   `sourceCodeAsBase64UrlEncoded` - Your source code
--   `expectedOutputAsBase64UrlEncoded` - Expected program output
--   `stdinStringAsBase64UrlEncoded` - Input data for the program
--   `base64UrlEncodedZip` - ZIP file contents for SQLite
--   `stdoutBase64UrlEncoded` - Program output (in responses)
--   `stderrBase64UrlEncoded` - Error output (in responses)
 
 ## Error Handling
 

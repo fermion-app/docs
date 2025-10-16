@@ -187,6 +187,7 @@
 						"group": "Executing Labs over API",
 						"pages": [
 							"creating-io-coding-labs/api-usage",
+							"creating-io-coding-labs/sql-over-api",
 							"creating-io-coding-labs/compile-api"
 							
 						]
