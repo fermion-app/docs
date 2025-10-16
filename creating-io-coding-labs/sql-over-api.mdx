@@ -3,28 +3,136 @@ title: 'Executing SQL via API'
 description: 'Learn how to execute SQLite code using Fermion DSA API, including preparing your database file and encoding it correctly.'
 ---
 
-# Executing SQLite Queries via API
+SQLite execution requires a small extra step compared to other languages: you need to upload a database file (`db.sqlite`), encoded as base64URL `string`, as part of your request.
 
-SQLite execution requires a small extra step compared to other languages:  
-you need to upload a database file (`db.sqlite`) as part of your request.
-
-This guide will walk you through everything — from preparing your `.sqlite` file to encoding and sending it through the API.
+This guide will walk you through everything: from preparing your `.sqlite` file to encoding and sending it through the API.
 
 ---
 
-## Step 1 - Create a Sample SQLite Database
+<Steps>
+  <Step title="Create a Sample SQLite Database">
 
-Create a simple SQLite database and populate it with sample data.
+  Create a simple SQLite database and populate it with sample data.
 
-```sql
--- schema.sql
-CREATE TABLE users (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT NOT NULL,
-  email TEXT UNIQUE NOT NULL
-);
+  ```sql
+  -- schema.sql
+  CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL
+  );
 
-INSERT INTO users (name, email) VALUES
-('Alice', 'alice@example.com'),
-('Bob', 'bob@example.com'),
-('Charlie', 'charlie@example.com');
+  INSERT INTO users (name, email) VALUES
+  ('Alice', 'alice@example.com'),
+  ('Bob', 'bob@example.com'),
+  ('Charlie', 'charlie@example.com');
+  ```
+
+  You can run this locally using sqlite3:
+
+  ```bash
+  sqlite3 db.sqlite < schema.sql
+  ```
+
+  </Step>
+
+  <Step title="Prepare Files for API Request">
+
+  The Fermion API requires:
+
+  - A ZIP file containing your `db.sqlite` file (Base64URL encoded)
+
+  Here’s how to generate encodings in Python.
+
+  ```python
+import base64
+import zipfile
+
+def base64url_encode(data: bytes) -> str:
+    # Base64 URL-safe encoding without padding
+    return base64.urlsafe_b64encode(data).decode("utf-8").rstrip("=")
+
+# Create a ZIP containing db.sqlite
+zip_filename = "db.zip"
+with zipfile.ZipFile(zip_filename, "w", zipfile.ZIP_DEFLATED) as zipf:
+    zipf.write("db.sqlite", arcname="db.sqlite")  # must be exactly 'db.sqlite'
+
+print(f"{zip_filename} created successfully!")
+
+# Read ZIP bytes
+with open(zip_filename, "rb") as f:
+    zip_bytes = f.read()
+
+# Base64URL encode
+encoded_zip = base64url_encode(zip_bytes)
+
+# Save encoded string to file
+with open("encoded.txt", "w") as f:
+    f.write(encoded_zip)
+
+print("Base64URL encoded string saved to encoded.txt")
+  ```
+If you run the above python script in the same folder where you have the db.sqlite file, the script will provide you with a db.zip file and another file called **encoded.txt**, which will the base64URL encoded string of the db.zip file. 
+
+You can utilize this string while making the API request.
+
+  </Step>
+
+  <Step title="Make the API Request">
+
+  Once you have the encoded SQL and ZIP file, send them via the Request DSA code execution [batch] endpoint:
+
+  ```json
+  {
+    "language": "Sqlite_3_48_0",
+    "sourceCodeAsBase64UrlEncoded": "<your-sql-query-base64url>",
+    "additionalFilesAsZip": {
+      "type": "base64url-encoding",
+      "base64UrlEncodedZip": "<your-db-zip-base64url>"
+    },
+    "runConfig": {
+      "callbackUrlOnExecutionCompletion": "https://your-domain.com/webhook/sqlite-result",
+      "customMatcherToUseForExpectedOutput": "ExactMatch",
+      "cpuTimeLimitInMilliseconds": 2000,
+      "wallTimeLimitInMilliseconds": 5000,
+      "memoryLimitInKilobyte": 131072
+    }
+  }
+  ```
+
+  > The ZIP must **contain exactly one file named `db.sqlite`** : the API expects this name. Do not rename it to anything else inside the ZIP archive.
+
+  </Step>
+
+  <Step title="Retrieve or Receive Results">
+
+  You can either:
+
+  - Poll results via [Get DSA code execution result [batch]](/api-reference/dsa/get-dsa-code-execution-result-[batch])
+  - Receive a webhook automatically if you specified `callbackUrlOnExecutionCompletion`
+
+  A successful response will look like:
+
+  ```json
+  {
+    "output": {
+      "status": "ok",
+      "data": {
+        "taskIds": ["b5d8b..."]
+      }
+    }
+  }
+  ```
+  </Step>
+
+
+
+</Steps>
+
+## Best practices
+
+- Ensure the ZIP file only contains **`db.sqlite`** , not folders or other files.
+- Always use **Base64URL**, not standard Base64.
+- Use `.sqlite` files created with **SQLite version 3.48.0**.
+
+---
