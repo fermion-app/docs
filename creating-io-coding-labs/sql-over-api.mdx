@@ -1,0 +1,30 @@
+---
+title: 'Executing SQL via API'
+description: 'Learn how to execute SQLite code using Fermion DSA API, including preparing your database file and encoding it correctly.'
+---
+
+# Executing SQLite Queries via API
+
+SQLite execution requires a small extra step compared to other languages:  
+you need to upload a database file (`db.sqlite`) as part of your request.
+
+This guide will walk you through everything — from preparing your `.sqlite` file to encoding and sending it through the API.
+
+---
+
+## Step 1 - Create a Sample SQLite Database
+
+Create a simple SQLite database and populate it with sample data.
+
+```sql
+-- schema.sql
+CREATE TABLE users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  email TEXT UNIQUE NOT NULL
+);
+
+INSERT INTO users (name, email) VALUES
+('Alice', 'alice@example.com'),
+('Bob', 'bob@example.com'),
+('Charlie', 'charlie@example.com');

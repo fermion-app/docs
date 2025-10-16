@@ -179,9 +179,17 @@
 							"creating-io-coding-labs/introduction",
 							"creating-io-coding-labs/creating-io-lab-successfully",
 							"creating-io-coding-labs/sql-lab",
-							"creating-io-coding-labs/compile-api",
-							"creating-io-coding-labs/embed-lab",
-							"creating-io-coding-labs/api-usage"
+							"creating-io-coding-labs/embed-lab"
+
+						]
+					},
+					{
+						"group": "Executing Labs over API",
+						"pages": [
+							"creating-io-coding-labs/api-usage",
+							"creating-io-coding-labs/sql-over-api",
+							"creating-io-coding-labs/compile-api"
+							
 						]
 					}
 				]
@@ -197,6 +205,7 @@
 							"live-classes/invite-to-stage",
 							"live-classes/pin-a-tile",
 							"live-classes/live-chat",
+							"live-classes/whiteboard",
 							"live-classes/recording-and-captions",
 							"live-classes/drm-and-watermarking"
 						]
