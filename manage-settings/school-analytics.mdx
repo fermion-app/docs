@@ -1,29 +1,122 @@
 ---
 title: 'Analytics'
-description: 'Track usage, engagement, lab activity, and key metrics for your Fermion school.'
+description: 'View student activity, usage insights, and performance metrics for your Fermion-powered school.'
 ---
 
-Fermion provides comprehensive analytics for your school, allowing you to track metrics, student activities, and bandwidth usage in one place.
+Fermion’s **Analytics** provides a unified view of how your school performs:  tracking bandwidth, storage, engagement, and activity across the platform.  
+These insights help you optimize learning experiences, monitor system usage, and understand your audience better.
 
-## Overview of Analytics Features
+![Analytics overview](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/20-10-2025/chrome_Lzem18SyFN.vblbss.png)
 
-School analytics allow you to monitor:
+---
 
-- **Bandwidth Consumed:** Displays total outbound bandwidth used by your school across all content—useful for understanding traffic and ensuring you stay within limits.
-- **Storage Usage:** Track how much storage space your uploaded videos, files, and resources are using.
-- **Page Views & Visitors:** View daily/monthly trends for views on your school, and track unique visitors to understand activity and outreach.
-- **Coding Lab Hours:** See the total hours spent by students in coding sandboxes or code labs—useful for monitoring student engagement and infrastructure usage.
-- **DSA Lab Runs:** Shows how many times students have executed Data Structure & Algorithms (DSA) challenges or labs.
-- **Emails Sent:** Track the number of outgoing emails triggered by actions such as enrollments, announcements, and automations.
+## Platform overview
 
-## Engagement & Source Insights
+The **Platform analytics** section provides a snapshot of your school’s performance and infrastructure usage. You can filter analytics by date range using the date selector on the top right.
 
-You can also dive deeper into user behavior with:
+<Columns cols={2}>
+  <Card title="Bandwidth consumed">
+    Shows total **bandwidth** used by your school for all hosted content - including video, labs, and API calls. This metric is used for **bandwidth overage billing**.
+  </Card>
 
-- **Top Referrers:** Discover which sources or platforms are driving the most traffic to your school (for example, links from your website, social media, or email campaigns).
-- **Top School Pages:** See which pages, courses, or resources are most popular with your visitors.
+  <Card title="Storage used">
+    Displays total **storage space** occupied by your uploaded files, videos, and resources.Exceeding your plan’s quota may lead to **storage overages**.
+  </Card>
+</Columns>
 
-These insights help you understand student engagement and optimize your school’s content for better reach and experience.
+<Columns cols={2}>
+  <Card title="Page views & visitors">
+    View total **page-views** and unique **visitors** over the selected time range. This helps you understand how new and distinct learners interact with your content.
+  </Card>
 
-You can access the analytics page from the instructor dashboard by going to : **Dashboard -> Analytics**.
-![analytics](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/10-10-2025/Arc_Igh8hcBhyz.slskau.png)
+  <Card title="Coding & DSA labs">
+    Monitor **coding lab activity** (hours spent) and **DSA lab runs** (executions). Useful for tracking student engagement and lab infrastructure usage for your entire school.
+  </Card>
+</Columns>
+
+<Columns cols={2}>
+  <Card title="Email analytics">
+    Track all outgoing communication from your school, including:
+    - **Emails sent:** Total number of emails dispatched.
+    - **Emails bounced:** Emails that failed to deliver.
+    - **Marked as spam:** Emails flagged by users or email providers as spam.  
+    - **Unsubscribed users:** Number of users who opted out of future emails.  
+  </Card>
+
+  <Card title="DRM licenses">
+    Monitor the number of **Digital Rights Management (DRM)** licenses utilized across your hosted video content.Each DRM license corresponds to a secured video playback instance.  
+  </Card>
+</Columns>
+
+
+![Platform analytics graph](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/20-10-2025/chrome_Fa0HLNCq2J.uwkkkd.png)
+
+
+---
+
+## Engagement & traffic insights
+
+The lower section of the analytics page shows detailed engagement and audience insights.  
+These metrics help you identify where users come from, what pages they visit most, and what devices or browsers they use.
+
+![Engagement metrics](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/20-10-2025/chrome_s4Oc0l250M.gucgis.png)
+
+<Columns cols={2}>
+  <Card title="Top Referrers">
+    Lists the top external sources that drive visitors to your school (e.g., social media, partner websites, or search engines).
+  </Card>
+
+  <Card title="Top Pages">
+    Displays your most visited pages and routes (such as `/join-call`, `/course-item`, or `/dashboard`). This helps to identify your most popular pages across school.
+  </Card>
+</Columns>
+
+<Columns cols={2}>
+  <Card title="Operating systems & browsers">
+    Shows what **devices (Operating System) and browsers** your users are accessing the platform from.
+  </Card>
+
+  <Card title="Geographic insights">
+    View where your users are located, including **countries**, to understand your global reach.
+  </Card>
+</Columns>
+
+<Check>
+  Your **Analytics Dashboard** is the single source of truth for how Fermion bills you for **usage and overages**. Metrics like **bandwidth consumed**, **storage used**, and **DRM licenses** directly influence your monthly billing.  
+
+  Fermion’s pricing is **transparent and usage-based**, ensuring you only pay for what you actually consume. Head over to the [Fermion Pricing](https://fermion.app/pricing) page to learn more about plan limits and overage calculations.
+</Check>
+
+---
+
+## Accessing analytics
+
+<Steps>
+  <Step title="Open your instructor dashboard">
+    Head to your **Instructor Dashboard** after logging into your Fermion school.
+  </Step>
+
+  <Step title="Navigate to analytics">
+    In the sidebar, click on **Analytics** to open the analytics dashboard and view performance metrics.
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/20-10-2025/hS9oexgAhJ.vqpdqd.png)
+  </Step>
+
+  <Step title="Explore metrics">
+    Use the **date filter** to explore real-time data such as bandwidth, storage, traffic, email performance, and engagement.
+  </Step>
+</Steps>
+
+## Next steps 
+
+<Columns cols={2}>
+  <Card title="Manage Instructors" href="/manage-settings/manage-instructors">
+    Learn how to add, remove, and assign roles to instructors within your school.  
+    [Read instructor management guide](/manage-settings/manage-instructors)
+  </Card>
+
+  <Card title="Manage Users" href="/manage-settings/manage-users">
+    Understand how to view and control user access in your school.  
+    [View user management guide](/manage-settings/manage-users)
+  </Card>
+</Columns>
+
