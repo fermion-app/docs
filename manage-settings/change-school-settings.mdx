@@ -1,22 +1,196 @@
 ---
 title: 'School Settings'
-description: 'Manage your institution’s settings, including branding, policies, and default preferences for courses and users'
+description: 'Learn how to configure your school’s branding, login options, security, and other administrative settings.'
 ---
 
+You can manage your school’s metadata, branding, login preferences, and security settings from the **School Settings** section. You can use this area to personalize your institution’s identity, control how users log in, and fine-tune advanced configurations.
 
-Fermion allows you to customize your school with additional school settings available exclusively for you inside your Fermion dashboard. 
+---
 
-* Step 1: 
-Head over to `School Settings` inside your dashboard. 
-![h_HWDozhHUwE_5uIZSCTk](https://creator-assets.codedamn.com/fermion-instructor/07-08-2024/instructor_66467ae8ada1f52e23942268/h_HWDozhHUwE_5uIZSCTk)
+### Accessing school settings
 
-* Step 2: 
-Under "School Settings" you can customize your school title, change your school's photo, as well as add a custom page URL where the user is redirected after a successful payment, though this custom URL is totally optional.
-![vTjX6ksLGCygV8OTWJJ6g](https://creator-assets.codedamn.com/fermion-instructor/09-08-2024/instructor_66467ae8ada1f52e23942268/vTjX6ksLGCygV8OTWJJ6g)
+To open the **School Settings** page:
 
-* Step 3: 
-You can also make a few more customizations to improve the experience of students inside your school by adding a custom user onboarding flow inside your school to understand more about your audience, with this, you can also change the appearance of your school to a certain extent by using custom CSS code injections. 
-![g3eR0JUNtFrma83_iOtz_](https://creator-assets.codedamn.com/fermion-instructor/09-08-2024/instructor_66467ae8ada1f52e23942268/g3eR0JUNtFrma83_iOtz_)
+<Steps>
+  <Step title="Open instructor dashboard">
+    Log in to your instructor account and navigate to your **Dashboard**.
+  </Step>
+  <Step title="Go to Settings">
+    In the sidebar, click **Settings** to expand the available configuration options.
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/21-10-2025/qO9jGpNhcT.ydhnsl.png)
+  </Step>
+  <Step title="Select School settings">
+    Click **School Settings** to open the full configuration panel where you can customize your school’s information, branding, and other options.
+  </Step>
+</Steps>
+
+---
+
+## Basic Information & Branding
+
+Configure your school’s core details, website metadata, and visual identity.
+
+<Note>
+If you need to change your school’s URL, please contact support@codedamn.com. School URLs cannot be changed manually.
+</Note>
+
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/21-10-2025/chrome_PdqRKDQMbD.iybuuq.png)
+
+You can change the following details of your school here
+- **Website URL**: Displays your current school URL (e.g., `https://demo.fermion.app`).
+- **Website name**: Set the public display name for your school.
+- **Square logo (1:1)**: Used as your favicon and brand icon on checkout.
+- **Rectangle logo (16:9)**: Appears as your website’s header logo.
+- **Header logo style**: Select the style of logo you wish to display on the **header**
+  - **Full width logo**: Uses the rectangle image as your header logo.
+  - **Square logo with text**: Uses the square image along with your site title.
+
+  Click on **Save changes** to publish your updates in your school branding.
 
 
-Click on "Save" to save the changes once you're doing editing. 
+
+---
+
+## Login options
+
+Manage which authentication methods are available for your users.
+
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/21-10-2025/chrome_LCSmGTIcpY.bjtwrl.png)
+
+**Available methods:**
+- **Google Login** – Enable sign-in via Google.
+- **Email/Password** – Standard email and password-based login.
+- **Phone Number** – Allow sign-in using a phone number and OTP.
+
+<Note>
+At least one login method must be enabled for users to access their accounts. You can also enable multiple login methods to increase ease of accessiblity of your students.
+</Note>
+
+---
+
+## Security
+
+Control security behavior for your school, including device limits, logout permissions, password access, and [video watermarking](/live-classes/drm-and-watermarking#video-watermarking).
+
+
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/21-10-2025/chrome_Amb6ulzrA5.duupae.png)
+
+#### Device login limit
+- **Maximum device login limit**: Specify how many devices a user can stay logged in on at once.
+- Exceeding this limit prompts the user to log out from older sessions.
+
+<Note>
+If your users access school with the help of their mobile devices, we recommend setting this option to at least **two devices**.
+</Note>
+
+#### Session and access controls
+- **Disable user logout**: Prevents users from manually logging out of their sessions.
+<Check>If you have enabled this option, you will have to manually logout users with the help of user access log. Please refer to [user access log](/manage-settings/user-access-logs) documentation to learn more </Check>  
+- **Enable password protection for your website**: Restrict access to your site behind a password (ideal for pre-launch or private schools).
+
+#### Video watermarking
+Overlay user identifiers dynamically during video playback.
+
+**Watermark configuration:**
+- **Font size (px)**  
+- **Opacity (%)**  
+- **Display options:**
+  - Name  
+  - Email  
+  - Phone Number  
+  - User ID  
+
+  Note that you can select multiple options here to display as watermark.
+
+<Example>
+**Preview:** `John Doe • USERID-1234-5678`
+</Example>
+Learn more about [video watermarking](/live-classes/drm-and-watermarking#video-watermarking)
+
+---
+
+## Support email
+
+Specify the contact email address shown to users for help or technical assistance.
+
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/21-10-2025/chrome_HO1afE7ghR.hvsgmh.png)
+
+Enter your support email address and click **Save changes** to add your support address. You can also preview the **user help** page to preview how it looks from the user's perspective.
+- **Support email address**: Displayed in user help sections and automated communications.
+
+<Note>
+If not set, support requests are sent to your billing email by default.
+</Note>
+
+
+---
+
+## Livestreaming settings
+
+Configure how [livestreaming sessions](/live-classes/what-are-live-classes) are [recorded](/live-classes/recording-and-captions) and displayed to your users.
+
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/21-10-2025/chrome_QI7pGvdfIu.hzkfeo.png)
+You can configure the following options in this section:
+- **Enable HD recording**: Record sessions in high-definition quality. Disable for lower bandwidth usage.  
+- **Always stick to edge**: Prevent students from seeking backward during live playback. This is disabled by default and students can go back and forth during live playback.  
+- **Generate AI transcripts automatically**: Automatically create transcripts and summaries after a stream ends. Note that this is a chargeable feature, head over to [Fermion pricing](https://fermion.app/pricing) to learn more. 
+
+  You can also enable this on a per stream basis inside [courses](/setting-up-course/prerequisites). Head over to **live events** and **edit session** inside a course builder to toggle this option
+- **Automatically add everyone on stage**: Start calls with all participants on [stage](/live-classes/invite-to-stage). By default live calls start with a webinar-like format where people can't speak/turn on their camera unless invited on stage.
+
+
+---
+
+## Recorded video settings
+
+Customize playback and processing rules for uploaded or recorded videos.
+
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/21-10-2025/chrome_xzevxzFVOt.bhqhga.png)
+You can configure the following options here:
+- **Generate AI transcripts automatically**: Automatically create transcripts for recorded videos (chargeable). Note that this is a chargeable feature, head over to [Fermion pricing](https://fermion.app/pricing) to learn more.  
+- **Whitelisted playback origin**: Restrict video embedding to authorized domains (e.g., `https://example.com`).
+
+---
+
+## Terms of Service
+
+A Terms of Service (ToS) is essential for setting clear expectations between your school and its users. It defines acceptable usage policies, protects your intellectual property, limits your legal liability, and outlines the rules that learners and instructors must follow while using your platform. Having a well-defined ToS ensures transparency, reduces disputes, and helps maintain a safe and professional learning environment.
+
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/21-10-2025/chrome_HVjBcmLLeW.fjwrkx.png)
+
+<Info>
+Your Terms of Service will appear publicly at `/terms-of-service` of your school's website.
+</Info>
+
+This editor supports rich text formatting so you can format your texts, add images, markdown blocks and hyperlinks to your terms of service.
+
+
+---
+
+## Privacy policy
+
+Manage your **Privacy Policy** document to define to your students how user data and privacy is handled at your school.
+
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/21-10-2025/chrome_4norjA29ON.mfseix.png)
+
+<Info>
+Your Privacy Policy will appear publicly at `/privacy-policy` page of your school's website.
+</Info>
+
+This editor supports rich text formatting so you can format your texts, add images, markdown blocks and hyperlinks to youe privacy policy.
+
+---
+
+## Additional settings
+
+The Additional Settings section lets you configure extra options that enhance your school’s functionality and branding. Here, you can set up redirects after successful payments, add your physical office address for compliance, inject custom code for advanced styling or scripts, and enable features like the recent sales FOMO widget to improve engagement and conversions.
+
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/21-10-2025/chrome_bD0TGHnkDb.tidmvd.png)
+You can configure the following options for your school:
+- **Post-payment success custom page URL**: You can choose to redirect users after successful payments to a specific webpage of your school's website. You can set up a custom page in your school's website and add the link here. Learn more about [custom pages](/custom-landing-pages/using-source-code) 
+- **Physical office address**: Your office address is displayed in emails for compliance and deliverability.  
+- **Custom code injection**: You can insert JavaScript or CSS globally for your school's website. Learn more about [custom CSS](/manage-settings/custom-css-styling)
+- **Enable recent sales FOMO widget**: you can display real-time notifications for recent purchases on your home page and landing pages for your [courses](/setting-up-course/landing-page). This induces a `fear of missing out` among students and drives better conversion.
+
+---
+
