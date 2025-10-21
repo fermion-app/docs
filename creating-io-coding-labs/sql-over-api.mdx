@@ -159,6 +159,36 @@ You can utilize this string while making the API request.
   }
 ```
 
+
+</Step>
+
+<Step title="SQLite test cases">
+
+SQLite can produce output in multiple formats (up to 14), but **Fermion’s API uses the `list` mode format** for evaluating SQL output.
+
+In list mode, each column value is separated by a `|` (pipe), and each row appears on a new line.  
+Here’s an example:
+
+```bash
+sqlite> SELECT * FROM users;
+Alice|alice@fermion.app
+Bob|bob@fermion.app
+Charlie|charlie@fermion.app
+sqlite>
+```
+To get the expected output for your own query against your own database, 
+create a file called script.sql that has the solution query, and run the following command locally on your system:
+
+```bash
+cat script.sql | sqlite3 db.sqlite
+```
+This command will print the output in the same list format that Fermion expects.
+You can then take this exact output, encode it using Base64URL, and include it in your API request under:
+
+```json
+"expectedOutputAsBase64UrlEncoded": "<base64url-of-your-expected-output>"
+```
+
   </Step>
 
   <Step title="Retrieve results">
