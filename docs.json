@@ -145,7 +145,6 @@
 						"group": "Manage Settings",
 						"pages": [
 							"manage-settings/change-school-settings",
-							"manage-settings/change-instructor-details",
 							"manage-settings/manage-payouts",
 							"manage-settings/custom-css-styling",
 							"manage-settings/custom-links",

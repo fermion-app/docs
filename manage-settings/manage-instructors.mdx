@@ -3,46 +3,303 @@ title: 'Manage Instructors'
 description: 'Add, remove, and customize instructor access and permissions for your Fermion school.'
 ---
 
-You can manage your school's instructors by navigating to **Dashboard > Settings > Manage instructors**.
+You can easily manage your school's instructor team by adding new instructors, editing their profiles, adjusting permissions, or revoking access in the **Manage instructor** section of the **Settings** tab. This feature allows you to maintain control over who can access and teach in your school while keeping your instructor list organized and up-to-date.
 
-![Manage Instructors](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/10-10-2025/Arc_qvLVOJgtX6.kxtagy.png)
+You can view important metrics such as the **total number of instructors**, **active instructors**, and **revoked access** directly from the instructor management panel.
 
-On this page, you can **add new instructors** or **revoke permissions** for existing ones.
+---
+## Manage school instructors
 
-By default, every new instructor is created with full (super admin) access to your school. However, you can customize each instructor’s permissions using granular preset options divided into three categories:
+You can access the **Manage instructor** section with the help of the following steps:
+
+<Steps>
+
+<Step title="Navigate to Settings">
+  In your sidebar, go to **Settings → Manage Instructors**. This will open the instructor management dashboard.
+  ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/21-10-2025/chrome_yd3t1FnvkR.txlbaw.png)
+</Step>
+
+<Step title="View Instructor Overview">
+  On the dashboard, you will see key metrics:  
+  - **Total Instructors**: Total number of instructors in your school.  
+  - **Active Instructors**: Instructors currently with access.  
+  - **Revoked Access**: Instructors whose access has been revoked.
+</Step>
+
+</Steps>
+
+
+## Create new instructor
+
+Managing your school's instructors is simple and efficient. You can add new instructors, update their profiles, adjust their permissions, or revoke access when needed. This ensures that only authorized instructors have access to your school's resources, keeping your team organized and your school secure.
+
+<Steps>
+
+<Step title="Add a new instructor">  
+In the **Instructor Management** dashboard, click **Add New Instructor**.  
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/21-10-2025/chrome_YsCkAVALWP.yuavjn.png)
+</Step>
+<Step title="Fill the instructor details">
+  Fill in the required details:
+     - **Full Name**: Enter the instructor's full name.  
+     - **Email Address**: Enter the instructor's email (e.g., instructor@example.com).  
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/21-10-2025/chrome_zQqMuYYGL6.tnptdg.png)
+      Now, Click **Create instructor** to add the instructor to your school . 
+</Step>
+
+</Steps>
+
+## Edit instructor profile
+
+From this page, you can also manually edit certain details of an instructor profile, such as their **name**, **profile picture**, **tagline**, and **long description**.
+![Edit Instructor Details](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/10-10-2025/Arc_kNO6rZmjpE.twvvgq.png)
+
+You will now see a form where you can update the details of the instructor. After updating any of these fields, click **Update Profile** to save your changes.  
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/21-10-2025/chrome_rAMzd8phIe.cyrxaw.png)
+
+You can update the following information about the instructor:
+- **Instructor name**  
+  Enter or update the instructor’s full name. 
+
+- **Instructor photo**  
+  Upload or change the profile photo. This image will appear on course pages, instructor listings, and the website. Please upload a **high-quality square photo** to ensure proper display. Click **Change** to update the photo.
+
+- **Email**  
+  Shows the instructor’s email address. To change this email, you will need to contact support@codedamn.com. This ensures account security and avoids accidental email changes.
+
+- **Tagline**  
+  A short description or title for the instructor, e.g., “ReactJS Instructor.” This will appear on their public profile page and can help highlight expertise.
+
+- **Long description**  
+  A detailed biography or overview of the instructor. This supports **Markdown**, so you can format text, add links, or lists to make the profile informative and engaging.
+
+
+
+## Instructor permissions
 
 To edit permissions for an instructor, please click on `Edit permissions` next to their instructor name.
 ![edit permissions](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/10-10-2025/Arc_odKAdPtA2j.lgfsuh.png)
 
-## Permission presets
+**Permission presets** on Fermion are designed to give you fine control over what each instructor can do within your school.
 
-**Permission presets** on Fermion are designed to give you fine control over what each instructor can do within your school. Below is an explanation of the main categories and options:
+ Add all of the required presets by clicking on them and providing confirmation. After you have added all the presets, click on **Save changes** to update the configuration.
+
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/21-10-2025/chrome_DGnDKNfhiN.bgxfpj.png)
+
+By default, every new instructor is created with full (super admin) access to your school. However, you can customize each instructor’s permissions using granular preset options divided into three categories:
+
 
 ### Courses
 You can allow an instructor to manage only specific courses, or grant them broader course administration rights:
-- **Single course access:** Instructor can manage only one specific course. They can edit content, enroll students, and handle discussions for that course, but will not see or affect other courses.
-- **All course admin (no delete):** Instructor can edit, manage, and update all courses but cannot delete any course. This is suitable if you want them to help maintain content but prevent accidental (or unauthorized) removal.
-- **All course admin:** Instructor has full admin rights for all courses, including the ability to create, update, or delete any course. This level should be reserved for highly trusted staff.
+
+<AccordionGroup>
+
+<Accordion title="Single course access">
+  **Description:** Create and manage specific courses (You can select which courses you want to provide the access of).  
+
+  **What user can do:**
+  - Create and manage selected course  
+  - Add and edit course content  
+  - Manage course coupons  
+  - View student lists  
+  - Delete course content  
+
+  **What user cannot do:**
+  - Access other courses  
+  - Access billing information  
+  - Manage webhooks  
+  - Access private API keys  
+</Accordion>
+
+<Accordion title="All courses administrator (no delete)">
+  **Description:** Full course management access except any deletion permissions.  
+
+  **What user can do:**
+  - Create and manage all courses  
+  - Add and edit course content  
+  - Manage course coupons  
+  - View student lists  
+  - Update course settings  
+
+  **What user cannot do:**
+  - Delete courses or content  
+  - Access billing information  
+  - Manage webhooks  
+  - Access private API keys  
+</Accordion>
+
+<Accordion title="All courses administrator">
+  **Description:** Full course management access.  
+
+  **What user can do:**
+  - Create and manage all courses  
+  - Add and edit course content  
+  - Manage course coupons  
+  - View student lists  
+  - Update course settings  
+
+  **What user cannot do:**
+  - Access billing information  
+  - Manage webhooks  
+  - Access private API keys  
+</Accordion>
+
+</AccordionGroup>
+
 
 ### Contest
 Control instructor access to contest management features:
-- **Single contest access:** Instructor can oversee and manage a single contest. They can set questions, monitor participation, and update settings for that contest only.
-- **Single contest access (read only):** Instructor can only view information and analytics for one specific contest. They cannot edit or manage any contest settings.
-- **Manage all contests:** Instructor can create, edit, and manage all contests on your school, from setting up problems to analyzing student performance.
+<AccordionGroup>
+
+<Accordion title="Single contest access">
+  **Description:** Manage a specific contest (you will select which contest).  
+
+  **What user can do:**
+  - Create and manage selected contest  
+  - Set contest prices  
+  - Manage contest coupons  
+  - Update contest details  
+
+  **What user cannot do:**
+  - Access other contests  
+  - Manage any course content  
+  - Access billing information  
+  - Manage webhooks  
+  - Access private API keys  
+</Accordion>
+
+<Accordion title="Single contest access [read only]">
+  **Description:** Read-only access to specific contests (you will select which contest).  
+
+  **What user can do:**
+  - Read results of contest  
+  - Export reports of contest  
+  - See enrolled students' performance in contests  
+
+  **What user cannot do:**
+  - Update contest details  
+  - Access other contests  
+  - Manage course content  
+  - Access billing information  
+  - Manage webhooks  
+  - Access private API keys  
+</Accordion>
+
+<Accordion title="Manage all contests">
+  **Description:** Full management access to all contests and their internal data.  
+
+  **What user can do:**
+  - Create and manage all contests  
+  - Set contest prices  
+  - Manage contest coupons  
+  - Update contest details  
+
+  **What user cannot do:**
+  - Manage any course content  
+  - Access billing information  
+  - Manage webhooks  
+  - Access private API keys  
+</Accordion>
+
+</AccordionGroup>
+
 
 ### Miscellaneous
 These settings cover access to other areas and advanced administrative features:
-- **All live events admin:** Instructor can create, edit, and manage all live classes and events in your school, including scheduling, invitations, and control during the actual live session.
-- **Video library access:** Instructor can access the full [video library](/recorded-videos/video-library), allowing them to upload, edit, or manage video resources shared with your students.
-- **Coding labs access:** Instructor can create and manage coding labs, oversee submissions, and monitor student engagement in these interactive environments.
-- **Billing access:** Instructor can view and manage billing information, including invoices, payments, and usage statistics. Sensitive—assign only when needed.
-- **Developer access:** Instructor can access developer settings like API keys, webhooks, advanced integrations, and platform-level configurations.
-- **Read-only super admin:** Instructor can view all school settings, student data, and analytics but cannot make changes anywhere in the system. Useful for oversight or auditing.
+
+<AccordionGroup>
+
+<Accordion title="All live events administrator">
+  **Description:** Full access to manage live events and sessions across all courses.  
+
+  **What user can do:**
+  - Create and manage live events  
+  - Schedule live sessions (outside courses)  
+  - Manage live event settings  
+  - Control participant permissions  
+
+  **What user cannot do:**
+  - Delete courses or content  
+  - Manage course content  
+  - Access billing information  
+  - Manage webhooks  
+</Accordion>
+
+<Accordion title="Video library access">
+  **Description:** Create and manage videos inside the video library.  
+
+  **What user can do:**
+  - Upload videos  
+  - Update video metadata  
+  - Delete videos  
+
+  **What user cannot do:**
+  - Access courses  
+  - Access billing information  
+  - Manage webhooks  
+  - Add/remove admins  
+</Accordion>
+
+<Accordion title="Coding labs access">
+  **Description:** Create and manage coding labs.  
+
+  **What user can do:**
+  - Create new coding labs  
+  - Update existing coding labs  
+  - Delete coding labs  
+
+  **What user cannot do:**
+  - Access courses  
+  - Access billing information  
+  - Manage webhooks  
+  - Add/remove admins  
+</Accordion>
+
+<Accordion title="Billing access">
+  **Description:** Read school transaction ledger data and payout information (Billing tab).  
+
+  **What user can do:**
+  - View transaction history  
+  - Access payout information  
+  - View billing analytics  
+
+  **What user cannot do:**
+  - Manage courses or content  
+  - Manage contests  
+  - Manage webhooks  
+  - Access private API keys  
+</Accordion>
+
+<Accordion title="Developer access">
+  **Description:** Manage webhooks and private API access.  
+
+  **What user can do:**
+  - Manage webhooks  
+  - Access private API keys  
+  - View webhook event logs  
+
+  **What user cannot do:**
+  - Manage courses or content  
+  - Manage contests  
+  - Access billing information  
+</Accordion>
+
+<Accordion title="Read-only admin">
+  **Description:** Manage everything on the platform as an admin, but in read-only mode.  
+
+  **What user can do:**
+  - Manage webhooks  
+  - Access private API keys  
+  - View webhook event logs  
+
+  **What user cannot do:**
+  - Delete courses  
+  - Delete contests  
+  - Remove other admins  
+</Accordion>
+
+</AccordionGroup>
+
 
 Adjust these settings to provide the right level of access for each instructor. This helps you keep your school secure and ensures that instructors can only manage the areas they're responsible for.
 
-From this page, you can also manually edit certain details of an instructor profile, such as their **name**, **profile picture**, **tagline**, and **long description**.
-
-This makes it easy to update an instructor’s public information—useful if someone’s bio changes or you want to add context to their instructor profile.
-
-![Edit Instructor Details](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/10-10-2025/Arc_kNO6rZmjpE.twvvgq.png)
