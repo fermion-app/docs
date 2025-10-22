@@ -24,7 +24,7 @@ Follow these steps to link your WhatsApp Business account to Fermion and enable 
 
   <Step title="Log in to Meta account">
     You will be redirected to Meta to log in with your account. Use the credentials associated with your WhatsApp Business account.
-    ![Sign in at Meta](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/08-10-2025/sign%20in%20at%20facebook.khwgry.png)
+    ![Sign in at Meta](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/22-10-2025/qH8Jb5WLmP.wkjvdr.png)
   </Step>
 
   <Step title="Connect your account to Fermion">
@@ -45,8 +45,8 @@ Follow these steps to link your WhatsApp Business account to Fermion and enable 
 
   <Step title="Fill in business information">
     Please enter the business information concerned with your school. Your audience will not see this information on your WhatsApp profile.
-
-
+    Add your own business name, email address, website URL and the country the business is operated from. 
+    <Note> The data shown in the image is for illustration purposes only. Make sure to replace it with your own business information in the appropriate fields. </Note>
     ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/08-10-2025/add%20business%20details.fikjlq.png)
   </Step>
 
@@ -88,7 +88,7 @@ Follow these steps to link your WhatsApp Business account to Fermion and enable 
   - Click on **Add Payment method** to add a payment method
   - Click on **Edit** in Business info to add correct and updated information about your details
   - Enter your GST number correctly.
-    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/08-10-2025/meta%20billing.wlcyui.png)
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/22-10-2025/EiYfXPWDAv.odblfc.png)
   </Step>
 
   <Step title="Finish setup">
@@ -124,7 +124,7 @@ Once your WhatsApp Business account is connected to Fermion, you can start sendi
 
     In this section, you can design a new message template using dynamic variables such as session name, start time, and participant name.
 
-    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/08-10-2025/00___pm__2_.pdlfob.png)
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/22-10-2025/chrome_vFmeKYw4qC.ucjvev.png)
   </Step>
 
   <Step title="Customize your template">
@@ -141,10 +141,10 @@ Once your WhatsApp Business account is connected to Fermion, you can start sendi
     - **Header (Optional):** *Live Session Starting Soon*  
     - **Body:**  
       ```
-      Hi {{participant_name}},
+      Hi {{participantName}},
 
-      Your live session "{{session_name}}" starts at {{session_start_time}} 
-      in {{time_until_start}}.
+      Your live session "{{sessionName}}" starts at {{sessionStartTime}} 
+      in {{timeUntilStart}}.
 
       Don't miss out on this exclusive learning opportunity! 
       Join us for an interactive session where you can ask questions 
@@ -154,7 +154,7 @@ Once your WhatsApp Business account is connected to Fermion, you can start sendi
     - **Button Text (Optional):** `Join Live Session`
 
 
-        ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/08-10-2025/28___pm__2_.avkysh.png)
+        ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/22-10-2025/chrome_P6bcJZTxRo.hzsuyw.png)
 ### Template Variables
 
 When creating your WhatsApp message template, you can use dynamic variables to automatically personalize each reminder. These variables are replaced with real data for every student and session, making each message feel tailored and professional.
@@ -163,11 +163,11 @@ Below are the variables currently supported in Fermion WhatsApp templates:
 
 | Variable | Description |
 |-----------|-------------|
-| `{{participant_name}}` | Automatically inserts the participant’s full name. |
-| `{{school_name}}` | Displays the name of your school |
-| `{{session_name}}` | Displays the name of the live session. |
-| `{{session_start_time}}` | Shows the exact start time of the live session. |
-| `{{time_until_start}}` | Displays how much time is left before the session starts (e.g., “in 30 minutes”). |
+| `{{participantName}}` | Automatically inserts the participant’s full name. |
+| `{{schoolName}}` | Displays the name of your school |
+| `{{sessionName}}` | Displays the name of the live session. |
+| `{{sessionStartTime}}` | Shows the exact start time of the live session. |
+| `{{timeUntilStart}}` | Displays how much time is left before the session starts (e.g., “30 minutes”). |
 
   <Warning>
   **Currently, only utility templates are supported.** These are templates for notifications or reminders. 
@@ -175,11 +175,13 @@ Below are the variables currently supported in Fermion WhatsApp templates:
   If you try to create a **marketing or promotional** template (e.g., discounts, offers, etc.), **WhatsApp will reject it.** If you need help setting up marketing templates, please contact our team at (support@codedamn.com).
   </Warning>
 
-    Once done, click **Save Template** to store it in your WhatsApp marketing template library. Your template will now be sent to WhatsApp for approval and would take some time to get approved by Meta.
+    Once done, click **Save Template** to store it in your WhatsApp marketing template library. Your template will now be sent to WhatsApp for approval and would take some time to get approved by Meta. 
+    
+    Meta typically reviews and approves message templates within a few minutes to a few hours. In some cases, it may take up to 24 hours for approval.
   </Step>
 
   <Step title="Toggle Live Session reminder and link a template">
-    After saving the template, Toggle the **Live Session Reminders** button and link the created template to the reminder. At a particular moment, you can only link 1 template to the live session reminder. 
+    After saving the template and getting it approved by Meta, Toggle the **Live Session Reminders** button and link the created template to the reminder. At a particular moment, you can only link 1 template to the live session reminder. 
     ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/08-10-2025/44___pm__2_.ojxwis.png)
 
   </Step>
