@@ -73,6 +73,7 @@
 						"group": "Forms",
 						"pages": [
 							"forms/introduction",
+							"forms/form-submissions",
 							"forms/onboarding-form"
 						]
 					},

@@ -115,6 +115,24 @@ These metrics help you identify where users come from, what pages they visit mos
 
 ---
 
+## Access analytics via API
+
+You can also access your analytics programmatically through Fermion’s API.  Head over to our [API documentation](/api-guide/introduction) to learn more.
+
+The following API endpoints are available to access user and school analytics over API:
+#### Sales Data
+- **Get sales data with filtering**: `POST` 
+
+#### User Progress
+- **Get user bundle progress for all bundles**: `POST`  
+- **Get all courses progress of a given user**: `POST`  
+- **Get user bundle progress for specific bundle**: `POST`  
+- **Get individual user course progress**: `POST`  
+
+<Note> All requests require authentication using the `FERMION-API-KEY` header.</Note>
+
+These endpoints let you programmatically retrieve progress, completion, and sales analytics to integrate with your dashboards or reporting tools.
+
 
 ## Next steps 
 
