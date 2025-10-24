@@ -158,7 +158,8 @@
 							"manage-settings/import-users",
 							"manage-settings/user-access-logs",
 							"manage-settings/manage-features",
-							"manage-settings/school-analytics"
+							"manage-settings/school-analytics",
+							"manage-settings/user-settings"
 							
 						]
 					}
