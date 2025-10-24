@@ -102,7 +102,8 @@
 						"pages": [
 							"contests/introduction",
 							"contests/set-up-contest",
-							"contests/contest-questions"
+							"contests/contest-questions",
+							"contests/user-attempts"
 						]
 					},
 					{
