@@ -197,7 +197,7 @@
 				"icon": "tower-broadcast",
 				"groups": [
 					{
-						"group": "Core concepts",
+						"group": "Core Concepts",
 						"pages": [
 							"live-classes/what-are-live-classes",
 							"live-classes/setup-live-class",
