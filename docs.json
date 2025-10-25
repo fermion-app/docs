@@ -1,6 +1,6 @@
 {
 	"$schema": "https://mintlify.com/docs.json",
-	"theme": "mint",
+	"theme": "maple",
 	"name": "Fermion Documentation",
 	"colors": {
 		"primary": "#0EA5E9",
@@ -9,17 +9,13 @@
 	},
 	"favicon": "/favicon.webp",
 	"contextual": {
-		"options": [
-			"copy",
-			"view",
-			"chatgpt",
-			"claude"
-		]
+		"options": ["copy", "view", "chatgpt", "claude", "perplexity", "cursor"]
 	},
 	"navigation": {
 		"tabs": [
 			{
-				"tab": "General Documentation",
+				"tab": "Introduction",
+				"icon": "rocket",
 				"groups": [
 					{
 						"group": "Quick Overview",
@@ -87,15 +83,11 @@
 							"digital-products/embed-ebook",
 							"digital-products/downloadable-products",
 							"digital-products/object-storage"
-
 						]
 					},
 					{
 						"group": "Community",
-						"pages": [
-							"community/what-are-communities",
-							"community/community-features"
-						]
+						"pages": ["community/what-are-communities", "community/community-features"]
 					},
 					{
 						"group": "Contests",
@@ -108,10 +100,7 @@
 					},
 					{
 						"group": "Gamification",
-						"pages": [
-							"gamification/introduction",
-							"gamification/features"
-						]
+						"pages": ["gamification/introduction", "gamification/features"]
 					},
 					{
 						"group": "Custom Pages",
@@ -161,13 +150,13 @@
 							"manage-settings/manage-features",
 							"manage-settings/school-analytics",
 							"manage-settings/user-settings"
-							
 						]
 					}
 				]
 			},
 			{
 				"tab": "Coding Labs",
+				"icon": "terminal",
 				"groups": [
 					{
 						"group": "Interactive Coding Labs",
@@ -191,7 +180,6 @@
 							"creating-io-coding-labs/sql-lab",
 							"creating-io-coding-labs/ai-agent",
 							"creating-io-coding-labs/embed-lab"
-
 						]
 					},
 					{
@@ -200,16 +188,16 @@
 							"creating-io-coding-labs/api-usage",
 							"creating-io-coding-labs/sql-over-api",
 							"creating-io-coding-labs/compile-api"
-							
 						]
 					}
 				]
 			},
 			{
-				"tab": "Livestreaming",
+				"tab": "Live calls / Webinars",
+				"icon": "tower-broadcast",
 				"groups": [
 					{
-						"group": "Hosting and Managing Live Classes",
+						"group": "Core concepts",
 						"pages": [
 							"live-classes/what-are-live-classes",
 							"live-classes/setup-live-class",
@@ -218,7 +206,8 @@
 							"live-classes/live-chat",
 							"live-classes/whiteboard",
 							"live-classes/recording-and-captions",
-							"live-classes/drm-and-watermarking"
+							"live-classes/drm-and-watermarking",
+							"live-classes/embed-live-session"
 						]
 					},
 					{
@@ -229,7 +218,6 @@
 							"live-classes/standalone-invites",
 							"live-classes/one-one-calls",
 							"live-classes/cloning-class",
-							"live-classes/embed-live-session",
 							"live-classes/livestream-analytics",
 							"live-classes/common-faqs"
 						]
@@ -237,7 +225,8 @@
 				]
 			},
 			{
-				"tab": "Video Streaming",
+				"tab": "Video streaming",
+				"icon": "video",
 				"groups": [
 					{
 						"group": "Recorded Videos",
@@ -252,7 +241,8 @@
 				]
 			},
 			{
-				"tab": "API Reference",
+				"tab": "API docs",
+				"icon": "code",
 				"groups": [
 					{
 						"group": "Using API",
@@ -271,18 +261,12 @@
 				]
 			},
 			{
-				"tab": "Fermion SDK",
-				"icon": "code",
-				"href": "https://github.com/fermion-app/sdk"
-			},
-			{
 				"tab": "Changelog",
+				"icon": "history",
 				"groups": [
 					{
 						"group": "Changelog",
-						"pages": [
-							"changelog"
-						]
+						"pages": ["changelog"]
 					}
 				]
 			}
