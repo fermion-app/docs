@@ -151,6 +151,13 @@
 							"manage-settings/school-analytics",
 							"manage-settings/user-settings"
 						]
+					},
+					{
+						"group": "Guides",
+						"pages": [
+							"guides/vimeo-embed"
+							
+						]
 					}
 				]
 			},

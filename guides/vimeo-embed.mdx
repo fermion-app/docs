@@ -1,0 +1,53 @@
+---
+title: Embedding Vimeo Videos Inside Courses
+description: Learn how to embed Vimeo videos inside courses using iframe embeds, and understand the trade-offs compared to Fermion’s built-in video library.
+sidebarTitle: 'Embed Vimeo Videos'
+icon: vimeo
+---
+
+Embedding a Vimeo video inside your course is a straightforward way to include external video content without uploading it to Fermion directly. Using an iframe embed, you can display any Vimeo-hosted video seamlessly within your course player. However, while this approach is simple, it also comes with certain limitations that you should be aware of before implementing it.
+
+## How does this integration work?
+
+When you embed a Vimeo video using an iframe, the player will load directly from Vimeo’s servers. This means that while students will be able to view the video without issues, Fermion will not be able to track analytics at the student level. Features like tracking video completion, enforcing watch-time constraints (such as requiring the learner to finish watching the entire video), or providing granular progress analytics will not be available.
+
+<Tip>
+We recommend using the **[Fermion Video Library](/recorded-videos/video-library)** for an optimized learning experience. Videos uploaded directly to Fermion come with built-in analytics, progress tracking, and viewing constraints that help maintain course integrity and engagement.
+</Tip>
+
+To embed a Vimeo video into a course using an iframe, follow these steps carefully. Make sure you have the Vimeo embed URL ready (for example, `https://vimeo.com/123456789`).
+
+<Steps>
+  <Step title="Open the Course Builder">
+    - Go to your **Instructor Dashboard → Courses → Open Course Builder**.  
+    - Select the [course](/setting-up-course/prerequisites) where you want to link your Vimeo video.
+
+    ![Open Course builder](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/06-10-2025/course%20builder%20open.pdcqad.png)  
+  </Step>
+  <Step title="Head over to the syllabus">
+    Navigate to the **Syllabus** tab of the course where you want to embed the Vimeo video. Choose the section in which you’d like the video to appear.
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/27-10-2025/chrome_UtYdAyvMZf.vpylpm.png)
+  </Step>
+  <Step title="Add a new item to the section">
+    Within the section, click on **Add in this section** to open the course item modal. 
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/27-10-2025/chrome_3afVyL6QRM.ulsiok.png)
+    
+    From the available item types, select **Iframe Embed** to create a new embedded video resource.
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/27-10-2025/chrome_QGjaHXn1MF.qrilat.png)
+  </Step>
+  <Step title="Enter iframe details">
+    Provide a suitable **Iframe Title** for your embedded video to help learners identify it easily. Then, paste your **Vimeo Embed URL** into the iframe URL field. Double-check that the URL follows Vimeo’s embed format and not the standard watch URL.
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/27-10-2025/chrome_CmOi2DT63m.quqyze.png)
+  </Step>
+  <Step title="Publish your changes">
+    Once you’ve entered all the details, click **Publish** to save your changes. 
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/27-10-2025/chrome_KmA71xD4VV.yenmmw.png)
+  </Step>
+</Steps>
+
+After completing all these steps, the Vimeo video will now be available inside your course, and learners will be able to access it directly within the course player interface.
+
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/27-10-2025/chrome_Q3Tl2zfqrt.hgbbky.png)
+
+While this embedding method works for quick integrations or when external hosting is preferred, for complete learning analytics, progress tracking, and a seamless course experience, the Fermion [Video Library](/recorded-videos/video-library) remains the recommended choice. To learn more about embedding Vimeo videos externally, please refer to [Vimeo documentation](https://vimeo.com/blog/post/how-to-embed-videos)
+
