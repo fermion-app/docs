@@ -14,8 +14,8 @@
 	"navigation": {
 		"tabs": [
 			{
-				"tab": "Introduction",
-				"icon": "rocket",
+				"tab": "Managed LMS",
+				"icon": "book",
 				"groups": [
 					{
 						"group": "Quick Overview",
