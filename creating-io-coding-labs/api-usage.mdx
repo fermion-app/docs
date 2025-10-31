@@ -35,14 +35,11 @@ Before you begin using the DSA Execution API, make sure you’ve set up the foll
     You must have a valid Fermion API key to run these coding labs. Create a Fermion account and go to **Settings → API access** in your instructor dashboard to get the key.  
     Learn how to get your [API key here](/api-guide/introduction#how-to-get-your-api-key).
   </Accordion>
-
-  <Accordion title="Base64URL Encoded source code" icon="code">
-    Base64URL encoding is **critical** for proper API usage.  
-    The DSA execution API requires Base64URL encoding (not standard Base64) for several fields including **source code**, **expected output**, **stdin input**, and **file attachments** for [SQL labs](/creating-io-coding-labs/sql-over-api).
-  </Accordion>
 </AccordionGroup>
 
-#### Why Base64URL Encoding?
+#### Base64URL Encoded source code
+ Base64URL encoding is **critical** for proper API usage.  
+    The DSA execution API requires Base64URL encoding (not standard Base64) for several fields including **source code**, **expected output**, **stdin input**, and **file attachments** for [SQL labs](/creating-io-coding-labs/sql-over-api).
 Base64URL encoding is a URL-safe variant of the standard Base64 format. It’s designed to ensure that encoded data can be safely transmitted in URLs, JSON, and APIs without introducing reserved or invalid characters.
 
 Base64URL encoding is a URL-safe variant of Base64 that:
@@ -78,6 +75,7 @@ Each language runs in a secure, isolated container with seperate resources.
 ## How to execute IO/DSA labs over API?
 
 You can utilize the following steps to execute DSA over API. If you wish to test how a request is structured for any given language, head over to the [compile API](/creating-io-coding-labs/api-usage#how-does-compile-api-work%3F) section of this documentation to learn more.
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/31-10-2025/Untitled-2025-02-04-2040.fanymm.png)
 
 <Steps>
 <Step title='Submit code for execution'>
@@ -125,24 +123,6 @@ Here is an empty sample request body for executing C code over API. Head over to
 }
 ```
 
-#### Special Case: SQLite
-
-For SQLite code execution, you must include a ZIP file containing a `db.sqlite` file:
-
-```json
-{
-	"language": "Sqlite_3_48_0",
-	"sourceCodeAsBase64UrlEncoded": "U0VMRUNUIEhFTExPKCk=",
-	"additionalFilesAsZip": {
-		"type": "base64url-encoding",
-		"base64UrlEncodedZip": "base64-encoded-zip-content"
-	},
-	"runConfig": {
-		// ... other config
-	}
-}
-```
-Learn more about [executing sql queries over API](/creating-io-coding-labs/sql-over-api)
 
 
 The API returns an array of task IDs in the same order of challenges that you submitted, that you can use to retrieve results later.
@@ -165,7 +145,7 @@ The API returns an array of task IDs in the same order of challenges that you su
 
 <Step title="Retrieve execution results">
 
-Use the **Get DSA code execution result [batch]** endpoint to retrieve results of submitted executions. You will have to pass the Fermion API key so that we can authenticate your request
+Use the **[Get DSA code execution result [batch]](/api-reference/dsa/get-dsa-code-execution-result-[batch])** endpoint to retrieve results of submitted executions. You will have to pass the Fermion API key so that we can authenticate your request
 
 Here's a sample cURL request to get the execution results of the task IDs returned from the previous endpoint
 
@@ -195,6 +175,101 @@ For detailed API specification, request/response schemas, and interactive exampl
 
 </Steps>
 
+--- 
+
+## Request DSA code execution 
+
+The request to the [Request DSA code execution](/api-reference/dsa/request-dsa-code-execution-[single]) endpoint contains a **language field**,  **runConfig** object,  source code as base64URL encoded, and additional files if we are executing [SQL over API](/creating-io-coding-labs/sql-over-api) 
+Here is a description of these fields to be provided while sending a request. 
+
+### Run Configuration (runConfig)
+
+The runConfig object defines execution parameters and resource limits for each code run. These settings control performance, safety, and sandbox behavior during code execution.
+
+| Field Name | Description |
+|-------------|-------------|
+| `customMatcherToUseForExpectedOutput` | Defines how program output is compared with the expected output. Common options include `ExactMatch`. |
+| `expectedOutputAsBase64UrlEncoded` | Base64URL-encoded expected output string. |
+| `stdinStringAsBase64UrlEncoded` | Base64URL-encoded standard input string for the program. |
+| `callbackUrlOnExecutionCompletion` | Optional webhook URL that receives a callback once execution completes. |
+| `shouldEnablePerProcessAndThreadCpuTimeLimit` | Enables CPU time limits per process/thread if set to `true`. |
+| `shouldEnablePerProcessAndThreadMemoryLimit` | Enables memory limits per process/thread if set to `true`. |
+| `shouldAllowInternetAccess` | Allows or restricts outbound internet access for the running code. |
+| `compilerFlagString` | Optional compiler flags or arguments to use during code compilation. |
+| `maxFileSizeInKilobytesFilesCreatedOrModified` | Maximum allowed size (in KB) for any file created or modified during execution. *(Default: 51200)* |
+| `stackSizeLimitInKilobytes` | Maximum stack size (in KB) allocated for the program. *(Default: 65536)* |
+| `cpuTimeLimitInMilliseconds` | Maximum CPU time (in ms) the program can use. *(Default: 2000)* |
+| `wallTimeLimitInMilliseconds` | Maximum total wall time (in ms) allowed for execution. *(Default: 5000)* |
+| `memoryLimitInKilobyte` | Maximum total memory (in KB) that the program may consume. *(Default: 512000)* |
+| `maxProcessesAndOrThreads` | Maximum number of processes and/or threads the program can spawn. *(Default: 60)* |
+
+
+### Required Fields
+
+The following fields **must** be Base64URL encoded and sent as part of the request body:
+
+| Field Name                     | Description                          |
+|--------------------------------|--------------------------------------|
+| `sourceCodeAsBase64UrlEncoded` | Your source code                     |
+| `expectedOutputAsBase64UrlEncoded` | Expected program output, API will judge the program output in accordance to this.           |
+| `stdinStringAsBase64UrlEncoded` | Input data for the program           |
+| `base64UrlEncodedZip`          | ZIP file contents for SQLite         |
+
+The response from this API provides us with `taskIds` which we can use to get the result from the [Get DSA code execution result](/api-reference/dsa/get-dsa-code-execution-result-[batch]) endpoint 
+
+
+## Get DSA code execution result
+
+After we have received the `taskIds` from the previous endpoint, we can send these task IDs to the [Get DSA code execution result](/api-reference/dsa/get-dsa-code-execution-result-[single]) and get the execution result. The API returns a  `taskUniqueId`, `language` and the `runConfig` provided at the time of request. Apart from this, the response has `codingTaskStatus` which tells us if the code has been executed or not, a `runResult` object which tells us about the execution of the code.
+
+### codingTaskStatus  Values
+
+Each submitted coding task in Fermion's DSA execution API has a `codingTaskStatus` that indicates its current stage of processing. The `codingTaskStatus` can have the following values:
+
+| Status       | Description                        |
+|---------------|------------------------------------|
+| **`Pending`**    | Task is queued for execution        |
+| **`Processing`** | Task is currently being executed    |
+| **`Finished`**   | Task execution completed            |
+
+### runResult object
+
+The runResult object contains information regarding the execution of the code and the program data after the code execution. The following fields are part of the runResult object.
+
+| Field                                            | Description                                                                     |
+| ------------------------------------------------ | ------------------------------------------------------------------------------- |
+| `compilerOutputAfterCompilationBase64UrlEncoded` | Base64-encoded compiler output.         |
+| `finishedAt`                                     | Timestamp representing when the execution finished.                    |
+| `runStatus`                                      | Status of the code run e.g., `successful`, `compilation-error`,  |
+| `programRunData.cpuTimeUsedInMilliseconds`       | CPU time consumed by the program (in milliseconds).                             |
+| `programRunData.wallTimeUsedInMilliseconds`      | Total elapsed (wall) time for execution (in milliseconds).                      |
+| `programRunData.memoryUsedInKilobyte`            | Memory used by the program (in kilobytes).                                      |
+| `programRunData.exitSignal`                      | Signal number if the program was terminated by the system.                      |
+| `programRunData.exitCode`                        | Exit code returned by the program after execution.                              |
+| `programRunData.stdoutBase64UrlEncoded`          | Base64-encoded standard output (stdout) from the executed program.              |
+| `programRunData.stderrBase64UrlEncoded`          | Base64-encoded standard error (stderr) output from the executed program.        |
+
+
+
+### runStatus Values
+
+The `runStatus` field inside runResult provides detailed feedback about the outcome of code execution. The `runStatus` field can have the following values: 
+
+| Status                     | Description                             |
+|-----------------------------|-----------------------------------------|
+| **`successful`**            | Code executed successfully              |
+| **`compilation-error`**     | Code failed to compile                  |
+| **`time-limit-exceeded`**   | Execution exceeded time limit           |
+| **`wrong-answer`**          | Output doesn't match expected result    |
+| **`non-zero-exit-code`**    | Program exited with non-zero code       |
+| **`died-sigsev`**           | Segmentation fault                      |
+| **`died-sigxfsz`**          | File size limit exceeded                |
+| **`died-sigfpe`**           | Floating point exception                |
+| **`died-sigabrt`**          | Program aborted                         |
+| **`internal-isolate-error`**| Internal system error                   |
+| **`unknown`**               | Unknown error occurred                  |
+
+
 ## Using webhook URLs for instant results (recommended)
 
     Instead of polling for results, it's recommended to use the`callbackUrlOnExecutionCompletion` parameter in your `runConfig`. This
@@ -221,72 +296,6 @@ For detailed API specification, request/response schemas, and interactive exampl
 }
 ```
 Your webhook endpoint will receive the complete execution result as a POST request body, containing the same data structure as the batch result API response.
-
---- 
-
-## Run Configuration (runConfig)
-
-The runConfig object defines execution parameters and resource limits for each code run. These settings control performance, safety, and sandbox behavior during code execution.
-
-| Field Name | Description |
-|-------------|-------------|
-| `customMatcherToUseForExpectedOutput` | Defines how program output is compared with the expected output. Common options include `ExactMatch`. |
-| `expectedOutputAsBase64UrlEncoded` | Base64URL-encoded expected output string. |
-| `stdinStringAsBase64UrlEncoded` | Base64URL-encoded standard input string for the program. |
-| `callbackUrlOnExecutionCompletion` | Optional webhook URL that receives a callback once execution completes. |
-| `shouldEnablePerProcessAndThreadCpuTimeLimit` | Enables CPU time limits per process/thread if set to `true`. |
-| `shouldEnablePerProcessAndThreadMemoryLimit` | Enables memory limits per process/thread if set to `true`. |
-| `shouldAllowInternetAccess` | Allows or restricts outbound internet access for the running code. |
-| `compilerFlagString` | Optional compiler flags or arguments to use during code compilation. |
-| `maxFileSizeInKilobytesFilesCreatedOrModified` | Maximum allowed size (in KB) for any file created or modified during execution. *(Default: 51200)* |
-| `stackSizeLimitInKilobytes` | Maximum stack size (in KB) allocated for the program. *(Default: 65536)* |
-| `cpuTimeLimitInMilliseconds` | Maximum CPU time (in ms) the program can use. *(Default: 2000)* |
-| `wallTimeLimitInMilliseconds` | Maximum total wall time (in ms) allowed for execution. *(Default: 5000)* |
-| `memoryLimitInKilobyte` | Maximum total memory (in KB) that the program may consume. *(Default: 512000)* |
-| `maxProcessesAndOrThreads` | Maximum number of processes and/or threads the program can spawn. *(Default: 60)* |
-
-
-## Required Fields
-
-The following fields **must** be Base64URL encoded and sent as part of the request body:
-
-| Field Name                     | Description                          |
-|--------------------------------|--------------------------------------|
-| `sourceCodeAsBase64UrlEncoded` | Your source code                     |
-| `expectedOutputAsBase64UrlEncoded` | Expected program output, API will judge the program output in accordance to this.           |
-| `stdinStringAsBase64UrlEncoded` | Input data for the program           |
-| `base64UrlEncodedZip`          | ZIP file contents for SQLite         |
-| `stdoutBase64UrlEncoded`       | Program output (in responses)        |
-| `stderrBase64UrlEncoded`       | Error output (in responses)          |
-
-
-## Task Status Values
-
-Each submitted coding task in Fermion's DSA execution API has a `codingTaskStatus` that indicates its current stage of processing. The `codingTaskStatus` can have the following values:
-
-| Status       | Description                        |
-|---------------|------------------------------------|
-| **`Pending`**    | Task is queued for execution        |
-| **`Processing`** | Task is currently being executed    |
-| **`Finished`**   | Task execution completed            |
-
-## Run Status Values
-The `runStatus` field inside runResult provides detailed feedback about the outcome of code execution. The `runStatus` field can have the following values: 
-
-| Status                     | Description                             |
-|-----------------------------|-----------------------------------------|
-| **`successful`**            | Code executed successfully              |
-| **`compilation-error`**     | Code failed to compile                  |
-| **`time-limit-exceeded`**   | Execution exceeded time limit           |
-| **`wrong-answer`**          | Output doesn't match expected result    |
-| **`non-zero-exit-code`**    | Program exited with non-zero code       |
-| **`died-sigsev`**           | Segmentation fault                      |
-| **`died-sigxfsz`**          | File size limit exceeded                |
-| **`died-sigfpe`**           | Floating point exception                |
-| **`died-sigabrt`**          | Program aborted                         |
-| **`internal-isolate-error`**| Internal system error                   |
-| **`unknown`**               | Unknown error occurred                  |
-
 
 
 The **Compile API** allows you to execute arbitrary code in a secure, sandboxed environment directly through Fermion’s backend. This is ideal for online coding exercises, testing snippets, or building coding playgrounds on your platform.
