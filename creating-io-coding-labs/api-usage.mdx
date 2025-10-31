@@ -215,12 +215,12 @@ The following fields **must** be Base64URL encoded and sent as part of the reque
 | `stdinStringAsBase64UrlEncoded` | Input data for the program           |
 | `base64UrlEncodedZip`          | ZIP file contents for SQLite         |
 
-The response from this API provides us with `taskIds` which we can use to get the result from the [Get DSA code execution result](/api-reference/dsa/get-dsa-code-execution-result-[batch]) endpoint 
+The response from this API provides us with `taskId` which we can use to get the result from the [Get DSA code execution result](/api-reference/dsa/get-dsa-code-execution-result-[batch]) endpoint 
 
 
 ## Get DSA code execution result
 
-After we have received the `taskIds` from the previous endpoint, we can send these task IDs to the [Get DSA code execution result](/api-reference/dsa/get-dsa-code-execution-result-[single]) and get the execution result. The API returns a  `taskUniqueId`, `language` and the `runConfig` provided at the time of request. Apart from this, the response has `codingTaskStatus` which tells us if the code has been executed or not, a `runResult` object which tells us about the execution of the code.
+After we have received the `taskId` from the previous endpoint, we can send this task ID to the [Get DSA code execution result](/api-reference/dsa/get-dsa-code-execution-result-[single]) and get the execution result. The API returns a  `taskUniqueId`, `language` and the `runConfig` provided at the time of request. Apart from this, the response has `codingTaskStatus` which tells us if the code has been executed or not, a `runResult` object which tells us about the execution of the code.
 
 ### codingTaskStatus  Values
 
@@ -269,12 +269,14 @@ The `runStatus` field inside runResult provides detailed feedback about the outc
 | **`internal-isolate-error`**| Internal system error                   |
 | **`unknown`**               | Unknown error occurred                  |
 
+This was an example flow for single DSA code execution request. The same flow can be followed for batch execution of codes using the batch endpoints.
 
 ## Using webhook URLs for instant results (recommended)
 
     Instead of polling for results, it's recommended to use the`callbackUrlOnExecutionCompletion` parameter in your `runConfig`. This
     webhook URL will receive a POST request with the execution results immediately when processing completes, eliminating the need for repeated
     polling and providing faster response times.
+
 
 <Tip>
 	When using webhook URLs, include the `callbackUrlOnExecutionCompletion` in
@@ -297,6 +299,9 @@ The `runStatus` field inside runResult provides detailed feedback about the outc
 ```
 Your webhook endpoint will receive the complete execution result as a POST request body, containing the same data structure as the batch result API response.
 
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/31-10-2025/Untitled-2025-02-04-2041.ylwqco.png)
+
+---
 
 The **Compile API** allows you to execute arbitrary code in a secure, sandboxed environment directly through Fermion’s backend. This is ideal for online coding exercises, testing snippets, or building coding playgrounds on your platform.
 

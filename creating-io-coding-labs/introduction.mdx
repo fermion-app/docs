@@ -4,18 +4,27 @@ description: 'An overview of IO-based coding labs designed for algorithmic and D
 icon: square-code
 ---
 
+Fermion’s IO Coding Labs provide an interactive environment for solving algorithmic and data structure–based challenges. These labs are designed to evaluate a learner’s ability to read input, process it through logic, and produce the correct output under defined constraints, just like in real competitive coding or technical interview settings.
+
+Each coding lab runs securely in an isolated environment with configurable runtime limits for CPU, memory, and execution time. Learners can write, compile, and execute code directly in the browser while instructors receive precise insights into submission results, runtime performance, and test case accuracy.
+
+![IO Coding Labs](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/30-10-2025/chrome_chAUaakdPP.ydaugn.png)
+
 Fermion allows you to add IO coding labs. IO coding labs are powerful labs that can run the following languages:
 
--   C
--   C++
--   C#/.NET 8
--   Go
--   Java
--   MySQL
--   Node.js (JavaScript)
--   Python
--   Rust
--   SQLite
+<Check>
+Before you start, make sure **Coding labs** are enabled under **Manage Features** in your instructor dashboard. Learn how to enable features at Fermion [here](/manage-settings/manage-features)
+</Check>
+<Columns cols={4}>
+  <Card title="C / C++" icon="C"></Card>
+  <Card title="Java" icon="java"></Card>
+  <Card title="Python" icon="python"></Card>
+  <Card title="Node.js (JavaScript)" icon="node-js"></Card>
+  <Card title="SQLite / MySQL 8" icon="database"></Card>
+  <Card title="Go (1.19)" icon="golang"></Card>
+  <Card title="Rust (1.87)" icon="rust"></Card>
+  <Card title=".NET 8" icon="hashtag"></Card>
+</Columns>
 
 IO coding labs are available to be used within the platform directly, or by embedding it.
 
@@ -23,3 +32,64 @@ IO coding labs are available to be used within the platform directly, or by embe
 	Reach out to Fermion support if you need access to more runtimes than listed
 	here.
 </Info>
+
+## How to access and create IO labs
+
+<Steps>
+
+<Step title="Head over to the Coding Labs section">
+To access **IO Coding Labs**, go to your **Instructor Dashboard** and open the **Coding Labs** section from the sidebar. Click on **Labs** and then navigate to the **IO Coding Labs** tab.
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/31-10-2025/chrome_2hExtgjuiu.jvhizt.png)
+</Step>
+
+<Step title="Create a new lab">
+Give your lab a suitable **name** and click **Create Lab**.  
+Next, add a **title** and **description** for your lab. You can also use **[Fermion Copilot](/creating-io-coding-labs/ai-agent)** to help build your lab.  
+The description field supports **Markdown**, allowing you to format content and add details freely.
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/31-10-2025/chrome_VrsPm9w5ck.adkiai.png)
+</Step>
+
+<Step title="Add test cases">
+After creating the lab, move on to **adding test cases**.  
+You can include **sample test cases** as well, which will be visible to the users attempting the lab.
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/31-10-2025/chrome_uxQBfuaxeY.bpkifh.png)
+</Step>
+
+<Step title="Select supported languages">
+Choose the programming **language(s)** you want your learners to use in the lab. To configure the **default code template** for any language, click on the **arrow** next to the language name.  
+Learn how to create [SQL labs](/creating-io-coding-labs/sql-lab)
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/31-10-2025/chrome_4Snrg7zXOs.rfeoii.png)
+</Step>
+
+<Step title="Set matcher type">
+Under **Matcher Type**, decide how the system should compare user output with the expected output:
+  <Accordion title="Matcher type">
+    Define how the expected output and user’s output should be compared:
+    - **Exact match**: Character-by-character comparison  
+    - **Ignore whitespace at start and end**  
+    - **Ignore case sensitivity and whitespace at start and end**  
+    - **Ignore whitespace in every line at start and end**  
+    - **Ignore case  sensitivity and whitespace in every line at start and end**  
+  </Accordion>
+
+</Step>
+
+<Step title="Configure advanced settings">
+Under **Advanced Settings**, you can fine-tune your lab’s execution limits.  
+These defaults are usually optimal:
+
+- **Maximum CPU time (ms):** 2000  
+- **Maximum wall time (ms):** 5000  
+- **Maximum memory (KB):** 512000
+
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/31-10-2025/chrome_2CxWKgub2Q.fgqada.png)
+
+</Step>
+
+<Step title="Save your lab">
+Once all configurations are complete, click **Save Changes**.  
+Your IO Coding Lab is now successfully added and ready for learners!
+</Step>
+
+</Steps>
+
