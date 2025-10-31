@@ -18,21 +18,25 @@ Before you start, make sure **Coding labs** are enabled under **Manage Features*
 
 Fermion currently supports the following runtimes for code execution:
 
-- **C**  
-- **C++**  
-- **Java**  
-- **Python**  
-- **Node.js (JavaScript)**  
-- **SQLite (3.48.0)**  
-- **Go (1.19)**  
-- **Rust (1.87)**  
-- **.NET 8**  
-- **MySQL 8**
+<Columns cols={4}>
+  <Card title="C / C++" icon="C"></Card>
+  <Card title="Java" icon="java"></Card>
+  <Card title="Python" icon="python"></Card>
+  <Card title="Node.js (JavaScript)" icon="node-js"></Card>
+  <Card title="SQLite / MySQL 8" icon="database"></Card>
+  <Card title="Go (1.19)" icon="golang"></Card>
+  <Card title="Rust (1.87)" icon="rust"></Card>
+  <Card title=".NET 8" icon="hashtag"></Card>
+</Columns>
+
 
 Each language runs in a secure, isolated container with seperate resources.
 
 ---
 ## How does compile API work?
+
+Fermion allows you to execute DSA over the Fermion API with the help of two endpoints: [Request DSA code execution](/api-reference/dsa/request-dsa-code-execution-[batch]) and [Get DSA code execution result](/api-reference/dsa/get-dsa-code-execution-result-[batch])
+We will discuss how we can execute DSA / IO codes over API in the previous sections. You can test how a request body would look like right inside your Fermion instructor dashboard with the help of the following steps.
 
 You can access compile API directly inside your instructor user dashboard by heading over to **Coding labs** → **Compile API**.
 
