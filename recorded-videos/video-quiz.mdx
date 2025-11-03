@@ -1,0 +1,92 @@
+---
+title: 'In-Video Quiz'
+description: 'Learn how to create interactive quizzes within course videos.'
+sidebarTitle: 'In-Video Quiz'
+icon: list-check
+---
+
+In-video quizzes allow instructors to make learning more engaging by embedding interactive questions directly within course videos. This helps maintain learner attention, reinforce key concepts, and assess understanding in real-time as students watch the content.
+
+---
+
+## How to add an in-video quiz
+
+You can attach an in-video quiz to your videos easily with the help of the following steps:
+
+<Steps>
+  <Step title='Head over to the course builder'>
+  Head over to the courses section and open the course builder which is associateed with the video you want to attach the in-video quiz to.
+  ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/03-11-2025/chrome_gYGSMHNpHx.lvtszw.png)
+  </Step>
+  <Step title="Navigate to the video">
+    Head over to your **Courses** section in the instructor dashboard.  
+    Open the course you want to edit and go to the **Syllabus** tab.
+  </Step>
+
+  <Step title="Edit the video">
+    Click on the **three dots (⋮)** next to any video where you want to attach the quiz, then select **Edit**.
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/03-11-2025/5m7SfNex1N.ektism.png)
+  </Step>
+
+  <Step title="Attach an in-video quiz">
+    Click the **Add in-video quiz** button to attach an in-video quiz to this particular video.
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/03-11-2025/chrome_rdSALhOtwl.vuhvff.png)
+  </Step>
+
+  <Step title="Create a new quiz">
+    Scroll to the **In-Video Quiz** section and click the **Create here to create a quiz** dialog box.
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/03-11-2025/chrome_kQmyAidka2.jxnmnt.png)
+    Give your quiz a suitable title and click **Submit**.
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/03-11-2025/chrome_iYt2ywuA54.zxncvn.png)
+  </Step>
+
+  <Step title="Create quiz questions">
+    Click on the **Edit** button next to the quiz name and start creating questions for your quiz. You can also add a simple description for your in-video quiz.
+    You can select **single correct** and **multiple correct** question types for your quiz, and then add the question label, available options, and the marking scheme . 
+    
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/03-11-2025/chrome_f2nV9xXJtV.oiaqge.png)
+    
+    You can also choose to bulk import questions with the help of CSV. The CSV format details and rules are mentioned in the following accordion.
+
+<Accordion title="CSV Format Details">
+
+| **Column header** | **Description** |
+|--------------------|-----------------|
+| `questionTitle` | A string representing the question title. |
+| `questionType` | Must be either `single-correct` or `multi-correct`. |
+| `questionDescription` | A string describing the question. |
+| `correctOptionNumbers` | Number(s) (1–8) indicating correct options (comma-separated). If `questionType` is `single-correct`, only one number should be present. |
+| `positiveMarks` | Marks awarded for a correct answer. |
+| `negativeMarks` | Marks deducted for an incorrect answer. |
+| `questionAnswerExplanation` | Explanation of the answer (optional). |
+| `questionOption1` | First answer option (required). |
+| `questionOption2` | Second answer option (optional). |
+| `questionOption3` | Third answer option (optional). |
+| `questionOption4` | Fourth answer option (optional). |
+| `questionOption5` | Fifth answer option (optional). |
+| `questionOption6` | Sixth answer option (optional). |
+| `questionOption7` | Seventh answer option (optional). |
+| `questionOption8` | Eighth answer option (optional). |
+
+**Rules to Follow:**
+- All column headers are mandatory (fields marked *optional* may be left empty).  
+- `questionType` must be either `single-correct` or `multi-correct`.  
+- `correctOptionNumbers` must contain a number between **1–8** (comma-separated if multiple).  
+- At least one of `questionOption1–8` must be filled.  
+- Options referenced in `correctOptionNumbers` must not be empty.  
+- For `single-correct` questions, only **one correct option number** is allowed.
+
+</Accordion>
+
+  </Step>
+
+  <Step title="Publish your quiz and select quiz time">
+  After adding all your questions, click on **Save Changes** and come out of the quiz builder to the in-video quiz section. Here, click **Publish** to attach this quiz to the video. Click on **Change time** to edit when the quiz appears in the video playback.
+  ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/03-11-2025/chrome_67KCJd3xfA.rrbapp.png) 
+  </Step>
+
+</Steps>
+
+Now, whenever a user plays this respective video, they will be prompted with an in-video quiz at the configured time.
+
+
