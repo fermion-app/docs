@@ -265,8 +265,9 @@
 						"group": "Recorded Videos",
 						"pages": [
 							"recorded-videos/introduction",
-							"recorded-videos/captions",
 							"recorded-videos/video-library",
+							"recorded-videos/captions",
+							"recorded-videos/video-watermark",
 							"recorded-videos/embed-video",
 							"recorded-videos/troubleshooting-playback"
 						]
