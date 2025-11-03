@@ -9,7 +9,14 @@
 	},
 	"favicon": "/favicon.webp",
 	"contextual": {
-		"options": ["copy", "view", "chatgpt", "claude", "perplexity", "cursor"]
+		"options": [
+			"copy",
+			"view",
+			"chatgpt",
+			"claude",
+			"perplexity",
+			"cursor"
+		]
 	},
 	"navigation": {
 		"tabs": [
@@ -88,7 +95,10 @@
 					},
 					{
 						"group": "Community",
-						"pages": ["community/what-are-communities", "community/community-features"]
+						"pages": [
+							"community/what-are-communities",
+							"community/community-features"
+						]
 					},
 					{
 						"group": "Contests",
@@ -101,7 +111,10 @@
 					},
 					{
 						"group": "Gamification",
-						"pages": ["gamification/introduction", "gamification/features"]
+						"pages": [
+							"gamification/introduction",
+							"gamification/features"
+						]
 					},
 					{
 						"group": "Custom Pages",
@@ -157,7 +170,6 @@
 						"group": "Guides",
 						"pages": [
 							"guides/vimeo-embed"
-							
 						]
 					}
 				]
@@ -207,13 +219,29 @@
 						"group": "Core Concepts",
 						"pages": [
 							"live-classes/what-are-live-classes",
-							"live-classes/setup-live-class",
-							"live-classes/invite-to-stage",
-							"live-classes/pin-a-tile",
-							"live-classes/live-chat",
-							"live-classes/whiteboard",
-							"live-classes/recording-and-captions",
-							"live-classes/drm-and-watermarking",
+							{
+								"group": "Start",
+								"icon": "play-circle",
+								"pages": [
+									"live-classes/setup-live-class",
+									"live-classes/public-event",
+									"live-classes/one-one-calls"
+								]
+							},
+							{
+								"group": "Features",
+								"icon": "sparkle",
+								"expanded": true,
+								"pages": [
+									"live-classes/invite-to-stage",
+									"live-classes/pin-a-tile",
+									"live-classes/live-chat",
+									"live-classes/whiteboard",
+									"live-classes/recording-and-captions",
+									"live-classes/drm-and-watermarking"
+								]
+							},
+							"live-classes/livestream-settings",
 							"live-classes/embed-live-session"
 						]
 					},
@@ -221,9 +249,7 @@
 						"group": "Scheduling and Analytics",
 						"pages": [
 							"live-classes/event-calendar",
-							"live-classes/public-event",
 							"live-classes/standalone-invites",
-							"live-classes/one-one-calls",
 							"live-classes/cloning-class",
 							"live-classes/livestream-analytics",
 							"live-classes/common-faqs"
@@ -273,7 +299,9 @@
 				"groups": [
 					{
 						"group": "Changelog",
-						"pages": ["changelog"]
+						"pages": [
+							"changelog"
+						]
 					}
 				]
 			}
