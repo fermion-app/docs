@@ -2,6 +2,9 @@
 	"$schema": "https://mintlify.com/docs.json",
 	"theme": "maple",
 	"name": "Fermion Documentation",
+	"background": {
+		"decoration": "windows"
+	},
 	"colors": {
 		"primary": "#0EA5E9",
 		"light": "#38BDF8",
@@ -307,6 +310,16 @@
 				]
 			}
 		]
+	},
+	"fonts":{
+		"body": {
+			"family": "Open Sans",
+			"format": "woff2"
+		},
+		"heading": {
+			"family": "Montserrat",
+			"format": "woff2"
+		}
 	},
 	"logo": {
 		"light": "https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/07-10-2024/fermion-logo-500x500.ezvmtj.png",
