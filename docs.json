@@ -39,6 +39,7 @@
 						"group": "Getting Started",
 						"pages": [
 							"onboarding/account-setup",
+							"manage-settings/manage-features",
 							"onboarding/platform-resources",
 							"onboarding/support-strategy",
 							"onboarding/turnaround-time",
@@ -154,17 +155,26 @@
 					{
 						"group": "Manage Settings",
 						"pages": [
-							"manage-settings/change-school-settings",
+							{
+								"group": "School Settings",
+								"icon":"gear",
+								"pages": [
+									"manage-settings/change-school-settings",
+									"manage-settings/security-settings",
+									"manage-settings/live-and-recorded-settings",
+									"manage-settings/legal-and-compliance",
+									"manage-settings/additional-settings",
+									"manage-settings/custom-css-styling"
+								]
+							},
 							"manage-settings/earnings",
 							"manage-settings/manage-payouts",
-							"manage-settings/custom-css-styling",
-							"manage-settings/custom-links",
 							"manage-settings/email-log",
 							"manage-settings/manage-instructors",
 							"manage-settings/manage-users",
 							"manage-settings/import-users",
 							"manage-settings/user-access-logs",
-							"manage-settings/manage-features",
+							"manage-settings/custom-links",
 							"manage-settings/school-analytics",
 							"manage-settings/user-settings"
 						]
@@ -312,7 +322,7 @@
 			}
 		]
 	},
-	"fonts":{
+	"fonts": {
 		"body": {
 			"family": "Open Sans",
 			"format": "woff2"
