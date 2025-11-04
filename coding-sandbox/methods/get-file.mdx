@@ -1,0 +1,96 @@
+---
+title: 'Retrieve files from your Sandbox instance'
+sidebarTitle: 'Get File'
+description: 'Retrieve text or binary files from the sandbox filesystem as standard web Response objects.'
+icon: file-arrow-down
+---
+
+
+The `getFile()` method retrieves a file from your sandbox’s filesystem and returns it as a standard **Web Response object**, allowing you to handle the data in multiple formats: text, JSON, binary, or Blob. This method gives you the flexibility to work with files in the same way you would when using the native `fetch()` API, making it intuitive and consistent for developers familiar with browser or Node.js environments.  
+
+All file paths must start with `~` or the absolute path `/home/damner/code` to ensure access is confined to the sandbox’s isolated workspace. If the requested file doesn’t exist or the path is invalid, an error is thrown.  
+
+`getFile()` is commonly used for reading script outputs, verifying file writes, or fetching configuration data generated during execution. Since the returned object supports `.text()`, `.json()`, `.arrayBuffer()`, and `.blob()` methods, it seamlessly supports diverse file types — from source code to media files. For large files, you can also use the response stream directly for efficient, chunked reading.
+
+
+
+### `getFile(path)`
+
+**Description:**
+Retrieves a file from the sandbox filesystem. Returns a standard Response object that you can read as text, binary, blob, etc.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| path | string |  Yes | File path (must start with `~` or `/home/damner/code`) |
+
+**Returns:**
+`Promise<Response>` - Standard fetch Response object with methods:
+- `.text()` - Read as string
+- `.arrayBuffer()` - Read as binary
+- `.blob()` - Read as Blob
+- `.json()` - Parse as JSON
+
+**Example:**
+```typescript
+// Read text file
+const response = await sandbox.getFile('~/script.js')
+const content = await response.text()
+console.log(content)
+
+// Read JSON file
+const response = await sandbox.getFile('~/config.json')
+const config = await response.json()
+console.log(config.name)
+
+// Read binary file
+const response = await sandbox.getFile('~/image.png')
+const buffer = await response.arrayBuffer()
+const blob = await response.blob()
+
+// Check if file exists (without try/catch)
+try {
+  await sandbox.getFile('~/maybe-exists.txt')
+  console.log('File exists')
+} catch (error) {
+  console.log('File not found')
+}
+```
+
+**Throws:**
+- `Error: "No container found"` - Must call `create()` or `fromSnippet()` first
+- `Error: "File not found: <path>"` - File doesn't exist (404)
+- `Error: "Path must start with ~ or /home/damner/code"` - Invalid path
+- `Error: "Failed to get file"` - Network error or permission issue
+
+**Response Object:**
+The returned Response is a standard web API Response:
+```typescript
+const response = await sandbox.getFile('~/file.txt')
+console.log(response.ok)         // true if found
+console.log(response.status)     // 200 if found, 404 if not
+console.log(response.statusText) // 'OK' or 'Not Found'
+```
+
+**Reading Different Formats:**
+```typescript
+// Text files
+const text = await (await sandbox.getFile('~/file.txt')).text()
+
+// JSON files
+const json = await (await sandbox.getFile('~/data.json')).json()
+
+// Binary files
+const buffer = await (await sandbox.getFile('~/image.png')).arrayBuffer()
+
+// Stream large files
+const response = await sandbox.getFile('~/large-file.zip')
+const stream = response.body // ReadableStream
+```
+
+**Best Practices:**
+- Always await both the getFile() call AND the .text()/.json() call
+- Use try/catch for files that might not exist
+- For large files, consider using streams
+

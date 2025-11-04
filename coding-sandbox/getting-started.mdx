@@ -1,0 +1,208 @@
+---
+title: 'Getting Started with the Fermion Sandbox'
+sidebarTitle: 'Getting Started'
+description: 'Set up Fermion Sandbox and run your first secure containerized code session.'
+icon: play
+---
+
+Fermion Sandbox lets you safely execute untrusted or user-generated code inside secure, containerized Linux environments. This guide walks you through installation, setup, and creating your first sandbox: from installing the SDK to running your first command inside an isolated container.
+
+---
+
+## Prerequisites
+
+Before you begin, ensure that your environment meets the following requirements.
+
+- You’ll need **Node.js 18 or higher** installed on your system, along with a package manager such as **npm**, **yarn**, or **pnpm**.  
+- A valid **Fermion API key** is required for authentication, which you can obtain from your [Fermion Dashboard](/api-guide/introduction#how-to-get-your-api-key).  
+- Familiarity with basic **JavaScript or TypeScript** will also be helpful as you follow along with the examples in this guide.
+
+---
+
+## Installation
+
+<Steps>
+<Step title="Install the Package">
+
+Install the package with the help of a package manager of your choice
+
+```bash
+# Using npm
+npm install @fermion-app/sandbox
+
+# Using yarn
+yarn add @fermion-app/sandbox
+
+# Using pnpm
+pnpm add @fermion-app/sandbox
+```
+</Step>
+
+<Step title="Get Your API Key">
+Login to your Fermion instructor dashboard and head over to **School Setting** -> **API Access** to get your `FERMION_API_KEY`. Learn more on how to get your [Fermion API key](/api-guide/introduction#how-to-get-your-api-key)
+</Step>
+<Step title="Set Up Environment Variables">
+
+Create a .env file in your project root and add your API key:
+
+```bash
+FERMION_API_KEY=your_api_key_here
+```
+
+<Warning>
+Never commit API keys to version control. Always load them via environment variables or secure secret management systems.
+</Warning>
+
+</Step>
+
+</Steps>
+
+## Creating your first Sandbox
+
+Let’s walk through a complete example of creating, running, and cleaning up a sandbox. This example shows how to execute a Node.js script securely in the cloud.
+<CodeGroup>
+```javaScript index.js
+import { Sandbox } from '@fermion-app/sandbox'
+
+async function main() {
+  // Step 1: Initialize the sandbox with your API key
+  const sandbox = new Sandbox({
+    apiKey: process.env.FERMION_API_KEY
+  })
+
+  try {
+    // Step 2: Create a new container
+    console.log('Creating sandbox...')
+    const snippetId = await sandbox.create({
+      shouldBackupFilesystem: false // Files won't persist after disconnect
+    })
+    console.log('✓ Sandbox created! Snippet ID:', snippetId)
+
+    // Step 3: Run a simple command
+    console.log('\nRunning node --version...')
+    const nodeVersion = await sandbox.runCommand({
+      cmd: 'node',
+      args: ['--version']
+    })
+    console.log('Node version:', nodeVersion.stdout.trim())
+
+    // Step 4: Write a file
+    console.log('\nWriting hello.js...')
+    await sandbox.writeFile({
+      path: '~/hello.js',
+      content: 'console.log("Hello from Fermion Sandbox!")'
+    })
+    console.log('✓ File written')
+
+    // Step 5: Execute the file
+    console.log('\nExecuting hello.js...')
+    const output = await sandbox.runCommand({
+      cmd: 'node',
+      args: ['hello.js']
+    })
+    console.log('Output:', output.stdout.trim())
+
+    // Step 6: Read the file back
+    console.log('\nReading hello.js...')
+    const fileResponse = await sandbox.getFile('~/hello.js')
+    const fileContent = await fileResponse.text()
+    console.log('File contents:', fileContent)
+
+  } catch (error) {
+    console.error('Error:', error.message)
+  } finally {
+    // Step 7: Always clean up
+    console.log('\nDisconnecting...')
+    await sandbox.disconnect()
+    console.log('✓ Disconnected')
+  }
+}
+
+main()
+
+```
+
+</CodeGroup>
+
+## Expected Output
+
+The following code snippet will create a sandbox that executes a simple node.js program. Following is the expected output:
+
+<CodeGroup>
+```bash Console Output
+Creating sandbox...
+✓ Sandbox created! Snippet ID: abc123xyz
+
+Running node --version...
+Node version: v20.11.0
+
+Writing hello.js...
+✓ File written
+
+Executing hello.js...
+Output: Hello from Fermion Sandbox!
+
+Reading hello.js...
+File contents: console.log("Hello from Fermion Sandbox!")
+
+Disconnecting...
+✓ Disconnected
+
+```
+</CodeGroup>
+
+## Common Issues
+
+<AccordionGroup>
+
+  <Accordion title="Error: API key is required" icon="key">
+    This error occurs when your sandbox initialization is missing the `FERMION_API_KEY` value.
+
+    **How to fix:**
+    - Ensure your `.env` file contains `FERMION_API_KEY=your_api_key_here`
+    - Verify that your `.env` file is located in your project root
+    - If using `dotenv`, import it before creating the sandbox:
+
+    ```js
+    require('dotenv').config()
+    ```
+  </Accordion>
+
+  <Accordion title="Error: Provisioning timeout" icon="timer">
+    This typically means the container took too long to start.
+
+    **Possible fixes:**
+    - Retry after a short delay: the issue may be temporary
+    - Check the [system status page](#) for ongoing service disruptions
+    - If this persists, contact support with your `snippetId` for analysis
+  </Accordion>
+
+  <Accordion title="Error: WebSocket connection failed" icon="ethernet">
+    This indicates a network or firewall issue blocking WebSocket traffic.
+
+    **How to fix:**
+    - Ensure `wss://` connections are allowed on your network
+    - Check your firewall or proxy configuration
+    - If using a corporate VPN, try disabling it temporarily
+  </Accordion>
+
+</AccordionGroup>
+
+---
+
+## Next Steps
+
+Now that you’ve successfully run your first sandbox, you’re ready to explore more advanced concepts and integrations.
+
+<Columns cols={2}>
+
+<Card title="Core Concepts" href="/coding-sandbox/core-concepts">
+Understand how Fermion Sandboxes are provisioned, managed, and destroyed.
+</Card>
+
+<Card title="API Reference" href="/coding-sandbox/methods/initialization">
+Explore all available methods and advanced configuration options.
+</Card>
+
+
+</Columns>

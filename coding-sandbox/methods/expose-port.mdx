@@ -1,0 +1,104 @@
+---
+title: 'Expose ports from Sandbox for a public HTTPS URL'
+sidebarTitle: 'Expose Port'
+description: 'Expose a sandbox port publicly over HTTPS and access live web services running inside the container.'
+icon: globe
+---
+
+
+The `exposePort()` method provides a **public HTTPS URL** that maps directly to a specific port running inside your sandbox container. Fermion automatically supports ports **3000**, **1337**, and **1338**, allowing you to host web servers, APIs, or other services securely and access them from anywhere.  
+
+When you start a server inside your sandbox, using commands like `node server.js` or `npm run dev`, you can call `exposePort(port)` to instantly retrieve a URL in the format `https://{subdomain}-{port}.run-code.com`. This enables you to preview, test, and share live services running within your sandbox without any manual networking setup or tunneling.  
+
+The returned URLs are ephemeral, meaning they last only for the sandbox’s lifetime. Each new session generates new subdomains for security and isolatio
+
+### `exposePort(port)`
+
+**Description:**
+Returns the public HTTPS URL for a specific port in the sandbox. The sandbox automatically exposes ports 3000, 1337, and 1338 publicly.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| port | 3000 \| 1337 \| 1338 | Yes | Port number (must be one of these three) |
+
+**Returns:**
+`Promise<string>` - Public HTTPS URL (format: `https://{subdomain}-{port}.run-code.com`)
+
+**Example:**
+```typescript
+// Start a server
+await sandbox.writeFile({
+  path: '~/server.js',
+  content: `
+    const http = require('http');
+    http.createServer((req, res) => {
+      res.writeHead(200, {'Content-Type': 'text/plain'});
+      res.end('Hello from Fermion!');
+    }).listen(3000, () => {
+      console.log('Server running on port 3000');
+    });
+  `
+})
+
+// Run server in background
+sandbox.runStreamingCommand({
+  cmd: 'node',
+  args: ['server.js'],
+  onStdout: (data) => console.log(data.trim())
+})
+
+// Wait a moment for server to start
+await new Promise(r => setTimeout(r, 2000))
+
+// Get public URL
+const url = await sandbox.exposePort(3000)
+console.log('Access your server at:', url)
+// Output: https://abc123xyz-3000.run-code.com
+
+// Test it
+const response = await fetch(url)
+const text = await response.text()
+console.log(text) // 'Hello from Fermion!'
+```
+
+**Multiple Ports:**
+```typescript
+// Run services on different ports
+// Port 3000: Web app
+sandbox.runStreamingCommand({
+  cmd: 'npm',
+  args: ['run', 'dev'] // Starts on 3000
+})
+
+// Port 1337: API server
+sandbox.runStreamingCommand({
+  cmd: 'node',
+  args: ['api-server.js'] // Starts on 1337
+})
+
+// Get both URLs
+const webUrl = await sandbox.exposePort(3000)
+const apiUrl = await sandbox.exposePort(1337)
+
+console.log('Web:', webUrl)
+console.log('API:', apiUrl)
+```
+
+**Throws:**
+- `Error: "No container found"` - Must call `create()` or `fromSnippet()` first
+- TypeScript error if port is not 3000, 1337, or 1338
+
+**Important Notes:**
+- URLs are available immediately, even before a server starts
+- Accessing URL before server starts will show connection error
+- HTTPS is automatic - no certificate setup needed
+- URLs are stable during sandbox lifetime
+- URLs change on reconnect to same snippet
+
+**Best Practices:**
+- Wait a moment after starting server before accessing URL
+- Add error handling when fetching URLs
+- Use health check endpoints to verify server is ready
+

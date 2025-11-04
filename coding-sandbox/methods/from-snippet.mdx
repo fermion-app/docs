@@ -1,0 +1,55 @@
+---
+title: 'Create a sandbox instance using Snippet Id'
+sidebarTitle: 'From Snippet'
+description: 'Reconnect to an existing persistent Fermion Sandbox using a saved snippet ID.'
+icon: link
+---
+
+
+The `fromSnippet()` method allows you to reconnect to a previously created **persistent sandbox** using its unique snippet ID. This is useful when you’ve created a sandbox with `shouldBackupFilesystem: true` and want to resume work without losing files or progress.  
+
+When invoked, `fromSnippet()` re-establishes the session, restores the container’s filesystem, and reconnects the WebSocket channel for live command execution. It behaves identically to a freshly created sandbox:except that your files, environment state, and project data are preserved. This makes it ideal for long-lived development environments, user projects, or build processes that span multiple sessions.  
+
+Use this method whenever you need to restore a saved environment by referencing the snippet ID returned from a previous `create()` call.
+
+## `fromSnippet(playgroundSnippetId)`
+
+
+**Description:**
+Connects to an existing sandbox using its snippet ID. Use this to reconnect to a sandbox that was created with `shouldBackupFilesystem: true`.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| playgroundSnippetId | string |  Yes | The snippet ID returned from a previous `create()` call |
+
+**Returns:**
+`Promise<void>` - Resolves when connection is established
+
+**Example:**
+```typescript
+// Session 1: Create persistent sandbox
+const snippetId = await sandbox1.create({
+  shouldBackupFilesystem: true
+})
+await sandbox1.writeFile({ path: '~/data.txt', content: 'saved' })
+await sandbox1.disconnect()
+
+// Session 2: Reconnect later
+const sandbox2 = new Sandbox({ apiKey: 'key' })
+await sandbox2.fromSnippet(snippetId)
+const file = await sandbox2.getFile('~/data.txt')
+console.log(await file.text()) // 'saved'
+```
+
+**Throws:**
+- `Error: "Provisioning timeout"` - Container took too long to start
+- `Error: "Cannot get new session"` - Snippet not found or no longer available
+- `Error: "WebSocket already connected"` - Already connected to a sandbox
+
+**Notes:**
+- Only works with snippets created with `shouldBackupFilesystem: true`
+- Old snippets may be deleted after inactivity period (document retention policy)
+
+---

@@ -1,0 +1,79 @@
+---
+title: 'Fermion Sandbox'
+description: 'Secure, isolated cloud sandboxes for executing untrusted code safely.'
+sidebarTitle: 'Introduction'
+icon: layer-group
+---
+
+## Secure Code Execution in Isolated Containers
+
+Fermion Sandbox provides a next-generation coding environment designed for code securely in the cloud. Each sandbox runs inside a fully isolated Linux container with its own filesystem, process space, and network layer: ensuring total separation from the host system. Developers can launch, execute, and destroy sandboxes on demand, making it ideal for environments where security, scalability, and speed matter.
+
+You can run anything from Node.js scripts to full web servers, with real-time streaming of `stdout` and `stderr` through WebSockets. Fermion manages provisioning, teardown, and optional persistence automatically, allowing developers to focus on writing and executing code rather than managing infrastructure. Whether you’re building an AI code assistant, a browser-based IDE, or a real-time code evaluation platform, Fermion Sandbox makes it seamless and safe.
+
+
+### Quick Code Preview
+
+```typescript
+import { Sandbox } from '@fermion-app/sandbox'
+
+const sandbox = new Sandbox({ apiKey: 'your-api-key' })
+await sandbox.create({ shouldBackupFilesystem: false })
+
+const result = await sandbox.runCommand({
+  cmd: 'node',
+  args: ['--version']
+})
+console.log(result.stdout) // v20.x.x
+
+await sandbox.disconnect()
+```
+
+
+## Key Features
+
+Fermion Sandbox offers a security-first architecture with developer experience at its core. Each sandbox runs in its own secure Linux container, ensuring complete process and filesystem isolation. Live WebSocket streaming provides real-time feedback as your code executes, while native file operations allow full control over the container’s filesystem.
+
+Developers can also expose public URLs directly from within containers, supporting ports like `3000`, `1337`, and `1338` for web-based services and applications. Git integration allows repositories to be cloned during container initialization, making it effortless to run existing projects. With full TypeScript support and robust type definitions, Fermion delivers a powerful developer experience with autocomplete and type safety built in.
+
+---
+
+## Common Use Cases
+
+Fermion Sandbox is the foundation for a variety of modern, interactive coding experiences. AI-powered coding assistants use it to safely execute generated code and provide instant feedback without risk. Online learning platforms rely on it to grade code submissions securely, while interview and assessment tools use Fermion to evaluate candidates’ code in real time.
+
+Browser-based IDEs can integrate Fermion to offer instant server deployment and live previews without managing servers. Even CI/CD systems can use Fermion as a reproducible environment to run tests or preview builds. For documentation and tutorials, Fermion Sandbox acts as a lightweight, interactive playground where readers can execute code examples instantly.
+
+---
+
+## Installation
+
+To get started, install the Fermion Sandbox SDK using your preferred package manager:
+
+```bash
+# Using npm
+npm install @fermion-app/sandbox
+
+# Using yarn
+yarn add @fermion-app/sandbox
+
+# Using pnpm
+pnpm add @fermion-app/sandbox
+```
+
+You’ll receive an API key upon registration, which is required to authenticate your sandbox sessions. Refer to the [Quick Start]() section to begin provisioning your first container.
+
+## Explore More
+
+<Columns cols={2}>
+
+<Card title="Getting Started" href="/coding-sandbox/getting-started">
+Learn how to create, run, and manage your first sandbox in minutes.
+</Card>
+
+<Card title="API Reference" href="/coding-sandbox/methods/initialization">
+Explore all available methods, and configuration options.
+</Card>
+
+
+</Columns>

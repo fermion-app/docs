@@ -1,0 +1,91 @@
+---
+title: 'Write to files inside your Sandbox Instance'
+sidebarTitle: 'Write File'
+description: 'Write text or binary files to the sandbox filesystem with automatic directory creation.'
+icon: file-plus
+---
+
+The `writeFile()` method allows you to create or overwrite files inside your sandbox’s isolated filesystem. It supports both **text** and **binary** content, making it flexible enough for handling scripts, configuration files, and assets like images or compiled binaries. When writing a file, parent directories are created automatically if they don’t exist, ensuring that nested paths are handled gracefully without requiring manual directory setup.  
+
+All file paths must begin with either the tilde (`~`) shortcut or the absolute sandbox path `/home/damner/code`. Any attempt to write outside this directory will throw an error for security reasons. This method replaces existing files silently, so it’s best used with care when overwriting content.  
+
+`writeFile()` is commonly used to prepare your execution environment: for example, uploading scripts before running them, storing generated output, or programmatically managing project files within persistent sandboxes. Combined with [getFile()](/coding-sandbox/methods/get-file), it provides a full read–write interface for your container’s filesystem.
+
+### `writeFile(options)`
+
+**Description:**
+Writes a file to the sandbox filesystem. Supports both text and binary content. Creates parent directories automatically if they don't exist.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| path | string |  Yes | File path (must start with `~` or `/home/damner/code`) |
+| content | string \| ArrayBuffer |  Yes | File content (text string or binary data) |
+
+**Returns:**
+`Promise<void>` - Resolves when write is complete
+
+**Example:**
+```typescript
+// Text file
+await sandbox.writeFile({
+  path: '~/script.js',
+  content: 'console.log("Hello World")'
+})
+
+// Text file with subdirectory
+await sandbox.writeFile({
+  path: '~/app/src/index.js',
+  content: 'export default "test"'
+})
+
+// Binary file
+const imageData = await fetch('https://example.com/image.png')
+  .then(r => r.arrayBuffer())
+
+await sandbox.writeFile({
+  path: '~/image.png',
+  content: imageData
+})
+
+// Multi-line content
+await sandbox.writeFile({
+  path: '~/config.json',
+  content: JSON.stringify({
+    name: 'my-app',
+    version: '1.0.0'
+  }, null, 2)
+})
+```
+
+**Throws:**
+- `Error: "No container found"` - Must call `create()` or `fromSnippet()` first
+- `Error: "Path must start with ~ or /home/damner/code"` - Invalid path format
+- `Error: "Failed to set file"` - Network error or permission issue
+
+**Path Handling:**
+```typescript
+// ✅ Valid paths
+await sandbox.writeFile({ path: '~/file.txt', content: '...' })
+await sandbox.writeFile({ path: '/home/damner/code/file.txt', content: '...' })
+await sandbox.writeFile({ path: '~/nested/dir/file.txt', content: '...' })
+
+// ❌ Invalid paths (will throw)
+await sandbox.writeFile({ path: '/tmp/file.txt', content: '...' })
+await sandbox.writeFile({ path: 'relative/file.txt', content: '...' })
+await sandbox.writeFile({ path: './file.txt', content: '...' })
+```
+
+**File Overwriting:**
+- Existing files are overwritten without warning
+- No confirmation prompt
+- Previous content is lost
+
+**Best Practices:**
+- Use tilde `~` for cleaner code
+- Create organized directory structures
+- JSON.stringify for JSON files with proper indentation
+- Check file was written with `getFile()` if critical
+
+---

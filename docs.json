@@ -157,7 +157,7 @@
 						"pages": [
 							{
 								"group": "School Settings",
-								"icon":"gear",
+								"icon": "gear",
 								"pages": [
 									"manage-settings/change-school-settings",
 									"manage-settings/security-settings",
@@ -191,6 +191,34 @@
 				"tab": "Coding Labs",
 				"icon": "terminal",
 				"groups": [
+					{
+						"group": "Coding Sandbox",
+						"pages": [
+							"coding-sandbox/introduction",
+							"coding-sandbox/getting-started",
+							"coding-sandbox/core-concepts",
+							{
+								"group": "Initialization and Methods",
+								"icon":"wrench",
+								"expanded": true,
+								"pages": [
+									"coding-sandbox/methods/initialization",
+									"coding-sandbox/methods/create",
+									"coding-sandbox/methods/from-snippet",
+									"coding-sandbox/methods/is-connected",
+									"coding-sandbox/methods/run-command",
+									"coding-sandbox/methods/run-streaming-command",
+									"coding-sandbox/methods/write-file",
+									"coding-sandbox/methods/get-file",
+									"coding-sandbox/methods/expose-port",
+									"coding-sandbox/methods/get-public-urls",
+									"coding-sandbox/methods/session-id",
+									"coding-sandbox/methods/container-details",
+									"coding-sandbox/methods/disconnect"
+								]
+							}
+						]
+					},
 					{
 						"group": "Interactive Coding Labs",
 						"pages": [

@@ -1,0 +1,50 @@
+---
+title: 'Is Connected'
+sidebarTitle: 'Is Connected'
+description: 'Check whether the current sandbox session is actively connected via WebSocket.'
+icon: plug
+---
+
+
+The `isConnected()` method provides a quick way to verify whether your current sandbox instance is actively connected to Fermion’s infrastructure. It returns a simple boolean value : `true` if the WebSocket connection is established and ready for commands, or `false` if the sandbox has been disconnected, has not yet been created, or encountered a network interruption.  
+
+This method is especially useful for implementing **connection health checks**, **conditional command execution**, or **automatic reconnection logic** in your application. You can safely call `isConnected()` at any time without throwing errors, making it ideal for lightweight status polling and runtime monitoring.  
+
+### `isConnected()`
+
+**Description:**
+Checks if the WebSocket connection to the sandbox is currently active.
+
+**Parameters:**
+None
+
+**Returns:**
+`boolean` - `true` if connected, `false` otherwise
+
+**Example:**
+```typescript
+console.log(sandbox.isConnected()) // false
+
+await sandbox.create({ shouldBackupFilesystem: false })
+console.log(sandbox.isConnected()) // true
+
+await sandbox.disconnect()
+console.log(sandbox.isConnected()) // false
+```
+
+**Use Cases:**
+```typescript
+// Conditional operations
+if (sandbox.isConnected()) {
+  await sandbox.runCommand({ cmd: 'ls' })
+} else {
+  console.log('Not connected. Call create() first.')
+}
+
+// Health check
+setInterval(() => {
+  if (!sandbox.isConnected()) {
+    console.warn('Sandbox disconnected!')
+  }
+}, 5000)
+```

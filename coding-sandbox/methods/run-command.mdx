@@ -1,0 +1,79 @@
+---
+title: 'Execute Commands inside your Sandbox'
+sidebarTitle: 'Run Command'
+description: 'Execute short, non-streaming commands within a Fermion Sandbox and return stdout and stderr once complete.'
+icon: terminal
+---
+
+
+The `runCommand()` method executes a single short-lived command inside your active sandbox container and waits until it finishes before returning the output. It’s ideal for quick tasks that complete within a few seconds: such as listing directories, checking Node.js or Python versions, or running lightweight scripts.  
+
+This method runs the command synchronously and captures both `stdout` and `stderr` once the execution is complete. Because it is optimized for speed and simplicity, `runCommand()` has a strict 5-second execution limit and does not support streaming output. For longer-running or real-time operations, you should use [runStreamingCommand()](/coding-sandbox/methods/run-streaming-command) instead.  
+
+In essence, `runCommand()` is your go-to choice for fast, non-interactive shell commands that produce immediate output without requiring continuous monitoring.
+
+
+### `runCommand(options)`
+
+**Description:**
+Executes a short command (< 5 seconds) and waits for completion. Use this for quick operations like `ls`, `pwd`, `cat`, or fast scripts. For longer operations, use `runStreamingCommand()`.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| cmd | string | Yes | Command to execute (e.g., 'node', 'python', 'ls') |
+| args | string[] |  No | Array of command arguments |
+
+**Returns:**
+```typescript
+Promise<{
+  stdout: string  // Standard output
+  stderr: string  // Standard error
+}>
+```
+
+**Example:**
+```typescript
+// Simple command
+const result = await sandbox.runCommand({
+  cmd: 'pwd'
+})
+console.log('Current dir:', result.stdout)
+
+// With arguments
+const result = await sandbox.runCommand({
+  cmd: 'ls',
+  args: ['-la', '/home/damner/code']
+})
+console.log(result.stdout)
+
+// Node script
+const result = await sandbox.runCommand({
+  cmd: 'node',
+  args: ['--version']
+})
+console.log('Node:', result.stdout.trim())
+```
+
+**Throws:**
+- `Error: "Not connected"` : Must call `create()` or `fromSnippet()` first
+- `Error: "Unexpected response event type"` - Internal protocol error (rare)
+- Timeout if command runs longer than 5 seconds
+
+**Limitations:**
+- **5 second maximum** : Command will timeout
+- No streaming - must wait for completion
+- No exit code returned (use `runStreamingCommand` if you need it)
+
+**When to Use:**
+- File listings (`ls`)
+- Quick scripts (`node script.js` under 5s)
+- Path operations (`pwd`, `cd && pwd`)
+- Reading small files (`cat file.txt`)
+
+**When NOT to Use:**
+-  Package installation (`npm install`)
+-  Building projects (`npm run build`)
+-  Long-running servers
+-  Large file operations

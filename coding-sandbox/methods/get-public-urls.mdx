@@ -1,0 +1,55 @@
+---
+title: 'Retrieve public URLs for Exposed Ports'
+sidebarTitle: 'Get Public URLs'
+description: 'Retrieve all public HTTPS URLs for exposed sandbox ports (3000, 1337, 1338).'
+icon: network-wired
+---
+
+The `getPublicUrls()` method returns all available **public HTTPS endpoints** for your sandbox container in a single object. By default, Fermion automatically exposes ports **3000**, **1337**, and **1338**, each corresponding to its own unique public URL.   
+
+Unlike [exposePort()](/coding-sandbox/methods/expose-port), which retrieves a single URL, `getPublicUrls()` provides a quick overview of every exposed port at once. It’s a **synchronous method**, meaning you don’t need to `await` it, though the URLs it returns remain valid only while the sandbox is active.  
+
+You can use this method to configure application settings dynamically: linking web apps, APIs, and socket servers without hardcoding endpoints. The URLs are automatically HTTPS-secured and regenerated with every new sandbox session, ensuring both security and isolation.
+
+
+### `getPublicUrls()`
+
+**Description:**
+Returns all available public URLs for the sandbox (ports 3000, 1337, 1338).
+
+**Parameters:**
+None
+
+**Returns:**
+```typescript
+{
+  3000: string  // https://{subdomain}-3000.run-code.com
+  1337: string  // https://{subdomain}-1337.run-code.com
+  1338: string  // https://{subdomain}-1338.run-code.com
+}
+```
+
+**Example:**
+```typescript
+const urls = sandbox.getPublicUrls()
+
+console.log('Available URLs:')
+console.log('Port 3000:', urls[3000])
+console.log('Port 1337:', urls[1337])
+console.log('Port 1338:', urls[1338])
+
+// Use in application
+const config = {
+  webUrl: urls[3000],
+  apiUrl: urls[1337],
+  socketUrl: urls[1338]
+}
+```
+
+**Throws:**
+- `Error: "No container found"` - Must call `create()` or `fromSnippet()` first
+
+<Note>
+This is a synchronous method (no await needed), but returns async URLs.
+</Note>
+

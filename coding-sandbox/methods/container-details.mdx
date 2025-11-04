@@ -1,0 +1,44 @@
+---
+title: 'Get Container Details'
+sidebarTitle: 'Get Container Details'
+description: 'Retrieve container connection details including subdomain and secure access token.'
+icon: server
+---
+
+
+The `getContainerDetails()` method provides low-level connection information for the currently active sandbox container. It returns an object containing the **container subdomain** and a **playground access token**, which are used internally to establish and manage secure communication between your client and the Fermion infrastructure.  
+
+If there is no active connection, for instance, before `create()` is called or after `disconnect()`- this method returns `null`. While this data can be useful for debugging, advanced integrations, or monitoring session details, it should be handled with extreme care.  
+
+The access token grants privileged access to the container and should **never** be exposed in logs, user interfaces, or shared externally. Always treat it as a secret and avoid persisting it outside secure server-side environments.
+
+
+### `getContainerDetails()`
+
+**Description:**
+Returns container connection details including subdomain and access token, or null if not connected.
+
+**Parameters:**
+None
+
+**Returns:**
+```typescript
+{
+  subdomain: string
+  playgroundContainerAccessToken: string
+} | null
+```
+
+**Example:**
+```typescript
+const details = sandbox.getContainerDetails()
+
+if (details) {
+  console.log('Subdomain:', details.subdomain)
+  console.log('Token:', details.playgroundContainerAccessToken)
+}
+```
+
+<Warning>
+The access token is sensitive. Do not expose it in logs or UI.
+</Warning>

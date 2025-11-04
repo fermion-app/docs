@@ -1,0 +1,71 @@
+---
+title: 'Create and Spin up a new sandbox instance'
+sidebarTitle: 'Create'
+description: 'Provision a new Fermion Sandbox container with optional persistence or repository cloning.'
+icon: plus
+---
+
+The `create()` method provisions a brand-new sandbox container within Fermion’s secure cloud infrastructure. When invoked, it initializes a clean Linux environment, configures your session, and establishes a WebSocket connection for real-time communication. Depending on the options you pass, the sandbox can be either **ephemeral** (short-lived and automatically destroyed on disconnect) or **persistent** (saved for later use).  
+
+You can also clone a Git repository during provisioning, making it easy to start from existing codebases or templates. The process typically completes within a few seconds, after which the sandbox is ready to accept commands, file operations, or server executions. The method returns a unique `snippetId`, which you can store and reuse to reconnect to the same environment later.
+
+
+## `create(options)`
+
+**Description:**
+Creates and provisions a new sandbox container. This process includes:
+1. Creating a playground snippet
+2. Starting a session
+3. Waiting for container provisioning (polling with 500ms intervals)
+4. Establishing WebSocket connection
+5. Waiting for container server to be ready
+6. Optionally cloning a git repository
+
+**Parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| shouldBackupFilesystem | boolean | Yes | - | If true, files persist after disconnect. If false, everything is deleted. |
+| gitRepoUrl | string |  No | undefined | GitHub/GitLab repository URL to clone on startup |
+
+**Returns:**
+`Promise<string>` - Resolves with the playground snippet ID (save this to reconnect later)
+
+**Example:**
+```typescript
+// Basic ephemeral sandbox
+const snippetId = await sandbox.create({
+  shouldBackupFilesystem: false
+})
+
+// Persistent sandbox
+const snippetId = await sandbox.create({
+  shouldBackupFilesystem: true
+})
+console.log('Save this ID:', snippetId)
+
+// With git repository
+const snippetId = await sandbox.create({
+  shouldBackupFilesystem: true,
+  gitRepoUrl: 'https://github.com/username/repo.git'
+})
+```
+
+**Throws:**
+- `Error: "Provisioning timeout"` - Container took longer than 30 seconds to start
+- `Error: "Cannot get new session"` - Account limit reached or other restriction
+- `Error: "WebSocket already connected"` - Called create() twice without disconnect
+- Git clone errors if repository is invalid or inaccessible
+
+**Timing:**
+- Typical provisioning time: 5-15 seconds
+- Maximum timeout: 30 seconds (configurable internally)
+- Git clone adds extra time depending on repository size
+
+**Best Practices:**
+- Always save the returned snippet ID if using `shouldBackupFilesystem: true`
+- Use try/catch to handle provisioning timeouts
+- For large repos, expect longer clone times
+
+
+---

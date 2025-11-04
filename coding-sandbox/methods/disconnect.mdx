@@ -1,0 +1,68 @@
+---
+title: 'Disconnect from the Sandbox instance'
+sidebarTitle: 'Disconnect'
+description: 'Gracefully close the WebSocket connection and clean up sandbox resources.'
+icon: plug-circle-xmark
+---
+
+## disconnect()
+
+The `disconnect()` method gracefully terminates your active sandbox session by closing the WebSocket connection and releasing all associated resources. It should always be called at the end of your workflow to ensure that containers are properly stopped and server resources are freed.  
+
+When you call `disconnect()`, Fermion performs a clean shutdown: it disables automatic reconnection, sends a disconnection signal to the container, closes all open communication channels, and resets the client’s internal state. Depending on the sandbox type, the container will either be **destroyed** (for ephemeral sessions) or **paused and saved** (for persistent sessions created with `shouldBackupFilesystem: true`).  
+
+Using `disconnect()` is considered best practice for all sandbox operations. Always wrap your workflow in a `try/finally` block to guarantee cleanup even when errors occur. After disconnection, the same `Sandbox` instance should not be reused — create a new one for any subsequent sessions.
+
+### `disconnect()`
+
+**Description:**
+Closes the WebSocket connection and cleans up resources. Always call this when done with the sandbox to free up server resources.
+
+**Parameters:**
+None
+
+**Returns:**
+`Promise<void>` - Resolves when disconnection is complete
+
+**Example:**
+```typescript
+const sandbox = new Sandbox({ apiKey: 'key' })
+await sandbox.create({ shouldBackupFilesystem: false })
+
+// Do work...
+
+// Always cleanup
+await sandbox.disconnect()
+```
+
+**With Try/Finally:**
+```typescript
+const sandbox = new Sandbox({ apiKey: 'key' })
+
+try {
+  await sandbox.create({ shouldBackupFilesystem: false })
+
+  // Do work that might throw errors
+  await sandbox.runCommand({ cmd: 'failing-command' })
+
+} catch (error) {
+  console.error('Error:', error)
+} finally {
+  // Guaranteed cleanup even if errors occur
+  await sandbox.disconnect()
+}
+```
+
+**What Happens:**
+1. Disables auto-reconnect
+2. Sends disconnect notification to container
+3. Closes WebSocket connection
+4. Cleans up internal state
+5. If `shouldBackupFilesystem: false`, container is destroyed
+6. If `shouldBackupFilesystem: true`, container is paused (can reconnect)
+
+**Best Practices:**
+- Always use try/finally pattern
+- Call disconnect() even if errors occurred
+- Don't reuse sandbox instance after disconnect
+- Create new instance for new connection
