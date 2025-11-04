@@ -11,7 +11,7 @@ The `disconnect()` method gracefully terminates your active sandbox session by c
 
 When you call `disconnect()`, Fermion performs a clean shutdown: it disables automatic reconnection, sends a disconnection signal to the container, closes all open communication channels, and resets the client’s internal state. Depending on the sandbox type, the container will either be **destroyed** (for ephemeral sessions) or **paused and saved** (for persistent sessions created with `shouldBackupFilesystem: true`).  
 
-Using `disconnect()` is considered best practice for all sandbox operations. Always wrap your workflow in a `try/finally` block to guarantee cleanup even when errors occur. After disconnection, the same `Sandbox` instance should not be reused — create a new one for any subsequent sessions.
+Using `disconnect()` is considered best practice for all sandbox operations. Always wrap your workflow in a `try/finally` block to guarantee cleanup even when errors occur. After disconnection, the same `Sandbox` instance should not be reused , create a new one for any subsequent sessions.
 
 ### `disconnect()`
 

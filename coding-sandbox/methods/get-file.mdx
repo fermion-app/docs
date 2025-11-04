@@ -10,7 +10,7 @@ The `getFile()` method retrieves a file from your sandbox’s filesystem and ret
 
 All file paths must start with `~` or the absolute path `/home/damner/code` to ensure access is confined to the sandbox’s isolated workspace. If the requested file doesn’t exist or the path is invalid, an error is thrown.  
 
-`getFile()` is commonly used for reading script outputs, verifying file writes, or fetching configuration data generated during execution. Since the returned object supports `.text()`, `.json()`, `.arrayBuffer()`, and `.blob()` methods, it seamlessly supports diverse file types — from source code to media files. For large files, you can also use the response stream directly for efficient, chunked reading.
+`getFile()` is commonly used for reading script outputs, verifying file writes, or fetching configuration data generated during execution. Since the returned object supports `.text()`, `.json()`, `.arrayBuffer()`, and `.blob()` methods, it seamlessly supports diverse file types,  from source code to media files. For large files, you can also use the response stream directly for efficient, chunked reading.
 
 
 
