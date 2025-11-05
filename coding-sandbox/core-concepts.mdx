@@ -10,8 +10,6 @@ A sandbox is essentially a temporary virtual computer that exists entirely in th
 
 Under the hood, Fermion Sandboxes run on containerized Linux environments that provide an isolated filesystem, meaning any changes made inside one sandbox do not affect others. Network access is also sandboxed, with only specific ports exposed for secure communication. After disconnection, containers are automatically cleaned up, maintaining a lightweight and efficient system. For users who need persistence, Fermion offers the option to back up the filesystem using the `shouldBackupFilesystem` flag, allowing you to reconnect later and resume your previous environment seamlessly.
 
-![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/04-11-2025/Untitled-2025-02-04-2040.dyhxze.png)
-
 ### Sandbox Lifecycle
 A Fermion coding sandbox has the following lifecycle
 
@@ -29,7 +27,7 @@ Work with files, run commands, host servers
     ↓
 Disconnect
     ↓
-Container Destroyed (unless shouldBackupFilesystem: true)
+Sandbox Destroyed
 ```
 </CodeGroup>
 

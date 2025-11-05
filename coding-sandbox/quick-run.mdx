@@ -1,0 +1,343 @@
+---
+title: 'quickRun() Method'
+description: 'Learn how to instantly execute code in multiple programming languages using the QuickRun method.'
+sidebarTitle: 'QuickRun'
+icon: code
+---
+
+The **`quickRun()`** method provides a fast and secure way to execute code directly within your application. Designed as an all-in-one code execution utility, it allows developers to run snippets, test logic, and validate program outputs across multiple languages without leaving their environment. 
+Whether you’re verifying a student’s submission, powering an online code playground, or testing algorithms on the fly, QuickRun delivers real-time execution results with minimal setup. With built-in support for ten popular runtimes: **Python, Java, C++, Node.js, and SQL engines**, it serves as a reliable sandbox for experimentation, learning, and evaluation. Each execution runs safely in an isolated environment, ensuring both performance and security.
+
+## Supported Languages
+
+The following languages can be executed with the help of the `quickRun()` method.
+
+<Columns cols={4}>
+
+  <Card title="C / C++" icon="C">
+  </Card>
+
+  <Card title="Java" icon="java">
+  </Card>
+
+  <Card title="Python" icon="python">
+  </Card>
+
+  <Card title="Node.js" icon="node-js">
+  </Card>
+
+  <Card title="SQLite / MySQL" icon="database">
+  </Card>
+
+  <Card title="Go" icon="golang">
+  </Card>
+
+  <Card title="Rust" icon="rust">
+  </Card>
+
+  <Card title=".NET (C#)" icon="hashtag">
+  </Card>
+
+</Columns>
+
+## Method Parameters
+
+The `quickRun()` method accepts a set of parameters that define how your code will be executed. Some are required to run code successfully, while others let you customize execution behavior, provide input, or validate results.
+
+---
+
+### Required Parameters
+
+These parameters are mandatory for every QuickRun execution. Without them, the method won’t know what language to use or what code to run.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `runtime` | string | Specifies the programming language to execute (see the supported languages above). |
+| `sourceCode` | string | The actual source code to be executed within the sandbox environment. If the source code is multi-line, please use backticks (`) to format the code. |
+
+---
+
+### Optional Parameters
+
+Use these optional parameters to provide inputs, verify expected outputs, or include additional files required by your program.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `stdin` | string | Input data passed to the program’s standard input (like console input). |
+| `expectedOutput` | string | The expected output for validation  |
+| `additionalFilesAsZip` | string | Base64URL-encoded ZIP archive containing any extra files your program depends on. (SQL schema) |
+
+## Understanding the Result
+
+When you execute code using the `quickRun()` method, the response includes a structured result object containing everything you need to know about the run.
+
+### Basic Information
+
+This section provides general metadata about the execution request.
+
+| Field | Description |
+|--------|-------------|
+| **`taskUniqueId`** | A unique identifier assigned to this specific code execution instance. Useful for referencing logs or tracing results. |
+| **`codingTaskStatus`** | Indicates the overall execution status, such as whether the task has completed (`"Finished"`) or is still processing. |
+| **`language`** | Specifies the runtime or programming language used for the execution (e.g., `"Python"`, `"C++"`, `"Java"`). |
+
+---
+
+### Your Code
+
+This section reflects the submitted code and how it’s stored or processed within the system.
+
+| Field | Description |
+|--------|-------------|
+| **`sourceCode`** | The exact code submitted for execution, typically represented in a securely encoded format to ensure consistency and safety. |
+
+---
+
+### Execution Results
+
+The `runResult` object holds detailed information about the execution outcome: whether it succeeded, failed, or encountered runtime or compilation issues.
+
+| Field | Description |
+|--------|-------------|
+| **`runResult.runStatus`** | Indicates the final execution result. Possible values include `"Success"`, `"CompilationError"`, `"RuntimeError"`, or `"TimeLimitExceeded"`. |
+| **`runResult.stdout`** | Captures everything the program printed to the standard output stream. This is typically the main output you expect from a successful run. |
+| **`runResult.stderr`** | Contains any error messages or debug logs printed to the standard error stream. Useful for diagnosing runtime issues or failed compilations. |
+| **`runResult.cpuTimeInMs`** | Reports how long the code took to execute, measured in milliseconds. Helpful for performance benchmarking or optimization. |
+| **`runResult.memoryInKb`** | Indicates the total memory used during execution, measured in kilobytes. |
+| **`runResult.outputSizeInKb`** | The size of the generated output data, in kilobytes. |
+| **`runResult.runDateTime`** | Timestamp marking when the execution took place, in UTC format. |
+
+---
+
+### Validation (if you provided `expectedOutput`)
+
+If you supplied an `expectedOutput` when running your code, QuickRun automatically compares the actual output (`stdout`) with your expected value. This allows for quick correctness checks, ideal for grading systems, test runners, or automated assessments.
+
+| Field | Description |
+|--------|-------------|
+| **`validationStatus`** | Reflects the result of the output comparison. Possible values include `"Accepted"` (output matched expected), `"WrongAnswer"` (output did not match), `"CompilationError"`, or `"RuntimeError"`. |
+
+---
+
+## How to Use QuickRun
+
+Here is a simple example on how you can use the `quickRun()` to execute a simple python script.
+
+<CodeGroup>
+
+```typescript helloWorld.ts
+const sandbox = new Sandbox('fermion-api-key')
+
+const result = await sandbox.quickRun({
+  runtime: 'Python',
+  sourceCode: 'print("Hello, World!")'
+})
+
+console.log(result.runResult.stdout) // Outputs: "Hello, World!"
+```
+</CodeGroup>
+
+Here is a another simple example on how you can use the `quickRun()` to execute a simple C++ program that takes a `name` input and greets the user.
+
+<CodeGroup>
+
+```typescript greet.ts
+const sandbox = new Sandbox('fermion-api-key')
+
+const result = await sandbox.quickRun({
+  runtime: 'C++',
+  sourceCode: `
+    #include <iostream>
+    using namespace std;
+    int main() {
+      string name;
+      cin >> name;
+      cout << "Hello, " << name << "!" << endl;
+      return 0;
+    }
+  `,
+  stdin: 'Alice'
+})
+
+console.log(result.runResult.stdout) // Outputs: "Hello, Alice!"
+```
+</CodeGroup>
+
+Now, let us try to run a Java code with output checks:
+
+<CodeGroup>
+
+```typescript sum.ts
+const result = await sandbox.quickRun({
+  runtime: 'Java',
+  sourceCode: `
+    public class Main {
+      public static void main(String[] args) {
+        int sum = 5 + 3;
+        System.out.println(sum);
+      }
+    }
+  `,
+  expectedOutput: '8'
+})
+
+console.log(result.validationStatus) // Shows if output matched expected
+```
+</CodeGroup>
+
+## Example: Complete Workflow
+
+
+Here’s a complete example demonstrating how to integrate **QuickRun** into your application. This workflow shows how to initialize the Sandbox client, execute user-submitted code, validate the output, and handle potential runtime or validation errors.
+
+
+<CodeGroup>
+
+```typescript completeWorkflow.ts
+import { Sandbox } from '@fermion/sandbox'
+
+async function runUserCode(code: string, input: string, expected: string) {
+  const sandbox = new Sandbox(process.env.FERMION_API_KEY!)
+
+  try {
+    const result = await sandbox.quickRun({
+      runtime: 'Python',
+      sourceCode: code,
+      stdin: input,
+      expectedOutput: expected
+    })
+
+    // Check if it ran successfully
+    if (result.runResult.runStatus !== 'Success') {
+      return {
+        success: false,
+        error: result.runResult.stderr,
+        type: result.runResult.runStatus
+      }
+    }
+
+    // Check if output matched
+    if (result.validationStatus === 'Accepted') {
+      return {
+        success: true,
+        output: result.runResult.stdout,
+        executionTime: result.runResult.cpuTimeInMs
+      }
+    } else {
+      return {
+        success: false,
+        output: result.runResult.stdout,
+        expected: expected,
+        validationStatus: result.validationStatus
+      }
+    }
+
+  } catch (error) {
+    return {
+      success: false,
+      error: error.message
+    }
+  }
+}
+
+// Usage
+const testResult = await runUserCode(
+  'print(input())',
+  'Hello',
+  'Hello'
+)
+
+console.log(testResult)
+```
+</CodeGroup>
+
+## Error Handling
+
+Even well-written code can fail, the `quickRun()`  provides clear feedback to help you identify and debug errors efficiently. Common failure types include compilation errors, runtime exceptions, and timeouts. Each is detailed below with example usage.
+
+<AccordionGroup>
+
+  <Accordion title="Compilation Errors" icon="terminal">
+    These occur when the code fails to compile due to syntax issues or missing elements. The `runStatus` will be set to **"CompilationError"**, and the compiler output can be found in `stderr`.
+
+    ```typescript
+    const result = await sandbox.quickRun({
+      runtime: 'Java',
+      sourceCode: 'public class Main { // Missing closing brace'
+    })
+
+    console.log(result.runResult.runStatus) // "CompilationError"
+    console.log(result.runResult.stderr)    // Shows compiler error messages
+    ```
+  </Accordion>
+
+  <Accordion title="Runtime Errors" icon="business-time">
+    Runtime errors happen when the program compiles successfully but fails during execution, such as dividing by zero or accessing invalid memory. In such cases, the `runStatus` will be **"RuntimeError"**, and the error message appears in `stderr`.
+
+    ```typescript
+    const result = await sandbox.quickRun({
+      runtime: 'Python',
+      sourceCode: 'print(1 / 0)' // Division by zero
+    })
+
+    console.log(result.runResult.runStatus) // "RuntimeError"
+    console.log(result.runResult.stderr)    // Shows error details
+    ```
+  </Accordion>
+
+  <Accordion title="Timeout Errors" icon="timer">
+    Timeout errors occur when a program runs beyond the allowed time limit, typically due to infinite loops or heavy computation. The `runStatus` will be **"TimeLimitExceeded"**.
+
+    ```typescript
+    const result = await sandbox.quickRun({
+      runtime: 'Python',
+      sourceCode: 'while True: pass' // Infinite loop
+    })
+
+    console.log(result.runResult.runStatus) // "TimeLimitExceeded"
+    ```
+  </Accordion>
+
+</AccordionGroup>
+
+## Best Practices
+
+- **Always check runStatus first** : Before looking at output, verify the code ran successfully
+- **Use expectedOutput for automated testing** : Let the system validate output automatically
+- **Handle errors gracefully** : Show helpful messages when code fails
+- **Validate user input** : If users can submit code, validate it before execution
+
+
+## Performance Tips
+
+- Code execution typically takes 1-3 seconds
+- Compilation languages (C++, Java, Rust) may take slightly longer
+- Interpreted languages (Python, Node.js) start faster
+- Database operations (SQLite, MySQL) depend on query complexity
+
+## Frequently Asked Questions
+
+<AccordionGroup>
+
+  <Accordion title="How long does code execution take?">
+    Code execution typically completes within **1–3 seconds**, depending on the programming language, code complexity, and whether compilation is required. Interpreted languages like Python or Node.js tend to execute faster, while compiled languages such as Java or Rust may take slightly longer.
+  </Accordion>
+
+  <Accordion title="What if my code needs external files?">
+    You can include any required files by encoding them as a Base64 ZIP and passing them through the **`additionalFilesAsZip`** parameter. This allows your program to access external dependencies, data files, or assets during execution.
+  </Accordion>
+
+  <Accordion title="Can I run code that reads from files?">
+    Yes. Your program can read from files provided through **`additionalFilesAsZip`**, or you can simulate user input using the **`stdin`** parameter for simpler text-based input.
+  </Accordion>
+
+  <Accordion title="What happens if my code runs forever?">
+    Each code execution has a **time limit** to prevent infinite loops or unresponsive code. If your program exceeds this limit, it’s automatically stopped and marked as **`TimeLimitExceeded`** in the result object.
+  </Accordion>
+
+  <Accordion title="Is the execution environment safe?">
+    Absolutely. All code runs inside a **secure, isolated sandbox** with strict resource and permission controls. This ensures your application and data remain safe from malicious or runaway code.
+  </Accordion>
+
+</AccordionGroup>
+

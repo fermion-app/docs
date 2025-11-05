@@ -200,7 +200,7 @@
 							{
 								"group": "Initialization and Methods",
 								"icon":"wrench",
-								"expanded": true,
+								"expanded": false,
 								"pages": [
 									"coding-sandbox/methods/initialization",
 									"coding-sandbox/methods/create",
@@ -216,7 +216,8 @@
 									"coding-sandbox/methods/container-details",
 									"coding-sandbox/methods/disconnect"
 								]
-							}
+							},
+							"coding-sandbox/quick-run"
 						]
 					},
 					{
