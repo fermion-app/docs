@@ -8,10 +8,6 @@ icon: server
 
 The `getContainerDetails()` method provides low-level connection information for the currently active sandbox container. It returns an object containing the **container subdomain** and a **playground access token**, which are used internally to establish and manage secure communication between your client and the Fermion infrastructure.  
 
-If there is no active connection, for instance, before `create()` is called or after `disconnect()`- this method returns `null`. While this data can be useful for debugging, advanced integrations, or monitoring session details, it should be handled with extreme care.  
-
-The access token grants privileged access to the container and should **never** be exposed in logs, user interfaces, or shared externally. Always treat it as a secret and avoid persisting it outside secure server-side environments.
-
 
 ### `getContainerDetails()`
 

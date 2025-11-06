@@ -10,8 +10,6 @@ The `exposePort()` method provides a **public HTTPS URL** that maps directly to 
 
 When you start a server inside your sandbox, using commands like `node server.js` or `npm run dev`, you can call `exposePort(port)` to instantly retrieve a URL in the format `https://{subdomain}-{port}.run-code.com`. This enables you to preview, test, and share live services running within your sandbox without any manual networking setup or tunneling.  
 
-The returned URLs are ephemeral, meaning they last only for the sandbox’s lifetime. Each new session generates new subdomains for security and isolatio
-
 ### `exposePort(port)`
 
 **Description:**
@@ -62,43 +60,3 @@ const response = await fetch(url)
 const text = await response.text()
 console.log(text) // 'Hello from Fermion!'
 ```
-
-**Multiple Ports:**
-```typescript
-// Run services on different ports
-// Port 3000: Web app
-sandbox.runStreamingCommand({
-  cmd: 'npm',
-  args: ['run', 'dev'] // Starts on 3000
-})
-
-// Port 1337: API server
-sandbox.runStreamingCommand({
-  cmd: 'node',
-  args: ['api-server.js'] // Starts on 1337
-})
-
-// Get both URLs
-const webUrl = await sandbox.exposePort(3000)
-const apiUrl = await sandbox.exposePort(1337)
-
-console.log('Web:', webUrl)
-console.log('API:', apiUrl)
-```
-
-**Throws:**
-- `Error: "No container found"` - Must call `create()` or `fromSnippet()` first
-- TypeScript error if port is not 3000, 1337, or 1338
-
-**Important Notes:**
-- URLs are available immediately, even before a server starts
-- Accessing URL before server starts will show connection error
-- HTTPS is automatic - no certificate setup needed
-- URLs are stable during sandbox lifetime
-- URLs change on reconnect to same snippet
-
-**Best Practices:**
-- Wait a moment after starting server before accessing URL
-- Add error handling when fetching URLs
-- Use health check endpoints to verify server is ready
-

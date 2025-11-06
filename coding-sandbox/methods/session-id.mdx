@@ -6,14 +6,12 @@ icon: passport
 ---
 
 
-The `getSessionId()` method returns the unique **session ID** associated with your active sandbox connection. This ID identifies the live session currently linked to your WebSocket connection and is useful for debugging, tracking, or logging sandbox activity.  
-
-If the sandbox is not connected: for example, before calling `create()` or after calling `disconnect()`, this method will return `null`. The session ID is distinct from the **snippet ID** returned by `create()`; while the snippet ID identifies a persistent sandbox that can be reconnected later, the session ID represents a temporary, live connection that expires once the session ends.  
+The `getSessionId()` method returns the unique **session ID** associated with your active sandbox connection. This ID identifies the live session currently linked to your WebSocket connection.  
 
 ### `getSessionId()`
 
 **Description:**
-Returns the current playground session ID, or null if not connected.
+Returns the current sandbox session ID, or null if not connected.
 
 **Parameters:**
 None

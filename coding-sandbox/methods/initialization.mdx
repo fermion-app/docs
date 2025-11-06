@@ -6,7 +6,7 @@ icon: key
 ---
 
 
-Before you can create or manage containers, you must first initialize the Fermion Sandbox client. The `Sandbox({ apiKey })` constructor establishes a secure connection between your application and Fermion’s backend infrastructure, authenticating every subsequent operation you perform. This step does not immediately spin up a container, instead, it prepares the client instance for later actions such as creating new sandboxes, reconnecting to saved sessions, or running commands. Supplying a valid API key is mandatory, as it ensures that all sandbox operations are securely tied to your account and usage environment.
+Before you can create or manage containers, you must first initialize the Fermion Sandbox client. The `Sandbox({ apiKey })` constructor establishes a secure connection between your application and Fermion’s backend infrastructure, authenticating every subsequent operation you perform. This step does not immediately spin up a container, instead, it prepares the client instance for later actions such as creating new sandboxes, reconnecting to saved sessions, or running commands.
 
 
 ### `new Sandbox({ apiKey })`
@@ -31,7 +31,4 @@ const sandbox = new Sandbox({
   apiKey: process.env.FERMION_API_KEY
 })
 ```
-
-**Throws:**
-- Error if apiKey is null, undefined, or empty string
 

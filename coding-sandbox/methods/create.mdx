@@ -29,7 +29,7 @@ Creates and provisions a new sandbox container. This process includes:
 | gitRepoUrl | string |  No | undefined | GitHub/GitLab repository URL to clone on startup |
 
 **Returns:**
-`Promise<string>` - Resolves with the playground snippet ID (save this to reconnect later)
+`Promise<string>` - Resolves with the playground snippet ID (save this to start another container with same file system later)
 
 **Example:**
 ```typescript
@@ -50,22 +50,5 @@ const snippetId = await sandbox.create({
   gitRepoUrl: 'https://github.com/username/repo.git'
 })
 ```
-
-**Throws:**
-- `Error: "Provisioning timeout"` - Container took longer than 30 seconds to start
-- `Error: "Cannot get new session"` - Account limit reached or other restriction
-- `Error: "WebSocket already connected"` - Called create() twice without disconnect
-- Git clone errors if repository is invalid or inaccessible
-
-**Timing:**
-- Typical provisioning time: 5-15 seconds
-- Maximum timeout: 30 seconds (configurable internally)
-- Git clone adds extra time depending on repository size
-
-**Best Practices:**
-- Always save the returned snippet ID if using `shouldBackupFilesystem: true`
-- Use try/catch to handle provisioning timeouts
-- For large repos, expect longer clone times
-
 
 ---

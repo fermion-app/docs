@@ -65,20 +65,20 @@ Let’s walk through a complete example of creating, running, and cleaning up a 
 import { Sandbox } from '@fermion-app/sandbox'
 
 async function main() {
-  // Step 1: Initialize the sandbox with your API key
+  // Initialize the sandbox with your API key
   const sandbox = new Sandbox({
     apiKey: process.env.FERMION_API_KEY
   })
 
   try {
-    // Step 2: Create a new container
+    // Create a new container
     console.log('Creating sandbox...')
     const snippetId = await sandbox.create({
       shouldBackupFilesystem: false // Files won't persist after disconnect
     })
-    console.log('✓ Sandbox created! Snippet ID:', snippetId)
+    console.log('Sandbox created! Snippet ID:', snippetId)
 
-    // Step 3: Run a simple command
+    // Run a simple command
     console.log('\nRunning node --version...')
     const nodeVersion = await sandbox.runCommand({
       cmd: 'node',
@@ -86,15 +86,15 @@ async function main() {
     })
     console.log('Node version:', nodeVersion.stdout.trim())
 
-    // Step 4: Write a file
+    // Write a file
     console.log('\nWriting hello.js...')
     await sandbox.writeFile({
       path: '~/hello.js',
       content: 'console.log("Hello from Fermion Sandbox!")'
     })
-    console.log('✓ File written')
+    console.log('File written')
 
-    // Step 5: Execute the file
+    // Execute the file
     console.log('\nExecuting hello.js...')
     const output = await sandbox.runCommand({
       cmd: 'node',
@@ -102,7 +102,7 @@ async function main() {
     })
     console.log('Output:', output.stdout.trim())
 
-    // Step 6: Read the file back
+    // Read the file back
     console.log('\nReading hello.js...')
     const fileResponse = await sandbox.getFile('~/hello.js')
     const fileContent = await fileResponse.text()
@@ -111,10 +111,10 @@ async function main() {
   } catch (error) {
     console.error('Error:', error.message)
   } finally {
-    // Step 7: Always clean up
+    // Always clean up
     console.log('\nDisconnecting...')
     await sandbox.disconnect()
-    console.log('✓ Disconnected')
+    console.log('Disconnected')
   }
 }
 
@@ -131,13 +131,13 @@ The following code snippet will create a sandbox that executes a simple node.js 
 <CodeGroup>
 ```bash Console Output
 Creating sandbox...
-✓ Sandbox created! Snippet ID: abc123xyz
+Sandbox created! Snippet ID: abc123xyz
 
 Running node --version...
 Node version: v20.11.0
 
 Writing hello.js...
-✓ File written
+File written
 
 Executing hello.js...
 Output: Hello from Fermion Sandbox!
@@ -146,59 +146,16 @@ Reading hello.js...
 File contents: console.log("Hello from Fermion Sandbox!")
 
 Disconnecting...
-✓ Disconnected
+Disconnected
 
 ```
 </CodeGroup>
-
-## Common Issues
-
-<AccordionGroup>
-
-  <Accordion title="Error: API key is required" icon="key">
-    This error occurs when your sandbox initialization is missing the `FERMION_API_KEY` value.
-
-    **How to fix:**
-    - Ensure your `.env` file contains `FERMION_API_KEY=your_api_key_here`
-    - Verify that your `.env` file is located in your project root
-    - If using `dotenv`, import it before creating the sandbox:
-
-    ```js
-    require('dotenv').config()
-    ```
-  </Accordion>
-
-  <Accordion title="Error: Provisioning timeout" icon="timer">
-    This typically means the container took too long to start.
-
-    **Possible fixes:**
-    - Retry after a short delay: the issue may be temporary
-    - Check the [system status page](#) for ongoing service disruptions
-    - If this persists, contact support with your `snippetId` for analysis
-  </Accordion>
-
-  <Accordion title="Error: WebSocket connection failed" icon="ethernet">
-    This indicates a network or firewall issue blocking WebSocket traffic.
-
-    **How to fix:**
-    - Ensure `wss://` connections are allowed on your network
-    - Check your firewall or proxy configuration
-    - If using a corporate VPN, try disabling it temporarily
-  </Accordion>
-
-</AccordionGroup>
-
----
 
 ## Next Steps
 
 Now that you’ve successfully run your first sandbox, you’re ready to explore more advanced concepts and integrations.
 
-<Columns cols={2}>
-
-<Card title="Core Concepts" href="/coding-sandbox/core-concepts">
-Understand how Fermion Sandboxes are provisioned, managed, and destroyed.
-</Card>
+<Columns cols={1}>
 
 <Card title="Available Methods" href="/coding-sandbox/methods/initialization">
 Explore all available methods and advanced configuration options.

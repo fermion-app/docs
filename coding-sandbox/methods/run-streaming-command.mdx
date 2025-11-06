@@ -6,15 +6,12 @@ icon: magnet
 ---
 
 
-The `runStreamingCommand()` method is designed for executing long-running or interactive commands inside a sandbox while receiving **real-time output streams**. Unlike [runCommand()](/coding-sandbox/methods/run-command), which waits for a command to complete before returning output, this method streams data continuously through callbacks as soon as it’s produced.  
-
-It’s the recommended way to handle installations, builds, and background processes such as servers that may run indefinitely. Each chunk of data from `stdout` or `stderr` is sent to the provided callbacks immediately, giving you full control over how logs and errors are displayed. Once execution completes, the method returns an object containing the aggregated `stdout`, `stderr`, and `exitCode`.  
-
+The `runStreamingCommand()` method is designed for executing long-running or interactive commands inside a sandbox while receiving **real-time output streams**.
 
 ### `runStreamingCommand(options)`
 
 **Description:**
-Executes a long-running command with real-time output streaming. Use this for installations, builds, servers, or any operation that takes more than 5 seconds. Callbacks are invoked as data arrives.
+Executes a long-running command with real-time output streaming. Callbacks are invoked as data arrives.
 
 **Parameters:**
 
@@ -46,23 +43,6 @@ const result = await sandbox.runStreamingCommand({
 })
 console.log('Exit code:', result.exitCode)
 
-// Build process with progress
-await sandbox.runStreamingCommand({
-  cmd: 'npm',
-  args: ['run', 'build'],
-  onStdout: (chunk) => {
-    process.stdout.write(chunk) // Stream to terminal
-  }
-})
-
-// Server (runs indefinitely)
-sandbox.runStreamingCommand({
-  cmd: 'node',
-  args: ['server.js'],
-  onStdout: (data) => console.log('[Server]', data.trim())
-})
-// Don't await if you want it to run in background
-
 // With stdin
 const result = await sandbox.runStreamingCommand({
   cmd: 'node',
@@ -70,36 +50,3 @@ const result = await sandbox.runStreamingCommand({
   stdin: 'Hello from stdin\n'
 })
 ```
-
-**Throws:**
-- `Error: "Not connected"` - Must call `create()` or `fromSnippet()` first
-- `Error: "Unexpected response event type"` - Internal protocol error
-
-**Exit Codes:**
-- `0` - Success
-- Non-zero - Error (e.g., `1` for general errors, `127` for command not found)
-
-**Streaming Behavior:**
-- Callbacks invoked immediately as data arrives
-- Data comes in chunks (may be partial lines)
-- Use `.trim()` to clean up newlines
-- Both callbacks and return value contain all output
-
-**Long-Running Processes:**
-```typescript
-// Background server - don't await
-sandbox.runStreamingCommand({
-  cmd: 'python',
-  args: ['-m', 'http.server', '3000']
-})
-
-// Do other work while server runs
-const url = await sandbox.exposePort(3000)
-console.log('Server running at:', url)
-```
-
-**Best Practices:**
-- Always provide `onStdout` and `onStderr` for visibility
-- Check `exitCode` to verify success
-- For servers, don't await the promise
-- Use stdin for interactive programs
