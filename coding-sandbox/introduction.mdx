@@ -11,7 +11,6 @@ Fermion Sandbox sandbox runs inside a fully isolated Linux container with its ow
 
 You can run anything from Node.js scripts to full web servers, with real-time streaming of `stdout` and `stderr` through WebSockets. Fermion manages provisioning, teardown, and optional persistence automatically, allowing developers to focus on writing and executing code rather than managing infrastructure. Whether you’re building an AI code assistant, a browser-based IDE, or a real-time code evaluation platform, Fermion Sandbox makes it seamless and safe.
 
-
 ### Quick Code Preview
 
 ```typescript
@@ -21,8 +20,8 @@ const sandbox = new Sandbox({ apiKey: 'your-api-key' })
 await sandbox.create({ shouldBackupFilesystem: false })
 
 const result = await sandbox.runCommand({
-  cmd: 'node',
-  args: ['--version']
+	cmd: 'node',
+	args: ['--version']
 })
 console.log(result.stdout) // v20.x.x
 
@@ -34,14 +33,10 @@ await sandbox.disconnect()
 <Columns cols={2}>
 
 <Card title="Getting Started" href="/coding-sandbox/getting-started">
-Learn how to create, run, and manage your first sandbox in minutes.
-</Card>
-<Card title="Core Concepts" href="/coding-sandbox/core-concepts">
-Understand how Fermion Sandboxes are provisioned, managed, and destroyed.
+	Learn how to create, run, and manage your first sandbox in minutes.
 </Card>
 <Card title="Available Methods" href="/coding-sandbox/methods/initialization">
-Explore all available methods, and configuration options.
+	Explore all available methods, and configuration options.
 </Card>
-
 
 </Columns>

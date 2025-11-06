@@ -196,7 +196,6 @@
 						"pages": [
 							"coding-sandbox/introduction",
 							"coding-sandbox/getting-started",
-							"coding-sandbox/core-concepts",
 							{
 								"group": "Initialization and Methods",
 								"icon":"wrench",
