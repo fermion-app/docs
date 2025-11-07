@@ -230,6 +230,8 @@
 									"coding-sandbox/python-sdk/run-streaming-command",
 									"coding-sandbox/python-sdk/write-file",
 									"coding-sandbox/python-sdk/get-file",
+									"coding-sandbox/python-sdk/expose-port",
+									"coding-sandbox/python-sdk/get-public-urls",
 									"coding-sandbox/python-sdk/disconnect"
 								]
 							}

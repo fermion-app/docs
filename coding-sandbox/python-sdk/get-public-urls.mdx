@@ -1,0 +1,59 @@
+---
+title: 'Retrieve Public URLs for Exposed Ports'
+sidebarTitle: 'Get Public URLs'
+description: 'Retrieve all public HTTPS URLs for exposed sandbox ports (3000, 1337, 1338) using the Python SDK.'
+icon: network-wired
+---
+
+The `get_public_urls()` method returns all available **public HTTPS endpoints** for your active sandbox container in a single dictionary.  
+
+By default, Fermion automatically exposes ports **3000**, **1337**, and **1338**, each corresponding to its own unique public URL.  
+This is useful for connecting multiple running services inside your sandbox, for example: a frontend (port 3000), API (port 1337), and WebSocket server (port 1338).
+
+---
+
+### `get_public_urls() -> dict[int, str]`
+
+**Description:**  
+Retrieves all currently available public HTTPS URLs for your sandbox, mapped by port number.
+
+---
+
+**Parameters:**  
+_None_
+
+---
+
+**Returns:**
+```python
+{
+  3000: str,  # e.g. "https://abc123xyz-3000.run-code.com"
+  1337: str,  # e.g. "https://abc123xyz-1337.run-code.com"
+  1338: str   # e.g. "https://abc123xyz-1338.run-code.com"
+}
+```
+**Example**
+
+```python
+from fermion_sandbox import Sandbox
+
+sandbox = Sandbox(api_key="your-api-key")
+sandbox.create(should_backup_filesystem=True)
+
+urls = sandbox.get_public_urls()
+
+print("Available Public URLs:")
+print("Port 3000:", urls[3000])
+print("Port 1337:", urls[1337])
+print("Port 1338:", urls[1338])
+
+# Example usage in an app config
+config = {
+    "web_url": urls[3000],
+    "api_url": urls[1337],
+    "socket_url": urls[1338]
+}
+
+print("App Configuration:", config)
+
+```

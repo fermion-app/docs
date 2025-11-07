@@ -1,0 +1,87 @@
+---
+title: 'Expose Ports from Sandbox for a Public HTTPS URL'
+sidebarTitle: 'Expose Port'
+description: 'Expose a sandbox port publicly over HTTPS and access live web services running inside the container using the Python SDK.'
+icon: globe
+---
+
+The `expose_port()` method provides a **public HTTPS URL** that maps directly to a specific port running inside your sandbox container.  
+Fermion automatically supports ports **3000**, **1337**, and **1338**, allowing you to host web servers, APIs, or other networked services securely and access them from anywhere.
+
+When you start a server inside your sandbox (for example, using `python -m http.server` or `node server.js`), you can call `expose_port(port)` to instantly retrieve a URL in the format:`https://{subdomain}-{port}.run-code.com`
+
+
+This allows you to preview, test, and share live web apps or APIs running within your sandbox.
+
+---
+
+### `expose_port(port: int) -> str`
+
+**Description:**  
+Returns the public HTTPS URL for a specific port inside the sandbox.  
+Currently, Fermion supports public exposure for ports **3000**, **1337**, and **1338**.
+
+---
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|------------|------|-----------|-------------|
+| `port` | `int` | Yes | Port number (must be one of `3000`, `1337`, or `1338`) |
+
+---
+
+**Returns:**  
+`str` : Public HTTPS URL in the format `https://{subdomain}-{port}.run-code.com`.
+
+---
+
+ **Example - Start and expose a Node.js server**
+
+```python
+import time
+from fermion_sandbox import Sandbox
+import requests
+
+sandbox = Sandbox(api_key="your-api-key")
+sandbox.create(should_backup_filesystem=False)
+
+# Write a simple Node.js server
+
+sandbox.write_file(
+    path="~/server.js",
+    content="""
+const http = require('http');
+http.createServer((req, res) => {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello from Fermion!');
+}).listen(3000, () => {
+  console.log('Server running on port 3000');
+});
+"""
+)
+
+
+# Run the server in the background with streaming output
+sandbox.run_streaming_command(
+    cmd="node",
+    args=["server.js"],
+    on_stdout=lambda data: print("[stdout]", data.strip())
+)
+
+# Wait briefly for the server to start
+time.sleep(2)
+
+# Retrieve the public HTTPS URL for the exposed port
+url = sandbox.expose_port(3000)
+print("Access your server at:", url)
+# Example output: https://abc123xyz-3000.run-code.com
+
+# Test the server.
+response = requests.get(url)
+print(response.text)  # Output: Hello from Fermion!
+
+
+```
+
+
