@@ -1,0 +1,52 @@
+---
+title: 'Get Container Details'
+sidebarTitle: 'Get Container Details'
+description: 'Retrieve container connection details including subdomain and secure access token using the Python SDK.'
+icon: server
+---
+
+The `get_container_details()` method provides low-level connection information for the currently active sandbox container. It returns a dictionary containing the **container subdomain** and **playground access token**, which are used internally to establish and maintain a secure WebSocket connection between your client and Fermion’s backend infrastructure.
+
+---
+
+### `get_container_details() -> Optional[dict[str, str]]`
+
+**Description:**  
+Returns container connection details, including the subdomain and secure access token.  
+If no sandbox is currently connected, returns `None`.
+
+---
+
+**Parameters:**  
+_None_
+
+---
+
+**Returns:**
+```python
+{
+  "subdomain": str,
+  "playground_container_access_token": str
+} or None
+```
+
+**Example**
+
+```python
+from fermion_sandbox import Sandbox
+
+sandbox = Sandbox(api_key="your-api-key")
+sandbox.create(should_backup_filesystem=False)
+
+details = sandbox.get_container_details()
+
+if details:
+    print("Subdomain:", details["subdomain"])
+    print("Access Token:", details["playground_container_access_token"])
+else:
+    print("No active container connection.")
+
+```
+<Warning>
+The access token is sensitive. Do not expose it in logs or UI.
+</Warning>

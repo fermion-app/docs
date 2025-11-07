@@ -1,0 +1,45 @@
+---
+title: 'Get Session ID'
+sidebarTitle: 'Get Session ID'
+description: 'Retrieve the current sandbox session ID, or None if no active session exists using the Python SDK.'
+icon: passport
+---
+
+The `get_session_id()` method returns the unique **session ID** associated with your active sandbox connection.  
+This ID identifies the currently live session linked to your WebSocket connection.
+
+---
+
+### `get_session_id() -> Optional[str]`
+
+**Description:**  
+Returns the current sandbox session ID, or `None` if there is no active session.
+
+---
+
+**Parameters:**  
+_None_
+
+---
+
+**Returns:**  
+`str` or `None` : The session ID if connected, otherwise `None`.
+
+---
+
+**Example**
+
+```python
+from fermion_sandbox import Sandbox
+
+sandbox = Sandbox(api_key="your-api-key")
+
+# No active session yet
+print(sandbox.get_session_id())  # None
+
+# Create a new sandbox
+sandbox.create(should_backup_filesystem=False)
+
+# Retrieve the session ID
+print(sandbox.get_session_id())  # e.g. "session-abc123"
+```

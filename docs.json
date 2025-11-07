@@ -232,6 +232,8 @@
 									"coding-sandbox/python-sdk/get-file",
 									"coding-sandbox/python-sdk/expose-port",
 									"coding-sandbox/python-sdk/get-public-urls",
+									"coding-sandbox/python-sdk/session-id",
+									"coding-sandbox/python-sdk/container-details",
 									"coding-sandbox/python-sdk/disconnect"
 								]
 							}
