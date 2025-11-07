@@ -13,7 +13,7 @@ Fermion Sandbox lets you safely execute untrusted or user-generated code inside 
 
 Before you begin, ensure that your environment meets the following requirements.
 
-- You’ll need **Node.js 18 or higher** installed on your system, along with a package manager such as **npm**, **yarn**, or **pnpm**.  
+- You’ll need **Node.js 18 or higher** | **Python** runtime installed on your system, along with a package manager such as **npm**, **yarn**, **pnpm**, **bun** for Javascript runtimes or **pip** or **uv** for python runtimes.  
 - A valid **Fermion API key** is required for authentication, which you can obtain from your [Fermion Dashboard](/api-guide/introduction#how-to-get-your-api-key).  
 - Familiarity with basic **JavaScript or TypeScript** will also be helpful as you follow along with the examples in this guide.
 
@@ -25,17 +25,35 @@ Before you begin, ensure that your environment meets the following requirements.
 <Step title="Install the Package">
 
 Install the package with the help of a package manager of your choice
-
-```bash
+<CodeGroup>
+```bash Typescript/Javascript
 # Using npm
-npm install @fermion-app/sandbox
+npm install @fermion-app/sdk
 
 # Using yarn
-yarn add @fermion-app/sandbox
+yarn add @fermion-app/sdk
+
+# Using bun 
+bun install @fermion-app/sdk
 
 # Using pnpm
-pnpm add @fermion-app/sandbox
+pnpm add @fermion-app/sdk
 ```
+
+```bash Python
+# Using pip
+pip install fermion_sandbox
+
+# Using pipenv
+pipenv install fermion_sandbox
+
+# Using uv
+uv add fermion_sandbox
+
+```
+
+</CodeGroup>
+
 </Step>
 
 <Step title="Get Your API Key">
@@ -61,8 +79,9 @@ Never commit API keys to version control. Always load them via environment varia
 
 Let’s walk through a complete example of creating, running, and cleaning up a sandbox. This example shows how to execute a Node.js script securely in the cloud.
 <CodeGroup>
-```javaScript index.js
-import { Sandbox } from '@fermion-app/sandbox'
+
+```javaScript hello.js
+import { Sandbox } from '@fermion-app/sdk'
 
 async function main() {
   // Initialize the sandbox with your API key
@@ -122,6 +141,50 @@ main()
 
 ```
 
+```python hello.py
+from fermion_sandbox import Sandbox
+import os
+
+def main():
+    # Initialize the sandbox with your API key
+    sandbox = Sandbox(api_key=os.getenv("FERMION_API_KEY"))
+
+    # Create a new container
+    print("Creating sandbox...")
+    snippet_id = sandbox.create(should_backup_filesystem=False)  # Files won't persist after disconnect
+    print(f"Sandbox created! Snippet ID: {snippet_id}")
+
+    # Run a simple command
+    print("\nRunning python3 --version...")
+    python_version = sandbox.run_command(cmd="python3", args=["--version"])
+    print("Python version:", python_version.stdout.strip())
+
+    # Write a file
+    print("\nWriting hello.py...")
+    sandbox.write_file(path="~/hello.py", content='print("Hello from Fermion Sandbox!")')
+    print("File written")
+
+    # Execute the file
+    print("\nExecuting hello.py...")
+    output = sandbox.run_command(cmd="python3", args=["hello.py"])
+    print("Output:", output.stdout.strip())
+
+    # Read the file back
+    print("\nReading hello.py...")
+    file_response = sandbox.get_file("~/hello.py")
+    file_content = file_response.text()
+    print("File contents:", file_content)
+
+    # Always clean up
+    print("\nDisconnecting...")
+    sandbox.disconnect()
+    print("Disconnected")
+
+if __name__ == "__main__":
+    main()
+
+```
+
 </CodeGroup>
 
 ## Expected Output
@@ -129,7 +192,7 @@ main()
 The following code snippet will create a sandbox that executes a simple node.js program. Following is the expected output:
 
 <CodeGroup>
-```bash Console Output
+```bash Typescript output
 Creating sandbox...
 Sandbox created! Snippet ID: abc123xyz
 
@@ -149,6 +212,27 @@ Disconnecting...
 Disconnected
 
 ```
+```bash Python output
+Creating sandbox...
+Sandbox created! Snippet ID: abcd-python-1234k
+
+Running python3 --version...
+Python version: Python 3.11.6
+
+Writing hello.py...
+File written
+
+Executing hello.py...
+Output: Hello from Fermion Sandbox!
+
+Reading hello.py...
+File contents: print("Hello from Fermion Sandbox!")
+
+Disconnecting...
+Disconnected
+
+```
+
 </CodeGroup>
 
 ## Next Steps

@@ -12,9 +12,10 @@ Fermion Sandbox sandbox runs inside a fully isolated Linux container with its ow
 You can run anything from Node.js scripts to full web servers, with real-time streaming of `stdout` and `stderr` through WebSockets. Fermion manages provisioning, teardown, and optional persistence automatically, allowing developers to focus on writing and executing code rather than managing infrastructure. Whether you’re building an AI code assistant, a browser-based IDE, or a real-time code evaluation platform, Fermion Sandbox makes it seamless and safe.
 
 ### Quick Code Preview
+<CodeGroup>
 
-```typescript
-import { Sandbox } from '@fermion-app/sandbox'
+```typescript Typescript preview
+import { Sandbox } from '@fermion-app/sdk'
 
 const sandbox = new Sandbox({ apiKey: 'your-api-key' })
 await sandbox.create({ shouldBackupFilesystem: false })
@@ -27,6 +28,30 @@ console.log(result.stdout) // v20.x.x
 
 await sandbox.disconnect()
 ```
+```python Python preview
+from fermion_sandbox import Sandbox
+
+# Initialize the Fermion SDK with your API key
+sandbox = Sandbox(api_key="your-api-key")
+
+# Create a new sandbox environment
+sandbox.create(should_backup_filesystem=False)
+
+# Run a simple command inside the sandbox (example: check Python version)
+result = sandbox.run_command(
+    "cmd":"python3",
+   	"args": ["--version"]
+)
+
+# Print the output from the command
+print(result.stdout)  # Expected output: Python 3.x.x
+
+# Disconnect and clean up the sandbox
+sandbox.disconnect()
+
+```
+
+</CodeGroup>
 
 ## Explore More
 
