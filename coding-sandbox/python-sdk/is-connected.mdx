@@ -1,0 +1,47 @@
+---
+title: 'Is Connected'
+sidebarTitle: 'Is Connected'
+description: 'Check whether the current sandbox session is actively connected via WebSocket using the Python SDK.'
+icon: plug
+---
+
+The `is_connected()` method provides a quick way to verify whether your current sandbox instance is actively connected to Fermion’s backend infrastructure.  
+
+This can be useful for checking the session state before running commands, writing files, or performing other operations that require an active connection.
+
+---
+
+### `is_connected() -> bool`
+
+**Description:**  
+Checks if the WebSocket connection to the sandbox is currently active.
+
+---
+
+**Parameters:**  
+_None_
+
+---
+
+**Returns:**  
+`bool` : `True` if the sandbox is connected, `False` otherwise.
+
+---
+
+### **Example**
+
+```python
+from fermion_sandbox import Sandbox
+
+sandbox = Sandbox(api_key="your-api-key")
+
+# Check initial connection state
+print(sandbox.is_connected())  # False
+
+# Create a new sandbox
+sandbox.create(should_backup_filesystem=False)
+print(sandbox.is_connected())  # True
+
+# Disconnect from the sandbox
+sandbox.disconnect()
+print(sandbox.is_connected())  # False

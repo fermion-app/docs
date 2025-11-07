@@ -1,0 +1,61 @@
+---
+title: 'Execute Commands Inside Your Sandbox'
+sidebarTitle: 'Run Command'
+description: 'Execute short, non-streaming commands within a Fermion Sandbox and return stdout and stderr once complete using the Python SDK.'
+icon: terminal
+---
+
+The `run_command()` method executes a short-lived command inside your active sandbox container and waits for it to finish before returning the output.  
+
+It’s ideal for quick, synchronous tasks such as listing files, checking Python or Node.js versions, or running lightweight scripts that complete within a few seconds.
+
+This method captures both `stdout` and `stderr` once the command completes. Because it’s optimized for speed and simplicity, `run_command()` has a **strict 5-second execution limit** and does **not support streaming output**.
+
+---
+
+### `run_command(cmd: str, args: Optional[List[str]] = None) -> dict`
+
+**Description:**  
+Executes a short command (< 5 seconds) and returns its standard output and standard error.  
+For longer-running or streaming processes, use `run_streaming_command()` instead.
+
+---
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|------------|------|-----------|-------------|
+| `cmd` | `str` | Yes | Command to execute (e.g. `"python3"`, `"ls"`, `"echo"`) |
+| `args` | `List[str]` |  No | List of command arguments |
+
+---
+
+**Returns:**
+
+```python
+{
+  "stdout": str,  # Standard output
+  "stderr": str   # Standard error
+}
+```
+
+
+**Example:**
+
+```python
+from fermion_sandbox import Sandbox
+
+sandbox = Sandbox(api_key="your-api-key")
+sandbox.create(should_backup_filesystem=False)
+
+# Run a simple shell command
+result = sandbox.run_command(cmd="pwd")
+
+print("Current directory:", result["stdout"])
+
+```
+
+**Limitations:**
+- **5 second maximum** : Command will timeout
+- No streaming - must wait for completion
+- No exit code returned (use `runStreamingCommand` if you need it)

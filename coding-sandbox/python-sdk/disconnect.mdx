@@ -1,0 +1,46 @@
+---
+title: 'Disconnect from the Sandbox Instance'
+sidebarTitle: 'Disconnect'
+description: 'Gracefully close the WebSocket connection and clean up sandbox resources using the Python SDK.'
+icon: plug-circle-xmark
+---
+
+## `disconnect()`
+
+The `disconnect()` method gracefully terminates your active sandbox session by closing the WebSocket connection and releasing all associated resources. This ensures that all running processes are stopped, the session is closed cleanly, and the container is freed up for reuse.
+
+---
+
+### `disconnect() -> None`
+
+**Description:**  
+Gracefully terminates your active sandbox session and releases all underlying resources.
+
+---
+
+**Parameters:**  
+_None_
+
+---
+
+**Returns:**  
+`None`: Resolves when disconnection and cleanup are complete.
+
+---
+
+### **Example**
+
+```python
+from fermion_sandbox import Sandbox
+
+# Initialize and create a new sandbox
+sandbox = Sandbox(api_key="your-api-key")
+sandbox.create(should_backup_filesystem=False)
+
+# Perform your tasks
+result = sandbox.run_command(cmd="python3", args=["--version"])
+print("Python version:", result["stdout"])
+
+# Always clean up when finished
+sandbox.disconnect()
+print("Sandbox disconnected successfully.")

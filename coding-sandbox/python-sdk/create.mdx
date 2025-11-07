@@ -1,0 +1,73 @@
+---
+title: 'Create and Spin Up a New Sandbox Instance'
+sidebarTitle: 'Create'
+description: 'Provision a new Fermion Sandbox container with optional persistence or repository cloning using the Python SDK.'
+icon: plus
+---
+
+The `create()` method provisions a brand-new sandbox container within Fermion’s secure cloud infrastructure.  
+When invoked, it initializes a clean Linux environment, configures your session, and establishes a WebSocket connection for real-time interaction.
+
+Depending on the parameters you provide, the sandbox can be either **ephemeral** (short-lived and automatically destroyed on disconnect) or **persistent** (saved for later reuse).  
+
+You can also optionally **clone a Git repository** during provisioning, allowing you to start from existing codebases or templates.  
+The provisioning process typically completes within a few seconds, after which the sandbox is ready to execute commands, perform file operations, or run servers.
+
+This method returns a unique `snippet_id`, which can be stored and reused to reconnect to the same environment later.
+
+---
+
+## `create(should_backup_filesystem: bool, git_repo_url: Optional[str] = None) -> str`
+
+**Description:**  
+Creates and provisions a new sandbox container.  
+This process includes:
+
+1. Creating a playground snippet  
+2. Starting a session  
+3. Waiting for container provisioning (polling with ~500 ms intervals)  
+4. Establishing a WebSocket connection  
+5. Waiting for the container to be ready  
+6. Optionally cloning a Git repository  
+
+---
+
+**Parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|------------|------|-----------|----------|-------------|
+| `should_backup_filesystem` | `bool` |  Yes | - | If `True`, files persist after disconnect. If `False`, everything is deleted. |
+| `git_repo_url` | `str` |  No | `None` | GitHub repository URL to clone on startup. |
+
+---
+
+**Returns:**  
+`str` : The unique **snippet ID** for this sandbox session.  
+Store this ID to reconnect or recreate the same environment later.
+
+---
+
+####  Basic sandbox
+
+```python
+from fermion_sandbox import Sandbox
+
+sandbox = Sandbox(api_key="your-api-key")
+
+## Ephemeral Sandbox
+snippet_id = sandbox.create(should_backup_filesystem=False)
+print("Ephemeral sandbox created with ID:", snippet_id)
+
+## Persistent Sandbox
+snippet_id = sandbox.create(should_backup_filesystem=True)
+print("Persistent sandbox created with ID:", snippet_id)
+
+## With git repository
+snippet_id = sandbox.create(
+    should_backup_filesystem=True,
+    git_repo_url="https://github.com/username/repo.git"
+)
+
+print("Sandbox created and repo cloned! Snippet ID:", snippet_id)
+
+```

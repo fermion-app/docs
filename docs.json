@@ -197,8 +197,8 @@
 							"coding-sandbox/introduction",
 							"coding-sandbox/getting-started",
 							{
-								"group": "Initialization and Methods",
-								"icon":"wrench",
+								"group": "Typescript SDK",
+								"icon":"js",
 								"expanded": false,
 								"pages": [
 									"coding-sandbox/methods/initialization",
@@ -207,6 +207,7 @@
 									"coding-sandbox/methods/is-connected",
 									"coding-sandbox/methods/run-command",
 									"coding-sandbox/methods/run-streaming-command",
+									"coding-sandbox/quick-run",
 									"coding-sandbox/methods/write-file",
 									"coding-sandbox/methods/get-file",
 									"coding-sandbox/methods/expose-port",
@@ -216,7 +217,22 @@
 									"coding-sandbox/methods/disconnect"
 								]
 							},
-							"coding-sandbox/quick-run"
+							{
+								"group": "Python SDK",
+								"icon":"python",
+								"expanded": false,
+								"pages": [
+									"coding-sandbox/python-sdk/initialization",
+									"coding-sandbox/python-sdk/create",
+									"coding-sandbox/python-sdk/from-snippet",
+									"coding-sandbox/python-sdk/is-connected",
+									"coding-sandbox/python-sdk/run-command",
+									"coding-sandbox/python-sdk/run-streaming-command",
+									"coding-sandbox/python-sdk/write-file",
+									"coding-sandbox/python-sdk/get-file",
+									"coding-sandbox/python-sdk/disconnect"
+								]
+							}
 						]
 					},
 					{

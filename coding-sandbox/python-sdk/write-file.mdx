@@ -1,0 +1,69 @@
+---
+title: 'Write to Files Inside Your Sandbox Instance'
+sidebarTitle: 'Write File'
+description: 'Write text or binary files to the sandbox filesystem with automatic directory creation using the Python SDK.'
+icon: file-plus
+---
+
+The `write_file()` method allows you to create or overwrite files inside your sandbox’s isolated filesystem.  
+It supports both **text** and **binary** content, making it flexible for handling scripts, configuration files, and assets such as images, JSON files, or compiled binaries.
+
+All file paths must begin with either the tilde (`~`) shortcut or the absolute sandbox path `/home/damner/code`.
+
+---
+
+### `write_file(path: str, content: Union[str, bytes]) -> None`
+
+**Description:**  
+Writes a file to the sandbox filesystem. Supports both text (`str`) and binary (`bytes`) content.  
+Automatically creates directories if they don’t exist.
+
+---
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|------------|------|-----------|-------------|
+| `path` | `str` | Yes | File path (must start with `~` or `/home/damner/code`) |
+| `content` | `str` or `bytes` | Yes | File content (text string or binary data) |
+
+---
+
+**Returns:**  
+`None` : Resolves when the file write operation is complete.
+
+---
+
+**Examples**
+
+```python
+# Write a simple Python file
+sandbox.write_file(
+    path="~/script.py",
+    content='print("Hello World")'
+)
+# Multi line content
+config = {
+    "name": "my-app",
+    "version": "1.0.0"
+}
+
+sandbox.write_file(
+    path="~/config.json",
+    content=json.dumps(config, indent=2)
+)
+```
+
+**Path Handling**
+```python
+# Valid paths
+
+sandbox.write_file(path="~/file.txt", content="data")
+sandbox.write_file(path="/home/damner/code/file.txt", content="data")
+sandbox.write_file(path="~/nested/dir/file.txt", content="data")
+
+# Invalid paths
+sandbox.write_file(path="/tmp/file.txt", content="data")
+sandbox.write_file(path="relative/file.txt", content="data")
+sandbox.write_file(path="./file.txt", content="data")
+```

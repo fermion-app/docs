@@ -1,0 +1,37 @@
+---
+title: 'Initialization (Sandbox)'
+sidebarTitle: 'Initialization'
+description: 'Learn how to initialize a new Fermion Sandbox client before creating containers using the Python SDK.'
+icon: key
+---
+
+Before you can create or manage containers, you must first initialize the Fermion Sandbox client in Python. The `Sandbox(api_key=...)` constructor establishes a secure connection between your Python application and Fermion’s backend infrastructure, authenticating every subsequent operation you perform.
+
+This step **does not immediately create a container** and instead, it prepares the client instance for later actions such as creating sandboxes, reconnecting to existing sessions, or running commands.
+
+---
+
+### `Sandbox(api_key: str)`
+
+**Description:**  
+Creates a new Sandbox client instance. This does not create a container yet, you will need to call `create()` or `from_snippet()` after initialization.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|------------|------|-----------|-------------|
+| `api_key` | `str` | Yes | Your Fermion API key from the dashboard |
+
+**Returns:**  
+`Sandbox` instance
+
+---
+
+### **Example:**
+
+```python
+from fermion_sandbox import Sandbox
+
+# Initialize the Fermion Sandbox client
+sandbox = Sandbox(api_key="your-api-key")
+```

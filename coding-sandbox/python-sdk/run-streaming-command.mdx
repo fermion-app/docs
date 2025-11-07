@@ -1,0 +1,71 @@
+---
+title: 'Execute Long-Running Commands Inside Your Sandbox'
+sidebarTitle: 'Run Streaming Commands'
+description: 'Execute long-running commands with real-time stdout and stderr streaming inside a Fermion Sandbox using the Python SDK.'
+icon: magnet
+---
+
+The `run_streaming_command()` method is designed for executing **long-running or interactive commands** inside your sandbox while receiving **real-time output streams**.  
+
+Unlike `run_command()`, this method does not block until completion — it allows you to process live logs or incremental output as the command runs.
+
+---
+
+### `run_streaming_command() -> dict`
+
+**Description:**  
+Executes a long-running command inside the sandbox and streams output in real time. Callbacks are triggered as new stdout or stderr data chunks arrive.
+
+---
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|------------|------|-----------|-------------|
+| `cmd` | `str` |  Yes | Command to execute (e.g., `"npm"`, `"python3"`) |
+| `args` | `List[str]` |  Yes | List of command arguments |
+| `stdin` | `str` |  No | Optional standard input to send to the command |
+| `on_stdout` | `Callable[[str], None]` |  No | Callback function invoked when stdout data arrives |
+| `on_stderr` | `Callable[[str], None]` |  No | Callback function invoked when stderr data arrives |
+
+---
+
+**Returns:**
+
+```python
+{
+  "stdout": str,   # Complete accumulated output
+  "stderr": str,   # Complete accumulated error output
+  "exit_code": int # Process exit code (0 = success)
+}
+```
+
+**Example**
+
+```python
+
+def handle_stdout(data: str):
+    print("[stdout]", data.strip())
+
+def handle_stderr(data: str):
+    print("[stderr]", data.strip())
+
+result = sandbox.run_streaming_command(
+    cmd="npm",
+    args=["install", "express"],
+    on_stdout=handle_stdout,
+    on_stderr=handle_stderr
+)
+
+print("Exit code:", result["exit_code"])
+
+## With stdin
+result = sandbox.run_streaming_command(
+    cmd="python3",
+    args=["-c", 'import sys; [print(line.strip()) for line in sys.stdin]'],
+    stdin="Hello from stdin\n"
+)
+
+print("Output:", result["stdout"])
+
+```

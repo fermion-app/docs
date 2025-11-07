@@ -1,0 +1,53 @@
+---
+title: 'Retrieve Files from Your Sandbox Instance'
+sidebarTitle: 'Get File'
+description: 'Retrieve text or binary files from the sandbox filesystem using the Python SDK.'
+icon: file-arrow-down
+---
+
+The `get_file()` method retrieves a file from your sandbox’s filesystem and returns its contents.  
+Depending on the type of file, you can read the data as **text**, **binary bytes**, or even parse it as **JSON**.
+
+All file paths must start with `~` or the absolute path `/home/damner/code` to ensure access is limited to the sandbox’s isolated workspace.  
+If the requested file doesn’t exist or the path is invalid, an error will be raised.
+
+---
+
+### `get_file(path: str) -> Union[str, bytes]`
+
+**Description:**  
+Retrieves a file from the sandbox filesystem. Returns its content either as a decoded string (`str`) or raw binary (`bytes`).
+
+---
+
+**Parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|------------|------|-----------|----------|-------------|
+| `path` | `str` | Yes | — | File path (must start with `~` or `/home/damner/code`) |
+
+---
+
+**Returns:**  
+`str` or `bytes`: File content.  
+Raises an exception if the file does not exist or the path is invalid.
+The response object has the following methods:
+- `.text()` - Read as string
+- `.arrayBuffer()` - Read as binary
+- `.blob()` - Read as Blob
+- `.json()` - Parse as JSON
+
+
+---
+
+**Examples**
+
+```python
+from fermion_sandbox import Sandbox
+
+sandbox = Sandbox(api_key="your-api-key")
+sandbox.create(should_backup_filesystem=True)
+
+# Read a Python file
+content = sandbox.get_file("~/script.py")
+print(content)
