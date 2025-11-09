@@ -25,7 +25,4 @@ console.log(sandbox.isConnected()) // false
 
 await sandbox.create({ shouldBackupFilesystem: false })
 console.log(sandbox.isConnected()) // true
-
-await sandbox.disconnect()
-console.log(sandbox.isConnected()) // false
 ```

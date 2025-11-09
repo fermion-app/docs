@@ -6,9 +6,7 @@ icon: file-arrow-down
 ---
 
 
-The `getFile()` method retrieves a file from your sandbox’s filesystem and returns it as a standard **Web Response object**, allowing you to handle the data in multiple formats: text, JSON, binary, or Blob.
-
-All file paths must start with `~` or the absolute path `/home/damner/code` to ensure access is confined to the sandbox’s isolated workspace. If the requested file doesn’t exist or the path is invalid, an error is thrown.
+The `getFile()` method retrieves a file from your sandbox’s filesystem and returns it as a standard **Web Response object**, allowing you to handle the data in multiple formats: text, JSON, binary, or Blob. All file paths must start with the absolute path `/home/damner` to ensure access is confined to the sandbox’s isolated workspace.
 
 
 ### `getFile(path)`
@@ -20,7 +18,7 @@ Retrieves a file from the sandbox filesystem. Returns a standard Response object
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| path | string |  Yes | File path (must start with `~` or `/home/damner/code`) |
+| path | string |  Yes | File path (must start with `/home/damner`) |
 
 **Returns:**
 `Promise<Response>` - Standard fetch Response object with methods:
@@ -32,7 +30,7 @@ Retrieves a file from the sandbox filesystem. Returns a standard Response object
 **Example:**
 ```typescript
 // Read text file
-const response = await sandbox.getFile('~/script.js')
+const response = await sandbox.getFile('/home/damner/script.js')
 const content = await response.text()
 console.log(content)
 ```

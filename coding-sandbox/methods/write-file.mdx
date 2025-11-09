@@ -5,9 +5,7 @@ description: 'Write text or binary files to the sandbox filesystem with automati
 icon: file-plus
 ---
 
-The `writeFile()` method allows you to create or overwrite files inside your sandbox’s isolated filesystem. It supports both **text** and **binary** content, making it flexible enough for handling scripts, configuration files, and assets like images or compiled binaries.
-
-All file paths must begin with either the tilde (`~`) shortcut or the absolute sandbox path `/home/damner/code`.
+The `writeFile()` method allows you to create or overwrite files inside your sandbox’s isolated filesystem. It supports both **text** and **binary** content. All file paths must begin with the absolute sandbox path `/home/damner`.
 
 ### `writeFile(options)`
 
@@ -18,7 +16,7 @@ Writes a file to the sandbox filesystem. Supports both text and binary content.
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| path | string |  Yes | File path (must start with `~` or `/home/damner/code`) |
+| path | string |  Yes | File path (must start with `/home/damner`) |
 | content | string \| ArrayBuffer |  Yes | File content (text string or binary data) |
 
 **Returns:**
@@ -28,31 +26,19 @@ Writes a file to the sandbox filesystem. Supports both text and binary content.
 ```typescript
 // Text file
 await sandbox.writeFile({
-  path: '~/script.js',
+  path: '/home/damner/script.js',
   content: 'console.log("Hello World")'
 })
-
-// Multi-line content
-await sandbox.writeFile({
-  path: '~/config.json',
-  content: JSON.stringify({
-    name: 'my-app',
-    version: '1.0.0'
-  }, null, 2)
-})
-```
 
 **Path Handling:**
 ```typescript
 // Valid paths
-await sandbox.writeFile({ path: '~/file.txt', content: '...' })
-await sandbox.writeFile({ path: '/home/damner/code/file.txt', content: '...' })
-await sandbox.writeFile({ path: '~/nested/dir/file.txt', content: '...' })
+await sandbox.writeFile({ path: '/home/damner/file.js', content: '...' })
 
 // Invalid paths
-await sandbox.writeFile({ path: '/tmp/file.txt', content: '...' })
-await sandbox.writeFile({ path: 'relative/file.txt', content: '...' })
-await sandbox.writeFile({ path: './file.txt', content: '...' })
+await sandbox.writeFile({ path: '/tmp/file.js', content: '...' })
+await sandbox.writeFile({ path: 'relative/file.js', content: '...' })
+await sandbox.writeFile({ path: './file.js', content: '...' })
 ```
 
 ---

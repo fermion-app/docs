@@ -29,13 +29,13 @@ Creates a new sandbox with same file system as previous sandbox using its snippe
 const snippetId = await sandbox1.create({
   shouldBackupFilesystem: true
 })
-await sandbox1.writeFile({ path: '~/data.txt', content: 'saved' })
+await sandbox1.writeFile({ path: '/home/damner/data.txt', content: 'saved' })
 await sandbox1.disconnect()
 
 // Session 2: Create a new sandbox with same file system as previous sandbox
 const sandbox2 = new Sandbox({ apiKey: 'key' })
 await sandbox2.fromSnippet(snippetId)
-const file = await sandbox2.getFile('~/data.txt')
+const file = await sandbox2.getFile('/home/damner/data.txt')
 console.log(await file.text()) // 'saved'
 ```
 

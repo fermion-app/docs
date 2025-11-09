@@ -7,6 +7,10 @@ icon: code
 
 The **`quickRun()`** method provides a fast and secure way to execute code directly within your application. It has built-in support for ten popular runtimes: **Python, Java, C++, Node.js, etc**.
 
+:::note
+Before using `quickRun()`, you must first establish a connection to the sandbox by calling `create()` or `fromSnippet()`. The sandbox must be connected before executing code.
+:::
+
 ## Supported Languages
 
 The following languages can be executed with the help of the `quickRun()` method.
@@ -14,27 +18,35 @@ The following languages can be executed with the help of the `quickRun()` method
 <Columns cols={4}>
 
 {' '}
+
 <Card title="C / C++" icon="C"></Card>
 
 {' '}
+
 <Card title="Java" icon="java"></Card>
 
 {' '}
+
 <Card title="Python" icon="python"></Card>
 
 {' '}
+
 <Card title="Node.js" icon="node-js"></Card>
 
 {' '}
+
 <Card title="SQLite / MySQL" icon="database"></Card>
 
 {' '}
+
 <Card title="Go" icon="golang"></Card>
 
 {' '}
+
 <Card title="Rust" icon="rust"></Card>
 
 {' '}
+
 <Card title=".NET (C#)" icon="hashtag"></Card>
 
 </Columns>
@@ -47,7 +59,7 @@ The `quickRun()` method accepts a set of parameters that define how your code wi
 
 ### Required Parameters
 
-These parameters are mandatory for every QuickRun execution. Without them, the method won’t know what language to use or what code to run.
+These parameters are mandatory for every QuickRun execution. Without them, the method won't know what language to use or what code to run.
 
 | Parameter    | Type   | Description                                                                                                                                          |
 | ------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -62,7 +74,7 @@ Use these optional parameters to provide inputs, verify expected outputs, or inc
 
 | Parameter              | Type   | Description                                                                                    |
 | ---------------------- | ------ | ---------------------------------------------------------------------------------------------- |
-| `stdin`                | string | Input data passed to the program’s standard input (like console input).                        |
+| `stdin`                | string | Input data passed to the program's standard input (like console input).                        |
 | `expectedOutput`       | string | The expected output for validation                                                             |
 | `additionalFilesAsZip` | string | Base64URL-encoded ZIP archive containing any extra files your program depends on. (SQL schema) |
 
@@ -76,14 +88,14 @@ The `quickRun()` method returns a `runResult` object that holds detailed informa
 | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`runStatus`**                                      | Indicates the final execution result. Possible values include `"successful"`, `"compilation-error"`, `"time-limit-exceeded"`, `"wrong-answer"`, `"non-zero-exit-code"`, `"died-sigsev"`, `"died-sigxfsz"`, `"died-sigfpe"`, `"died-sigabrt"`, `"internal-isolate-error"`, or `"unknown"`. Returns `null` if execution hasn't completed yet. |
 | **`programRunData`**                                 | An object containing detailed execution metrics and output. Returns `null` if execution hasn't completed yet.                                                                                                                                                                                                                               |
-| **`programRunData.stdoutBase64UrlEncoded`**          | Base64URL-encoded string containing everything the program printed to the standard output stream. Decode using `decodeBase64Url()` to get the actual output.                                                                                                                                                                                |
-| **`programRunData.stderrBase64UrlEncoded`**          | Base64URL-encoded string containing any error messages or debug logs printed to the standard error stream. Decode using `decodeBase64Url()` to get the actual error output.                                                                                                                                                                 |
+| **`programRunData.stdoutBase64UrlEncoded`**          | String containing everything the program printed to the standard output stream. The SDK automatically decodes this value, so you can use it directly without additional decoding.                                                                                                                                                           |
+| **`programRunData.stderrBase64UrlEncoded`**          | String containing any error messages or debug logs printed to the standard error stream. The SDK automatically decodes this value, so you can use it directly without additional decoding.                                                                                                                                                  |
 | **`programRunData.cpuTimeUsedInMilliseconds`**       | Reports how long the code took to execute (CPU time), measured in milliseconds. Helpful for performance benchmarking or optimization.                                                                                                                                                                                                       |
 | **`programRunData.wallTimeUsedInMilliseconds`**      | Reports the wall-clock time (real time) taken for execution, measured in milliseconds.                                                                                                                                                                                                                                                      |
 | **`programRunData.memoryUsedInKilobyte`**            | Indicates the total memory used during execution, measured in kilobytes.                                                                                                                                                                                                                                                                    |
 | **`programRunData.exitCode`**                        | The exit code returned by the program (0 typically indicates success).                                                                                                                                                                                                                                                                      |
 | **`programRunData.exitSignal`**                      | The exit signal if the process was terminated by a signal, or `null` otherwise.                                                                                                                                                                                                                                                             |
-| **`compilerOutputAfterCompilationBase64UrlEncoded`** | Base64URL-encoded compiler output (for compiled languages). Returns `null` for interpreted languages or if there's no compiler output.                                                                                                                                                                                                      |
+| **`compilerOutputAfterCompilationBase64UrlEncoded`** | Compiler output (for compiled languages). The SDK automatically decodes this value, so you can use it directly without additional decoding. Returns `null` for interpreted languages or if there's no compiler output.                                                                                                                      |
 | **`finishedAt`**                                     | Timestamp marking when the execution completed, in ISO 8601 UTC format (e.g., `"2025-11-06T08:14:10.127Z"`). Returns `null` if execution hasn't completed yet.                                                                                                                                                                              |
 
 ---
@@ -103,162 +115,42 @@ This allows for quick correctness checks, ideal for grading systems, test runner
 
 ## How to Use QuickRun
 
-Here is a simple example on how you can use the `quickRun()` to execute a simple python script.
+Here is a simple example on how you can use the `quickRun()` to execute code:
 
 <CodeGroup>
 
 ```typescript helloWorld.ts
-import { Sandbox, decodeBase64Url } from '@fermion/sandbox'
+import { Sandbox } from '@fermion/sandbox'
 
 const sandbox = new Sandbox({ apiKey: 'fermion-api-key' })
+
+// Connect to sandbox first (required)
+await sandbox.create()
 
 const result = await sandbox.quickRun({
 	runtime: 'Python',
 	sourceCode: 'print("Hello, World!")'
 })
 
-// Decode the Base64URL-encoded output
-const output = decodeBase64Url(result.programRunData.stdoutBase64UrlEncoded)
+// Output is already decoded by the SDK
+const output = result.programRunData?.stdoutBase64UrlEncoded
 console.log(output) // Outputs: "Hello, World!"
 console.log(result.runStatus) // "successful"
 ```
 
-</CodeGroup>
-
-Here is a another simple example on how you can use the `quickRun()` to execute a simple C++ program that takes a `name` input and greets the user.
-
-<CodeGroup>
-
-```typescript greet.ts
-import { Sandbox, decodeBase64Url } from '@fermion/sandbox'
+```typescript withInput.ts
+import { Sandbox } from '@fermion/sandbox'
 
 const sandbox = new Sandbox({ apiKey: 'fermion-api-key' })
+await sandbox.create()
 
 const result = await sandbox.quickRun({
-	runtime: 'C++',
-	sourceCode: `
-    #include <iostream>
-    using namespace std;
-    int main() {
-      string name;
-      cin >> name;
-      cout << "Hello, " << name << "!" << endl;
-      return 0;
-    }
-  `,
+	runtime: 'Python',
+	sourceCode: 'name = input()\nprint(f"Hello, {name}!")',
 	stdin: 'Alice'
 })
 
-// Decode the Base64URL-encoded output
-const output = decodeBase64Url(result.programRunData.stdoutBase64UrlEncoded)
-console.log(output) // Outputs: "Hello, Alice!"
-console.log(result.runStatus) // "successful"
-```
-
-</CodeGroup>
-
-Now, let us try to run a Java code with output checks:
-
-<CodeGroup>
-
-```typescript sum.ts
-import { Sandbox, decodeBase64Url } from '@fermion/sandbox'
-
-const sandbox = new Sandbox({ apiKey: 'fermion-api-key' })
-
-const result = await sandbox.quickRun({
-	runtime: 'Java',
-	sourceCode: `
-    public class Main {
-      public static void main(String[] args) {
-        int sum = 5 + 3;
-        System.out.println(sum);
-      }
-    }
-  `,
-	expectedOutput: '8'
-})
-
-console.log(result.runStatus) // "successful" if output matched, "wrong-answer" if it didn't
-const output = decodeBase64Url(result.programRunData.stdoutBase64UrlEncoded)
-console.log(output) // "8"
-```
-
-</CodeGroup>
-
-## Example: Complete Workflow
-
-Here’s a complete example demonstrating how to integrate **QuickRun** into your application. This workflow shows how to initialize the Sandbox client, execute user-submitted code, validate the output, and handle potential runtime or validation errors.
-
-<CodeGroup>
-
-```typescript completeWorkflow.ts
-import { Sandbox, decodeBase64Url } from '@fermion/sandbox'
-
-async function runUserCode(code: string, input: string, expected: string) {
-	const sandbox = new Sandbox({ apiKey: process.env.FERMION_API_KEY! })
-
-	try {
-		const result = await sandbox.quickRun({
-			runtime: 'Python',
-			sourceCode: code,
-			stdin: input,
-			expectedOutput: expected
-		})
-
-		// Check if execution completed
-		if (!result.programRunData) {
-			return {
-				success: false,
-				error: 'Execution did not complete',
-				type: result.runStatus
-			}
-		}
-
-		// Decode output and error messages
-		const stdout = decodeBase64Url(result.programRunData.stdoutBase64UrlEncoded)
-		const stderr = result.programRunData.stderrBase64UrlEncoded
-			? decodeBase64Url(result.programRunData.stderrBase64UrlEncoded)
-			: ''
-
-		// Check if it ran successfully
-		if (result.runStatus !== 'successful') {
-			return {
-				success: false,
-				error: stderr || `Execution failed with status: ${result.runStatus}`,
-				type: result.runStatus,
-				output: stdout
-			}
-		}
-
-		// Check if output matched (runStatus will be 'successful' if matched, 'wrong-answer' if not)
-		if (result.runStatus === 'successful') {
-			return {
-				success: true,
-				output: stdout,
-				executionTime: result.programRunData.cpuTimeUsedInMilliseconds,
-				memoryUsed: result.programRunData.memoryUsedInKilobyte
-			}
-		} else {
-			return {
-				success: false,
-				output: stdout,
-				expected: expected,
-				runStatus: result.runStatus
-			}
-		}
-	} catch (error) {
-		return {
-			success: false,
-			error: error instanceof Error ? error.message : String(error)
-		}
-	}
-}
-
-// Usage
-const testResult = await runUserCode('print(input())', 'Hello', 'Hello')
-
-console.log(testResult)
+console.log(result.programRunData?.stdoutBase64UrlEncoded) // "Hello, Alice!"
 ```
 
 </CodeGroup>
@@ -273,9 +165,11 @@ Even well-written code can fail, the `quickRun()` provides clear feedback to hel
     These occur when the code fails to compile due to syntax issues or missing elements. The `runStatus` will be set to **"compilation-error"**, and the compiler output can be found in `compilerOutputAfterCompilationBase64UrlEncoded`.
 
     ```typescript
-    import { Sandbox, decodeBase64Url } from '@fermion/sandbox'
+    import { Sandbox } from '@fermion/sandbox'
 
     const sandbox = new Sandbox({ apiKey: 'fermion-api-key' })
+    await sandbox.create() // Connect first (required)
+
     const result = await sandbox.quickRun({
       runtime: 'Java',
       sourceCode: 'public class Main { // Missing closing brace'
@@ -283,7 +177,8 @@ Even well-written code can fail, the `quickRun()` provides clear feedback to hel
 
     console.log(result.runStatus) // "compilation-error"
     if (result.compilerOutputAfterCompilationBase64UrlEncoded) {
-      const compilerOutput = decodeBase64Url(result.compilerOutputAfterCompilationBase64UrlEncoded)
+      // Output is already decoded by the SDK
+      const compilerOutput = result.compilerOutputAfterCompilationBase64UrlEncoded
       console.log(compilerOutput) // Shows compiler error messages
     }
     ```
@@ -294,9 +189,11 @@ Even well-written code can fail, the `quickRun()` provides clear feedback to hel
     Runtime errors happen when the program compiles successfully but fails during execution, such as dividing by zero or accessing invalid memory. In such cases, the `runStatus` will be **"non-zero-exit-code"** or another error status, and the error message appears in `programRunData.stderrBase64UrlEncoded`.
 
     ```typescript
-    import { Sandbox, decodeBase64Url } from '@fermion/sandbox'
+    import { Sandbox } from '@fermion/sandbox'
 
     const sandbox = new Sandbox({ apiKey: 'fermion-api-key' })
+    await sandbox.create() // Connect first (required)
+
     const result = await sandbox.quickRun({
       runtime: 'Python',
       sourceCode: 'print(1 / 0)' // Division by zero
@@ -304,7 +201,8 @@ Even well-written code can fail, the `quickRun()` provides clear feedback to hel
 
     console.log(result.runStatus) // "non-zero-exit-code" or other error status
     if (result.programRunData?.stderrBase64UrlEncoded) {
-      const stderr = decodeBase64Url(result.programRunData.stderrBase64UrlEncoded)
+      // Output is already decoded by the SDK
+      const stderr = result.programRunData.stderrBase64UrlEncoded
       console.log(stderr) // Shows error details
     }
     ```
@@ -318,6 +216,8 @@ Even well-written code can fail, the `quickRun()` provides clear feedback to hel
     import { Sandbox } from '@fermion/sandbox'
 
     const sandbox = new Sandbox({ apiKey: 'fermion-api-key' })
+    await sandbox.create() // Connect first (required)
+
     const result = await sandbox.quickRun({
       runtime: 'Python',
       sourceCode: 'while True: pass' // Infinite loop
@@ -332,11 +232,12 @@ Even well-written code can fail, the `quickRun()` provides clear feedback to hel
 
 ## Best Practices
 
+-   **Connect to sandbox first** : Always call `create()` or `fromSnippet()` before using `quickRun()`
 -   **Always check runStatus first** : Before looking at output, verify the code ran successfully (`runStatus === 'successful'`)
 -   **Check programRunData is not null** : Ensure `programRunData` exists before accessing its properties
--   **Decode Base64URL-encoded output** : Use `decodeBase64Url()` to decode `stdoutBase64UrlEncoded` and `stderrBase64UrlEncoded`
+-   **Output is already decoded** : The SDK automatically decodes `stdoutBase64UrlEncoded`, `stderrBase64UrlEncoded`, and `compilerOutputAfterCompilationBase64UrlEncoded`, so you can use them directly without additional decoding
 -   **Use expectedOutput for automated testing** : The system will set `runStatus` to `"successful"` if output matches, or `"wrong-answer"` if it doesn't
--   **Handle errors gracefully** : Show helpful messages when code fails by checking `runStatus` and decoding `stderrBase64UrlEncoded`
+-   **Handle errors gracefully** : Show helpful messages when code fails by checking `runStatus` and accessing `stderrBase64UrlEncoded` directly
 -   **Validate user input** : If users can submit code, validate it before execution
 
 ## Performance Tips
@@ -351,6 +252,7 @@ Even well-written code can fail, the `quickRun()` provides clear feedback to hel
 <AccordionGroup>
 
 {' '}
+
 <Accordion title="How long does code execution take?">
 	Code execution typically completes within **1–3 seconds**, depending on the programming
 	language, code complexity, and whether compilation is required. Interpreted languages like
@@ -359,6 +261,7 @@ Even well-written code can fail, the `quickRun()` provides clear feedback to hel
 </Accordion>
 
 {' '}
+
 <Accordion title="What if my code needs external files?">
 	You can include any required files by encoding them as a Base64 ZIP and passing them through the
 	**`additionalFilesAsZip`** parameter. This allows your program to access external dependencies,
@@ -366,19 +269,22 @@ Even well-written code can fail, the `quickRun()` provides clear feedback to hel
 </Accordion>
 
 {' '}
+
 <Accordion title="Can I run code that reads from files?">
 	Yes. Your program can read from files provided through **`additionalFilesAsZip`**, or you can
 	simulate user input using the **`stdin`** parameter for simpler text-based input.
 </Accordion>
 
 {' '}
+
 <Accordion title="What happens if my code runs forever?">
 	Each code execution has a **time limit** to prevent infinite loops or unresponsive code. If your
-	program exceeds this limit, it’s automatically stopped and marked as **`TimeLimitExceeded`** in
+	program exceeds this limit, it's automatically stopped and marked as **`TimeLimitExceeded`** in
 	the result object.
 </Accordion>
 
 {' '}
+
 <Accordion title="Is the execution environment safe?">
 	Absolutely. All code runs inside a **secure, isolated sandbox** with strict resource and
 	permission controls. This ensures your application and data remain safe from malicious or
