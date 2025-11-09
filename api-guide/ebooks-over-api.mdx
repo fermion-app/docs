@@ -1,0 +1,391 @@
+---
+title: 'eBooks over API'
+description: 'Learn how to manage eBooks digital product over APIs'
+sidebarTitle: 'eBooks over API'
+icon: book
+---
+
+Fermion provides a comprehensive API for creating and managing eBook digital products programmatically. This guide walks you through the complete process of uploading, encrypting, and publishing eBooks through our APIs.
+
+## Overview
+
+The eBook API allows you to:
+
+-   Create eBook products programmatically
+-   Upload PDF files securely to cloud storage
+-   Automatically encrypt eBooks with DRM protection
+-   Configure watermarks and download permissions
+-   Update metadata and descriptions
+-   Set up pricing plans and publish eBooks
+-   Manage multiple versions of the same eBook
+
+## Prerequisites
+
+Before creating eBooks over API, ensure you have:
+
+-   A [valid Fermion API key](/api-guide/introduction#how-to-get-your-api-key)
+-   A PDF file ready for upload (your eBook content)
+-   Basic understanding of HTTP requests and file uploads
+
+## How eBook Upload Works
+
+The eBook upload process involves multiple steps to ensure security and proper encryption:
+
+1. **Create Product**: First, create an eBook product record in your school
+2. **Get Upload URL**: Request a secure, time-limited presigned URL for uploading
+3. **Upload PDF**: Upload your PDF file directly to cloud storage using the presigned URL
+4. **Process & Encrypt**: Trigger encryption and DRM protection for the uploaded PDF
+5. **Update Metadata**: Set titles, descriptions, and reader settings
+6. **Add Pricing**: Configure pricing plans (optional)
+7. **Publish**: Change status to Active to make it available to students
+
+<Info>
+	All eBooks are automatically encrypted with AES-128-CBC encryption to prevent unauthorized
+	distribution. You can also enable watermarks to further protect your content.
+</Info>
+
+## Step 1: Create eBook Product
+
+Create a new eBook product using the create-ebook-product endpoint.
+
+**API name:** `create-ebook-product`
+
+Read about [how to call this API endpoint here](/api-reference/product/create-ebook-product)
+
+**Response:**
+
+```json
+{
+	"status": "ok",
+	"data": {
+		"fermionDigitalProductId": "prod_abc123xyz",
+		"slug": "xyz789"
+	}
+}
+```
+
+<Note>
+	Save the `slug` returned from this call - you'll need it for all subsequent API calls. The slug
+	is a URL-friendly identifier for your eBook product.
+</Note>
+
+## Step 2: Get Presigned Upload URL
+
+Read about [how to call this API endpoint here](/api-reference/product/get-presigned-url-for-ebook-upload)
+
+**Response:**
+
+```json
+{
+	"status": "ok",
+	"data": {
+		"r2KeyForOriginalEbookPdf": "private-cached-ebook-unencrypted/prod_abc123xyz/file_unique_id",
+		"presignedUrl": "https://storage.example.com/upload?signature=..."
+	}
+}
+```
+
+<Warning>
+	The presigned URL expires in **1 hour**. You must upload your PDF file before it expires. If it
+	expires, simply request a new presigned URL.
+</Warning>
+
+**Important Notes:**
+
+-   Save the `r2KeyForOriginalEbookPdf` - you'll need it in Step 3
+-   The presigned URL is single-use and time-limited for security
+-   Each call generates a new version of your eBook
+
+## Step 3: Upload PDF to Presigned URL
+
+Upload your PDF file directly to the presigned URL using a PUT request.
+
+<CodeGroup>
+
+```bash cURL
+curl -X PUT \
+  -H "Content-Type: application/pdf" \
+  --data-binary @your-ebook.pdf \
+  "https://storage.example.com/upload?signature=..."
+```
+
+```javascript JavaScript (Node.js)
+const fs = require('fs')
+
+const pdfBuffer = fs.readFileSync('your-ebook.pdf')
+
+await fetch(presignedUrl, {
+	method: 'PUT',
+	headers: {
+		'Content-Type': 'application/pdf'
+	},
+	body: pdfBuffer
+})
+```
+
+```python Python
+import requests
+
+with open('your-ebook.pdf', 'rb') as f:
+    pdf_data = f.read()
+
+response = requests.put(
+    presigned_url,
+    headers={'Content-Type': 'application/pdf'},
+    data=pdf_data
+)
+```
+
+</CodeGroup>
+
+<Tip>
+	Make sure to use a PUT request (not POST) and set the Content-Type header to `application/pdf`
+	for proper file upload.
+</Tip>
+
+## Step 4: Process and Encrypt the Uploaded eBook
+
+After uploading the PDF, trigger the processing and encryption.
+
+Read about [how to call this API endpoint here](/api-reference/product/process-uploaded-ebook)
+
+**Response:**
+
+```json
+{
+	"status": "ok",
+	"data": {
+		"ebookVersionIndex": 0
+	}
+}
+```
+
+**What Happens During Processing:**
+
+1. Downloads your uploaded PDF from storage
+2. Encrypts the file using AES-128-CBC encryption
+3. Generates unique encryption keys and initialization vectors
+4. Stores the encrypted version in secure storage
+5. Updates the product configuration with encryption metadata
+
+<Info>
+	Save the `ebookVersionIndex` - you'll use this to activate this version of the eBook when
+	updating metadata.
+</Info>
+
+## Step 5: Update eBook Metadata and Settings
+
+Read about [how to call this API endpoint here](/api-reference/product/update-ebook-metadata)
+
+**Request Body:**
+
+```json
+{
+	"productSlug": "xyz789",
+	"title": "Introduction to Web Development",
+	"shortDescription": "Learn HTML, CSS, and JavaScript fundamentals",
+	"longDescription": "This comprehensive guide covers everything you need to know about modern web development...",
+	"activeVersionIndex": 0,
+	"isBookDownloadable": false,
+	"shouldEnableCenterWatermark": true,
+	"shouldEnableHeaderWatermark": true
+}
+```
+
+**Field Descriptions:**
+
+-   `title` (optional): Display title for the eBook
+-   `shortDescription` (optional): Brief description for listings
+-   `longDescription` (optional): Detailed description for the product page
+-   `activeVersionIndex` (optional): Which version to make active (from Step 4)
+-   `isBookDownloadable` (optional): Allow users to download the PDF file
+-   `shouldEnableCenterWatermark` (optional): Display watermark in center of pages
+-   `shouldEnableHeaderWatermark` (optional): Display watermark in page headers
+
+<Warning>
+	**Important:** You must set `activeVersionIndex` to the version number returned from Step 4 to
+	activate the uploaded eBook. Only processed versions (status: `uploaded-and-processed`) can be
+	set as active.
+</Warning>
+
+### Watermark Settings
+
+Watermarks help protect your content from unauthorized distribution:
+
+-   **Center Watermark**: Displays user's email or identifier in the center of each page
+-   **Header Watermark**: Shows user information in the header area
+-   Both watermarks are applied dynamically per user to track unauthorized sharing
+
+### Download Permissions
+
+-   `isBookDownloadable: true` - Users can download the PDF to read offline
+-   `isBookDownloadable: false` - Users can only read online in the browser
+
+## Step 6: Add Pricing (Optional)
+
+Use the existing digital product pricing API to add pricing plans to your eBook.
+
+Read about [how to call this API endpoint here](/api-reference/product/create-custom-pricing-plan-for-a-product)
+
+## Complete Example Workflow
+
+Here's a complete example using JavaScript/Node.js:
+
+```javascript
+const API_KEY = 'your-api-key'
+const BASE_URL = 'https://your-school.fermion.app/api'
+
+// Step 1: Create eBook product
+const createResponse = await fetch(`${BASE_URL}/public/create-ebook-product`, {
+	method: 'POST',
+	headers: {
+		'fermion-api-key': API_KEY,
+		'Content-Type': 'application/json'
+	},
+	body: JSON.stringify({
+		ebookName: 'My Amazing eBook',
+		shortDescription: 'Learn something awesome',
+		status: 'Draft'
+	})
+})
+
+const { slug, fermionDigitalProductId } = (await createResponse.json()).data
+
+// Step 2: Get presigned upload URL
+const uploadUrlResponse = await fetch(`${BASE_URL}/public/get-presigned-url-for-ebook-upload`, {
+	method: 'POST',
+	headers: {
+		'fermion-api-key': API_KEY,
+		'Content-Type': 'application/json'
+	},
+	body: JSON.stringify({ productSlug: slug })
+})
+
+const { presignedUrl, r2KeyForOriginalEbookPdf } = (await uploadUrlResponse.json()).data
+
+// Step 3: Upload PDF file
+const pdfBuffer = fs.readFileSync('./my-ebook.pdf')
+await fetch(presignedUrl, {
+	method: 'PUT',
+	headers: { 'Content-Type': 'application/pdf' },
+	body: pdfBuffer
+})
+
+// Step 4: Process and encrypt
+const processResponse = await fetch(`${BASE_URL}/public/process-uploaded-ebook`, {
+	method: 'POST',
+	headers: {
+		'fermion-api-key': API_KEY,
+		'Content-Type': 'application/json'
+	},
+	body: JSON.stringify({
+		productSlug: slug,
+		r2KeyForOriginalEbookPdf
+	})
+})
+
+const { ebookVersionIndex } = (await processResponse.json()).data
+
+// Step 5: Update metadata and activate
+await fetch(`${BASE_URL}/public/update-ebook-metadata`, {
+	method: 'POST',
+	headers: {
+		'fermion-api-key': API_KEY,
+		'Content-Type': 'application/json'
+	},
+	body: JSON.stringify({
+		productSlug: slug,
+		title: 'My Amazing eBook',
+		longDescription: 'This eBook will teach you...',
+		activeVersionIndex: ebookVersionIndex,
+		isBookDownloadable: false,
+		shouldEnableCenterWatermark: true,
+		shouldEnableHeaderWatermark: true
+	})
+})
+
+console.log(`eBook created successfully! Product ID: ${fermionDigitalProductId}`)
+```
+
+## Managing Multiple Versions
+
+You can upload multiple versions of the same eBook (e.g., for updates or revisions):
+
+1. Call `get-presigned-url-for-ebook-upload` again to get a new upload URL
+2. Upload the updated PDF file
+3. Call `process-uploaded-ebook` to encrypt the new version
+4. Update `activeVersionIndex` to switch to the new version
+
+<Tip>
+	Keep older versions available by not deleting them. You can switch between versions at any time
+	by updating the `activeVersionIndex`.
+</Tip>
+
+## Best Practices
+
+### Security
+
+-   Always use HTTPS for all API calls and file uploads
+-   Keep your API key secure and never expose it in client-side code
+-   Enable watermarks for premium content to discourage piracy
+-   Consider disabling downloads (`isBookDownloadable: false`) for high-value content
+
+### Performance
+
+-   Upload large PDF files directly to the presigned URL (not through your server)
+-   Request a new presigned URL if upload fails - don't retry with an expired URL
+-   Process uploads asynchronously if integrating into a user-facing application
+
+### Content Management
+
+-   Use descriptive `ebookName` values for easy identification in your system
+-   Keep eBooks in `Draft` status while setting up metadata and pricing
+-   Test the eBook reader experience before changing status to `Active`
+-   Use `shortDescription` for SEO and discovery, `longDescription` for detailed info
+
+## Troubleshooting
+
+### "Uploaded eBook not found" Error
+
+This error occurs in Step 4 if:
+
+-   The PDF upload in Step 3 failed or didn't complete
+-   The `r2KeyForOriginalEbookPdf` doesn't match the presigned URL used
+-   The presigned URL expired before upload completed
+
+**Solution:** Request a new presigned URL and re-upload the PDF file.
+
+### "You can only mark an uploaded book as active" Error
+
+This happens when trying to set `activeVersionIndex` to a version that hasn't been processed yet.
+
+**Solution:** Ensure you completed Step 4 (process-uploaded-ebook) before setting the activeVersionIndex.
+
+### Upload Times Out
+
+Large PDF files may take time to upload.
+
+**Solution:**
+
+-   Ensure stable internet connection
+-   Increase timeout settings in your HTTP client
+-   Consider compressing large PDFs before upload
+
+### Presigned URL Expired
+
+**Solution:** Simply request a new presigned URL - there's no limit to how many you can generate.
+
+## Getting Help
+
+If you encounter issues not covered in this guide:
+
+-   Check the [API Reference](https://docs.fermion.app/api-reference) for detailed endpoint documentation
+-   Review the [Webhooks Guide](https://docs.fermion.app/webhooks) for tracking eBook purchases
+-   Contact support with your `fermionDigitalProductId` for product-specific issues
+
+## Next Steps
+
+-   [Set up pricing plans](https://docs.fermion.app/api-reference/product/create-custom-pricing-plan-for-a-product)
+-   [Create coupons for your eBooks](https://docs.fermion.app/api-reference/product/create-digital-product-coupon)
+-   [Enroll users programmatically](https://docs.fermion.app/api-reference/user/enroll-user-into-digital-product)
+-   [Configure webhooks](https://docs.fermion.app/webhooks) to track purchases and enrollments

@@ -12,14 +12,7 @@
 	},
 	"favicon": "/favicon.webp",
 	"contextual": {
-		"options": [
-			"copy",
-			"view",
-			"chatgpt",
-			"claude",
-			"perplexity",
-			"cursor"
-		]
+		"options": ["copy", "view", "chatgpt", "claude", "perplexity", "cursor"]
 	},
 	"navigation": {
 		"tabs": [
@@ -99,10 +92,7 @@
 					},
 					{
 						"group": "Community",
-						"pages": [
-							"community/what-are-communities",
-							"community/community-features"
-						]
+						"pages": ["community/what-are-communities", "community/community-features"]
 					},
 					{
 						"group": "Contests",
@@ -115,10 +105,7 @@
 					},
 					{
 						"group": "Gamification",
-						"pages": [
-							"gamification/introduction",
-							"gamification/features"
-						]
+						"pages": ["gamification/introduction", "gamification/features"]
 					},
 					{
 						"group": "Custom Pages",
@@ -181,9 +168,7 @@
 					},
 					{
 						"group": "Guides",
-						"pages": [
-							"guides/vimeo-embed"
-						]
+						"pages": ["guides/vimeo-embed"]
 					}
 				]
 			},
@@ -198,7 +183,7 @@
 							"coding-sandbox/getting-started",
 							{
 								"group": "Typescript SDK",
-								"icon":"js",
+								"icon": "js",
 								"expanded": false,
 								"pages": [
 									"coding-sandbox/methods/initialization",
@@ -219,7 +204,7 @@
 							},
 							{
 								"group": "Python SDK",
-								"icon":"python",
+								"icon": "python",
 								"expanded": false,
 								"pages": [
 									"coding-sandbox/python-sdk/initialization",
@@ -345,7 +330,8 @@
 						"pages": [
 							"api-guide/introduction",
 							"api-guide/using-user-endpoints",
-							"api-guide/affiliate-marketing-over-api"
+							"api-guide/affiliate-marketing-over-api",
+							"api-guide/ebooks-over-api"
 						]
 					},
 					{
@@ -362,9 +348,7 @@
 				"groups": [
 					{
 						"group": "Changelog",
-						"pages": [
-							"changelog"
-						]
+						"pages": ["changelog"]
 					}
 				]
 			}
@@ -393,7 +377,7 @@
 	},
 	"footer": {
 		"socials": {
-			"discord":"https://discord.com/invite/Sf45Hz38eB",
+			"discord": "https://discord.com/invite/Sf45Hz38eB",
 			"twitter": "https://twitter.com/fermionapp",
 			"github": "https://github.com/fermion-app/docs",
 			"linkedin": "https://www.linkedin.com/company/fermion-app"
