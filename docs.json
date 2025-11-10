@@ -215,6 +215,7 @@
 									"coding-sandbox/python-sdk/run-streaming-command",
 									"coding-sandbox/python-sdk/write-file",
 									"coding-sandbox/python-sdk/get-file",
+									"coding-sandbox/python-sdk/quick-run",
 									"coding-sandbox/python-sdk/expose-port",
 									"coding-sandbox/python-sdk/get-public-urls",
 									"coding-sandbox/python-sdk/session-id",
@@ -295,7 +296,6 @@
 						"group": "Scheduling and Analytics",
 						"pages": [
 							"live-classes/event-calendar",
-							"live-classes/standalone-invites",
 							"live-classes/cloning-class",
 							"live-classes/livestream-analytics",
 							"live-classes/common-faqs"
