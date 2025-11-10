@@ -84,19 +84,19 @@ Use these optional parameters to provide inputs, verify expected outputs, or inc
 
 The `quickRun()` method returns a `runResult` object that holds detailed information about the execution outcome: whether it succeeded, failed, or encountered runtime or compilation issues.
 
-| Field                                                | Description                                                                                                                                                                                                                                                                                                                                 |
-| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`runStatus`**                                      | Indicates the final execution result. Possible values include `"successful"`, `"compilation-error"`, `"time-limit-exceeded"`, `"wrong-answer"`, `"non-zero-exit-code"`, `"died-sigsev"`, `"died-sigxfsz"`, `"died-sigfpe"`, `"died-sigabrt"`, `"internal-isolate-error"`, or `"unknown"`. Returns `null` if execution hasn't completed yet. |
-| **`programRunData`**                                 | An object containing detailed execution metrics and output. Returns `null` if execution hasn't completed yet.                                                                                                                                                                                                                               |
-| **`programRunData.stdoutBase64UrlEncoded`**          | String containing everything the program printed to the standard output stream. The SDK automatically decodes this value, so you can use it directly without additional decoding.                                                                                                                                                           |
-| **`programRunData.stderrBase64UrlEncoded`**          | String containing any error messages or debug logs printed to the standard error stream. The SDK automatically decodes this value, so you can use it directly without additional decoding.                                                                                                                                                  |
-| **`programRunData.cpuTimeUsedInMilliseconds`**       | Reports how long the code took to execute (CPU time), measured in milliseconds. Helpful for performance benchmarking or optimization.                                                                                                                                                                                                       |
-| **`programRunData.wallTimeUsedInMilliseconds`**      | Reports the wall-clock time (real time) taken for execution, measured in milliseconds.                                                                                                                                                                                                                                                      |
-| **`programRunData.memoryUsedInKilobyte`**            | Indicates the total memory used during execution, measured in kilobytes.                                                                                                                                                                                                                                                                    |
-| **`programRunData.exitCode`**                        | The exit code returned by the program (0 typically indicates success).                                                                                                                                                                                                                                                                      |
-| **`programRunData.exitSignal`**                      | The exit signal if the process was terminated by a signal, or `null` otherwise.                                                                                                                                                                                                                                                             |
-| **`compilerOutputAfterCompilationBase64UrlEncoded`** | Compiler output (for compiled languages). The SDK automatically decodes this value, so you can use it directly without additional decoding. Returns `null` for interpreted languages or if there's no compiler output.                                                                                                                      |
-| **`finishedAt`**                                     | Timestamp marking when the execution completed, in ISO 8601 UTC format (e.g., `"2025-11-06T08:14:10.127Z"`). Returns `null` if execution hasn't completed yet.                                                                                                                                                                              |
+| Field                                           | Description                                                                                                                                                                                                                                                                                                                                 |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`runStatus`**                                 | Indicates the final execution result. Possible values include `"successful"`, `"compilation-error"`, `"time-limit-exceeded"`, `"wrong-answer"`, `"non-zero-exit-code"`, `"died-sigsev"`, `"died-sigxfsz"`, `"died-sigfpe"`, `"died-sigabrt"`, `"internal-isolate-error"`, or `"unknown"`. Returns `null` if execution hasn't completed yet. |
+| **`programRunData`**                            | An object containing detailed execution metrics and output. Returns `null` if execution hasn't completed yet.                                                                                                                                                                                                                               |
+| **`programRunData.stdout`**                     | String containing everything the program printed to the standard output stream. The SDK automatically decodes this value, so you can use it directly without additional decoding.                                                                                                                                                           |
+| **`programRunData.stderr`**                     | String containing any error messages or debug logs printed to the standard error stream. The SDK automatically decodes this value, so you can use it directly without additional decoding.                                                                                                                                                  |
+| **`programRunData.cpuTimeUsedInMilliseconds`**  | Reports how long the code took to execute (CPU time), measured in milliseconds. Helpful for performance benchmarking or optimization.                                                                                                                                                                                                       |
+| **`programRunData.wallTimeUsedInMilliseconds`** | Reports the wall-clock time (real time) taken for execution, measured in milliseconds.                                                                                                                                                                                                                                                      |
+| **`programRunData.memoryUsedInKilobyte`**       | Indicates the total memory used during execution, measured in kilobytes.                                                                                                                                                                                                                                                                    |
+| **`programRunData.exitCode`**                   | The exit code returned by the program (0 typically indicates success).                                                                                                                                                                                                                                                                      |
+| **`programRunData.exitSignal`**                 | The exit signal if the process was terminated by a signal, or `null` otherwise.                                                                                                                                                                                                                                                             |
+| **`compilerOutputAfterCompilation`**            | Compiler output (for compiled languages). The SDK automatically decodes this value, so you can use it directly without additional decoding. Returns `null` for interpreted languages or if there's no compiler output.                                                                                                                      |
+| **`finishedAt`**                                | Timestamp marking when the execution completed, in ISO 8601 UTC format (e.g., `"2025-11-06T08:14:10.127Z"`). Returns `null` if execution hasn't completed yet.                                                                                                                                                                              |
 
 ---
 
@@ -133,8 +133,8 @@ const result = await sandbox.quickRun({
 })
 
 // Output is already decoded by the SDK
-const output = result.programRunData?.stdoutBase64UrlEncoded
-console.log(output) // Outputs: "Hello, World!"
+const output = result.programRunData?.stdout
+console.log(output) // Outputs: "Hello, World!\n"
 console.log(result.runStatus) // "successful"
 ```
 
@@ -150,7 +150,7 @@ const result = await sandbox.quickRun({
 	stdin: 'Alice'
 })
 
-console.log(result.programRunData?.stdoutBase64UrlEncoded) // "Hello, Alice!"
+console.log(result.programRunData?.stdout) // "Hello, Alice!\n"
 ```
 
 </CodeGroup>
@@ -162,7 +162,7 @@ Even well-written code can fail, the `quickRun()` provides clear feedback to hel
 <AccordionGroup>
 
   <Accordion title="Compilation Errors" icon="terminal">
-    These occur when the code fails to compile due to syntax issues or missing elements. The `runStatus` will be set to **"compilation-error"**, and the compiler output can be found in `compilerOutputAfterCompilationBase64UrlEncoded`.
+    These occur when the code fails to compile due to syntax issues or missing elements. The `runStatus` will be set to **"compilation-error"**, and the compiler output can be found in `compilerOutputAfterCompilation`.
 
     ```typescript
     import { Sandbox } from '@fermion/sandbox'
@@ -176,9 +176,9 @@ Even well-written code can fail, the `quickRun()` provides clear feedback to hel
     })
 
     console.log(result.runStatus) // "compilation-error"
-    if (result.compilerOutputAfterCompilationBase64UrlEncoded) {
+    if (result.compilerOutputAfterCompilation) {
       // Output is already decoded by the SDK
-      const compilerOutput = result.compilerOutputAfterCompilationBase64UrlEncoded
+      const compilerOutput = result.compilerOutputAfterCompilation
       console.log(compilerOutput) // Shows compiler error messages
     }
     ```
@@ -186,7 +186,7 @@ Even well-written code can fail, the `quickRun()` provides clear feedback to hel
   </Accordion>
 
   <Accordion title="Runtime Errors" icon="business-time">
-    Runtime errors happen when the program compiles successfully but fails during execution, such as dividing by zero or accessing invalid memory. In such cases, the `runStatus` will be **"non-zero-exit-code"** or another error status, and the error message appears in `programRunData.stderrBase64UrlEncoded`.
+    Runtime errors happen when the program compiles successfully but fails during execution, such as dividing by zero or accessing invalid memory. In such cases, the `runStatus` will be **"non-zero-exit-code"** or another error status, and the error message appears in `programRunData.stderr`.
 
     ```typescript
     import { Sandbox } from '@fermion/sandbox'
@@ -200,9 +200,9 @@ Even well-written code can fail, the `quickRun()` provides clear feedback to hel
     })
 
     console.log(result.runStatus) // "non-zero-exit-code" or other error status
-    if (result.programRunData?.stderrBase64UrlEncoded) {
+    if (result.programRunData?.stderr) {
       // Output is already decoded by the SDK
-      const stderr = result.programRunData.stderrBase64UrlEncoded
+      const stderr = result.programRunData.stderr
       console.log(stderr) // Shows error details
     }
     ```
@@ -235,9 +235,9 @@ Even well-written code can fail, the `quickRun()` provides clear feedback to hel
 -   **Connect to sandbox first** : Always call `create()` or `fromSnippet()` before using `quickRun()`
 -   **Always check runStatus first** : Before looking at output, verify the code ran successfully (`runStatus === 'successful'`)
 -   **Check programRunData is not null** : Ensure `programRunData` exists before accessing its properties
--   **Output is already decoded** : The SDK automatically decodes `stdoutBase64UrlEncoded`, `stderrBase64UrlEncoded`, and `compilerOutputAfterCompilationBase64UrlEncoded`, so you can use them directly without additional decoding
+-   **Output is already decoded** : The SDK automatically decodes `stdout`, `stderr`, and `compilerOutputAfterCompilation`, so you can use them directly without additional decoding
 -   **Use expectedOutput for automated testing** : The system will set `runStatus` to `"successful"` if output matches, or `"wrong-answer"` if it doesn't
--   **Handle errors gracefully** : Show helpful messages when code fails by checking `runStatus` and accessing `stderrBase64UrlEncoded` directly
+-   **Handle errors gracefully** : Show helpful messages when code fails by checking `runStatus` and accessing `stderr` directly
 -   **Validate user input** : If users can submit code, validate it before execution
 
 ## Performance Tips
