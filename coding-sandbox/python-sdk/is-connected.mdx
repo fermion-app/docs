@@ -31,17 +31,21 @@ _None_
 ### **Example**
 
 ```python
+import asyncio
 from fermion_sandbox import Sandbox
 
-sandbox = Sandbox(api_key="your-api-key")
+async def main():
+    sandbox = Sandbox(api_key="your-api-key")
 
-# Check initial connection state
-print(sandbox.is_connected())  # False
+    # Check initial connection state
+    print(sandbox.is_connected())  # False
 
-# Create a new sandbox
-sandbox.create(should_backup_filesystem=False)
-print(sandbox.is_connected())  # True
+    # Create a new sandbox
+    await sandbox.create(should_backup_filesystem=False)
+    print(sandbox.is_connected())  # True
 
-# Disconnect from the sandbox
-sandbox.disconnect()
-print(sandbox.is_connected())  # False
+    # Disconnect from the sandbox
+    await sandbox.disconnect()
+    print(sandbox.is_connected())  # False
+
+asyncio.run(main())

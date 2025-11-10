@@ -5,49 +5,63 @@ description: 'Retrieve text or binary files from the sandbox filesystem using th
 icon: file-arrow-down
 ---
 
-The `get_file()` method retrieves a file from your sandbox’s filesystem and returns its contents.  
+The `get_file()` method retrieves a file from your sandbox's filesystem and returns its contents.  
 Depending on the type of file, you can read the data as **text**, **binary bytes**, or even parse it as **JSON**.
 
-All file paths must start with `~` or the absolute path `/home/damner/code` to ensure access is limited to the sandbox’s isolated workspace.  
-If the requested file doesn’t exist or the path is invalid, an error will be raised.
+All file paths must start with the absolute path `/home/damner` to ensure access is limited to the sandbox's isolated workspace.  
+If the requested file doesn't exist or the path is invalid, an error will be raised.
 
 ---
 
-### `get_file(path: str) -> Union[str, bytes]`
+### `async get_file(path: str) -> httpx.Response`
 
 **Description:**  
-Retrieves a file from the sandbox filesystem. Returns its content either as a decoded string (`str`) or raw binary (`bytes`).
+Retrieves a file from the sandbox filesystem. Returns an `httpx.Response` object that you can use to read the content as text, bytes, or parse as JSON.
 
 ---
 
 **Parameters:**
 
-| Parameter | Type | Required | Default | Description |
-|------------|------|-----------|----------|-------------|
-| `path` | `str` | Yes | — | File path (must start with `~` or `/home/damner/code`) |
+| Parameter | Type  | Required | Default | Description                                |
+| --------- | ----- | -------- | ------- | ------------------------------------------ |
+| `path`    | `str` | Yes      | —       | File path (must start with `/home/damner`) |
 
 ---
 
 **Returns:**  
-`str` or `bytes`: File content.  
-Raises an exception if the file does not exist or the path is invalid.
-The response object has the following methods:
-- `.text()` - Read as string
-- `.arrayBuffer()` - Read as binary
-- `.blob()` - Read as Blob
-- `.json()` - Parse as JSON
+`httpx.Response`: Response object with the following methods:
 
+-   `.text` - Read as string (property)
+-   `.content` - Read as bytes (property)
+-   `.read()` - Read as bytes (method)
+-   `.json()` - Parse as JSON (method)
+
+Raises an exception if the file does not exist or the path is invalid.
 
 ---
 
 **Examples**
 
 ```python
+import asyncio
 from fermion_sandbox import Sandbox
 
-sandbox = Sandbox(api_key="your-api-key")
-sandbox.create(should_backup_filesystem=True)
+async def main():
+    sandbox = Sandbox(api_key="your-api-key")
+    await sandbox.create(should_backup_filesystem=True)
 
-# Read a Python file
-content = sandbox.get_file("~/script.py")
-print(content)
+    # Read a Python file as text
+    response = await sandbox.get_file("/home/damner/script.py")
+    content = response.text
+    print(content)
+
+    # Read a binary file
+    response = await sandbox.get_file("/home/damner/data.bin")
+    binary_data = response.content
+
+    # Read and parse JSON
+    response = await sandbox.get_file("/home/damner/config.json")
+    config = response.json()
+
+asyncio.run(main())
+```

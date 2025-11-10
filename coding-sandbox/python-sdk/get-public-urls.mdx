@@ -35,25 +35,28 @@ _None_
 **Example**
 
 ```python
+import asyncio
 from fermion_sandbox import Sandbox
 
-sandbox = Sandbox(api_key="your-api-key")
-sandbox.create(should_backup_filesystem=True)
+async def main():
+    sandbox = Sandbox(api_key="your-api-key")
+    await sandbox.create(should_backup_filesystem=True)
 
-urls = sandbox.get_public_urls()
+    urls = sandbox.get_public_urls()
 
-print("Available Public URLs:")
-print("Port 3000:", urls[3000])
-print("Port 1337:", urls[1337])
-print("Port 1338:", urls[1338])
+    print("Available Public URLs:")
+    print("Port 3000:", urls[3000])
+    print("Port 1337:", urls[1337])
+    print("Port 1338:", urls[1338])
 
-# Example usage in an app config
-config = {
-    "web_url": urls[3000],
-    "api_url": urls[1337],
-    "socket_url": urls[1338]
-}
+    # Example usage in an app config
+    config = {
+        "web_url": urls[3000],
+        "api_url": urls[1337],
+        "socket_url": urls[1338]
+    }
 
-print("App Configuration:", config)
+    print("App Configuration:", config)
 
+asyncio.run(main())
 ```

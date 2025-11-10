@@ -30,16 +30,20 @@ _None_
 **Example**
 
 ```python
+import asyncio
 from fermion_sandbox import Sandbox
 
-sandbox = Sandbox(api_key="your-api-key")
+async def main():
+    sandbox = Sandbox(api_key="your-api-key")
 
-# No active session yet
-print(sandbox.get_session_id())  # None
+    # No active session yet
+    print(sandbox.get_session_id())  # None
 
-# Create a new sandbox
-sandbox.create(should_backup_filesystem=False)
+    # Create a new sandbox
+    await sandbox.create(should_backup_filesystem=False)
 
-# Retrieve the session ID
-print(sandbox.get_session_id())  # e.g. "session-abc123"
+    # Retrieve the session ID
+    print(sandbox.get_session_id())  # e.g. "session-abc123"
+
+asyncio.run(main())
 ```

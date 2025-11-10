@@ -8,7 +8,7 @@ icon: code
 The **`quick_run()`** method provides a fast and secure way to execute code directly within your Python application. It supports **ten popular runtimes**, including **Python, Java, C++, Node.js**, and more.
 
 <Note>
-Before calling `quick_run()`, you must first connect to the sandbox using either `create()` or `from_snippet()`. The sandbox must be active before you can execute any code.
+Before calling `quick_run()`, you must first connect to the sandbox using either `await create()` or `await from_snippet()`. The sandbox must be active before you can execute any code.
 </Note>
 
 ## Supported Languages
@@ -34,6 +34,15 @@ The following programming languages are supported by the `quick_run()` method.
 <Card title=".NET (C#)" icon="hashtag"></Card>
 
 </Columns>
+
+---
+
+## Method Signature
+
+### `async quick_run(runtime: Literal['C', 'C++', 'Java', 'Python', 'Node.js', 'SQLite', 'MySQL', 'Go', 'Rust', '.NET'], source_code: str, stdin: Optional[str] = None, expected_output: Optional[str] = None, additional_files_as_zip: Optional[str] = None) -> DecodedRunResult`
+
+**Description:**  
+Executes code using the DSA execution API and returns the results. This method provides a simple way to execute code in various languages without needing to set up a full sandbox container.
 
 ---
 
@@ -64,32 +73,32 @@ The `quick_run()` method takes a set of parameters that define how your code wil
 
 ## Execution Results
 
-The `quick_run()` method returns a **`RunResult`** object containing detailed execution results: status, output, timing, and resource usage.
+The `quick_run()` method returns a **`DecodedRunResult`** object containing detailed execution results: status, output, timing, and resource usage.
 
 | Field                                         | Description                                                                                                                                                                                                                                                |
 | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `run_status`                                  | Final execution result. Possible values: `"successful"`, `"compilation-error"`, `"time-limit-exceeded"`, `"wrong-answer"`, `"non-zero-exit-code"`, `"died-sigsev"`, `"died-sigfpe"`, `"died-sigabrt"`, `"internal-isolate-error"`, `"unknown"`.             |
-| `program_run_data`                            | Object holding detailed execution data like stdout, stderr, CPU time, and memory usage. Returns `None` if execution hasn’t finished.                                                                                |
-| `program_run_data.stdout_base64url_encoded`   | Program’s standard output (already decoded by the SDK).                                                                                                                      |
-| `program_run_data.stderr_base64url_encoded`   | Program’s error output (already decoded by the SDK).                                                                                                                         |
-| `program_run_data.cpu_time_used_in_ms`        | CPU time consumed during execution (milliseconds).                                                                                                                            |
-| `program_run_data.wall_time_used_in_ms`       | Real (wall-clock) time elapsed (milliseconds).                                                                                                                                |
-| `program_run_data.memory_used_in_kb`          | Memory used during execution (kilobytes).                                                                                                                                    |
-| `program_run_data.exit_code`                  | Program’s exit code (0 indicates success).                                                                                                                                    |
-| `program_run_data.exit_signal`                | Termination signal if the process was killed, or `None`.                                                                                                                     |
-| `compiler_output_after_compilation_base64url_encoded` | Compiler output (for compiled languages). Already decoded by SDK; returns `None` for interpreted languages.                                                                   |
-| `finished_at`                                 | ISO 8601 UTC timestamp when execution finished (e.g., `"2025-11-06T08:14:10.127Z"`). Returns `None` if still running.                                                        |
+| `run_status`                                  | Final execution result (RunStatus enum). Use `.value` to get the string value. Possible values: `"successful"`, `"compilation-error"`, `"time-limit-exceeded"`, `"wrong-answer"`, `"non-zero-exit-code"`, `"died-sigsev"`, `"died-sigfpe"`, `"died-sigabrt"`, `"internal-isolate-error"`, `"unknown"`.             |
+| `program_run_data`                            | Object holding detailed execution data like stdout, stderr, CPU time, and memory usage. Returns `None` if execution hasn't finished.                                                                                |
+| `program_run_data.stdout`   | Program's standard output (already decoded by the SDK, not Base64URL).                                                                                                                      |
+| `program_run_data.stderr`   | Program's error output (already decoded by the SDK, not Base64URL).                                                                                                                         |
+| `program_run_data.cpu_time_used_in_milliseconds`        | CPU time consumed during execution (milliseconds).                                                                                                                            |
+| `program_run_data.wall_time_used_in_milliseconds`       | Real (wall-clock) time elapsed (milliseconds).                                                                                                                                |
+| `program_run_data.memory_used_in_kilobyte`          | Memory used during execution (kilobytes).                                                                                                                                    |
+| `program_run_data.exit_code`                  | Program's exit code (0 indicates success).                                                                                                                                    |
+| `program_run_data.exit_signal`                | Termination signal if the process was killed, or 0 otherwise.                                                                                                                     |
+| `compiler_output_after_compilation` | Compiler output (for compiled languages). Already decoded by SDK; returns `None` for interpreted languages.                                                                   |
+| `finished_at`                                 | ISO 8601 UTC timestamp when execution finished (e.g., `"2025-11-06T08:14:10.127Z"`).                                                                                                                        |
 
 ---
 
 ### Validation (if you provided `expected_output`)
 
-If you supplied an `expectedOutput` when running your code, QuickRun automatically compares the actual output with your expected value. The comparison result is reflected in the `runStatus` field:
+If you supplied an `expected_output` when running your code, QuickRun automatically compares the actual output with your expected value. The comparison result is reflected in the `run_status` field:
 
--   If the output matches: `run_status` will be `"successful"`
--   If the output doesn't match: `run_status` will be `"wrong-answer"`
--   If there's a compilation error: `run_status` will be `"compilation-error"`
--   If there's a runtime error: `run_status` will be `"non-zero-exit-code"` or another error status
+-   If the output matches: `run_status.value` will be `"successful"`
+-   If the output doesn't match: `run_status.value` will be `"wrong-answer"`
+-   If there's a compilation error: `run_status.value` will be `"compilation-error"`
+-   If there's a runtime error: `run_status.value` will be `"non-zero-exit-code"` or another error status
 
 This allows for quick correctness checks, ideal for grading systems, test runners, or automated assessments.
 
@@ -102,43 +111,52 @@ Below are examples showing how to use `quick_run()` in Python.
 <CodeGroup>
 
 ```python hello_world.py
+import asyncio
 from fermion_sandbox import Sandbox
 
-sandbox = Sandbox(api_key="fermion-api-key")
+async def main():
+    sandbox = Sandbox(api_key="fermion-api-key")
 
-# Connect to sandbox first
-sandbox.create()
+    # Connect to sandbox first
+    await sandbox.create(should_backup_filesystem=False)
 
-result = sandbox.quick_run(
-    runtime="Python",
-    source_code='print("Hello, World!")'
-)
+    result = await sandbox.quick_run(
+        runtime="Python",
+        source_code='print("Hello, World!")'
+    )
 
-# Output is already decoded
-output = result.program_run_data.stdout_base64url_encoded
-print(output)          # "Hello, World!"
-print(result.run_status)  # "successful"
+    # Output is already decoded
+    if result.program_run_data:
+        output = result.program_run_data.stdout
+        print(output)          # "Hello, World!\n"
+    print(result.run_status.value)  # "successful"
+
+asyncio.run(main())
 ```
 
 ```python with_input.py
-from fermion import Sandbox
+import asyncio
+from fermion_sandbox import Sandbox
 
-# Initialize the sandbox with your API key
-sandbox = Sandbox(api_key="fermion-api-key")
+async def main():
+    # Initialize the sandbox with your API key
+    sandbox = Sandbox(api_key="fermion-api-key")
 
-# Connect to the sandbox first (required)
-sandbox.create()
+    # Connect to the sandbox first (required)
+    await sandbox.create(should_backup_filesystem=False)
 
-# Run the Python code with input
-result = sandbox.quick_run(
-    runtime="Python",
-    source_code='name = input()\nprint(f"Hello, {name}!")',
-    stdin="Alice"
-)
+    # Run the Python code with input
+    result = await sandbox.quick_run(
+        runtime="Python",
+        source_code='name = input()\nprint(f"Hello, {name}!")',
+        stdin="Alice"
+    )
 
-# Output is already decoded by the SDK
-print(result.program_run_data.stdout_base64url_encoded)  # "Hello, Alice!"
+    # Output is already decoded by the SDK
+    if result.program_run_data:
+        print(result.program_run_data.stdout)  # "Hello, Alice!\n"
 
+asyncio.run(main())
 ```
 </CodeGroup>
 
@@ -151,79 +169,91 @@ Each is explained below with example usage.
 <AccordionGroup>
 
 <Accordion title="Compilation Errors" icon="terminal">
-Compilation errors occur when the source code cannot be compiled, typically due to syntax issues or missing elements. The `run_status` will be set to **"compilation-error"**, and the compiler output can be accessed through `compiler_output_after_compilation_base64url_encoded`.
+Compilation errors occur when the source code cannot be compiled, typically due to syntax issues or missing elements. The `run_status.value` will be `"compilation-error"`, and the compiler output can be accessed through `compiler_output_after_compilation`.
 
 ```python
+import asyncio
 from fermion_sandbox import Sandbox
 
-sandbox = Sandbox(api_key="fermion-api-key")
-sandbox.create()  # Connect first (required)
+async def main():
+    sandbox = Sandbox(api_key="fermion-api-key")
+    await sandbox.create(should_backup_filesystem=False)  # Connect first (required)
 
-result = sandbox.quick_run(
-    runtime="Java",
-    source_code='public class Main { // Missing closing brace'
-)
+    result = await sandbox.quick_run(
+        runtime="Java",
+        source_code='public class Main { // Missing closing brace'
+    )
 
-print(result.run_status)  # "compilation-error"
+    print(result.run_status.value)  # "compilation-error"
 
-if result.compiler_output_after_compilation_base64url_encoded:
-    # Output is already decoded by the SDK
-    compiler_output = result.compiler_output_after_compilation_base64url_encoded
-    print(compiler_output)  # Shows compiler error messages
+    if result.compiler_output_after_compilation:
+        # Output is already decoded by the SDK
+        compiler_output = result.compiler_output_after_compilation
+        print(compiler_output)  # Shows compiler error messages
+
+asyncio.run(main())
 ```
 
 </Accordion> 
 
 <Accordion title="Runtime Errors" icon="business-time"> 
 
-Runtime errors happen when the code compiles successfully but fails during execution, for example, dividing by zero or accessing invalid memory. In such cases, `run_status` will be **"non-zero-exit-code"**, and the error details are available in `program_run_data.stderr_base64url_encoded`.
+Runtime errors happen when the code compiles successfully but fails during execution, for example, dividing by zero or accessing invalid memory. In such cases, `run_status.value` will be `"non-zero-exit-code"`, and the error details are available in `program_run_data.stderr`.
 
 ```python
+import asyncio
 from fermion_sandbox import Sandbox
 
-sandbox = Sandbox(api_key="fermion-api-key")
-sandbox.create()  # Connect first (required)
+async def main():
+    sandbox = Sandbox(api_key="fermion-api-key")
+    await sandbox.create(should_backup_filesystem=False)  # Connect first (required)
 
-result = sandbox.quick_run(
-    runtime="Python",
-    source_code='print(1 / 0)'  # Division by zero
-)
+    result = await sandbox.quick_run(
+        runtime="Python",
+        source_code='print(1 / 0)'  # Division by zero
+    )
 
-print(result.run_status)  # "non-zero-exit-code" or another error status
+    print(result.run_status.value)  # "non-zero-exit-code" or another error status
 
-if result.program_run_data and result.program_run_data.stderr_base64url_encoded:
-    stderr_output = result.program_run_data.stderr_base64url_encoded
-    print(stderr_output)  # Shows error details
+    if result.program_run_data and result.program_run_data.stderr:
+        stderr_output = result.program_run_data.stderr
+        print(stderr_output)  # Shows error details
+
+asyncio.run(main())
 ```
 </Accordion> 
 
 <Accordion title="Timeout Errors" icon="timer"> 
 
-Timeout errors occur when a program runs beyond the allowed execution time. In such cases, the `run_status` will be set to **"time-limit-exceeded"**.
+Timeout errors occur when a program runs beyond the allowed execution time. In such cases, the `run_status.value` will be `"time-limit-exceeded"`.
 ```python
+import asyncio
 from fermion_sandbox import Sandbox
 
-sandbox = Sandbox(api_key="fermion-api-key")
-sandbox.create()  # Connect first (required)
+async def main():
+    sandbox = Sandbox(api_key="fermion-api-key")
+    await sandbox.create(should_backup_filesystem=False)  # Connect first (required)
 
-result = sandbox.quick_run(
-    runtime="Python",
-    source_code='while True: pass'  # Infinite loop
-)
+    result = await sandbox.quick_run(
+        runtime="Python",
+        source_code='while True: pass'  # Infinite loop
+    )
 
-print(result.run_status)  # "time-limit-exceeded"
+    print(result.run_status.value)  # "time-limit-exceeded"
+
+asyncio.run(main())
 ```
 </Accordion>
 </AccordionGroup>
 
 ## Best Practices
 
-- **Connect to the sandbox first:** Always call `create()` or `from_snippet()` before using `quick_run()`.
-- **Always check `run_status` first:** Before reading output, confirm the code executed successfully (`run_status == "successful"`).
+- **Connect to the sandbox first:** Always call `await create()` or `await from_snippet()` before using `quick_run()`.
+- **Always check `run_status` first:** Before reading output, confirm the code executed successfully (`run_status.value == "successful"`).
 - **Ensure `program_run_data` is not `None`:** Verify that the result object includes `program_run_data` before accessing its properties.
-- **Output is automatically decoded:** The SDK automatically decodes `stdout_base64url_encoded`, `stderr_base64url_encoded`, and `compiler_output_after_compilation_base64url_encoded`. You can use them directly without additional decoding.
-- **Use `expected_output` for automated validation:** If the output matches your expected value, `run_status` will be `"successful"`, otherwise it will be `"wrong-answer"`.
-- **Handle errors gracefully:** Check `run_status` and read `stderr_base64url_encoded` to display meaningful error messages.
+- **Output is automatically decoded:** The SDK automatically decodes `stdout`, `stderr`, and `compiler_output_after_compilation`. You can use them directly without additional decoding.
+- **Use `expected_output` for automated validation:** If the output matches your expected value, `run_status.value` will be `"successful"`, otherwise it will be `"wrong-answer"`.
+- **Handle errors gracefully:** Check `run_status.value` and read `stderr` to display meaningful error messages.
 - **Validate user input:** Always validate and sanitize user-submitted code before execution to ensure safety and reliability.
 
 ---

@@ -5,18 +5,18 @@ description: 'Write text or binary files to the sandbox filesystem with automati
 icon: file-plus
 ---
 
-The `write_file()` method allows you to create or overwrite files inside your sandbox’s isolated filesystem.  
+The `write_file()` method allows you to create or overwrite files inside your sandbox's isolated filesystem.  
 It supports both **text** and **binary** content, making it flexible for handling scripts, configuration files, and assets such as images, JSON files, or compiled binaries.
 
-All file paths must begin with either the tilde (`~`) shortcut or the absolute sandbox path `/home/damner/code`.
+All file paths must begin with the absolute sandbox path `/home/damner`.
 
 ---
 
-### `write_file(path: str, content: Union[str, bytes]) -> None`
+### `async write_file(path: str, content: Union[str, bytes]) -> None`
 
 **Description:**  
 Writes a file to the sandbox filesystem. Supports both text (`str`) and binary (`bytes`) content.  
-Automatically creates directories if they don’t exist.
+Automatically creates directories if they don't exist.
 
 ---
 
@@ -24,7 +24,7 @@ Automatically creates directories if they don’t exist.
 
 | Parameter | Type | Required | Description |
 |------------|------|-----------|-------------|
-| `path` | `str` | Yes | File path (must start with `~` or `/home/damner/code`) |
+| `path` | `str` | Yes | File path (must start with `/home/damner`) |
 | `content` | `str` or `bytes` | Yes | File content (text string or binary data) |
 
 ---
@@ -37,33 +37,44 @@ Automatically creates directories if they don’t exist.
 **Examples**
 
 ```python
-# Write a simple Python file
-sandbox.write_file(
-    path="~/script.py",
-    content='print("Hello World")'
-)
-# Multi line content
-config = {
-    "name": "my-app",
-    "version": "1.0.0"
-}
+import asyncio
+import json
+from fermion_sandbox import Sandbox
 
-sandbox.write_file(
-    path="~/config.json",
-    content=json.dumps(config, indent=2)
-)
+async def main():
+    sandbox = Sandbox(api_key="your-api-key")
+    await sandbox.create(should_backup_filesystem=False)
+
+    # Write a simple Python file
+    await sandbox.write_file(
+        path="/home/damner/script.py",
+        content='print("Hello World")'
+    )
+
+    # Multi line content
+    config = {
+        "name": "my-app",
+        "version": "1.0.0"
+    }
+
+    await sandbox.write_file(
+        path="/home/damner/config.json",
+        content=json.dumps(config, indent=2)
+    )
+
+asyncio.run(main())
 ```
 
 **Path Handling**
 ```python
-# Valid paths
+# Valid paths (must start with /home/damner)
 
-sandbox.write_file(path="~/file.txt", content="data")
-sandbox.write_file(path="/home/damner/code/file.txt", content="data")
-sandbox.write_file(path="~/nested/dir/file.txt", content="data")
+await sandbox.write_file(path="/home/damner/file.txt", content="data")
+await sandbox.write_file(path="/home/damner/code/file.txt", content="data")
+await sandbox.write_file(path="/home/damner/nested/dir/file.txt", content="data")
 
 # Invalid paths
-sandbox.write_file(path="/tmp/file.txt", content="data")
-sandbox.write_file(path="relative/file.txt", content="data")
-sandbox.write_file(path="./file.txt", content="data")
+await sandbox.write_file(path="/tmp/file.txt", content="data")  # Error
+await sandbox.write_file(path="relative/file.txt", content="data")  # Error
+await sandbox.write_file(path="./file.txt", content="data")  # Error
 ```

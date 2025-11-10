@@ -9,7 +9,7 @@ The `from_snippet()` method allows you to create a new sandbox that shares the *
 
 ---
 
-## `from_snippet(snippet_id: str) -> None`
+## `async from_snippet(playground_snippet_id: str) -> None`
 
 **Description:**  
 Recreates a sandbox using the same file system as a previous sandbox session identified by its snippet ID.
@@ -18,9 +18,9 @@ Recreates a sandbox using the same file system as a previous sandbox session ide
 
 **Parameters:**
 
-| Parameter | Type | Required | Description |
-|------------|------|-----------|-------------|
-| `snippet_id` | `str` | Yes | The snippet ID returned from a previous `create()` call. |
+| Parameter               | Type  | Required | Description                                                                                    |
+| ----------------------- | ----- | -------- | ---------------------------------------------------------------------------------------------- |
+| `playground_snippet_id` | `str` | Yes      | The snippet ID returned from a previous `create()` call (use `result['playgroundSnippetId']`). |
 
 ---
 
@@ -32,26 +32,33 @@ Recreates a sandbox using the same file system as a previous sandbox session ide
 ### **Example**
 
 ```python
+import asyncio
 from fermion_sandbox import Sandbox
 
-# --- Session 1: Create a persistent sandbox ---
-sandbox1 = Sandbox(api_key="your-api-key")
+async def main():
+    # --- Session 1: Create a persistent sandbox ---
+    sandbox1 = Sandbox(api_key="your-api-key")
 
-# Create a sandbox with persistent filesystem
-snippet_id = sandbox1.create(should_backup_filesystem=True)
+    # Create a sandbox with persistent filesystem
+    result = await sandbox1.create(should_backup_filesystem=True)
+    snippet_id = result['playgroundSnippetId']
 
-# Write a file to the sandbox
-sandbox1.write_file(path="~/data.txt", content="saved")
+    # Write a file to the sandbox
+    await sandbox1.write_file(path="/home/damner/data.txt", content="saved")
 
-# Disconnect but keep the filesystem backed up
-sandbox1.disconnect()
+    # Disconnect but keep the filesystem backed up
+    await sandbox1.disconnect()
 
-# --- Session 2: Resume using the same filesystem ---
-sandbox2 = Sandbox(api_key="your-api-key")
+    # --- Session 2: Resume using the same filesystem ---
+    sandbox2 = Sandbox(api_key="your-api-key")
 
-# Reconnect using the saved snippet ID
-sandbox2.from_snippet(snippet_id)
+    # Reconnect using the saved snippet ID
+    await sandbox2.from_snippet(playground_snippet_id=snippet_id)
 
-# Read the previously saved file
-file_content = sandbox2.get_file("~/data.txt")
-print(file_content)  # Output: "saved"
+    # Read the previously saved file
+    response = await sandbox2.get_file("/home/damner/data.txt")
+    file_content = response.text
+    print(file_content)  # Output: "saved"
+
+asyncio.run(main())
+```

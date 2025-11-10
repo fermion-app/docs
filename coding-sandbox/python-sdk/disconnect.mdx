@@ -11,7 +11,7 @@ The `disconnect()` method gracefully terminates your active sandbox session by c
 
 ---
 
-### `disconnect() -> None`
+### `async disconnect() -> None`
 
 **Description:**  
 Gracefully terminates your active sandbox session and releases all underlying resources.
@@ -31,16 +31,20 @@ _None_
 ### **Example**
 
 ```python
+import asyncio
 from fermion_sandbox import Sandbox
 
-# Initialize and create a new sandbox
-sandbox = Sandbox(api_key="your-api-key")
-sandbox.create(should_backup_filesystem=False)
+async def main():
+    # Initialize and create a new sandbox
+    sandbox = Sandbox(api_key="your-api-key")
+    await sandbox.create(should_backup_filesystem=False)
 
-# Perform your tasks
-result = sandbox.run_command(cmd="python3", args=["--version"])
-print("Python version:", result["stdout"])
+    # Perform your tasks
+    result = await sandbox.run_command(cmd="python3", args=["--version"])
+    print("Python version:", result.stdout)
 
-# Always clean up when finished
-sandbox.disconnect()
-print("Sandbox disconnected successfully.")
+    # Always clean up when finished
+    await sandbox.disconnect()
+    print("Sandbox disconnected successfully.")
+
+asyncio.run(main())

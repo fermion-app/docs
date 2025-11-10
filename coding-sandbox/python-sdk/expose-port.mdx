@@ -15,7 +15,7 @@ This allows you to preview, test, and share live web apps or APIs running within
 
 ---
 
-### `expose_port(port: int) -> str`
+### `async expose_port(port: Literal[3000, 1337, 1338]) -> str`
 
 **Description:**  
 Returns the public HTTPS URL for a specific port inside the sandbox.  
@@ -27,7 +27,7 @@ Currently, Fermion supports public exposure for ports **3000**, **1337**, and **
 
 | Parameter | Type | Required | Description |
 |------------|------|-----------|-------------|
-| `port` | `int` | Yes | Port number (must be one of `3000`, `1337`, or `1338`) |
+| `port` | `Literal[3000, 1337, 1338]` | Yes | Port number (must be one of `3000`, `1337`, or `1338`) |
 
 ---
 
@@ -39,18 +39,19 @@ Currently, Fermion supports public exposure for ports **3000**, **1337**, and **
  **Example - Start and expose a Node.js server**
 
 ```python
+import asyncio
 import time
 from fermion_sandbox import Sandbox
 import requests
 
-sandbox = Sandbox(api_key="your-api-key")
-sandbox.create(should_backup_filesystem=False)
+async def main():
+    sandbox = Sandbox(api_key="your-api-key")
+    await sandbox.create(should_backup_filesystem=False)
 
-# Write a simple Node.js server
-
-sandbox.write_file(
-    path="~/server.js",
-    content="""
+    # Write a simple Node.js server
+    await sandbox.write_file(
+        path="/home/damner/server.js",
+        content="""
 const http = require('http');
 http.createServer((req, res) => {
   res.writeHead(200, {'Content-Type': 'text/plain'});
@@ -59,29 +60,30 @@ http.createServer((req, res) => {
   console.log('Server running on port 3000');
 });
 """
-)
+    )
 
+    # Run the server in the background with streaming output
+    server_task = asyncio.create_task(
+        sandbox.run_streaming_command(
+            cmd="node",
+            args=["/home/damner/server.js"],
+            on_stdout=lambda data: print("[stdout]", data.strip())
+        )
+    )
 
-# Run the server in the background with streaming output
-sandbox.run_streaming_command(
-    cmd="node",
-    args=["server.js"],
-    on_stdout=lambda data: print("[stdout]", data.strip())
-)
+    # Wait briefly for the server to start
+    await asyncio.sleep(2)
 
-# Wait briefly for the server to start
-time.sleep(2)
+    # Retrieve the public HTTPS URL for the exposed port
+    url = await sandbox.expose_port(3000)
+    print("Access your server at:", url)
+    # Example output: https://abc123xyz-3000.run-code.com
 
-# Retrieve the public HTTPS URL for the exposed port
-url = sandbox.expose_port(3000)
-print("Access your server at:", url)
-# Example output: https://abc123xyz-3000.run-code.com
+    # Test the server.
+    response = requests.get(url)
+    print(response.text)  # Output: Hello from Fermion!
 
-# Test the server.
-response = requests.get(url)
-print(response.text)  # Output: Hello from Fermion!
-
-
+asyncio.run(main())
 ```
 
 

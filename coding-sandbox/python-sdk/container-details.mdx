@@ -9,7 +9,7 @@ The `get_container_details()` method provides low-level connection information f
 
 ---
 
-### `get_container_details() -> Optional[dict[str, str]]`
+### `get_container_details() -> Optional[ContainerDetails]`
 
 **Description:**  
 Returns container connection details, including the subdomain and secure access token.  
@@ -23,29 +23,29 @@ _None_
 ---
 
 **Returns:**
-```python
-{
-  "subdomain": str,
-  "playground_container_access_token": str
-} or None
-```
+`ContainerDetails` object or `None`. The `ContainerDetails` object has the following attributes:
+- `subdomain: str` - Container subdomain
+- `playground_container_access_token: str` - Secure access token
 
 **Example**
 
 ```python
+import asyncio
 from fermion_sandbox import Sandbox
 
-sandbox = Sandbox(api_key="your-api-key")
-sandbox.create(should_backup_filesystem=False)
+async def main():
+    sandbox = Sandbox(api_key="your-api-key")
+    await sandbox.create(should_backup_filesystem=False)
 
-details = sandbox.get_container_details()
+    details = sandbox.get_container_details()
 
-if details:
-    print("Subdomain:", details["subdomain"])
-    print("Access Token:", details["playground_container_access_token"])
-else:
-    print("No active container connection.")
+    if details:
+        print("Subdomain:", details.subdomain)
+        print("Access Token:", details.playground_container_access_token)
+    else:
+        print("No active container connection.")
 
+asyncio.run(main())
 ```
 <Warning>
 The access token is sensitive. Do not expose it in logs or UI.

@@ -13,7 +13,7 @@ This method captures both `stdout` and `stderr` once the command completes. Beca
 
 ---
 
-### `run_command(cmd: str, args: Optional[List[str]] = None) -> dict`
+### `async run_command(cmd: str, args: Optional[List[str]] = None) -> CommandResult`
 
 **Description:**  
 Executes a short command (< 5 seconds) and returns its standard output and standard error.  
@@ -32,30 +32,32 @@ For longer-running or streaming processes, use `run_streaming_command()` instead
 
 **Returns:**
 
-```python
-{
-  "stdout": str,  # Standard output
-  "stderr": str   # Standard error
-}
-```
+`CommandResult` object with the following attributes:
+- `stdout: str` - Standard output
+- `stderr: str` - Standard error
+- `exit_code: int` - Exit code (defaults to 0)
 
 
 **Example:**
 
 ```python
+import asyncio
 from fermion_sandbox import Sandbox
 
-sandbox = Sandbox(api_key="your-api-key")
-sandbox.create(should_backup_filesystem=False)
+async def main():
+    sandbox = Sandbox(api_key="your-api-key")
+    await sandbox.create(should_backup_filesystem=False)
 
-# Run a simple shell command
-result = sandbox.run_command(cmd="pwd")
+    # Run a simple shell command
+    result = await sandbox.run_command(cmd="pwd")
 
-print("Current directory:", result["stdout"])
+    print("Current directory:", result.stdout)
+    print("Exit code:", result.exit_code)
 
+asyncio.run(main())
 ```
 
 **Limitations:**
 - **5 second maximum** : Command will timeout
 - No streaming - must wait for completion
-- No exit code returned (use `runStreamingCommand` if you need it)
+- Exit code is always 0 for this method (use `run_streaming_command()` if you need accurate exit codes)

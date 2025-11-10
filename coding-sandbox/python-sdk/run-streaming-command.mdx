@@ -11,7 +11,7 @@ Unlike `run_command()`, this method does not block until completion — it allow
 
 ---
 
-### `run_streaming_command() -> dict`
+### `async run_streaming_command(cmd: str, args: Optional[List[str]] = None, stdin: Optional[str] = None, on_stdout: Optional[Callable[[str], None]] = None, on_stderr: Optional[Callable[[str], None]] = None) -> CommandResult`
 
 **Description:**  
 Executes a long-running command inside the sandbox and streams output in real time. Callbacks are triggered as new stdout or stderr data chunks arrive.
@@ -23,7 +23,7 @@ Executes a long-running command inside the sandbox and streams output in real ti
 | Parameter | Type | Required | Description |
 |------------|------|-----------|-------------|
 | `cmd` | `str` |  Yes | Command to execute (e.g., `"npm"`, `"python3"`) |
-| `args` | `List[str]` |  Yes | List of command arguments |
+| `args` | `List[str]` |  No | List of command arguments (defaults to empty list) |
 | `stdin` | `str` |  No | Optional standard input to send to the command |
 | `on_stdout` | `Callable[[str], None]` |  No | Callback function invoked when stdout data arrives |
 | `on_stderr` | `Callable[[str], None]` |  No | Callback function invoked when stderr data arrives |
@@ -32,40 +32,44 @@ Executes a long-running command inside the sandbox and streams output in real ti
 
 **Returns:**
 
-```python
-{
-  "stdout": str,   # Complete accumulated output
-  "stderr": str,   # Complete accumulated error output
-  "exit_code": int # Process exit code (0 = success)
-}
-```
+`CommandResult` object with the following attributes:
+- `stdout: str` - Complete accumulated output
+- `stderr: str` - Complete accumulated error output
+- `exit_code: int` - Process exit code (0 = success)
 
 **Example**
 
 ```python
+import asyncio
+from fermion_sandbox import Sandbox
 
-def handle_stdout(data: str):
-    print("[stdout]", data.strip())
+async def main():
+    sandbox = Sandbox(api_key="your-api-key")
+    await sandbox.create(should_backup_filesystem=False)
 
-def handle_stderr(data: str):
-    print("[stderr]", data.strip())
+    def handle_stdout(data: str):
+        print("[stdout]", data.strip())
 
-result = sandbox.run_streaming_command(
-    cmd="npm",
-    args=["install", "express"],
-    on_stdout=handle_stdout,
-    on_stderr=handle_stderr
-)
+    def handle_stderr(data: str):
+        print("[stderr]", data.strip())
 
-print("Exit code:", result["exit_code"])
+    result = await sandbox.run_streaming_command(
+        cmd="npm",
+        args=["install", "express"],
+        on_stdout=handle_stdout,
+        on_stderr=handle_stderr
+    )
 
-## With stdin
-result = sandbox.run_streaming_command(
-    cmd="python3",
-    args=["-c", 'import sys; [print(line.strip()) for line in sys.stdin]'],
-    stdin="Hello from stdin\n"
-)
+    print("Exit code:", result.exit_code)
 
-print("Output:", result["stdout"])
+    # With stdin
+    result = await sandbox.run_streaming_command(
+        cmd="python3",
+        args=["-c", 'import sys; [print(line.strip()) for line in sys.stdin]'],
+        stdin="Hello from stdin\n"
+    )
 
+    print("Output:", result.stdout)
+
+asyncio.run(main())
 ```
