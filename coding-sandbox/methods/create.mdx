@@ -29,23 +29,23 @@ Creates and provisions a new sandbox container. This process includes:
 | gitRepoUrl | string |  No | undefined | GitHub/GitLab repository URL to clone on startup |
 
 **Returns:**
-`Promise<string>` - Resolves with the playground snippet ID (save this to start another container with same file system later)
+`Promise<{ playgroundSnippetId: string }>` - Resolves with the playground snippet ID (save this to start another container with same file system later)
 
 **Example:**
 ```typescript
 // Basic ephemeral sandbox
-const snippetId = await sandbox.create({
+const { playgroundSnippetId } = await sandbox.create({
   shouldBackupFilesystem: false
 })
 
 // Persistent sandbox
-const snippetId = await sandbox.create({
+const { playgroundSnippetId } = await sandbox.create({
   shouldBackupFilesystem: true
 })
-console.log('Save this ID:', snippetId)
+console.log('Save this ID:', playgroundSnippetId)
 
 // With git repository
-const snippetId = await sandbox.create({
+const { playgroundSnippetId } = await sandbox.create({
   shouldBackupFilesystem: true,
   gitRepoUrl: 'https://github.com/username/repo.git'
 })

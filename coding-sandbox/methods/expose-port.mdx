@@ -55,8 +55,5 @@ const url = await sandbox.exposePort(3000)
 console.log('Access your server at:', url)
 // Output: https://abc123xyz-3000.run-code.com
 
-// Test it
-const response = await fetch(url)
-const text = await response.text()
-console.log(text) // 'Hello from Fermion!'
+await new Promise(r => setTimeout(r, 30000)) // Wait for 30 seconds
 ```

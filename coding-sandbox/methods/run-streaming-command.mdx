@@ -45,11 +45,19 @@ console.log('Exit code:', result.exitCode)
 
 // With stdin
 const result = await sandbox.runStreamingCommand({
-  cmd: 'node',
-  args: ['-e', 'process.stdin.on("data", d => console.log(d.toString()))'],
-  stdin: 'Hello from stdin\n'
+	cmd: 'node',
+	args: ['-e', 'process.stdin.on("data", d => console.log(d.toString()))'],
+	stdin: 'Hello from stdin\n'
 })
 ```
 
 **Path Handling:**
-- **Command arguments**: You can use `~/` shorthand (e.g., `~/file.js`) as the shell automatically expands it
+
+When passing file paths or directory paths as command arguments, you can use the `~/` shorthand notation, which the shell automatically expands to the user's home directory (`/home/damner`).
+
+**Examples:**
+
+-   `~/file.js` expands to `/home/damner/file.js`
+-   `~/project/script.sh` expands to `/home/damner/project/script.sh`
+-   `~/code/app.py` expands to `/home/damner/code/app.py`
+
