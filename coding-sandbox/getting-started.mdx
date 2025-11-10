@@ -108,22 +108,22 @@ async function main() {
     // Write a file
     console.log('\nWriting hello.js...')
     await sandbox.writeFile({
-      path: '~/hello.js',
+      path: '/home/damner/hello.js',
       content: 'console.log("Hello from Fermion Sandbox!")'
     })
     console.log('File written')
 
-    // Execute the file
+    // Execute the file (~/ works in commands, shell expands it)
     console.log('\nExecuting hello.js...')
     const output = await sandbox.runCommand({
       cmd: 'node',
-      args: ['hello.js']
+      args: ['~/hello.js']
     })
     console.log('Output:', output.stdout.trim())
 
     // Read the file back
     console.log('\nReading hello.js...')
-    const fileResponse = await sandbox.getFile('~/hello.js')
+    const fileResponse = await sandbox.getFile('/home/damner/hello.js')
     const fileContent = await fileResponse.text()
     console.log('File contents:', fileContent)
 

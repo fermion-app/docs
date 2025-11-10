@@ -5,10 +5,9 @@ description: 'Expose a sandbox port publicly over HTTPS and access live web serv
 icon: globe
 ---
 
+The `exposePort()` method provides a **public HTTPS URL** that maps directly to a specific port running inside your sandbox container. Fermion automatically supports ports **3000**, **1337**, and **1338**, allowing you to host web servers, APIs, or other services securely and access them from anywhere.
 
-The `exposePort()` method provides a **public HTTPS URL** that maps directly to a specific port running inside your sandbox container. Fermion automatically supports ports **3000**, **1337**, and **1338**, allowing you to host web servers, APIs, or other services securely and access them from anywhere.  
-
-When you start a server inside your sandbox, using commands like `node server.js` or `npm run dev`, you can call `exposePort(port)` to instantly retrieve a URL in the format `https://{subdomain}-{port}.run-code.com`. This enables you to preview, test, and share live services running within your sandbox without any manual networking setup or tunneling.  
+When you start a server inside your sandbox, using commands like `node server.js` or `npm run dev`, you can call `exposePort(port)` to instantly retrieve a URL in the format `https://{subdomain}-{port}.run-code.com`. This enables you to preview, test, and share live services running within your sandbox without any manual networking setup or tunneling.
 
 ### `exposePort(port)`
 
@@ -25,11 +24,12 @@ Returns the public HTTPS URL for a specific port in the sandbox. The sandbox aut
 `Promise<string>` - Public HTTPS URL (format: `https://{subdomain}-{port}.run-code.com`)
 
 **Example:**
+
 ```typescript
 // Start a server
 await sandbox.writeFile({
-  path: '~/server.js',
-  content: `
+	path: '/home/damner/server.js',
+	content: `
     const http = require('http');
     http.createServer((req, res) => {
       res.writeHead(200, {'Content-Type': 'text/plain'});
@@ -40,11 +40,11 @@ await sandbox.writeFile({
   `
 })
 
-// Run server in background
+// Run server in background (~/ works in commands, shell expands it)
 sandbox.runStreamingCommand({
-  cmd: 'node',
-  args: ['server.js'],
-  onStdout: (data) => console.log(data.trim())
+	cmd: 'node',
+	args: ['~/server.js'],
+	onStdout: data => console.log(data.trim())
 })
 
 // Wait a moment for server to start
