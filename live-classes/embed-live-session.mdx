@@ -38,18 +38,30 @@ A signed JWT is required for any user with any permission (host or student) to b
 Here is an example of how to generate this in Node.js:
 
 ```js
-// using a popular package jsonwebtoken from NPM
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
 
 const payloadObject = {
-	liveEventSessionId: 'your-live-session-id',
-	userId: 'unique-user-id'
-}
+    // --- Required fields ---
+    liveEventSessionId: 'session-abc-123',
+    userId: 'user-xyz-789',
 
-const jwtToken = jwt.sign(payloadObject, 'FERMION_API_KEY', {
-	// only required to start the playback the first time
-	expiresIn: '10m'
-})
+    // --- Optional fields ---
+    name: 'Jane Doe',
+    profilePicUrl: 'https://example.com/images/jane-doe-avatar.png',
+
+    // --- Optional object with defaults ---
+    // All playback options are set to false by default
+    playbackOptions: {
+        shouldDisallowRecordedPlaybackIfNotLive: false,
+        shouldPreferOnlyHighDefinitionPlayback: true, // <-- Example of overriding a default
+        shouldHideSeekControls: false
+    }
+};
+
+// Generate the JWT token using the complete payload
+const jwtToken = jwt.sign(payloadObject, YOUR_SECRET_KEY, {
+    expiresIn: '10m'
+});
 ```
 
 1. `liveEventSessionId` field is the same ID that you got when you created session over API.

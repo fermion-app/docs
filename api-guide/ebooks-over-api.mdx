@@ -5,54 +5,40 @@ sidebarTitle: 'eBooks over API'
 icon: book
 ---
 
-Fermion provides a comprehensive API for creating and managing eBook digital products programmatically. This guide walks you through the complete process of uploading, encrypting, and publishing eBooks through our APIs.
+Fermion offers an easy-to-use API for creating and managing eBook digital products. This guide will help you upload, encrypt, and publish eBooks via API step by step.
 
 ## Overview
 
-The eBook API allows you to:
+With Fermion’s eBook API, you can:
 
--   Create eBook products programmatically
--   Upload PDF files securely to cloud storage
--   Automatically encrypt eBooks with DRM protection
--   Configure watermarks and download permissions
--   Update metadata and descriptions
--   Set up pricing plans and publish eBooks
--   Manage multiple versions of the same eBook
+-   Create eBook products through code
+-   Securely upload PDF files to our cloud storage
+-   Apply automatic DRM protection and encryption
+-   Configure watermarks and control download permissions
+-   Update eBook metadata and descriptions
+-   Set up and edit pricing plans
+-   Manage multiple versions of any eBook
 
 ## Prerequisites
 
-Before creating eBooks over API, ensure you have:
+Before you begin, make sure you have:
 
 -   A [valid Fermion API key](/api-guide/introduction#how-to-get-your-api-key)
--   A PDF file ready for upload (your eBook content)
--   Basic understanding of HTTP requests and file uploads
+-   A PDF file ready for upload (your eBook)
+-   Basic familiarity with HTTP requests and file uploads
 
-## How eBook Upload Works
 
-The eBook upload process involves multiple steps to ensure security and proper encryption:
 
-1. **Create Product**: First, create an eBook product record in your school
-2. **Get Upload URL**: Request a secure, time-limited presigned URL for uploading
-3. **Upload PDF**: Upload your PDF file directly to cloud storage using the presigned URL
-4. **Process & Encrypt**: Trigger encryption and DRM protection for the uploaded PDF
-5. **Update Metadata**: Set titles, descriptions, and reader settings
-6. **Add Pricing**: Configure pricing plans (optional)
-7. **Publish**: Change status to Active to make it available to students
 
-<Info>
-	All eBooks are automatically encrypted with AES-128-CBC encryption to prevent unauthorized
-	distribution. You can also enable watermarks to further protect your content.
-</Info>
+<Steps>
 
-## Step 1: Create eBook Product
+<Step title="Create an eBook Product">
 
-Create a new eBook product using the create-ebook-product endpoint.
+Create a new eBook product using the `create-ebook-product` endpoint.
 
-**API name:** `create-ebook-product`
+Refer to the [create-ebook endpoint](/api-reference/product/create-ebook-product) for call details.
 
-Read about [how to call this API endpoint here](/api-reference/product/create-ebook-product)
-
-**Response:**
+**Sample Response:**
 
 ```json
 {
@@ -65,15 +51,16 @@ Read about [how to call this API endpoint here](/api-reference/product/create-eb
 ```
 
 <Note>
-	Save the `slug` returned from this call - you'll need it for all subsequent API calls. The slug
-	is a URL-friendly identifier for your eBook product.
+	Save the `slug` value—it's a unique, URL-friendly ID you’ll use for all later API calls.
 </Note>
 
-## Step 2: Get Presigned Upload URL
+</Step>
 
-Read about [how to call this API endpoint here](/api-reference/product/get-presigned-url-for-ebook-upload)
+<Step title="Get a Presigned Upload URL">
 
-**Response:**
+See the [get-presigned-url-for-ebook-upload](/api-reference/product/get-presigned-url-for-ebook-upload) for details.
+
+**Sample Response:**
 
 ```json
 {
@@ -86,19 +73,21 @@ Read about [how to call this API endpoint here](/api-reference/product/get-presi
 ```
 
 <Warning>
-	The presigned URL expires in **1 hour**. You must upload your PDF file before it expires. If it
-	expires, simply request a new presigned URL.
+	The presigned upload URL will expire in **1 hour**. Be sure to upload your PDF before then.
+	If it expires, just request a new upload URL.
 </Warning>
 
-**Important Notes:**
+**Key Points:**
 
--   Save the `r2KeyForOriginalEbookPdf` - you'll need it in Step 3
--   The presigned URL is single-use and time-limited for security
--   Each call generates a new version of your eBook
+-   Save `r2KeyForOriginalEbookPdf`—you’ll need it next
+-   The upload link is one-time and time-limited for security
+-   Requesting a new URL allows you to upload a new version
 
-## Step 3: Upload PDF to Presigned URL
+</Step>
 
-Upload your PDF file directly to the presigned URL using a PUT request.
+<Step title="Upload the PDF via Presigned URL">
+
+Upload your PDF using a HTTP PUT request to the URL from Step 2.
 
 <CodeGroup>
 
@@ -139,17 +128,18 @@ response = requests.put(
 </CodeGroup>
 
 <Tip>
-	Make sure to use a PUT request (not POST) and set the Content-Type header to `application/pdf`
-	for proper file upload.
+	Use the HTTP PUT method (not POST) and make sure <code>Content-Type</code> is set to <code>application/pdf</code> for correct uploads.
 </Tip>
 
-## Step 4: Process and Encrypt the Uploaded eBook
+</Step>
 
-After uploading the PDF, trigger the processing and encryption.
+<Step title="Process and Encrypt the Uploaded eBook">
 
-Read about [how to call this API endpoint here](/api-reference/product/process-uploaded-ebook)
+After uploading your PDF, trigger processing and encryption.
 
-**Response:**
+See the [process-uploaded-ebook](/api-reference/product/process-uploaded-ebook).
+
+**Sample Response:**
 
 ```json
 {
@@ -160,24 +150,25 @@ Read about [how to call this API endpoint here](/api-reference/product/process-u
 }
 ```
 
-**What Happens During Processing:**
+**What Processing Does:**
 
-1. Downloads your uploaded PDF from storage
-2. Encrypts the file using AES-128-CBC encryption
-3. Generates unique encryption keys and initialization vectors
-4. Stores the encrypted version in secure storage
-5. Updates the product configuration with encryption metadata
+1. Downloads your PDF from storage
+2. Encrypts the file with AES-128-CBC
+3. Generates encryption keys and initialization vectors
+4. Saves the encrypted eBook securely
+5. Logs encryption metadata to your product
 
 <Info>
-	Save the `ebookVersionIndex` - you'll use this to activate this version of the eBook when
-	updating metadata.
+	Save the `ebookVersionIndex`—you’ll need it to activate (publish) this version.
 </Info>
 
-## Step 5: Update eBook Metadata and Settings
+</Step>
 
-Read about [how to call this API endpoint here](/api-reference/product/update-ebook-metadata)
+<Step title="Update eBook Metadata and Reader Settings">
 
-**Request Body:**
+See API docs: [update-ebook-metadata](/api-reference/product/update-ebook-metadata)
+
+**Sample Request Body:**
 
 ```json
 {
@@ -192,50 +183,61 @@ Read about [how to call this API endpoint here](/api-reference/product/update-eb
 }
 ```
 
-**Field Descriptions:**
+**Field Breakdown:**
 
--   `title` (optional): Display title for the eBook
--   `shortDescription` (optional): Brief description for listings
--   `longDescription` (optional): Detailed description for the product page
--   `activeVersionIndex` (optional): Which version to make active (from Step 4)
--   `isBookDownloadable` (optional): Allow users to download the PDF file
--   `shouldEnableCenterWatermark` (optional): Display watermark in center of pages
--   `shouldEnableHeaderWatermark` (optional): Display watermark in page headers
+-   `title` (optional): eBook display title
+-   `shortDescription` (optional): Summary for listings
+-   `longDescription` (optional): Main description on product page
+-   `activeVersionIndex` (optional): Which uploaded version readers see
+-   `isBookDownloadable` (optional): Allow download of PDF file
+-   `shouldEnableCenterWatermark` (optional): Show watermark in middle of pages
+-   `shouldEnableHeaderWatermark` (optional): Show watermark in headers
 
 <Warning>
-	**Important:** You must set `activeVersionIndex` to the version number returned from Step 4 to
-	activate the uploaded eBook. Only processed versions (status: `uploaded-and-processed`) can be
-	set as active.
+	**Important:** Set `activeVersionIndex` to the version index returned from Step 4 to activate your upload.
+	Only processed eBook versions (`uploaded-and-processed`) can be marked active.
 </Warning>
 
-### Watermark Settings
+### Watermark Options
 
-Watermarks help protect your content from unauthorized distribution:
+Watermarks protect your content from unauthorized sharing:
 
--   **Center Watermark**: Displays user's email or identifier in the center of each page
--   **Header Watermark**: Shows user information in the header area
--   Both watermarks are applied dynamically per user to track unauthorized sharing
+-   **Center Watermark**: User’s email/ID in the center of every page
+-   **Header Watermark**: User info shown in each PDF header
+-   Watermarks are personalized for each downloader to trace misuse
 
-### Download Permissions
+### Controlling Download Access
 
--   `isBookDownloadable: true` - Users can download the PDF to read offline
--   `isBookDownloadable: false` - Users can only read online in the browser
+-   <code>isBookDownloadable: true</code> — Allow PDF downloads for offline reading
+-   <code>isBookDownloadable: false</code> — Restrict reading to browser-only
 
-## Step 6: Add Pricing (Optional)
+</Step>
 
-Use the existing digital product pricing API to add pricing plans to your eBook.
+<Step title="Add Pricing (Optional)">
 
-Read about [how to call this API endpoint here](/api-reference/product/create-custom-pricing-plan-for-a-product)
+To set up paid access, use the digital product pricing API.
 
-## Complete Example Workflow
+See docs: [create-custom-pricing-plan-for-a-product](/api-reference/product/create-custom-pricing-plan-for-a-product)
 
-Here's a complete example using JavaScript/Node.js:
+</Step>
+
+<Step title="Publish & Share">
+
+After completing the above, your eBook is ready to be published by setting it to "Active."
+
+</Step>
+
+</Steps>
+
+## Complete Example: JavaScript/Node.js Workflow
+
+Below is a full eBook upload example using Node.js:
 
 ```javascript
 const API_KEY = 'your-api-key'
 const BASE_URL = 'https://your-school.fermion.app/api'
 
-// Step 1: Create eBook product
+// Step 1: Create the eBook product
 const createResponse = await fetch(`${BASE_URL}/public/create-ebook-product`, {
 	method: 'POST',
 	headers: {
@@ -251,7 +253,7 @@ const createResponse = await fetch(`${BASE_URL}/public/create-ebook-product`, {
 
 const { slug, fermionDigitalProductId } = (await createResponse.json()).data
 
-// Step 2: Get presigned upload URL
+// Step 2: Request presigned upload URL
 const uploadUrlResponse = await fetch(`${BASE_URL}/public/get-presigned-url-for-ebook-upload`, {
 	method: 'POST',
 	headers: {
@@ -263,7 +265,7 @@ const uploadUrlResponse = await fetch(`${BASE_URL}/public/get-presigned-url-for-
 
 const { presignedUrl, r2KeyForOriginalEbookPdf } = (await uploadUrlResponse.json()).data
 
-// Step 3: Upload PDF file
+// Step 3: Upload the PDF
 const pdfBuffer = fs.readFileSync('./my-ebook.pdf')
 await fetch(presignedUrl, {
 	method: 'PUT',
@@ -271,7 +273,7 @@ await fetch(presignedUrl, {
 	body: pdfBuffer
 })
 
-// Step 4: Process and encrypt
+// Step 4: Process and encrypt the PDF
 const processResponse = await fetch(`${BASE_URL}/public/process-uploaded-ebook`, {
 	method: 'POST',
 	headers: {
@@ -286,7 +288,7 @@ const processResponse = await fetch(`${BASE_URL}/public/process-uploaded-ebook`,
 
 const { ebookVersionIndex } = (await processResponse.json()).data
 
-// Step 5: Update metadata and activate
+// Step 5: Update metadata and activate version
 await fetch(`${BASE_URL}/public/update-ebook-metadata`, {
 	method: 'POST',
 	headers: {
@@ -307,81 +309,92 @@ await fetch(`${BASE_URL}/public/update-ebook-metadata`, {
 console.log(`eBook created successfully! Product ID: ${fermionDigitalProductId}`)
 ```
 
-## Managing Multiple Versions
+## Managing Multiple eBook Versions
 
-You can upload multiple versions of the same eBook (e.g., for updates or revisions):
+You can upload new versions (such as updates or corrections) for the same eBook:
 
-1. Call `get-presigned-url-for-ebook-upload` again to get a new upload URL
-2. Upload the updated PDF file
-3. Call `process-uploaded-ebook` to encrypt the new version
-4. Update `activeVersionIndex` to switch to the new version
+<Steps>
+
+<Step title="Get New Presigned Upload URL">
+Call <code>get-presigned-url-for-ebook-upload</code> again to get a fresh upload URL.
+</Step>
+<Step title="Upload New PDF">
+Upload your new PDF via the new URL.
+</Step>
+<Step title="Process and Encrypt">
+Process and encrypt the new version.
+</Step>
+<Step title="Update Version Index">
+Update <code>activeVersionIndex</code> via the metadata API to switch to the new version.
+</Step>
+
+</Steps>
 
 <Tip>
-	Keep older versions available by not deleting them. You can switch between versions at any time
-	by updating the `activeVersionIndex`.
+	Don't delete past versions—you can switch between them any time by changing <code>activeVersionIndex</code>.
 </Tip>
 
 ## Best Practices
 
 ### Security
 
--   Always use HTTPS for all API calls and file uploads
--   Keep your API key secure and never expose it in client-side code
--   Enable watermarks for premium content to discourage piracy
--   Consider disabling downloads (`isBookDownloadable: false`) for high-value content
+-   Always use HTTPS for every API request and upload
+-   Never expose your API key in frontend or client code
+-   Enable watermarks to discourage piracy for premium content
+-   Disable file downloads (`isBookDownloadable: false`) for sensitive material
 
 ### Performance
 
--   Upload large PDF files directly to the presigned URL (not through your server)
--   Request a new presigned URL if upload fails - don't retry with an expired URL
--   Process uploads asynchronously if integrating into a user-facing application
+-   Upload large PDFs directly to storage with the presigned URL (not through your own server)
+-   If the upload fails or times out, request a new presigned URL and re-upload (do not reuse old links)
+-   Integrate uploads asynchronously if building user-facing dashboards
 
-### Content Management
+### Content Organization
 
--   Use descriptive `ebookName` values for easy identification in your system
--   Keep eBooks in `Draft` status while setting up metadata and pricing
--   Test the eBook reader experience before changing status to `Active`
--   Use `shortDescription` for SEO and discovery, `longDescription` for detailed info
+-   Set clear and descriptive `ebookName` values for easy identification
+-   Keep products in `Draft` mode during setup and review
+-   Review the eBook reader experience before publishing as “Active”
+-   Use `shortDescription` for SEO/discovery and `longDescription` for full details
 
 ## Troubleshooting
 
 ### "Uploaded eBook not found" Error
 
-This error occurs in Step 4 if:
+You may see this in Step 4 if:
 
--   The PDF upload in Step 3 failed or didn't complete
--   The `r2KeyForOriginalEbookPdf` doesn't match the presigned URL used
--   The presigned URL expired before upload completed
+-   The PDF failed to upload, or upload was incomplete
+-   The `r2KeyForOriginalEbookPdf` you used does not match the uploaded file
+-   The presigned upload URL expired
 
-**Solution:** Request a new presigned URL and re-upload the PDF file.
+**Fix:** Request a new presigned URL and upload your PDF again.
 
 ### "You can only mark an uploaded book as active" Error
 
-This happens when trying to set `activeVersionIndex` to a version that hasn't been processed yet.
+This occurs if you try to activate a version that hasn't been processed.
 
-**Solution:** Ensure you completed Step 4 (process-uploaded-ebook) before setting the activeVersionIndex.
+**Fix:** Complete Step 4 (process-uploaded-ebook), then set `activeVersionIndex`.
 
-### Upload Times Out
+### Upload Timed Out
 
-Large PDF files may take time to upload.
+Large PDFs can sometimes time out or stall.
 
-**Solution:**
+**Fixes:**
 
--   Ensure stable internet connection
--   Increase timeout settings in your HTTP client
--   Consider compressing large PDFs before upload
+-   Use a stable and fast internet connection
+-   Adjust timeout settings in your HTTP client or tool
+-   Compress or optimize PDFs before uploading
 
-### Presigned URL Expired
+### Expired Upload URL
 
-**Solution:** Simply request a new presigned URL - there's no limit to how many you can generate.
+**Fix:** Simply request a new presigned URL using the API—there’s no limit to how many times you can do this.
 
 ## Getting Help
 
-If you encounter issues not covered in this guide:
+If you get stuck or have an edge-case issue:
 
--   Check the [API Reference](https://docs.fermion.app/api-reference) for detailed endpoint documentation
--   Review the [Webhooks Guide](https://docs.fermion.app/webhooks) for tracking eBook purchases
--   Contact support with your `fermionDigitalProductId` for product-specific issues
+-   See the [API Reference](https://docs.fermion.app/api-reference) for endpoint details
+-   Check the [Webhooks Guide](https://docs.fermion.app/webhooks) to track eBook purchases
+-   For product-specific issues, contact support and include your `fermionDigitalProductId`
 
 ## Next Steps
 
