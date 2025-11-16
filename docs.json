@@ -150,11 +150,12 @@
 						"group": "Manage Settings",
 						"pages": [
 							{
-								"group": "School Settings",
+								"group": "School settings",
 								"icon": "gear",
 								"pages": [
 									"manage-settings/change-school-settings",
 									"manage-settings/security-settings",
+									"manage-settings/password-protect",
 									"manage-settings/live-and-recorded-settings",
 									"manage-settings/legal-and-compliance",
 									"manage-settings/additional-settings",
