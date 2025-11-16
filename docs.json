@@ -65,7 +65,14 @@
 							"setup-pricing/setup-emi",
 							"setup-pricing/add-coupon-codes",
 							"setup-pricing/checkout-fields",
-							"setup-pricing/payment-gateway",
+							{
+								"group": "Collect Payments",
+								"icon": "dollar",
+								"pages": [
+									"setup-pricing/payment-gateway",
+									"setup-pricing/custom-payment-gateway"
+								]
+							},
 							"setup-pricing/custom-payment-links",
 							"setup-pricing/common-faqs"
 						]
