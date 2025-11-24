@@ -51,9 +51,16 @@
 							"setting-up-course/assignments",
 							"setting-up-course/tags",
 							"setting-up-course/completion-certificate",
-							"setting-up-course/announcements",
-							"setting-up-course/course-analytics",
-							"setting-up-course/bundle",
+						"setting-up-course/announcements",
+						{
+							"group": "Course Analytics",
+							"icon": "chart-line",
+							"pages": [
+								"setting-up-course/detailed-student-report",
+								"setting-up-course/overall-progress"
+							]
+						},
+						"setting-up-course/bundle",
 							"setting-up-course/course-settings",
 							"setting-up-course/ai-tutor",
 							"setting-up-course/common-faqs"
