@@ -55,15 +55,9 @@ const payloadObject = {
 }
 
 // Generate the JWT token using the complete payload
-<<<<<<< HEAD
 const jwtToken = jwt.sign(payloadObject, FERMION_API_KEY, {
-    expiresIn: '10m'
-});
-=======
-const jwtToken = jwt.sign(payloadObject, YOUR_SECRET_KEY, {
 	expiresIn: '10m'
 })
->>>>>>> ecf792c (docs: improve live embed session docs)
 ```
 
 1. `liveEventSessionId` field is the same ID that you got when you created session over API.
