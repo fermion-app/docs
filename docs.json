@@ -283,7 +283,7 @@
 						"pages": [
 							"live-classes/what-are-live-classes",
 							{
-								"group": "Start",
+								"group": "Where can you use?",
 								"icon": "play-circle",
 								"pages": [
 									"live-classes/setup-live-class",
@@ -292,7 +292,7 @@
 								]
 							},
 							{
-								"group": "Features",
+								"group": "Core features",
 								"icon": "sparkle",
 								"expanded": true,
 								"pages": [
@@ -300,11 +300,11 @@
 									"live-classes/pin-a-tile",
 									"live-classes/live-chat",
 									"live-classes/whiteboard",
+									"live-classes/livestream-settings",
 									"live-classes/recording-and-captions",
 									"live-classes/drm-and-watermarking"
 								]
 							},
-							"live-classes/livestream-settings",
 							"live-classes/embed-live-session"
 						]
 					},

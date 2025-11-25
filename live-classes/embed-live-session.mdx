@@ -5,10 +5,6 @@ sidebarTitle: 'External Embed'
 description: 'Learn about embedding live sessions externally and customizing the look and feel for them'
 ---
 
-This guide will introduce you to the ability for embedding Fermion live sessions into external websites using the Fermion SDK, or manual iframe embedding.
-
-## Embedding sessions externally
-
 Fermion allows you to embed live calls externally using a simple integration. This is useful if you wish to add realtime calls on your own website and do not wish to use Fermion managed LMS.
 
 There are a few steps you need to do in order to embed a session externally.
@@ -38,30 +34,36 @@ A signed JWT is required for any user with any permission (host or student) to b
 Here is an example of how to generate this in Node.js:
 
 ```js
-import jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken'
 
 const payloadObject = {
-    // --- Required fields ---
-    liveEventSessionId: 'your-live-session-id',
-    userId: 'your-internal-user-id',
+	// --- Required fields ---
+	liveEventSessionId: 'your-live-session-id',
+	userId: 'your-internal-user-id',
 
-    // --- Optional fields ---
-    name: 'Jane Doe',
-    profilePicUrl: 'https://example.com/images/jane-doe-avatar.png',
+	// --- Optional fields ---
+	name: 'Jane Doe',
+	profilePicUrl: 'https://example.com/images/jane-doe-avatar.png',
 
-    // --- Optional object with defaults ---
-    // All playback options are set to false by default
-    playbackOptions: {
-        shouldDisallowRecordedPlaybackIfNotLive: false,
-        shouldPreferOnlyHighDefinitionPlayback: true, // <-- Example of overriding a default
-        shouldHideSeekControls: false
-    }
-};
+	// --- Optional object with defaults ---
+	// All playback options are set to false by default
+	playbackOptions: {
+		shouldDisallowRecordedPlaybackIfNotLive: false,
+		shouldPreferOnlyHighDefinitionPlayback: true, // <-- Example of overriding a default
+		shouldHideSeekControls: false
+	}
+}
 
 // Generate the JWT token using the complete payload
+<<<<<<< HEAD
 const jwtToken = jwt.sign(payloadObject, FERMION_API_KEY, {
     expiresIn: '10m'
 });
+=======
+const jwtToken = jwt.sign(payloadObject, YOUR_SECRET_KEY, {
+	expiresIn: '10m'
+})
+>>>>>>> ecf792c (docs: improve live embed session docs)
 ```
 
 1. `liveEventSessionId` field is the same ID that you got when you created session over API.
@@ -165,3 +167,187 @@ Here's a payload to pass in the API call, that will make a given user, a host in
 Note that you can programmatically control more parts in the user journey (including starting the session/ending the session/adding or removing people from the call), but once you have upgraded someone to be a host, if you refresh the same embed page where you have placed your iframe earlier, you will see that the host will see controls to start the meeting.
 
 Once the meeting is started, the host will be able to turn on camera/mic/whiteboard/screenshare, etc. and also manage students.
+
+## window.postMessage events
+
+When you embed the live session on your domain, the iframe will emit events in real-time through the `window.postMessage` API. You can read more about [`window.postMessage` API here](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage).
+
+These events are emitted from both live WebRTC sessions and recorded video playback. This allows you to track user engagement, respond to session lifecycle changes, and build interactive experiences around your embedded live sessions.
+
+Note that you must not fully rely on events emitted by `window.postMessage` because of security reasons. Please do a server-side validation with our real API endpoint to be sure of the final result. You can use messages from `window.postMessage` to optimistically display results, however, since it is a client-side API, it is possible to hijack the event data by the untrusted user.
+
+You can listen to every postMessage like this:
+
+```js
+window.addEventListener('message', event => {
+	const payload = event.data
+
+	if (payload == null || typeof payload !== 'object' || !('type' in payload)) {
+		// not from fermion
+		return
+	}
+
+	if (payload.type === 'webrtc:livestream-ended') {
+		// handle live session ended
+	}
+})
+```
+
+We also recommend processing `event.data` with zod if you can. Our schemas are strictly typed and are zod-parseable.
+
+Here are the events we emit through `window.postMessage` API:
+
+### webrtc:livestream-ended
+
+This event fires when a live WebRTC session ends (typically when the host ends the session for everyone). Here's a TypeScript type for this event:
+
+```ts
+type Event = {
+	type: 'webrtc:livestream-ended'
+}
+```
+
+Use this event to trigger navigation, show a post-session survey, or redirect users after the live session concludes.
+
+### video:play
+
+This event fires when a user plays the recorded video playback. Note that this event only fires during recorded playback, not during live sessions. Here's a TypeScript type for this event:
+
+```ts
+type Event = {
+	type: 'video:play'
+	durationAtInSeconds: number
+}
+```
+
+The `durationAtInSeconds` field indicates the playback position when the user pressed play. Use this event to track playback engagement and viewing patterns.
+
+### video:pause
+
+This event fires when a user pauses the recorded video playback. Note that this event only fires during recorded playback, not during live sessions. Here's a TypeScript type for this event:
+
+```ts
+type Event = {
+	type: 'video:pause'
+	durationAtInSeconds: number
+}
+```
+
+The `durationAtInSeconds` field indicates the playback position when the user pressed pause. Use this event to track viewing patterns and engagement metrics.
+
+### video:ended
+
+This event fires when the recorded video playback reaches the end. Note that this event only fires during recorded playback, not during live sessions. Here's a TypeScript type for this event:
+
+```ts
+type Event = {
+	type: 'video:ended'
+}
+```
+
+Use this event to trigger completion actions, show the next lesson, or mark the session as completed in your system.
+
+### video:livestream-ended
+
+This event fires when a live stream transitions to VOD (video-on-demand / recorded) mode. Here's a TypeScript type for this event:
+
+```ts
+type Event = {
+	type: 'video:livestream-ended'
+}
+```
+
+Use this event to notify users that the live session has ended but the recording is available for playback. This is different from `webrtc:livestream-ended` as it relates to the HLS stream transitioning from live to recorded mode.
+
+### video:time-updated
+
+This event fires periodically during recorded video playback (every few seconds). Note that this event only fires during recorded playback, not during live sessions. Here's a TypeScript type for this event:
+
+```ts
+type Event = {
+	type: 'video:time-updated'
+	currentTimeInSeconds: number
+}
+```
+
+The `currentTimeInSeconds` field indicates the current playback position. Use this event to track detailed viewing progress, create bookmarks, or show custom overlays. Note that this event fires frequently, so consider throttling or debouncing on the receiving end if you're performing expensive operations.
+
+### Complete TypeScript Type
+
+Here's a complete TypeScript discriminated union type for all live event postMessage events:
+
+```ts
+type LiveEventPostMessageEvent =
+	| { type: 'video:play'; durationAtInSeconds: number }
+	| { type: 'video:pause'; durationAtInSeconds: number }
+	| { type: 'video:ended' }
+	| { type: 'video:livestream-ended' }
+	| { type: 'webrtc:livestream-ended' }
+	| { type: 'video:time-updated'; currentTimeInSeconds: number }
+```
+
+### Important Notes
+
+-   **Video events** (`video:*`) only fire during recorded video playback. If a user is watching the live session in real-time, these events will not be emitted.
+-   **WebRTC events** (`webrtc:*`) only fire during live sessions when users are connected via WebRTC.
+-   The `playbackOptions` object in the JWT token (mentioned in Step 2) controls playback behavior, which affects which events users might see.
+-   Some sessions may have both live and recorded phases. During the live phase, you'll receive WebRTC events. After the session ends and transitions to recorded playback, you'll receive video events.
+
+## Using the Fermion SDK for event handling
+
+If you're using the Fermion SDK (installed via `@fermion-app/sdk`), you don't need to manually set up `window.addEventListener` for postMessage events. The SDK provides a convenient `setupEventListenersOnVideo()` method that handles all the complexity for you.
+
+### Benefits of using the SDK
+
+-   **Type-safe callbacks**: TypeScript definitions ensure you're handling events correctly
+-   **Automatic validation**: The SDK validates incoming events automatically
+-   **Cleaner API**: More intuitive methods instead of manual postMessage parsing
+-   **Built-in cleanup**: Easy disposal of event listeners to prevent memory leaks
+
+### Example usage
+
+```ts
+import { FermionLivestreamVideo } from '@fermion-app/sdk/livestream-video'
+
+const livestream = new FermionLivestreamVideo({
+	liveEventSessionId: 'your-live-session-id',
+	websiteHostname: 'your-domain.fermion.app'
+})
+
+// Set up event listeners
+const events = livestream.setupEventListenersOnVideo()
+
+// Listen for video play event
+events.onVideoPlay(data => {
+	console.log('Video started playing at', data.durationAtInSeconds, 'seconds')
+})
+
+// Listen for video pause event
+events.onVideoPaused(data => {
+	console.log('Video paused at', data.durationAtInSeconds, 'seconds')
+})
+
+// Listen for video ended event
+events.onVideoEnded(() => {
+	console.log('Video playback finished')
+})
+
+// Listen for time updates (fires periodically during playback)
+events.onTimeUpdated(data => {
+	console.log('Current playback position:', data.currentTimeInSeconds, 'seconds')
+})
+
+// Listen for livestream ended event
+events.onLivestreamEnded(data => {
+	if (data.type === 'webrtc') {
+		console.log('Live WebRTC session ended')
+	} else {
+		console.log('Live HLS stream ended (now in VOD mode)')
+	}
+})
+
+// When you're done (e.g., component unmount), clean up the listeners
+events.dispose()
+```
+
+The SDK automatically handles event validation, origin checking, and provides a more developer-friendly API compared to manually listening to postMessage events.
