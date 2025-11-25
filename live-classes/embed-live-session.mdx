@@ -59,7 +59,7 @@ const payloadObject = {
 };
 
 // Generate the JWT token using the complete payload
-const jwtToken = jwt.sign(payloadObject, YOUR_SECRET_KEY, {
+const jwtToken = jwt.sign(payloadObject, FERMION_API_KEY, {
     expiresIn: '10m'
 });
 ```
