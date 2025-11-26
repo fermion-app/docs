@@ -12,7 +12,7 @@ When enabled, the AI tutor appears as a copilot in the bottom-right corner of th
 - **Article**: Reads the article content and supplementary materials
 - **Video**: Utilizes generated video captions and transcripts
 
-You can enable AI tutor for any combination of these content types from **Course Builder → AI tutor**. The AI provides rich, targeted responses to boost student learning and engagement without students needing to switch tabs or wait for instructor replies.
+You can enable AI tutor for any combination of these content types from **Instructor dashboard → Open any course → Select AI tutor from the sidebar**. The AI provides rich, targeted responses to boost student learning and engagement without students needing to switch tabs or wait for instructor replies.
 
 For more information, see [AI tutor](/setting-up-course/ai-tutor).
 
@@ -33,6 +33,38 @@ You can now create and manage digital products-including eBooks (PDF) and downlo
 For step-by-step instructions, see:
 - [eBooks over API](/api-guide/ebooks-over-api)
 - [Downloadable Products over API](/api-guide/downloadable-products-over-api)
+
+## Blog editor LaTeX support
+
+The blog editor now supports LaTeX formatting, allowing you to include mathematical equations and formulas in your blog posts. This enhancement makes it easier to create educational content with complex mathematical notation, scientific formulas, and technical documentation.
+
+For more information on creating and managing blogs, see [Blogs](/custom-landing-pages/blogs).
+
+## Instructor support chatbot
+
+Instructors can now reach out to Fermion support directly through the instructor dashboard using an integrated chatbot. This feature provides quick access to help and support without leaving your workspace, making it easier to get assistance with platform features, troubleshooting, and account-related questions.
+
+The chatbot is accessible directly from your instructor dashboard, providing instant support for common queries and the ability to escalate more complex issues to our support team : [Support channels](/onboarding/support-strategy#support-channels)
+
+## Live stream optimization and animations
+
+We've enhanced the live streaming experience with performance optimizations and smoother animations. These improvements result in faster load times, more responsive controls, and a more polished user interface during live sessions. The optimizations ensure a better experience for both instructors and students, especially in sessions with many participants.
+
+For more information on live classes, see [Live Class on Fermion](/live-classes/what-are-live-classes).
+
+## Customizable live stream iframe embed
+
+The live stream iframe embed is now fully customizable, giving you more control over how embedded live sessions appear on your website. You can customize the appearance, dimensions, and behavior of embedded live sessions to match your site's design and branding.
+
+For detailed instructions on embedding live sessions externally, see [Embedding live session externally](/live-classes/embed-live-session).
+
+## Live stream API enhancements
+
+The live stream API endpoints for creating and updating live sessions have been enhanced to include a new parameter: `shouldAddEveryoneOnStageByDefault`. When set to `true`, this option will automatically add all participants to the stage when they join a live session, up to a maximum of 50 people (the stage capacity limit). This is ideal for group discussions or smaller interactive sessions where seamless communication is needed.
+
+You can use this feature via the following API endpoints:
+- [Create Live Session](https://docs.fermion.app/api-reference/live/create-live-session)
+- [Update Live Event Session](https://docs.fermion.app/api-reference/live/update-live-event-session)
 </Update>
 
 <Update label="October 2025">
