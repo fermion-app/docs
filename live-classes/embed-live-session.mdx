@@ -203,6 +203,18 @@ type Event = {
 
 Use this event to trigger navigation, show a post-session survey, or redirect users after the live session concludes.
 
+### webrtc:left-stage
+
+This event fires when someone leaves the stage during a live WebRTC session. Here's a TypeScript type for this event:
+
+```ts
+type Event = {
+	type: 'webrtc:left-stage'
+}
+```
+
+Use this event to track stage participation, update UI to reflect who's currently on stage, or trigger notifications when participants leave the stage.
+
 ### video:play
 
 This event fires when a user plays the recorded video playback. Note that this event only fires during recorded playback, not during live sessions. Here's a TypeScript type for this event:
@@ -277,6 +289,7 @@ type LiveEventPostMessageEvent =
 	| { type: 'video:ended' }
 	| { type: 'video:livestream-ended' }
 	| { type: 'webrtc:livestream-ended' }
+	| { type: 'webrtc:left-stage' }
 	| { type: 'video:time-updated'; currentTimeInSeconds: number }
 ```
 
