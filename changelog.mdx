@@ -60,11 +60,46 @@ For detailed instructions on embedding live sessions externally, see [Embedding 
 
 ## Live stream API enhancements
 
-The live stream API endpoints for creating and updating live sessions have been enhanced to include a new parameter: `shouldAddEveryoneOnStageByDefault`. When set to `true`, this option will automatically add all participants to the stage when they join a live session, up to a maximum of 50 people (the stage capacity limit). This is ideal for group discussions or smaller interactive sessions where seamless communication is needed.
+The live stream API endpoints for creating and updating live sessions have been enhanced to include a new parameter: `shouldAddEveryoneOnStageByDefault`. When set to `true`, this option will automatically add all participants to the stage when they join a live session, up to a maximum of 50 people (the stage capacity limit).
 
 You can use this feature via the following API endpoints:
 - [Create Live Session](https://docs.fermion.app/api-reference/live/create-live-session)
 - [Update Live Event Session](https://docs.fermion.app/api-reference/live/update-live-event-session)
+
+### Live Stream Embed `window.postMessage` Events
+
+You can programmatically interact with an embedded live stream using `window.postMessage` events. These events enable you to control the embedded player and respond to state changes from your own application.
+
+**Available events include:**
+
+- **`play`**
+  Start or resume the embedded live video.
+  → See [How to control playback](/live-classes/embed-live-session#playback-controls)
+- **`pause`**
+  Pause the currently playing video.
+  → See [Playback controls](/live-classes/embed-live-session#playback-controls)
+- **`toggle-fullscreen`**
+  Switch the embedded video to or from fullscreen mode.
+  → [Read more about fullscreen support](/live-classes/embed-live-session#fullscreen)
+- **`mute`**
+  Mute the audio in the embedded player.
+  → [Mute and unmute events](/live-classes/embed-live-session#audio-controls)
+- **`unmute`**
+  Unmute the audio in the embedded player.
+  → See [Mute and unmute events](/live-classes/embed-live-session#audio-controls)
+- **`get-current-state`**
+  Request the current state (playing, paused, time, etc.) from the embed.
+  → [State and event information](/live-classes/embed-live-session#state-event)
+- **`seek-to`**
+  Seek to a specific time (in seconds) in the video.
+  → [Seeking events and usage](/live-classes/embed-live-session#seeking)
+
+You can find a **full reference and code examples** in [Embedding live session externally > window.postMessage Events](/live-classes/embed-live-session#window-postmessage-events).
+
+These events allow you to build custom controls, synchronize multiple players, or react to embed status changes from your web page or app.
+For more details, : [See the documentation](/live-classes/embed-live-session#window-postmessage-events)
+
+
 
 ## PhonePe payment gateway integration
 
@@ -79,6 +114,14 @@ For step-by-step setup instructions, see [Custom PhonePe integration](/setup-pri
 You can now reset course progress for multiple students at once from the Students tab in your course. This feature is useful when you need to allow students to retake a course or reset their progress after course content updates. Select multiple students using checkboxes and use the Actions dropdown to reset all course progress for the selected students in a single operation.
 
 For step-by-step instructions, see [Bulk reset progress for multiple students](/setting-up-course/detailed-student-report#bulk-reset-progress-for-multiple-students).
+
+## Submission history for IO coding labs
+
+Instructors can now view the complete submission history for IO coding labs, including execution results, performance metrics, and test case outcomes. The submissions history can be accessed via the lab management interface, making it easy to monitor class progress and identify common issues. The submissions history table displays comprehensive information about each code submission, including date, status, language, runtime, memory usage, and test case results. This feature helps instructors track student progress, recognize patterns, and support effective learning.
+
+To access submission history, navigate to **Coding Labs → IO Labs → open any lab → Try out lab**, then click on **Submission history**.
+
+For more information, see [Submissions History](/creating-io-coding-labs/submissions).
 </Update>
 
 <Update label="October 2025">
