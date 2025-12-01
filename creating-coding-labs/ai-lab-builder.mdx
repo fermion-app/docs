@@ -1,0 +1,197 @@
+---
+title: 'AI Lab Builder'
+description: 'Learn how to create coding labs using Fermion AI Agent builder'
+sidebarTitle: 'AI Lab Builder'
+icon: robot
+---
+
+
+Fermion's AI Lab Builder allows you to quickly create interactive coding labs using AI assistance. This feature helps you generate lab content, instructions, and challenges automatically based on your requirements.
+
+## Getting Started
+
+<Steps>
+
+<Step title="Access the AI Lab Builder">
+To get started with the AI Lab Builder:
+
+1. Navigate to your **Dashboard**
+2. Go to **Coding labs** → **Labs** → **Interactive labs**
+3. Click on **Build using AI Agent**
+
+![AI Lab Builder Access](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/01-12-2025/Arc_oVn3asH5ln.plalkw.png)
+</Step>
+
+<Step title="Configure Your Lab">
+Once you've accessed the AI Lab Builder, you'll need to:
+
+1. **Enter a title** for your coding lab
+2. **Choose a language or framework** from the available options
+
+![Lab Configuration](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/01-12-2025/Arc_p0k7iUPsWi.drpolr.png)
+
+Once you've selected your preferred technology and entered a title, the AI Agent will help you generate the lab structure, including:
+
+- Initial project setup
+- Lab instructions
+- Coding challenges
+- Evaluation criteria
+
+The AI will create a complete, ready-to-use coding lab that you can further customize as needed.
+</Step>
+
+<Step title="Use the AI Agent Chat Window">
+After configuring your lab, use the **AI agent chat window on the left** to start building your lab. The AI agent can understand natural language instructions and automatically configure your lab by invoking various tool calls.
+
+![AI Agent Chat Window](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/01-12-2025/Arc_iwVWd91QM1.qlknlr.png)
+
+You can interact with the AI agent using natural language. For example, you can ask it to:
+- Create project files and folder structure
+- Install dependencies
+- Set up test cases
+- Configure the lab description
+- Generate evaluation scripts
+
+The AI agent will automatically use the appropriate tool calls to fulfill your requests.
+</Step>
+
+<Step title="Interact with the AI Agent">
+Interact with the AI agent by describing your requirements in natural language. The AI agent will process your instructions and automatically set up the lab for you, including:
+
+- Creating the necessary project files
+- Writing initial code templates
+- Configuring challenges
+- Updating lab instructions and descriptions
+
+![AI Agent Interaction](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/01-12-2025/Arc_aOpswNXqYB.tovkuc.png)
+
+Simply type your requirements in the chat window and wait for the AI agent to set up the lab. The agent will execute the necessary tool calls in the background and provide you with a summary once the lab is ready. You can then review the generated lab, test it, and make any additional adjustments as needed.
+</Step>
+
+<Step title="Verify the Generated Lab">
+After the AI agent has set up your lab, it's important to verify that all the generated data and code are correct. Review the following components and make any necessary adjustments before using the lab in your courses.
+</Step>
+
+</Steps>
+
+## Available Languages and Frameworks
+
+The AI Lab Builder supports the following technologies:
+
+<Columns cols={3}>
+
+<Card
+  title="HTML/CSS/JavaScript"
+  icon="html5"
+>
+  Create web pages, style with CSS, and add interactivity with JavaScript.
+</Card>
+
+<Card
+  title="React/Springboot (Java)"
+  icon="react"
+>
+  Build robust backend services with React + Springboot.
+</Card>
+
+<Card
+  title="Next.js"
+  icon="https://img.icons8.com/?size=100&id=yUdJlcKanVbh&format=png&color=0EA5E9"
+  disabled
+>
+  Build fullstack React apps with Next.js <br/><span style={{ color: 'var(--muted)' }}>(Coming soon)</span>
+</Card>
+
+<Card
+  title="Node.js"
+  icon="node-js"
+  disabled
+>
+  Create backend APIs and services with Node.js <br/><span style={{ color: 'var(--muted)' }}>(Coming soon)</span>
+</Card>
+
+<Card
+  title="Django (Python)"
+  icon="python"
+  disabled
+>
+  Build web apps and APIs with Django and Python <br/><span style={{ color: 'var(--muted)' }}>(Coming soon)</span>
+</Card>
+
+</Columns>
+
+## Available Tool Calls
+
+The AI agent can invoke the following tool calls to build your lab:
+
+<AccordionGroup>
+
+<Accordion title="update-coding-lab-title-and-description">
+Updates the lab's title and its Markdown description.
+
+**Parameters:**
+- `title` (string) - The title of the coding lab
+- `description` (string) - The Markdown description of the lab
+</Accordion>
+
+<Accordion title="update-coding-lab-test-cases-and-test-file">
+Defines or updates the array of challenge descriptions and the Puppeteer-based evaluation script.
+
+**Parameters:**
+- `testCases` (string[]) - List of challenge texts in order
+- `testFileContent` (string) - Full content of the Node.js/Puppeteer test file
+</Accordion>
+
+<Accordion title="run-bash-command-inside-container">
+Executes an arbitrary bash command inside the sandbox (working directory: `/home/damner/code`). Useful for creating files, listing directories, installing dependencies, etc.
+
+**Parameters:**
+- `command` (string) - The bash command to execute
+</Accordion>
+
+</AccordionGroup>
+
+## Verification Checklist
+
+After the AI agent has set up your lab, use this checklist to verify everything is correct:
+
+<AccordionGroup>
+
+<Accordion title="Check the Challenges">
+Make sure the AI has generated the right set of challenges that align with your requirements. You can view the challenges in the **CHALLENGES** tab on the left sidebar. Verify that:
+
+- All required challenges are present
+- Challenge descriptions are clear and accurate
+- Challenges are in the correct order
+- Each challenge tests the intended functionality
+</Accordion>
+
+<Accordion title="Review Generated Code">
+Check the generated code files to ensure:
+
+- **Project structure** - Files and folders are organized correctly
+- **Code quality** - The initial code templates are appropriate for the lab
+- **Dependencies** - Required packages and libraries are properly installed
+- **File completeness** - All necessary files have been created
+</Accordion>
+
+<Accordion title="Test the Lab">
+Use the **Run Tests** button to verify that:
+
+- The lab environment boots correctly
+- All challenges can be evaluated properly
+- The evaluation script works as expected
+- Students can complete the challenges successfully
+</Accordion>
+
+<Accordion title="Make Adjustments">
+If you find any issues or want to make changes:
+
+- Continue chatting with the AI agent to request modifications
+- Manually edit files, challenges, or descriptions as needed
+- Test again to ensure everything works correctly
+</Accordion>
+
+</AccordionGroup>
+
+Once verified, your lab is ready to be used in your courses!
