@@ -151,6 +151,14 @@ Assignment grading has been enhanced with the ability to upload files when provi
 Students can view these uploaded files directly in their course, allowing them to see detailed annotations, corrections, and comments on their submissions. This feature enhances the feedback process by making it more visual and comprehensive, helping students better understand their work and areas for improvement.
 
 To learn more about reviewing and grading assignments, see [Assignments](/setting-up-course/assignments#review--grade-assignment-submissions).
+
+## Instructor management API endpoints
+
+You can now manage instructors programmatically through Fermion's API. Two new endpoints allow you to create and remove instructor accounts for your school:
+
+- **[Create instructor account](/api-reference/user/create-instructor-account)**: Create a new instructor account for your school. This function is idempotent, calling it multiple times with the same email will not create duplicate accounts. If the instructor already exists, they will be added to your school if not already associated.
+
+- **[Remove fermion instructor from school](/api-reference/user/remove-fermion-instructor-from-school)**: Revoke an instructor's access to your school programmatically. This endpoint allows you to remove instructors from your school via API calls, making it easier to manage instructor access at scale.
 </Update>
 
 <Update label="October 2025">
