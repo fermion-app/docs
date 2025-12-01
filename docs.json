@@ -43,10 +43,22 @@
 					{
 						"group": "Courses on Fermion",
 						"pages": [
-							"setting-up-course/prerequisites",
-							"setting-up-course/landing-page",
-							"setting-up-course/syllabus",
-							"setting-up-course/bulk-import-syllabus",
+						"setting-up-course/prerequisites",
+						"setting-up-course/landing-page",
+						"setting-up-course/syllabus",
+						{
+							"group": "Course Items",
+							"icon": "list",
+							"pages": [
+								"setting-up-course/syllabus/article",
+								"setting-up-course/syllabus/recorded-video",
+								"setting-up-course/syllabus/quiz",
+								"setting-up-course/syllabus/scorm",
+								"setting-up-course/syllabus/iframe-embed",
+								"setting-up-course/syllabus/resources"
+							]
+						},
+						"setting-up-course/bulk-import-syllabus",
 							"setting-up-course/attachments",
 							"setting-up-course/assignments",
 							"setting-up-course/tags",
