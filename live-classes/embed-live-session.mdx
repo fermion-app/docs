@@ -42,15 +42,20 @@ const payloadObject = {
 	userId: 'your-internal-user-id',
 
 	// --- Optional fields ---
-	name: 'Jane Doe',
-	profilePicUrl: 'https://example.com/images/jane-doe-avatar.png',
+	name: 'Jane Doe', // Optional default name to use for the user. If provided, this value will override the existing name.
+	profilePicUrl: 'https://example.com/images/jane-doe-avatar.png', // Optional default profile photo URL to use for the user. If provided, this value will override the existing profile photo.
 
 	// --- Optional object with defaults ---
 	// All playback options are set to false by default
 	playbackOptions: {
-		shouldDisallowRecordedPlaybackIfNotLive: false,
-		shouldPreferOnlyHighDefinitionPlayback: true, // <-- Example of overriding a default
-		shouldHideSeekControls: false
+		shouldDisallowRecordedPlaybackIfNotLive: false, // If true, once the livestream ends, the same JWT that is used to embed the stream would not be able to playback the recorded version of the video
+		shouldPreferOnlyHighDefinitionPlayback: true, // If true, system would enforce only 1080p and 720p modes of playback. Note: Passing this as true might result in buffering on user side if their internet is not fast (as this disables low quality playback versions)
+		shouldHideSeekControls: false, // If true, it will hide the seek controls (seekbar and jump forward/backward buttons) from the UI
+		customBrandingData: {
+			// Optional: If you pass this branding information, it would be used to show logo / brand name instead of your primary school brand name
+			name: 'Custom Brand Name',
+			logoUrl: 'https://example.com/images/custom-logo.png' // Optional logo URL
+		}
 	}
 }
 
@@ -60,8 +65,28 @@ const jwtToken = jwt.sign(payloadObject, FERMION_API_KEY, {
 })
 ```
 
-1. `liveEventSessionId` field is the same ID that you got when you created session over API.
-2. `userId` is a unique ID for a user that you're creating the playback session for. Note that it should be a stable ID. It can be anything like a database identifier or even an email address of the user. However two sessions must not be sharing same stable ID, otherwise they will be considered as a single user.
+### JWT Payload Fields
+
+**Required fields:**
+
+1. `liveEventSessionId` - The same ID that you got when you created session over API.
+2. `userId` - A unique ID for a user that you're creating the playback session for. Note that it should be a stable ID. It can be anything like a database identifier or even an email address of the user. However two sessions must not be sharing same stable ID, otherwise they will be considered as a single user.
+
+**Optional fields:**
+
+3. `name` - Optional default name to use for the user. If provided, this value will override the existing name.
+4. `profilePicUrl` - Optional default profile photo URL to use for the user. If provided, this value will override the existing profile photo.
+
+**Optional `playbackOptions` object:**
+
+The `playbackOptions` object is optional and has the following default values if not provided:
+
+-   `shouldDisallowRecordedPlaybackIfNotLive` (default: `false`) - If you pass this as `true`, once the livestream ends, the same JWT that is used to embed the stream would not be able to playback the recorded version of the video.
+-   `shouldPreferOnlyHighDefinitionPlayback` (default: `false`) - If you pass this as `true`, system would enforce only 1080p and 720p modes of playback. Note: Passing this as `true` might result in buffering on user side if their internet is not fast (as this disables low quality playback versions).
+-   `shouldHideSeekControls` (default: `false`) - If you pass this as `true`, it will hide the seek controls (seekbar and jump forward/backward buttons) from the UI.
+-   `customBrandingData` (optional) - If you pass this branding information, it would be used to show logo / brand name instead of your primary school brand name. This object contains:
+    -   `name` (required) - The custom brand name to display.
+    -   `logoUrl` (optional) - URL to the custom logo image.
 
 Once the token is ready, you need to embed the session.
 
@@ -203,6 +228,18 @@ type Event = {
 
 Use this event to trigger navigation, show a post-session survey, or redirect users after the live session concludes.
 
+### webrtc:left-stage
+
+This event fires when someone leaves the stage during a live WebRTC session. Here's a TypeScript type for this event:
+
+```ts
+type Event = {
+	type: 'webrtc:left-stage'
+}
+```
+
+Use this event to track stage participation, update UI to reflect who's currently on stage, or trigger notifications when participants leave the stage.
+
 ### video:play
 
 This event fires when a user plays the recorded video playback. Note that this event only fires during recorded playback, not during live sessions. Here's a TypeScript type for this event:
@@ -277,6 +314,7 @@ type LiveEventPostMessageEvent =
 	| { type: 'video:ended' }
 	| { type: 'video:livestream-ended' }
 	| { type: 'webrtc:livestream-ended' }
+	| { type: 'webrtc:left-stage' }
 	| { type: 'video:time-updated'; currentTimeInSeconds: number }
 ```
 
