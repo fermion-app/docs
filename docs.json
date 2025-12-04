@@ -184,6 +184,7 @@
 								]
 							},
 							"manage-settings/earnings",
+							"manage-settings/partial-payment-dashboard",
 							"manage-settings/manage-payouts",
 							"manage-settings/email-log",
 							"manage-settings/manage-instructors",
@@ -317,6 +318,7 @@
 									"live-classes/whiteboard",
 									"live-classes/livestream-settings",
 									"live-classes/recording-and-captions",
+									"live-classes/ai-summary",
 									"live-classes/drm-and-watermarking"
 								]
 							},
