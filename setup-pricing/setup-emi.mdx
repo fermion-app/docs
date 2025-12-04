@@ -28,20 +28,20 @@ You can also consider this as a custom-EMI plan since your students can pay you 
 
 Before we figure out how to setup this pricing plan, there are a few things to understand. Let's go over them one by one:
 
--   **Total cost of product:**  
-    
+-   **Total cost of product:**
+
     This is the total price of your product or the final price the user will pay
     overall. All the EMIs you will be setting up should result as a sum equal to
     this number.
 
--   **Minimum mandatory amount:**  
-    
+-   **Minimum mandatory amount:**
+
     This is the mandatory amount that the user must pay upfront. User can pay
     more than this amount as well. Paying this amount will give user the access
     to product.
 
--   **EMI collection interval:**  
-    
+-   **EMI collection interval:**
+
     You can set the interval in days, ie, when want the user to pay the next EMI
     if available.
 
@@ -76,90 +76,102 @@ Let's understand this with an example. This is how a **4 installment plan** will
 
 ## How to setup a partial payment pricing plan?
 
-### Step 1: Head to the `courses` tab
+<Steps>
 
-From your dashboard, head over to the `courses tab`.
-
-![Step 1](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/22%402x.jkyvqz.png)
+<Step title="Head to the Courses tab">
+From your dashboard, go to the <b>Courses</b> tab.
+<br/>
+<img src="https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/22%402x.jkyvqz.png" alt="Step 1" />
 
 <Warning>
-
-    If you are setting the price for course bundles, ebooks or other digital products,
-    head over to their respective tabs.
-
+If you are setting the price for course bundles, ebooks, or other digital products, head over to their respective tabs.
 </Warning>
+</Step>
 
-### Step 2: Select the course
+<Step title="Select the course">
+On the courses page, select the course for which you want to set up the partial payment (EMI) pricing plan.
+<br/>
+<img src="https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/19%402x.mhnqhl.png" alt="Step 2" />
+</Step>
 
-From the courses page, select the course for which you are setting the fixed pricing plan.
+<Step title="Go to the Pricing tab">
+Click the <b>Pricing</b> tab from your course's landing page manager.
+<br/>
+<img src="https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/35%402x.twioru.png" alt="Step 3" />
+</Step>
 
-![Step 2](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/19%402x.mhnqhl.png)
+<Step title="Select Partial Payment Plan">
+Click on the <b>Partial payment plan</b> option. This will expand additional configuration options.
+<br/>
+<img src="https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/22%402x.fzbynt.png" alt="Step 4" />
 
-### Step 3: Head over to the `pricing` tab
+<ul>
+<li><b>Draft</b> state: Only you can see and edit the plan (not visible to students).</li>
+<li><b>Unlisted</b> state: Only accessible via direct API links, not shown on landing pages.</li>
+<li><b>Published</b> state: Functional and visible to students. Students can purchase via this plan.</li>
+</ul>
+</Step>
 
-Select the pricing tab from your landing page manager.
+<Step title="Configure the pricing plan">
+Set the following:
+<ul>
+<li><b>Total cost of the product</b> (overall price students will pay for the course)</li>
+<li><b>Minimum mandatory amount</b> (minimum upfront payment students must make to access the product; they can choose to pay more if they wish)</li>
+<li><b>EMI collection interval</b> (the number of days between required installment payments)</li>
+</ul>
 
-![Step 3](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/35%402x.twioru.png)
+<br/>
+<img src="https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/58%402x.kluoac.png" alt="Step 5" />
 
-### Step 4: Click on `partial payment plan`
+Default EMI options will be displayed based on your configuration. After setting these details, an installment plan will be auto-generated according to the user’s selection.
 
-Click on the `partial payment plan` option on the screen and it will expand showcasing you multiple options. Make sure that the plan is in `draft` state unless and until you want to publish it.
+<br/>
+<img src="https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/08%E2%80%AFPM.bcvski.png" alt="Step 6" />
 
-![Step 4](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/22%402x.fzbynt.png)
+<b>Example:</b>
+If a user opts for a 2-installment plan and pays the minimum mandatory amount ($5 on November 19th, 2024), the schedule will be:
+<ul>
+<li>Base payment: $5 on November 19th, 2024</li>
+<li>Installment #1: $2.50 on or before December 19th, 2024</li>
+<li>Installment #2: $2.50 on or before January 18th, 2025</li>
+</ul>
 
--   Draft state means that your plan would not be visible to users. You can use this state to edit and setup your plan.
+If you want to create a custom installment (EMI) plan, click <b>Add another installment plan</b>.
 
--   Unlisted state means that the plan would be functional but not visible on landing pages. You can use it to open checkout through API endpoint.
+<br/>
+<img src="https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/41%402x.zjqeyy.png" alt="Step 7" />
 
--   Published state means the plan would be functional and visible to users. Users will be able to purchase access to your product with this plan.
+Specify the installment count.
 
-### Step 5: Configure the pricing plan
+<br/>
+<img src="https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/15%402x.fbhnew.png" alt="Step 8" />
 
--   Setup the total cost of the product
--   The minimum mandatory amount (users can pay more than this amount as well, think of it as the amount to book their seat for your product)
--   And the EMI collection interval (in days). This is the interval time when the user will pay their next EMI.
+Your new plan will be displayed. Make sure to click <b>Save changes</b> to update.
 
-![Step 5](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/58%402x.kluoac.png)
+<br/>
+<img src="https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/36%402x.mxfgin.png" alt="Step 9" />
+</Step>
 
-These are the EMI options available by default. After you setup the above details, your installment plan will automatically be made depending on which plan the user opts for.
+<Step title="Support multiple currencies">
+To allow your pricing plan to accept multiple currencies:
+<ul>
+<li>Click <b>Add a new currency</b>.</li>
+<li>Select the desired currency from the dropdown.</li>
+<li>Enter the price value in this currency.</li>
+</ul>
 
-![Step 6](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/08%E2%80%AFPM.bcvski.png)
+<br/>
+<img src="https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/37%402x.jsyyob.png" alt="Step 10" />
+<br/>
+<img src="https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/23%402x.ddbyuc.png" alt="Step 11" />
 
-**For example:**
+After adding, click <b>Add currency</b>. Your new pricing will appear as shown:
 
-If a user opts for a 2 installment plan, here's what it will look like based on the numbers we have configured above.
+<br/>
+<img src="https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/48%402x.ctrhcx.png" alt="Step 12" />
+</Step>
 
-Assume that the user pays the minimum mandatory amount: $5 on November 19th, 2024. Then, their EMI plan becomes:
-
--   Base payment of $5 done on November 19th, 2024
--   Installment #1 of $2.50 to be paid on or before December 19th, 2024
--   Installment #2 of $2.50 to be paid on or before January 18th, 2025
-
-If you'd like to setup a custom installment plan, you can also do that. Click on `Add another installment plan`
-
-![Step 7](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/41%402x.zjqeyy.png)
-
-Now, enter the installment count
-
-![Step 8](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/15%402x.fbhnew.png)
-
-Your new installment plan will be added here. Make sure to click on `save changes` to save the changes.
-
-![Step 9](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/36%402x.mxfgin.png)
-
-### Step 6: Support multiple currencies
-
-To support your pricing plan in multiple currencies, simply click on `Add a new currency` button like shown below.
-
-![Step10](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/37%402x.jsyyob.png)
-
-Select your currency and add a price amount in the next input field.
-
-![Step11](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/23%402x.ddbyuc.png)
-
-Once you add the currency and price, click on `Add currency` and your pricing plan will be updated with a new currency. This is how it will look like:
-
-![Step12](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/19-11-2024/48%402x.ctrhcx.png)
+</Steps>
 
 
 ## Direct checkout links for partial payment plans
