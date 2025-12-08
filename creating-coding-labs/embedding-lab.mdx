@@ -38,7 +38,7 @@ Here’s how a coding lab environment looks like:
 
 ## How do you create a coding lab?
 
-Complete documentation has been laid out at [docs.fermion.app](http://docs.fermion.app/), where you can follow the instructions according to the technology you want to use, and create coding labs.
+Complete documentation has been laid out [here](/creating-coding-labs/what-are-coding-labs), where you can follow the instructions according to the technology you want to use, and create coding labs.
 
 ## How to embed a coding lab from Fermion?
 
@@ -159,6 +159,8 @@ Let's say the lab you're creating this JWT token for has an ID of `X` and the `l
 -   In case it does not (i.e. when the user starts the lab for the first time), system will check if there is a past work snapshot for the given user that exists for the lab `Y`.
 -   If work exists for `Y`, system will copy the filesystem to lab `X` and user will start the lab `X` with the filesystem of lab `Y`.
 -   If work does not exist for `Y`, system will boot the filesystem from the GitHub repository (and branch) you gave while setting up lab `X`.
+
+> **Note:** After creating a new lab or updating its filesystem programmatically (for example, via API or automation), please allow up to **2 minutes** before starting the lab. This delay ensures that all lab files and environment are fully synchronized and ready for use. Starting the lab immediately after creation may result in incorrect or outdated file contents(when override is enabled).
 
 ## How can I access lab results?
 
