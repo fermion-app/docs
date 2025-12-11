@@ -1,281 +1,88 @@
 ---
 title: 'Bulk Import Syllabus'
-description: 'Discover how to upload an entire syllabus at once using the platform’s bulk import syllabus tools.'
+description: "Discover how to upload an entire syllabus at once using the platform's bulk import syllabus tools via CSV."
 icon: file-import
 ---
 
-Fermion supports bulk importing syllabus into your course. This can be handy if you have a lot of content and you want to quickly import it into your course.
+Fermion supports bulk importing syllabus into your course using CSV files. This can be handy if you have a lot of content and you want to quickly import it into your course.
 
-## Dashboard UI
+<Steps>
+  <Step title="Navigate to Courses">
+    Go to the **Instructor dashboard** and click on **Courses**.
 
-![](https://codedamn-website-assets.s3.us-east-1.amazonaws.com/uploads/07-12-2024/screenshot-000264%402x.tksjan.png)
+    ![Instructor dashboard courses](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/11-12-2025/Arc_34eE20BeOe.echxge.png)
+  </Step>
 
-Open any course for which you'd want to bulk import items.
+  <Step title="Select Your Course">
+    Select the course for which you want to bulk import the syllabus.
 
-1. Click on `Bulk import syllabus` from left
-2. Write a valid JSON schema
-3. Check with preview to make sure everything looks okay
-4. Click on the `Import` button to import the items.
+    ![Select course](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/11-12-2025/Arc_j1PWOEqdF6.grwydd.png)
+  </Step>
+
+  <Step title="Open Syllabus">
+    Click on **Syllabus** from the course navigation.
+
+    ![Click on Syllabus](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/11-12-2025/Arc_4XxRj1pNhZ.xdzdni.png)
+  </Step>
+
+  <Step title="Click on Bulk Import from CSV">
+    Select **Bulk import syllabus via CSV** from the available options.
+
+    ![Bulk import syllabus via CSV](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/11-12-2025/Arc_JHp3vvkdjh.vtglia.png)
+  </Step>
+
+  <Step title="Review CSV Format">
+    Review the CSV format requirements or download a sample CSV file for reference. Use the format guide to build your course syllabus.
+
+    ![CSV format and sample download](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/11-12-2025/Arc_JGz6FYxofc.kxddac.png)
+
+    <AccordionGroup>
+      <Accordion title="Required CSV Columns">
+        - **`itemType`** (required): The type of content item. Supported values:
+          - `Article`
+          - `Video`
+          - `LiveEvent`
+          - `IoCodingLab`
+          - `InteractiveCodingLab`
+        - **`itemTitle`** (required): The title of the item (string)
+        - **`sectionName`** (required): The section name where the item belongs (string)
+      </Accordion>
+
+      <Accordion title="Optional CSV Columns">
+        - **`itemDescription`** (optional): Description of the item (string)
+        - **`liveSessionStartAt`** (optional, for `LiveEvent`): Date string for when the live session starts. Example: "January 31 2025 02:15:00 PM"
+        - **`liveSessionHostsEmails`** (optional, for `LiveEvent`): Comma-separated list of host emails who can start the session
+        - **`status`** (optional): Can be
+        `Published` or `Draft`. If not specified,
+        defaults to `Draft`
+      </Accordion>
+    </AccordionGroup>
+
+    <Info>
+      **Note:** LiveEvent (live class) items are only valid for cohort-based courses.
+    </Info>
+  </Step>
+
+  <Step title="Upload CSV File">
+    Click on the drop field or drag and drop your CSV file to upload it.
+
+    ![Upload CSV file](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/11-12-2025/Arc_ICoafFqPi1.bluskt.png)
+  </Step>
+
+  <Step title="Verify Preview">
+    Review the items shown in the preview to ensure everything is correct before importing.
+
+    ![Preview items](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/11-12-2025/Arc_aosPMXHuHQ.nikbtm.png)
+	<Info>
+  	**Dependent Items:** Course items like labs and videos are 'Published' once you attach a video or lab to the course item. This applies in cases where you set the status as `Published` for those items.
+	</Info>
+  </Step>
+
+  <Step title="Import Syllabus">
+    Once you've verified the preview, click the **Import** button to complete the bulk import process.
+  </Step>
+</Steps>
 
 <Warning>
-	Please note that once imported, you can only edit the items via Syllabus
-	manager. Bulk importer will only allow you to import items, not edit them.
+  Please note that once imported, you can only edit the items via Syllabus manager. Bulk importer will only allow you to import items, not edit them.
 </Warning>
-
-## JSON Schema
-
-In order to bulk import your curriculum, you must create a JSON object. This object can then directly be imported in our backend creating all relevant course items.
-
-Here's the schema you have to follow:
-
-### Recorded course
-
-If you're importing course items in a recorded course, you have to follow the following schema:
-
-```ts
-type RecordedCourseItems = RecordedCourseItem[]
-// ^ this is the type your final JSON should conform to
-
-type RecordedCourseItem =
-	| {
-			type: 'Video'
-			title: string
-			sectionName: string
-			descriptionInMarkdown: string
-	  }
-	| {
-			type: 'Article'
-			title: string
-			sectionName: string
-			contentMarkdown: string
-	  }
-	| {
-			type: 'Coding Lab'
-			title: string
-			sectionName: string
-			descriptionInMarkdown?: string
-	  }
-	| {
-			type: 'Quiz'
-			title: string
-			sectionName: string
-			descriptionInMarkdown?: string
-			questions: {
-				question: string
-				answerExplanation?: string
-				options: {
-					option: string
-					isCorrect?: boolean
-				}[]
-			}[]
-	  }
-```
-
-Here's an example of valid JSON that conforms to the schema above:
-
-```json
-[
-	{
-		"type": "Article",
-		"sectionName": "Welcome to my course!",
-		"title": "Introduction to Programming",
-		"contentMarkdown": "I'll have some intro to programming data here"
-	},
-	{
-		"type": "Coding Lab",
-		"sectionName": "Welcome to my course!",
-		"title": "Hello to HTML",
-		"descriptionInMarkdown": "Create an h1 tag in this lab and write your name."
-	},
-	{
-		"type": "Coding Lab",
-		"sectionName": "Welcome to my course!",
-		"title": "Building a Simple React Component",
-		"descriptionInMarkdown": "Hands-on practice creating your first React component from scratch."
-	},
-	{
-		"type": "Quiz",
-		"sectionName": "Welcome to my course!",
-		"title": "JavaScript Fundamentals Quiz",
-		"descriptionInMarkdown": "Test your knowledge of core JavaScript concepts",
-		"questions": [
-			{
-				"question": "What is the difference between let and var in JavaScript?",
-				"answerExplanation": "Let is block-scoped, while var is function-scoped.",
-				"options": [
-					{
-						"option": "Let is block-scoped, var is function-scoped",
-						"isCorrect": true
-					},
-					{
-						"option": "They are exactly the same",
-						"isCorrect": false
-					},
-					{
-						"option": "Let is function-scoped, var is block-scoped",
-						"isCorrect": false
-					},
-					{
-						"option": "Neither has any meaningful difference",
-						"isCorrect": false
-					}
-				]
-			},
-			{
-				"question": "What does the spread operator do in JavaScript?",
-				"answerExplanation": "The spread operator allows an iterable to expand in places where 0+ arguments are expected.",
-				"options": [
-					{
-						"option": "Combines two arrays",
-						"isCorrect": false
-					},
-					{
-						"option": "Spreads elements of an array or object",
-						"isCorrect": true
-					},
-					{
-						"option": "Creates a deep copy of an object",
-						"isCorrect": false
-					},
-					{
-						"option": "Merges object properties",
-						"isCorrect": false
-					}
-				]
-			}
-		]
-	}
-]
-```
-
-### Cohort-based course
-
-If you're importing course items in a cohort course, you have to follow the following schema. The reason it is different from above course is because a cohort-based-course can also have live classes:
-
-```ts
-type CohortBasedCourseItems = CohortBasedCourseItem[]
-// ^ this is the type your final JSON should conform to
-
-type CohortBasedCourseItem =
-	| {
-			type: 'Video'
-			title: string
-			itemScheduledDate: string
-			descriptionInMarkdown?: string
-	  }
-	| {
-			type: 'Live Class'
-			liveClassStartAt: string
-			title: string
-			descriptionInMarkdown?: string
-			liveClassDurationInMinutes: number
-	  }
-	| {
-			type: 'Article'
-			title: string
-			itemScheduledDate: string
-			descriptionInMarkdown?: string
-			contentMarkdown: string
-	  }
-	| {
-			type: 'Coding Lab'
-			title: string
-			itemScheduledDate: string
-			descriptionInMarkdown?: string
-	  }
-	| {
-			type: 'Quiz'
-			title: string
-			descriptionInMarkdown?: string
-			itemScheduledDate: string
-			questions: {
-				question: string
-				answerExplanation?: string
-				options: {
-					option: string
-					isCorrect?: boolean
-				}[]
-			}[]
-	  }
-```
-
-Here's an example of valid JSON that conforms to the schema above:
-
-```json
-[
-	{
-		"type": "Live Class",
-		"title": "Introduction to Web Development",
-		"descriptionInMarkdown": "A comprehensive overview of modern web development techniques.",
-		"liveClassStartAt": "2024-07-15T14:30:00Z",
-		"liveClassDurationInMinutes": 60
-	},
-	{
-		"type": "Article",
-		"title": "Understanding JavaScript Closures",
-		"itemScheduledDate": "2024-07-16T00:00:00Z",
-		"descriptionInMarkdown": "A deep dive into one of JavaScript's most powerful features.",
-		"contentMarkdown": "# JavaScript Closures\n\nClosures are a fundamental concept in JavaScript that allows functions to access variables from their outer (enclosing) scope even after the outer function has returned."
-	},
-	{
-		"type": "Coding Lab",
-		"title": "Building a Simple React Component",
-		"itemScheduledDate": "2024-07-16T00:00:00Z",
-		"descriptionInMarkdown": "Hands-on practice creating your first React component from scratch."
-	},
-	{
-		"type": "Quiz",
-		"title": "JavaScript Fundamentals Quiz",
-		"itemScheduledDate": "2024-07-16T00:00:00Z",
-		"descriptionInMarkdown": "Test your knowledge of core JavaScript concepts",
-		"questions": [
-			{
-				"question": "What is the difference between let and var in JavaScript?",
-				"answerExplanation": "Let is block-scoped, while var is function-scoped.",
-				"options": [
-					{
-						"option": "Let is block-scoped, var is function-scoped",
-						"isCorrect": true
-					},
-					{
-						"option": "They are exactly the same",
-						"isCorrect": false
-					},
-					{
-						"option": "Let is function-scoped, var is block-scoped",
-						"isCorrect": false
-					},
-					{
-						"option": "Neither has any meaningful difference",
-						"isCorrect": false
-					}
-				]
-			},
-			{
-				"question": "What does the spread operator do in JavaScript?",
-				"answerExplanation": "The spread operator allows an iterable to expand in places where 0+ arguments are expected.",
-				"options": [
-					{
-						"option": "Combines two arrays",
-						"isCorrect": false
-					},
-					{
-						"option": "Spreads elements of an array or object",
-						"isCorrect": true
-					},
-					{
-						"option": "Creates a deep copy of an object",
-						"isCorrect": false
-					},
-					{
-						"option": "Merges object properties",
-						"isCorrect": false
-					}
-				]
-			}
-		]
-	}
-]
-```
-
-Any errors in your JSON schema will be reported to you directly on the UI.
