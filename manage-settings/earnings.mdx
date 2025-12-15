@@ -4,7 +4,7 @@ description: 'Learn how to manage your payouts, track revenue, and export sales 
 icon: sack-dollar
 ---
 
-The earnings dashboard gives you a complete picture of how your sales evolve over time. It automatically aggregates revenue from all your products, including [courses](/setting-up-course/prerequisites), [bundles](/setting-up-course/bundle), or [digital products](/digital-products/introduction), and displays them in a clear, date-based chart. This helps you visualize your earning patterns, track daily or weekly performance, and identify trends such as spikes in sales during promotions or new course launches. 
+The earnings dashboard gives you a complete picture of how your sales evolve over time. It automatically aggregates revenue from all your products, including [courses](/setting-up-course/prerequisites), [bundles](/setting-up-course/bundle), or [digital products](/digital-products/introduction), and displays them in a clear, date-based chart. This helps you visualize your earning patterns, track daily or weekly performance, and identify trends such as spikes in sales during promotions or new course launches.
 
 Along with visual insights, the dashboard provides detailed figures like total sales count, total revenue in a selected date range, and transaction summaries. These numbers update automatically as new sales occur, giving you real-time insights without needing to refresh or recalculate anything manually.
 ## Accessing the earnings dashboard
@@ -36,9 +36,9 @@ You can easily switch the date range (for example, **Oct 8 - Oct 22, 2025**) to 
 
 You’ll see the following details:
 
-- **Revenue in Range**: The total revenue generated within the selected period.  
+- **Revenue in Range**: The total revenue generated within the selected period.
   Example: `₹56000` for Oct 8 - Oct 22, 2025.
-- **Total Sales**: The total number of successful purchases.  
+- **Total Sales**: The total number of successful purchases.
   Example: `79 sales`.
 - **Chart Date Range**: The period shown in the revenue graph.
 - **Revenue Graph**: Visual representation of your daily revenue growth.
@@ -49,31 +49,42 @@ The chart allows you to track your earnings trends by date, helping you identify
 
 ---
 
-## Export sales data
+## Export reports (sales & no sales)
 
-You can export your earnings data to a CSV file for compliance, backup, or record-keeping.
-
+You can export sales and user data from your earnings dashboard for accounting, compliance, or analytics purposes. Here’s how to access and use the export functionality:
 
 <Steps>
-  <Step title="Select range">
-    Choose the date range of data you wish to export.
+  <Step title="Navigate to export reports">
+    Go to **Billings & earnings** &nbsp;→&nbsp; **Earnings** &nbsp;→&nbsp; select the **Exports** tab.<br/>
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/15-12-2025/Arc_bUn9DtWoGS.qqbnvd.png)
   </Step>
-  <Step title="Click Download data">
-    Once the range is selected, click **Download Data** to export your file.  
-    A CSV file will be automatically downloaded with all your transaction details.
+  <Step title="Choose export type">
+    Use the **Export Type** dropdown to pick the kind of report you want to download:
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/15-12-2025/Arc_5LjBSMf2ac.tdrqrv.png)
+    <ul>
+      <li>
+        <b>Users with no purchase</b> &ndash; Export a list of all registered users who have not made any purchases.
+      </li>
+      <li>
+        <b>Sales data</b> &ndash; Export all sales for a date range. Selecting this shows more options:
+        <ul>
+          <li><strong>Select Date Range:</strong> Pick the start and end dates for your sales data export.</li>
+          <li><strong>Include invoice downloads:</strong> (optional) Check this box to include PDF invoices in your export.</li>
+        </ul>
+      </li>
+    </ul>
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/15-12-2025/Arc_ez7tubai9r.gwwung.png)
+  </Step>
+  <Step title="Create and download export">
+    Click **Create Export**.<br/>
+    - For <strong>Sales data</strong>: You’ll receive a ZIP containing a CSV of your sales report, and if selected, PDF invoices for all sales in the period.<br/>
+    - For <strong>Users with no purchase</strong>: You’ll receive a CSV with all users who have not purchased anything on your school.
   </Step>
 </Steps>
 
-![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/22-10-2025/chrome_rpKeAxiGyU.rmzrmo.png)
-
 <Note>
-Exporting your sales data is useful for accounting, tax compliance, or integration with external analytics tools.
+Use exports for reconciling payments, tax compliance, deeper analysis, or to retarget users who haven't made a purchase.
 </Note>
-
-### Export no sales data
-
-You can also export a list of **registered users who have not purchased anything**.  
-This helps in understanding user behavior and planning retargeting or promotional campaigns for users who have registered but have not purchased anything yet. Click on the **Download data** button in the **Export no sales** section to download this data.
 
 ---
 
@@ -99,7 +110,7 @@ Each record displays key information about a sale: including the buyer’s name,
 
 <Columns cols={1}>
   <Card title="Manage Payouts" href="/manage-settings/manage-payouts">
-    Configure your payout details to receive your earnings securely and on time.  
+    Configure your payout details to receive your earnings securely and on time.
   </Card>
 </Columns>
 
