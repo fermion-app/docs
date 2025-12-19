@@ -1,0 +1,118 @@
+---
+title: 'School Event Logs'
+description: 'Monitor and track all events and actions performed in your school, including deletions, updates, and other administrative activities.'
+icon: list
+---
+
+The **School Event Logs** dashboard provides a comprehensive audit trail of all events and actions performed within your school. You can track who performed what action, when it occurred, and on which resource. This helps maintain accountability, troubleshoot issues, and ensure transparency across your school's operations.
+
+---
+
+## Accessing School Event Logs
+
+To view the **School Event Logs** dashboard:
+
+<Steps>
+  <Step title="Open instructor dashboard">
+    Log in to your instructor account and navigate to your **Dashboard**.
+  </Step>
+  <Step title="Go to Settings">
+    In the sidebar, click **Settings** to expand the available configuration options.
+  </Step>
+  <Step title="Select School event logs">
+    Click **School Settings** → **School event logs** to open the event logs dashboard.
+    ![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/19-12-2025/Arc_91v7M8cNxk.jypvdu.png)
+  </Step>
+</Steps>
+
+---
+
+## Understanding the Event Logs Dashboard
+
+The **School Event Logs** dashboard displays a comprehensive table of all events that have occurred in your school. Each log entry includes detailed information about the action, the resource affected, and who performed it.
+
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/19-12-2025/Arc_88QSazMNzB.bilbqt.png)
+
+### Event Log Columns
+
+The dashboard displays the following information for each event:
+
+- **Timestamp**: The date and time when the event occurred. You can filter logs by timestamp using the filter icon in the column header.
+- **Action**: The specific action that was performed (e.g., "Deleted", "Updated", "Created").
+- **Resource Type**: The type of resource that was affected by the action (e.g., "Course Item", "Digital Product", "Video", "Live Event Session", "Payment Gateway").
+- **Resource ID**: A unique identifier for the specific resource that was acted upon.
+- **Actor Type**: The role of the user who performed the action (e.g., "Instructor", "User", "API").
+- **Actor User ID**: The unique identifier of the user who performed the action.
+- **Technical Details**: A "View Details" button that provides additional technical information about the event.
+
+---
+
+## Filtering Event Logs
+
+You can filter the event logs using two main filters to narrow down the results:
+
+### Resource Type Filter
+
+The **Resource Type** filter allows you to view events for specific types of resources:
+
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/19-12-2025/Arc_vfjzRyJaOp.sfylez.png)
+
+Available resource types include:
+- **All Resources**: Shows events for all resource types (default)
+- **Course Item**: Events related to course items
+- **Live Event Session**: Events related to live class sessions
+- **Digital Product**: Events related to digital products
+- **Video**: Events related to videos
+- **Payment Gateway**: Events related to payment gateways
+
+### Actor Type Filter
+
+The **Actor Type** filter allows you to view events performed by specific types of users:
+
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/19-12-2025/Arc_GfFMYSvxuC.zrqjwf.png)
+
+Available actor types include:
+- **All Actors**: Shows events from all actor types (default)
+- **User**: Events performed by regular users/students
+- **Instructor**: Events performed by instructors
+- **API**: Events performed through API calls
+
+---
+
+## Viewing Technical Details
+
+For any event log entry, click the **View Details** button to access in-depth technical information about that specific event. The technical details panel displays:
+
+![](https://67d6ad5ef66ee0901532fd2f.storage.fermion.app/public-uncached/object-store-public-files/uploads/19-12-2025/Arc_AhZSR08dHX.eolumf.png)
+
+Here you'll find:
+
+- **IP Address**: The IP address from which the action was performed (masked in UI for privacy).
+- **User Agent**: Detailed information about the browser and device used to perform the action.
+
+This information can help with advanced troubleshooting, auditing, and investigating the context of specific actions—such as identifying suspicious activity or confirming how and from where an event was triggered.
+
+
+## Why Event Logs Are Important
+
+School event logs provide instructors with complete visibility into all activities within their school. This helps:
+
+- **Accountability**: Track who performed what action and when
+- **Troubleshooting**: Identify issues by reviewing event history
+- **Security**: Monitor for suspicious or unauthorized activities
+- **Compliance**: Maintain an audit trail for regulatory requirements
+- **Transparency**: Ensure all actions are logged and traceable
+
+---
+
+## Next Steps
+
+<Columns cols={2}>
+  <Card title="User Access Log" href="/manage-settings/user-access-logs">
+    Monitor all logged-in sessions and maintain account security.
+  </Card>
+
+  <Card title="School Analytics" href="/manage-settings/school-analytics">
+    Gain insights into your school's analytics and track feature usage.
+  </Card>
+</Columns>
