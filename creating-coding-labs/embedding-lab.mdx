@@ -99,6 +99,9 @@ const jwtToken = jwt.sign(
 			// change this to true to hide logo
 			shouldHideLogo: true,
 
+			// change this to true to hide the test output logs section in the editor.
+			shouldHideTestOutputLogs: false,
+
 			// change this to true and supply a lab ID to boot the new lab filesystem from the older lab (documented below)
 			overrideDefaultFilesystemForLab: {
 				isEnabled: false,
@@ -125,6 +128,18 @@ Enabling this will restrict people to paste directly in the editor. Use this if 
 ### shouldHideLogo
 
 By default, when you embed the lab, your school logo will be visible on top left of the IDE interface. If you enable this the logo will be hidden.
+
+### shouldHideTestOutputLogs
+
+By default, the output logs of the lab's challenges will be shown in the embedded IDE after users run their code. If you set `shouldHideTestOutputLogs` to `true`, the test output logs section will be hidden from the user's view.
+
+**Example:**
+```js
+playgroundOptions: {
+    shouldHideTestOutputLogs: true,
+}
+```
+
 
 ### overrideDefaultFilesystemForLab
 
