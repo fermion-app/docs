@@ -139,6 +139,7 @@
 						"group": "Custom Pages",
 						"pages": [
 							"custom-landing-pages/introduction",
+							"custom-landing-pages/using-ai-builder",
 							"custom-landing-pages/using-source-code",
 							"custom-landing-pages/blogs",
 							"custom-landing-pages/checkout-page-direct-links",
