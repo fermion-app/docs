@@ -212,6 +212,18 @@ These new permission types allow you to delegate specific responsibilities to in
 
 For more information, see [Manage Instructors](/manage-settings/manage-instructors).
 
+## Instructor IAM permissions API endpoints
+
+You can now manage instructor permissions programmatically through Fermion's API. Three new endpoints allow you to retrieve and update instructor IAM permissions:
+
+- **[Get instructor IAM permissions](https://docs.fermion.app/api-reference/user/get-instructor-iam-permissions)**: Retrieve the current IAM permissions of an instructor. This endpoint returns the complete permission policy including all permission sets and resource sets assigned to the instructor.
+
+- **[Get instructor permission presets](https://docs.fermion.app/api-reference/user/get-instructor-permission-presets)**: Retrieve available permission presets that can be applied to instructors. This endpoint returns a list of all available presets (such as "single-course-access", "bundle-management", "object-storage-access", etc.) along with their requirements and permission sets.
+
+- **[Update instructor IAM permissions](https://docs.fermion.app/api-reference/user/update-instructor-iam-permissions)**: Update an instructor's IAM permissions using presets. This endpoint allows you to programmatically assign permission presets to instructors, making it easy to manage instructor access at scale through API calls.
+
+These API endpoints enable automated instructor permission management, making it easier to integrate Fermion's instructor management into your existing systems and workflows.
+
 
 </Update>
 
