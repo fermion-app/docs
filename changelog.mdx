@@ -3,6 +3,22 @@ title: "Product Updates"
 description: "New updates and improvements"
 ---
 
+<Update label="January 2026">
+
+## Quiz API endpoints
+
+You can now retrieve quizzes and their submissions programmatically through Fermion's API. Three new endpoints allow you to access quiz data:
+
+- **[Get course quiz submissions](https://docs.fermion.app/api-reference/quiz/get-course-quiz-submissions)**: Retrieve all quiz submissions for a course product, grouped by quiz. This endpoint returns a question-wise breakdown with scores, including user details, submission timestamps, total scores, and detailed question-level analysis showing selected answers, correct answers, and points earned for each question.
+
+- **[List all quizzes](https://docs.fermion.app/api-reference/quiz/list-all-quizzes)**: Retrieve a list of all quizzes from your school's private library. This endpoint returns quiz IDs, creation dates, and titles with pagination support, making it easy to programmatically discover and work with your quizzes.
+
+- **[Get quiz details](https://docs.fermion.app/api-reference/quiz/get-quiz-details)**: Retrieve detailed information about a specific quiz from its ID. This endpoint returns the quiz title, creation date, and all questions with their types, titles, descriptions, explanations, and options (including which options are correct).
+
+These API endpoints enable you to integrate quiz data into your existing systems, automate quiz submission processing, build custom analytics dashboards, and create workflows around quiz performance and analysis.
+
+</Update>
+
 <Update label="December 2025">
 
 ### Increased stage capacity to 150 participants
