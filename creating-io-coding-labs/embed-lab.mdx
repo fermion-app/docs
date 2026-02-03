@@ -58,8 +58,6 @@ Generate a JWT (JSON Web Token) containing the following claims. The JWT token m
 <li><code>userId</code> (String) – This is a string that you have stored in your database that can uniquely identify a given user. You have to ensure that you store this identifier properly in your database and reuse it every time a user tries to access any lab.</li>
 <li><code>isReadOnly</code> (Boolean, optional) – Set to <code>true</code> to render the embedded coding lab in a read-only mode. Defaults to <code>false</code>.</li>
 </ul>
-
-Example JWT: [view on jwt.io](https://jwt.io/#debugger-io?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYWJJZCI6ImFiY2QiLCJ1c2VySWQiOiJ4eXoiLCJpYXQiOjE1MTYyMzkwMjJ9.9SKcAU52Qad6MERnzy1kF4Y0A3SoAWuGfpmE97JDYOo)
 </Step>
 
 <Step title="Append the JWT to get the final URL">
