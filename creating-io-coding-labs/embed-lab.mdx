@@ -44,11 +44,29 @@ On any page in which you wish to let the user attempt the lab, you need to embed
 
 Here, the `EMBED_URL` needs to be securely generated on your backend as follows:
 
-1. The embed URL will always contain the following part: [`https://acme.fermion.app/embed/io-coding-lab?token=TOKEN_HERE`](https://acme.fermion.app/embed/io-coding-lab?token=TOKEN_HERE)
-2. After this, you need to generate a JWT (JSON Web Token) containing the following claims:The JWT token must be signed with your Fermion API Key. Example JWT: [here](https://jwt.io/#debugger-io?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYWJJZCI6ImFiY2QiLCJ1c2VySWQiOiJ4eXoiLCJpYXQiOjE1MTYyMzkwMjJ9.9SKcAU52Qad6MERnzy1kF4Y0A3SoAWuGfpmE97JDYOo)
-    1. `labId` (String) – This is the unique identifier of the lab as mentioned above.
-    2. `userId` (String) – This is a string that you have stored in your database that can uniquely identify a given user. You have to ensure that you store this identifier properly in your database and reuse it every time a user tries to access any lab.
-3. Append this generated JWT token to the end to get the final embed URL.
+<Steps>
+
+<Step title="Start with the base embed URL">
+The embed URL will always contain the following base: [`https://acme.fermion.app/embed/io-coding-lab?token=TOKEN_HERE`](https://acme.fermion.app/embed/io-coding-lab?token=TOKEN_HERE)
+</Step>
+
+<Step title="Generate a JWT with required claims">
+Generate a JWT (JSON Web Token) containing the following claims. The JWT token must be signed with your Fermion API Key.
+
+<ul>
+<li><code>labId</code> (String) – This is the unique identifier of the lab as mentioned above.</li>
+<li><code>userId</code> (String) – This is a string that you have stored in your database that can uniquely identify a given user. You have to ensure that you store this identifier properly in your database and reuse it every time a user tries to access any lab.</li>
+<li><code>isReadOnly</code> (Boolean, optional) – Set to <code>true</code> to render the embedded coding lab in a read-only mode. Defaults to <code>false</code>.</li>
+</ul>
+
+Example JWT: [view on jwt.io](https://jwt.io/#debugger-io?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYWJJZCI6ImFiY2QiLCJ1c2VySWQiOiJ4eXoiLCJpYXQiOjE1MTYyMzkwMjJ9.9SKcAU52Qad6MERnzy1kF4Y0A3SoAWuGfpmE97JDYOo)
+</Step>
+
+<Step title="Append the JWT to get the final URL">
+Append this generated JWT token to the end of the base URL to get the final embed URL.
+</Step>
+
+</Steps>
 
 Example JavaScript code to generate `EMBED_URL` securely on your backend server:
 
