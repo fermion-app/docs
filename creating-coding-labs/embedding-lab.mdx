@@ -105,6 +105,8 @@ const jwtToken = jwt.sign(
 			// change this to true and supply a lab ID to boot the new lab filesystem from the older lab (documented below)
 			overrideDefaultFilesystemForLab: {
 				isEnabled: false,
+			// change this to `true` to render the embedded coding lab in a read-only mode
+			isReadOnly = false
 			},
 		},
 	},

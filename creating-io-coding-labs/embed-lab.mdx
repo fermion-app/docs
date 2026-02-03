@@ -61,6 +61,11 @@ const jwtToken = jwt.sign(
 	{
 		labId: '66a9202ab1458d00083ff520',
 		userId: '<enter a user ID here unique to every user>',
+
+		// change this to `true` to render the embedded coding lab in a read-only mode
+		isReadOnly = false
+
+
 	},
 	'FERMION_API_KEY',
 	{ expiresIn: '1h' }
