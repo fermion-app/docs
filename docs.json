@@ -188,6 +188,7 @@
 								]
 							},
 							"manage-settings/earnings",
+							"manage-settings/billing",
 							"manage-settings/partial-payment-dashboard",
 							"manage-settings/manage-payouts",
 							"manage-settings/email-log",
